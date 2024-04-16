@@ -6,15 +6,14 @@ use App\Shared\Domain\Exceptions\InvalidValueException;
 
 final class Name
 {
-    private string $value;
-
     /**
      * @throws InvalidValueException
      */
-    public function __construct(string $value)
+    public function __construct(
+        private readonly string $value
+    )
     {
         self::ensureIsValid($value);
-        $this->value = $value;
     }
 
     public function value(): string
