@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Auction\Domain\Ports\Outbound;
 
-interface AuctionRepository
+interface AuctionRepositoryPort
 {
     public function findAll();
     public function find($id);

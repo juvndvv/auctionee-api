@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuctionController;
+use App\Auction\Infraestructure\Controllers\AuctionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

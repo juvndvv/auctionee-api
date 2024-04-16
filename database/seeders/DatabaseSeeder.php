@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Auction;
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\auction\infra\Repositories\Models\EloquentAuctionModel;
 use Illuminate\Database\Seeder;
+
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,15 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // EloquentUserModel::factory(10)->create();
 
         /*
-        User::factory()->create([
-            'name' => 'Test User',
+        EloquentUserModel::factory()->create([
+            'name' => 'Test EloquentUserModel',
             'email' => 'test@example.com',
         ]);
         */
 
-        Auction::factory(10)->create();       
+        EloquentAuctionModel::factory(10)->create();
     }
 }

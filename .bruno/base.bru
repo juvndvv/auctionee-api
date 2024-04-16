@@ -4,8 +4,17 @@ meta {
   seq: 2
 }
 
-get {
-  url: /auctions
-  body: none
+post {
+  url: http://localhost/api/auctions
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "name": "Petanca de mano",
+    "description": "aksnmal sklanmskma aksmm",
+    "price": 0.5,
+    "initialDate": "2029-11-23"
+  }
 }
