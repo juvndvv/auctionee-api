@@ -2,7 +2,6 @@
 
 namespace App\Auction\Infraestructure\Controllers;
 
-use App\Auction\Application\Services\AuctionService;
 use App\Auction\Domain\Ports\Inbound\AuctionServicePort;
 use App\Shared\Infraestructure\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
