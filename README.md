@@ -11,3 +11,6 @@
   - Fecha de inicio
   - Duracion
   - Pujas
+
+[ ] Generación de IDs
+[ ] Autenticación con sanctum

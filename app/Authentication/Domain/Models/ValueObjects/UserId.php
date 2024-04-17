@@ -2,7 +2,9 @@
 
 namespace App\Authentication\Domain\Models\ValueObjects;
 
-final readonly class UserId
+use App\Shared\Domain\Models\ValueObjects\Uuid;
+
+class UserId extends Uuid
 {
     private readonly int $value;
 

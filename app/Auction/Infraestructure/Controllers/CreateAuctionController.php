@@ -6,6 +6,7 @@ use App\Auction\Domain\Ports\Inbound\CreateAuctionUseCasePort;
 use App\Shared\Infraestructure\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CreateAuctionController extends Controller
 {
@@ -17,6 +18,6 @@ class CreateAuctionController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         $auctions = $this->createAuctionUseCase->invoke($request->toArray());
-        return response()->json($auctions);
+        return new JsonResponse($auctions, Response::HTTP_CREATED);
     }
 }

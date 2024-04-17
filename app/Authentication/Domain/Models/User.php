@@ -47,7 +47,7 @@ class User
         return new self(
             $data['id'],
             $data['name'],
-            $data['userName'],
+            $data['username'],
             $data['email'],
             $data['password'],
             $data['birthDate'],
@@ -66,6 +66,10 @@ class User
             'birth_date' => $this->birthDate->value(),
             'image_url' => $this->image->value(),
         ];
+    }
+
+    public static function create(array $data): User {
+        return User::fromArray($data);
     }
 
     public function delete(): void

@@ -5,6 +5,7 @@ namespace App\Authentication\Infraestructure\Controllers;
 use App\Authentication\Domain\Ports\Inbound\RegisterUserUseCasePort;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RegisterUserController
 {
@@ -16,17 +17,7 @@ class RegisterUserController
 
     public function __invoke(Request $request): JsonResponse
     {
-        // Todo: validar
-
         $user = $this->registerUserUseCase->invoke($request->toArray());
-
-        $token = $user->createToken('apiToken')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token,
-        ];
-
-        return new JsonResponse($response, 201);
+        return new JsonResponse($user, Response::HTTP_CREATED);
     }
 }
