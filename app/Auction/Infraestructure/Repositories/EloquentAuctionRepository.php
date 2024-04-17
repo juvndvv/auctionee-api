@@ -24,7 +24,7 @@ class EloquentAuctionRepository implements AuctionRepositoryPort
         return EloquentAuctionModel::query()->create($attributes);
     }
 
-    public function deleteById($id): Model
+    public function deleteById($id): bool
     {
         return EloquentAuctionModel::query()->findOrFail($id)->delete();
     }

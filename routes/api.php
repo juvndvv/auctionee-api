@@ -1,6 +1,9 @@
 <?php
 
-use App\Auction\Infraestructure\Controllers\AuctionController;
+use App\Auction\Infraestructure\Controllers\CreateAuctionController;
+use App\Auction\Infraestructure\Controllers\DeleteByIdAuctionController;
+use App\Auction\Infraestructure\Controllers\FindAllAuctionController;
+use App\Auction\Infraestructure\Controllers\FindByIdAuctionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,7 +12,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Auctions
-Route::get('/auctions', [AuctionController::class, 'findAll']);
-Route::post('/auctions', [AuctionController::class,'create']);
-Route::get('/auctions/{id}', [AuctionController::class,'findById']);
-Route::delete('/auctions/{id}', [AuctionController::class,'deleteById']);
+Route::get('/auctions', FindAllAuctionController::class);
+Route::post('/auctions', CreateAuctionController::class);
+Route::get('/auctions/{id}', FindByIdAuctionController::class);
+Route::delete('/auctions/{id}', DeleteByIdAuctionController::class);
