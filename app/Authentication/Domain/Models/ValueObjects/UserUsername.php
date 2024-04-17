@@ -2,9 +2,9 @@
 
 namespace App\Authentication\Domain\Models\ValueObjects;
 
-class UserUsername
+final readonly class UserUsername
 {
-    public readonly string $value;
+    private string $value;
 
     public function __construct(string $value)
     {

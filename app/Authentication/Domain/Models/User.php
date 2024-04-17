@@ -8,10 +8,11 @@ use App\Authentication\Domain\Models\ValueObjects\UserId;
 use App\Authentication\Domain\Models\ValueObjects\UserImage;
 use App\Authentication\Domain\Models\ValueObjects\UserName;
 use App\Authentication\Domain\Models\ValueObjects\UserPassword;
-use App\Authentication\Domain\Models\ValueObjects\UserToken;
 use App\Authentication\Domain\Models\ValueObjects\UserUsername;
 use DateTime;
+use Illuminate\Support\Facades\Date;
 
+// Todo: publicar eventos
 class User
 {
     private UserId $id;
@@ -28,7 +29,7 @@ class User
         string $userName,
         string $email,
         string $password,
-        DateTime $birthDate,
+        Date $birthDate,
         string $image,
     )
     {
@@ -39,6 +40,36 @@ class User
         $this->password = new UserPassword($password);
         $this->birthDate = new UserBirthDate($birthDate);
         $this->image = new UserImage($image);
+    }
+
+    public static function fromArray(array $data): User
+    {
+        return new self(
+            $data['id'],
+            $data['name'],
+            $data['userName'],
+            $data['email'],
+            $data['password'],
+            $data['birthDate'],
+            $data['image']
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id->value(),
+            'name' => $this->name->value(),
+            'username' => $this->userName->value(),
+            'email' => $this->email->value(),
+            'password' => $this->password->value(),
+            'birth_date' => $this->birthDate->value(),
+            'image_url' => $this->image->value(),
+        ];
+    }
+
+    public function delete(): void
+    {
     }
 
     public function updateName(string $name): void
@@ -71,38 +102,38 @@ class User
         $this->image = new UserImage($image);
     }
 
-    public function getId(): UserId
+    public function getId(): int
     {
-        return $this->id;
+        return $this->id->value();
     }
 
-    public function getName(): UserName
+    public function getName(): string
     {
-        return $this->name;
+        return $this->name->value();
     }
 
-    public function getUsername(): UserUsername
+    public function getUsername(): string
     {
-        return $this->userName;
+        return $this->userName->value();
     }
 
-    public function getEmail(): UserEmail
+    public function getEmail(): string
     {
-        return $this->email;
+        return $this->email->value();
     }
 
-    public function getPassword(): UserPassword
+    public function getPassword(): string
     {
-        return $this->password;
+        return $this->password->value();
     }
 
-    public function getBirthDate(): DateTime
+    public function getBirthDate(): Date
     {
-        return $this->birthDate;
+        return $this->birthDate->value();
     }
 
-    public function getImage(): UserImage
+    public function getImage(): string
     {
-        return $this->image;
+        return $this->image->value();
     }
 }

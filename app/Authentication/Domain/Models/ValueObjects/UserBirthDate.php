@@ -2,26 +2,26 @@
 
 namespace App\Authentication\Domain\Models\ValueObjects;
 
-use DateTime;
+use Illuminate\Support\Facades\Date;
 
-class UserBirthDate
+final readonly class UserBirthDate
 {
-    private readonly DateTime $value;
+    private readonly Date $value;
 
-    public function __construct(DateTime $value)
+    public function __construct(Date $value)
     {
         self::ensureIsValid($value);
         $this->value = $value;
     }
 
-    public static function ensureIsValid(DateTime $value): void
+    public static function ensureIsValid(Date $value): void
     {
-        if ($value->getTimestamp() > time()) {
+        if ($value < Date::now()) {
             throw new \InvalidArgumentException("La fecha debe ser una fecha inferior a la fecha actual");
         }
     }
 
-    public function value(): DateTime
+    public function value(): Date
     {
         return $this->value;
     }

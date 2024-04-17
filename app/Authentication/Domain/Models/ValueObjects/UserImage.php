@@ -4,7 +4,7 @@ namespace App\Authentication\Domain\Models\ValueObjects;
 
 use InvalidArgumentException;
 
-class UserImage
+final readonly class UserImage
 {
     public readonly string $value;
 

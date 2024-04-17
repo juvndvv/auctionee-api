@@ -2,7 +2,7 @@
 
 namespace App\Authentication\Domain\Models\ValueObjects;
 
-class UserEmail
+final readonly class UserEmail
 {
     private readonly string $value;
 
