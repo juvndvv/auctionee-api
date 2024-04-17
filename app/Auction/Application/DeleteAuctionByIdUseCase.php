@@ -4,7 +4,6 @@ namespace App\Auction\Application;
 
 use App\Auction\Domain\Ports\Inbound\DeleteAuctionByIdUseCasePort;
 use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
-use Illuminate\Database\Eloquent\Model;
 
 class DeleteAuctionByIdUseCase implements DeleteAuctionByIdUseCasePort
 {
