@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Auction\Domain\Models\ValueObjects;
+namespace App\Shared\Domain\Models\ValueObjects;
 
 use InvalidArgumentException;
 
-class AuctionDuration
+class ImageUrl
 {
     public readonly int $value;
 
@@ -16,9 +16,8 @@ class AuctionDuration
 
     public static function ensureIsValid($value): void
     {
-        if ($value % 5 !== 0)
-        {
-            throw new InvalidArgumentException("La duracion debe ser multiplo de 5");
+        if (!filter_var($value, FILTER_VALIDATE_URL)) {
+            throw new InvalidArgumentException("Url de imagen invalida");
         }
     }
 }

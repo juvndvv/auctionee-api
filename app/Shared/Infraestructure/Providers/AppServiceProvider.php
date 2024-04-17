@@ -14,6 +14,10 @@ use App\Auction\Domain\Ports\Inbound\FindAllAuctionUseCasePort;
 use App\Auction\Domain\Ports\Inbound\FindAuctionByIdUseCasePort;
 use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
 use App\Auction\Infraestructure\Repositories\EloquentAuctionRepository;
+use App\Authentication\Application\RegisterUserUseCase;
+use App\Authentication\Domain\Ports\Inbound\RegisterUserUseCasePort;
+use App\Authentication\Domain\Ports\Outbound\AuthRepositoryPort;
+use App\Authentication\Infraestructure\Repositories\EloquentAuthRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,11 +28,13 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(AuctionRepositoryPort::class, EloquentAuctionRepository::class);
-        $this->app->singleton(AuctionServicePort::class, AuctionService::class);
         $this->app->singleton(CreateAuctionUseCasePort::class, CreateAuctionUseCase::class);
         $this->app->singleton(DeleteAuctionByIdUseCasePort::class, DeleteAuctionByIdUseCase::class);
         $this->app->singleton(FindAllAuctionUseCasePort::class, FindAllAuctionUseCase::class);
         $this->app->singleton(FindAuctionByIdUseCasePort::class, FindAuctionByIdUseCase::class);
+
+        $this->app->singleton(AuthRepositoryPort::class, EloquentAuthRepository::class);
+        $this->app->singleton(RegisterUserUseCasePort::class, RegisterUserUseCase::class);
     }
 
     /**

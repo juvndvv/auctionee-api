@@ -15,6 +15,6 @@ class EloquentAuctionModel extends Model
         'name',
         'description',
         'price',
-        'initialDate'
+        'initial_date'
     ];
 }

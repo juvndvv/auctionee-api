@@ -1,6 +1,13 @@
 # Auctionee API
 
-## AuctionHouse
+## Casa de subastas
 
-- Auctions
-- Bids
+- Auction
+  - Product
+    - Nombre
+    - Descripcion
+    - Galeria de imagenes
+  - Precio inicial
+  - Fecha de inicio
+  - Duracion
+  - Pujas

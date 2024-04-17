@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Shared;
+namespace App\Authentication\Infraestructure\Repositories\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class EloquentUserModel extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -17,8 +18,12 @@ class EloquentUserModel extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'birth_date',
+        'image_url',
+        'role_id'
     ];
 
     /**

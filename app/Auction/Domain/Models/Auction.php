@@ -18,8 +18,10 @@ class Auction
     public readonly AuctionPrice $price;
     public readonly AuctionInitialDate $initialDate;
     public readonly AuctionDuration $duration;
+    public readonly AuctionGallery $gallery;
+    public readonly BidList $bids;
 
-    public function __construct(int $id, string $name, string $description, float $price, DateTime $initialDate, int $duration)
+    public function __construct(int $id, string $name, string $description, float $price, DateTime $initialDate, int $duration, array $imageUrlList)
     {
         $this->id = new AuctionId($id);
         $this->name = new AuctionName($name);
@@ -27,10 +29,11 @@ class Auction
         $this->price = new AuctionPrice($price);
         $this->initialDate = new AuctionInitialDate($initialDate);
         $this->duration = new AuctionDuration($duration);
+        $this->gallery = new AuctionGallery($imageUrlList);
     }
 
-    public static function create(string $name, string $description, float $price, DateTime $initialDate)
+    public static function create(int $id, string $name, string $description, float $price, DateTime $initialDate, int $duration, array $gallery): Auction
     {
-        return new Auction($name, $description, $price, $initialDate);
+        return new Auction($id, $name, $description, $price, $initialDate, $duration, $gallery);
     }
 }
