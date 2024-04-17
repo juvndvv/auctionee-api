@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Auction\Domain\Models;
+namespace App\Auction\Domain\Models\ValueObjects;
 
 use InvalidArgumentException;
 
-class AuctionName
+class AuctionDescription
 {
     public readonly string $value;
 
@@ -16,7 +16,7 @@ class AuctionName
 
     public static function ensureIsValid($value): void
     {
-        if (strlen($value) < 3 || strlen($value) > 64) {
+        if (strlen($value) < 20 || strlen($value) > 1000) {
             throw new InvalidArgumentException();
         }
     }

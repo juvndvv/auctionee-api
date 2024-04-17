@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auction\Domain\Models;
+namespace App\Auction\Domain\Models\ValueObjects;
 
 use InvalidArgumentException;
 

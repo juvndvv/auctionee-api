@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Auction\Domain\Models;
+declare(strict_types=1);
+
+namespace App\Auction\Domain\Models\ValueObjects;
 
 use DateTime;
 
@@ -16,6 +18,6 @@ class AuctionInitialDate
 
     public static function ensureIsValid(DateTime $value): void
     {
-
+        // TODO: implementar validaciones
     }
 }
