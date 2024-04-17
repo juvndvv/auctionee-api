@@ -12,5 +12,7 @@
   - Duracion
   - Pujas
 
+# Resolver
 [ ] Generación de IDs
+[ ] Eventos
 [ ] Autenticación con sanctum
