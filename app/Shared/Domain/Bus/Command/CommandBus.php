@@ -12,14 +12,15 @@ class CommandBus
     /**
      * @throws ReflectionException
      */
-    public function handle($command): void
+    public function handle($command)
     {
-        // resolve handler
+        // Resolve Handler
         $reflection = new ReflectionClass($command);
         $handlerName = str_replace("Command", "CommandHandler", $reflection->getShortName());
         $handlerName = str_replace($reflection->getShortName(), $handlerName, $reflection->getName());
         $handler = App::make($handlerName);
-        // invoke handler
-        $handler($command);
+
+        // Invoke handler
+        return $handler($command);
     }
 }
