@@ -14,9 +14,9 @@ class UserEloquentRepository implements UserRepositoryPort
         return EloquentUserModel::all();
     }
 
-    public function findById(string $id): Model
+    public function findByUsername(string $username): Model
     {
-        return EloquentUserModel::query()->findOrFail($id);
+        return EloquentUserModel::query()->where('username', $username)->first();
     }
 
     public function create(array $data): Model

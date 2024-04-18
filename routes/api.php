@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 // Users
 Route::post('/register', \App\UserManagement\Infraestructure\Controllers\CreateUserController::class);
 Route::get('/users', \App\UserManagement\Infraestructure\Controllers\FindAllUserController::class);
+Route::get('/users/{username}', \App\UserManagement\Infraestructure\Controllers\FindUserByUsernameController::class);
 
 // Auctions
 Route::get('/auctions', FindAllAuctionController::class);

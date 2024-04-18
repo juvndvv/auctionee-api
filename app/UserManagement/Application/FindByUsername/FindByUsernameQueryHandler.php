@@ -1,13 +1,13 @@
 <?php
 
-namespace App\UserManagement\Application\FindById;
+namespace App\UserManagement\Application\FindByUsername;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class FindByIdQueryHandler
+class FindByUsernameQueryHandler
 {
     public function __construct(private readonly UserRepositoryPort $userRepository)
     {}
@@ -15,13 +15,13 @@ class FindByIdQueryHandler
     /**
      * @throws NotFoundException
      */
-    public function __invoke(FindByIdQuery $query): Model
+    public function __invoke(FindByUsernameQuery $query): Model
     {
         try {
-            return $this->userRepository->findById($query->id());
+            return $this->userRepository->findByUsername($query->username());
 
         } catch (ModelNotFoundException $exception) {
-            throw new NotFoundException('Usuario no encontrado');
+            throw new NotFoundException('Usuario ' . $query->username() . ' no encontrado');
         }
     }
 }

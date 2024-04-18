@@ -12,11 +12,14 @@ class FindAllUserQueryHandler extends QueryHandler
     public function __construct(private readonly UserRepositoryPort $userRepository)
     {}
 
+    /**
+     * @throws NoContentException
+     */
     public function __invoke(FindAllUserQuery $query): Collection
     {
         $users = $this->userRepository->findAll();
 
-        if (empty($users)) {
+        if ($users->count() === 0) {
             throw new NoContentException("No existen usuarios");
         }
 

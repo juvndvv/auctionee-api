@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 interface UserRepositoryPort
 {
     public function findAll(): Collection;
-    public function findById(string $id): Model;
+    public function findByUsername(string $username): Model;
     public function create(array $data): Model;
     public function updateName(string $name): Model;
     public function updateUsername(string $username): Model;
