@@ -5,13 +5,14 @@ namespace App\UserManagement\Application\Create;
 use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
+use Resources\UserSmallResource;
 
 class CreateUserCommandHandler extends CommandHandler
 {
     public function __construct(private readonly UserRepositoryPort  $userRepository)
     {}
 
-    public function __invoke(CreateUserCommand $command): User
+    public function __invoke(CreateUserCommand $command): array
     {
         $user = User::create(
             $command->name(),
@@ -21,11 +22,10 @@ class CreateUserCommandHandler extends CommandHandler
         );
 
         // Persists
-        $this->userRepository->create($user->toPrimitives());
+        $userModel = $this->userRepository->create($user->toPrimitives());
 
-        // Publish event
         // TODO: publish event
 
-        return $user;
+        return UserSmallResource::fromArray($userModel->toArray());
     }
 }
