@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Authentication\Infraestructure\Repositories;
+namespace App\UserManagement\Infraestructure\Repositories;
 
-use App\Authentication\Domain\Ports\Outbound\AuthRepositoryPort;
-use App\Authentication\Infraestructure\Repositories\Models\EloquentUserModel;
+use App\UserManagement\Domain\Ports\Outbound\AuthRepositoryPort;
+use App\UserManagement\Infraestructure\Repositories\Models\EloquentUserModel;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentAuthRepository implements AuthRepositoryPort

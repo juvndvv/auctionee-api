@@ -1,23 +1,21 @@
 <?php
 
-namespace App\Authentication\Infraestructure\Controllers;
+namespace App\UserManagement\Infraestructure\Controllers;
 
-use App\Authentication\Domain\Ports\Inbound\RegisterUserUseCasePort;
+use App\UserManagement\Domain\Ports\Inbound\CreateUserPort;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 class RegisterUserController
 {
     public function __construct(
-        private readonly RegisterUserUseCasePort $registerUserUseCase
-    )
-    {
-    }
+        private readonly CreateUserPort $userCreator
+    ) {}
 
     public function __invoke(Request $request): JsonResponse
     {
-        $user = $this->registerUserUseCase->invoke($request->toArray());
+        $user = $this->userCreator->__invoke($request->toArray());
         return new JsonResponse($user, Response::HTTP_CREATED);
     }
 }

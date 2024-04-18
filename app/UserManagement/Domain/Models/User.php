@@ -4,6 +4,8 @@ namespace App\UserManagement\Domain\Models;
 
 use App\Shared\Domain\Models\AggregateRoot;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
+use App\UserManagement\Domain\Events\UserDeletedEvent;
+use App\UserManagement\Domain\Events\UserUpdatedEvent;
 use App\UserManagement\Domain\Models\ValueObjects\UserEmail;
 use App\UserManagement\Domain\Models\ValueObjects\UserId;
 use App\UserManagement\Domain\Models\ValueObjects\UserName;
@@ -39,6 +41,39 @@ class User extends AggregateRoot
         );
         $user->record(new UserCreatedEvent($generatedId, $name, $username, $email, $password));
         return $user;
+    }
+
+    public function updateName(string $new): void
+    {
+        $old = $this->name->value();
+        $this->name = new UserName($new);
+        $this->record(new UserUpdatedEvent($this->id(), "UserName", $new, $old));
+    }
+
+    public function updateUsername(string $new): void
+    {
+        $old = $this->username->value();
+        $this->username = new UserUsername($new);
+        $this->record(new UserUpdatedEvent($this->id(), "UserUsername",$new, $old));
+    }
+
+    public function updateEmail(string $new): void
+    {
+        $old = $this->email->value();
+        $this->email = new UserEmail($new);
+        $this->record(new UserUpdatedEvent($this->id(), "UserEmail", $new, $old));
+    }
+
+    public function updatePassword(string $new): void
+    {
+        $old = $this->password->value();
+        $this->password = new UserPassword($new);
+        $this->record(new UserUpdatedEvent($this->id(), "UserPassword", $new, $old));
+    }
+
+    public function delete(): void
+    {
+        $this->record(new UserDeletedEvent($this->id));
     }
 
     public function id(): string

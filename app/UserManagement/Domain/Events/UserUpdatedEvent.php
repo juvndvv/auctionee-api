@@ -4,16 +4,16 @@ namespace App\UserManagement\Domain\Events;
 
 use App\Shared\Domain\Bus\Events\DomainEvent;
 
-class UserCreatedEvent extends DomainEvent
+class UserUpdatedEvent extends DomainEvent
 {
     public function __construct(
         string $aggregateId,
-        private readonly string $name,
-        private readonly string $username,
-        private readonly string $email,
+        private readonly string $field,
+        private readonly string $old,
+        private readonly string $new,
         string $eventId = null,
-        string $occurredOn = null)
-    {
+        string $occurredOn = null
+    ) {
         parent::__construct($aggregateId, $eventId, $occurredOn);
     }
 
@@ -21,38 +21,39 @@ class UserCreatedEvent extends DomainEvent
     {
         return new self(
             $aggregateId,
-            $body['name'],
-            $body['username'],
-            $body['email'],
+            $body['field'],
+            $body['old'],
+            $body['new']
         );
     }
 
     public static function eventName(): string
     {
-        return 'user.created';
+        return 'user.updated';
     }
 
     public function toPrimitives(): array
     {
         return [
-            'name' => $this->name,
-            'username' => $this->username,
-            'email' => $this->email,
+            'aggregateId' => $this->aggregateId(),
+            'field' => $this->field,
+            'old' => $this->old,
+            'new' => $this->new
         ];
     }
 
-    public function name(): string
+    public function field(): string
     {
-        return $this->name;
+        return $this->field;
     }
 
-    public function username(): string
+    public function old(): string
     {
-        return $this->username;
+        return $this->old;
     }
 
-    public function email(): string
+    public function new(): string
     {
-        return $this->email;
+        return $this->new;
     }
 }

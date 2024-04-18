@@ -8,18 +8,21 @@ use App\Auction\Domain\Events\AuctionUpdatedEvent;
 use App\Auction\Domain\Models\Bid\BidEntity;
 use App\Auction\Domain\Models\Product\ProductEntity;
 use App\Shared\Domain\Models\AggregateRoot;
+use App\UserManagement\Domain\Models\ValueObjects\UserId;
 
 class Auction extends AggregateRoot
 {
     private AuctionId $id;
+    private UserId $userId;
     private ProductEntity $product;
     private AuctionPrice $price;
     public AuctionDuration $duration;
     public array/*BidEntity*/ $bids;
 
-    public function __construct(string $id, string $name, string $description, float $price, int $duration, array $bids = [])
+    public function __construct(string $id, string $userId, string $name, string $description, float $price, int $duration, array $bids = [])
     {
         $this->id = new AuctionId($id);
+        $this->userId = new UserId($userId);
         $this->product = new ProductEntity($name, $description);
         $this->price = new AuctionPrice($price);
         $this->duration = new AuctionDuration($duration);
@@ -29,10 +32,10 @@ class Auction extends AggregateRoot
         }
     }
 
-    public static function create(string $name, string $description, float $price, int $duration): Auction
+    public static function create(string $userId, string $name, string $description, float $price, int $duration): Auction
     {
         $generatedId = AuctionId::random();
-        $auction = new self($generatedId, $name, $description, $price, $duration);
+        $auction = new self($generatedId, $userId, $name, $description, $price, $duration);
         $auction->record(new AuctionCreatedEvent($generatedId, $name, $description, $price, $duration));
         return $auction;
     }
@@ -79,6 +82,11 @@ class Auction extends AggregateRoot
     public function id(): string
     {
         return $this->id->value();
+    }
+
+    public function userId(): string
+    {
+        return $this->userId->value();
     }
 
     public function product(): ProductEntity
