@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Authentication\Domain\Models\ValueObjects;
+namespace App\Shared\Domain\Models\ValueObjects;
 
-final readonly class UserEmail
+use App\Authentication\Domain\Models\ValueObjects\UserEmail;
+
+abstract class EmailValueObject
 {
     private readonly string $value;
 
@@ -24,8 +26,8 @@ final readonly class UserEmail
         return $this->value;
     }
 
-    public function equals(UserEmail $userEmail): bool
+    public function equals(EmailValueObject $emailValueObject): bool
     {
-        return $this->value === $userEmail->value;
+        return $this->value === $emailValueObject->value;
     }
 }
