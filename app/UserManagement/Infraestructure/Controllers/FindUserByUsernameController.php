@@ -5,7 +5,7 @@ namespace App\UserManagement\Infraestructure\Controllers;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Controllers\Controller;
-use App\Shared\Infraestructure\Controllers\Responses\Response;
+use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\FindByUsername\FindByUsernameQuery;
 use Exception;
 use Illuminate\Http\JsonResponse;

@@ -5,7 +5,7 @@ namespace App\UserManagement\Infraestructure\Controllers;
 use App\Shared\Domain\Bus\Query\QueryBus;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infraestructure\Controllers\Controller;
-use App\Shared\Infraestructure\Controllers\Responses\Response;
+use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\FindAll\FindAllUserQuery;
 use Illuminate\Http\JsonResponse;
 
