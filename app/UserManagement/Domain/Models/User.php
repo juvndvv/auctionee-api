@@ -43,6 +43,28 @@ class User extends AggregateRoot
         return $user;
     }
 
+    public static function fromPrimitives(array $data): User
+    {
+        return new self(
+            $data['uuid'],
+            $data['name'],
+            $data['username'],
+            $data['email'],
+            $data['password']
+        );
+    }
+
+    public function toPrimitives(): array
+    {
+        return [
+            'uuid' => $this->id->value(),
+            'name' => $this->name->value(),
+            'username' => $this->username->value(),
+            'email' => $this->email->value(),
+            'password' => $this->password->value(),
+        ];
+    }
+
     public function updateName(string $new): void
     {
         $old = $this->name->value();

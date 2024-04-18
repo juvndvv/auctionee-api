@@ -11,19 +11,19 @@ class EloquentUserModel extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
 
+    protected $table = "users";
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
+        'uuid',
         'name',
         'username',
         'email',
-        'password',
-        'birth_date',
-        'image_url',
-        'role_id'
+        'password'
     ];
 
     /**
