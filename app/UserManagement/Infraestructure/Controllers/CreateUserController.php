@@ -3,7 +3,7 @@
 namespace App\UserManagement\Infraestructure\Controllers;
 
 use App\Shared\Domain\Bus\Command\CommandBus;
-use App\Shared\Infraestructure\Controllers\Responses\Response;
+use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\Create\CreateUserCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -27,8 +27,11 @@ class CreateUserController
         $command = new CreateUserCommand($name, $username, $email, $password);
 
         try {
-            $this->commandBus->handle($command);
-            return Response::CREATED("Usuario creado satisfactoriamente", "/users/" . $username);
+            $resource = $this->commandBus->handle($command);
+
+            // TODO: generate and return token
+
+            return Response::CREATED($resource, "Usuario creado satisfactoriamente", "/users/" . $username);
 
         } catch (Exception $e) {
             return Response::SERVER_ERROR();
