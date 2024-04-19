@@ -9,7 +9,6 @@ class UserSmallResource
         return [
             "name" => $data["name"],
             "username" => $data["username"],
-            "email" => $data["email"],
             "avatar" => env("CLOUDFLARE_R2_URL") . $data["avatar"],
         ];
     }
