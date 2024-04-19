@@ -3,6 +3,7 @@
 use App\UserManagement\Infraestructure\Controllers\CreateUserController;
 use App\UserManagement\Infraestructure\Controllers\DeleteUserController;
 use App\UserManagement\Infraestructure\Controllers\FindAllUserController;
+use App\UserManagement\Infraestructure\Controllers\FindUserByUuidController;
 use App\UserManagement\Infraestructure\Controllers\FindUserByUsernameController;
 use App\UserManagement\Infraestructure\Controllers\UpdateUserAvatarController;
 use App\UserManagement\Infraestructure\Controllers\UpdateUserEmailController;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 // Users
 Route::post('/users', CreateUserController::class);
 Route::get('/users', FindAllUserController::class);
+Route::get('/users/{uuid}', FindUserByUuidController::class);
 Route::get('/users/{username}', FindUserByUsernameController::class);
 Route::delete('/users/{uuid}', DeleteUserController::class);
 Route::post('/users/{uuid}/avatar', UpdateUserAvatarController::class);
