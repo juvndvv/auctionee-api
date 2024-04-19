@@ -1,0 +1,17 @@
+meta {
+  name: UpdateEmail
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{url}}/users/21eb8be8-4ac4-433q4-93a1-aaa081a6a1fa275/email
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "juandaniel@forner.es"
+  }
+}
