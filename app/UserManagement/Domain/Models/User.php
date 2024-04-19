@@ -22,9 +22,15 @@ class User extends AggregateRoot
     private UserPassword $password;
     private UserAvatar $avatar;
 
-    public function __construct(string $id, string $name, string $username, string $email, string $password, string $avatar)
-    {
-        $this->id = new UserId($id);
+    public function __construct(
+        string $uuid,
+        string $name = "str",
+        string $username = "str",
+        string $email = "str",
+        string $password = "str",
+        string $avatar = "str"
+    ) {
+        $this->id = new UserId($uuid);
         $this->name = new UserName($name);
         $this->username = new UserUsername($username);
         $this->email = new UserEmail($email);
