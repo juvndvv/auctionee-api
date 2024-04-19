@@ -20,7 +20,8 @@ class CreateUserCommandHandler extends CommandHandler
             $command->username(),
             $command->email(),
             $command->password(),
-            $command->avatar()
+            $command->avatar(),
+            $command->role()
         );
 
         // Persists

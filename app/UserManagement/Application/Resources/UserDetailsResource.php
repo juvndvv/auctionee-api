@@ -12,6 +12,11 @@ class UserDetailsResource
             "username" => $data['username'],
             "email" => $data['email'],
             "avatar" => env("CLOUDFLARE_R2_URL") . $data['avatar'],
+            "role" => match ($data["role"]) {
+                1 => "ADMIN",
+                2 => "BLOCKED",
+                default =>  "USER"
+            },
             "created_at" => $data['created_at'],
             "updated_at" => $data['updated_at']
         ];

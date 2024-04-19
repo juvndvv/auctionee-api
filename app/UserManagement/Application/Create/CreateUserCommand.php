@@ -11,7 +11,8 @@ class CreateUserCommand extends Command
         private readonly string $username,
         private readonly string $email,
         private readonly string $password,
-        private readonly string $avatar
+        private readonly string $avatar,
+        private readonly int $role
     )
     {}
 
@@ -38,5 +39,10 @@ class CreateUserCommand extends Command
     public function avatar(): string
     {
         return $this->avatar;
+    }
+
+    public function role(): int
+    {
+        return $this->role;
     }
 }

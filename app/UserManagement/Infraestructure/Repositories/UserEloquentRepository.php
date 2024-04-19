@@ -68,4 +68,14 @@ class UserEloquentRepository implements UserRepositoryPort
     {
         return EloquentUserModel::query()->where("uuid", $uuid)->delete();
     }
+
+    public function block(string $uuid): int
+    {
+        return EloquentUserModel::query()->where("uuid", $uuid)->update(['role' => 2]);
+    }
+
+    public function unblock(string $uuid): int
+    {
+        return EloquentUserModel::query()->where("uuid", $uuid)->update(['role' => 0]);
+    }
 }

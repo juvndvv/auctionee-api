@@ -38,7 +38,7 @@ class CreateUserController
             }
 
             // Create the user
-            $command = new CreateUserCommand($name, $username, $email, $password, $avatar);
+            $command = new CreateUserCommand($name, $username, $email, $password, $avatar, 0);
             $resource = $this->commandBus->handle($command);
 
             // TODO: generate and return token

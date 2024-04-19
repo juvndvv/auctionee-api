@@ -17,4 +17,6 @@ interface UserRepositoryPort
     public function updatePassword(string $uuid, string $password): int;
     public function updateAvatar(string $uuid, string $avatar): int;
     public function delete(string $uuid): int;
+    public function block(string $uuid): int;
+    public function unblock(string $uuid): int;
 }
