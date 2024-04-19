@@ -71,6 +71,13 @@ class User extends AggregateRoot
         ];
     }
 
+    public function updateAvatar(string $new): void
+    {
+        $old = $this->avatar->value();
+        $this->avatar = new UserAvatar($new);
+        $this->record(new UserUpdatedEvent($this->id, "UserAvatar", $new, $old));
+    }
+
     public function updateName(string $new): void
     {
         $old = $this->name->value();

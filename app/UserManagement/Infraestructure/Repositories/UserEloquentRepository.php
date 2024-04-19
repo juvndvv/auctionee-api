@@ -41,12 +41,12 @@ class UserEloquentRepository implements UserRepositoryPort
 
     public function updateName(string $uuid, string $name): int
     {
-        // TODO: Implement updateName() method.
+        return EloquentUserModel::query()->findOrFail($uuid)->update(['name' => $name]);
     }
 
     public function updateUsername(string $uuid, string $username): int
     {
-        // TODO: Implement updateUsername() method.
+        return EloquentUserModel::query()->findOrFail($uuid)->update(['username' => $username]);
     }
 
     public function updateEmail(string $uuid, string $email): int
@@ -56,7 +56,7 @@ class UserEloquentRepository implements UserRepositoryPort
 
     public function updatePassword(string $uuid, string $password): int
     {
-        // TODO: Implement updatePassword() method.
+        return EloquentUserModel::query()->findOrFail($uuid)->update(['uuid' => $password]);
     }
 
     public function updateAvatar(string $uuid, string $avatar): int
