@@ -3,6 +3,7 @@
 namespace App\UserManagement\Application\UpdateEmail;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
+use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use RuntimeException;
@@ -14,18 +15,27 @@ class UpdateEmailCommandHandler
 
     public function __invoke(UpdateEmailCommand $command): void
     {
-        try {
-            $uuid = $command->uuid();
-            $email = $command->email();
+        $uuid = $command->uuid();
+        $email = $command->email();
 
-            $updates = $this->userRepository->updateEmail($uuid, $email);
+        // Fetch data
+        $dbUser = $this->userRepository->findByUuid($uuid);
 
-            if ($updates < 1) {
-                throw new RuntimeException("Ha ocurrido un error al actualizar el email");
-            }
-
-        } catch (ModelNotFoundException $e) {
+        if (is_null($dbUser)) {
             throw new NotFoundException("El usuario con uuid $uuid no existe");
         }
+
+        // Use case
+        $user = User::fromPrimitives($dbUser->toArray());
+        $user->updateEmail($email);
+
+        // Persistence
+        $updates = $this->userRepository->updateEmail($uuid, $user->email());
+
+        if ($updates < 1) {
+            throw new RuntimeException("Ha ocurrido un error al actualizar el email");
+        }
+
+        // TODO publish event
     }
 }

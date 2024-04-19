@@ -3,8 +3,8 @@
 namespace App\UserManagement\Application\UpdateName;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
+use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use RuntimeException;
 
 class UpdateNameCommandHandler
@@ -17,18 +17,24 @@ class UpdateNameCommandHandler
      */
     public function __invoke(UpdateNameCommand $command): void
     {
-        try {
-            $uuid = $command->uuid();
-            $name = $command->name();
+        $uuid = $command->uuid();
+        $name = $command->name();
 
-            $updates = $this->userRepository->updateName($uuid, $name);
+        // Fetch data
+        $dbUser = $this->userRepository->findByUuid($uuid);
 
-            if ($updates < 1) {
-                throw new RuntimeException("Ha ocurrido un error al actualizar el email");
-            }
-
-        } catch (ModelNotFoundException $e) {
+        if (is_null($dbUser)) {
             throw new NotFoundException("El usuario con uuid $uuid no existe");
+        }
+
+        // Use case
+        $user = User::fromPrimitives($dbUser->toArray());
+        $user->updateName($name);
+
+        $updates = $this->userRepository->updateName($uuid, $user->name());
+
+        if ($updates < 1) {
+            throw new RuntimeException("Ha ocurrido un error al actualizar el email");
         }
     }
 }
