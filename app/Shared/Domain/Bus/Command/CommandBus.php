@@ -2,7 +2,6 @@
 
 namespace App\Shared\Domain\Bus\Command;
 
-
 use Illuminate\Support\Facades\App;
 use ReflectionClass;
 use ReflectionException;
