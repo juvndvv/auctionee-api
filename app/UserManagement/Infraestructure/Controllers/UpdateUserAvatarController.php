@@ -7,6 +7,7 @@ use App\Shared\Infraestructure\Controllers\Controller;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\UpdateAvatar\UpdateAvatarCommand;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class UpdateUserAvatarController extends Controller
@@ -25,6 +26,9 @@ class UpdateUserAvatarController extends Controller
             $newPath = $this->commandBus->handle($command);
 
             return Response::OK($newPath, "Avatar actualizado correctamente");
+
+        } catch (ModelNotFoundException $e) {
+            return Response::NOT_FOUND($e->getMessage());
 
         } catch (Exception $e) {
             return Response::SERVER_ERROR();

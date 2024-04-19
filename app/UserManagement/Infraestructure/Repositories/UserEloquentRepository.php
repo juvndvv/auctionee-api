@@ -39,22 +39,22 @@ class UserEloquentRepository implements UserRepositoryPort
         return EloquentUserModel::query()->where('username', $username)->exists();
     }
 
-    public function updateName(string $name): Model
+    public function updateName(string $uuid, string $name): int
     {
         // TODO: Implement updateName() method.
     }
 
-    public function updateUsername(string $username): Model
+    public function updateUsername(string $uuid, string $username): int
     {
         // TODO: Implement updateUsername() method.
     }
 
-    public function updateEmail(string $email): Model
+    public function updateEmail(string $uuid, string $email): int
     {
-        // TODO: Implement updateEmail() method.
+        return EloquentUserModel::query()->findOrFail($uuid)->update(['email' => $email]);
     }
 
-    public function updatePassword(string $password): Model
+    public function updatePassword(string $uuid, string $password): int
     {
         // TODO: Implement updatePassword() method.
     }

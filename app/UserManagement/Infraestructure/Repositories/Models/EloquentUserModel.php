@@ -13,6 +13,8 @@ class EloquentUserModel extends Authenticatable
 
     protected $table = "users";
 
+    protected $primaryKey = "uuid";
+
     /**
      * The attributes that are mass assignable.
      *

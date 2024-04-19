@@ -5,6 +5,7 @@ namespace App\UserManagement\Application\UpdateAvatar;
 use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use RuntimeException;
 
 class UpdateAvatarCommandHandler extends CommandHandler
@@ -17,8 +18,14 @@ class UpdateAvatarCommandHandler extends CommandHandler
         $uuid = $command->uuid();
         $new = $command->new();
 
-        // Search last avatar
-        $old = $this->userRepository->findByUuid($uuid)->toArray()["avatar"];
+        // Search the user and get the avatar
+        $user = $this->userRepository->findByUuid($uuid);
+
+        if (is_null($user)) {
+            throw new ModelNotFoundException("El usuario con uuid $uuid no existe");
+        }
+
+        $old = $user->toArray()['avatar'];
 
         // Delete image if is not default
         if ($old !== env("DEFAULT_AVATAR")) {
@@ -30,7 +37,7 @@ class UpdateAvatarCommandHandler extends CommandHandler
         $updates = $this->userRepository->updateAvatar($uuid, $newPath);
 
         if ($updates !== 1) {
-            throw new RuntimeException('Update avatar failed');
+            throw new RuntimeException('Ha ocurrido un error al intentar actualizar el avatar');
         }
 
         return $newPath;
