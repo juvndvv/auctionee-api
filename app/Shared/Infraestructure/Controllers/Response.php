@@ -7,12 +7,9 @@ use Symfony\Component\HttpFoundation\Response as STATUS;
 
 class Response
 {
-    public static function NO_CONTENT($message = ""): JsonResponse
+    public static function NO_CONTENT(): JsonResponse
     {
         return response()->json([
-            'data' => null,
-            'message' => $message,
-            'status' => "NO_CONTENT",
         ], STATUS::HTTP_NO_CONTENT);
     }
 
@@ -36,6 +33,7 @@ class Response
     public static function CREATED($data = null, $message = "", $url = ""): JsonResponse
     {
         return response()->json([
+            'data' => $data,
             'message' => $message,
             'url' => $url,
             'status' => "CREATED"
@@ -48,5 +46,14 @@ class Response
             'error' => $error,
             'status' => "SERVER_ERROR"
         ], STATUS::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    public static function UNPROCESSABLE_ENTITY($message, $error): JsonResponse
+    {
+        return response()->json([
+            'message' => $message,
+            'error' => $error,
+            'status' => "UNPROCESSABLE_ENTITY"
+        ], STATUS::HTTP_UNPROCESSABLE_ENTITY);
     }
 }
