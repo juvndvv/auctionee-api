@@ -3,6 +3,7 @@
 namespace App\UserManagement\Application\Create;
 
 use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\UserManagement\Application\Resources\UserDetailsResource;
 use App\UserManagement\Application\Resources\UserSmallResource;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
@@ -27,6 +28,6 @@ class CreateUserCommandHandler extends CommandHandler
 
         // TODO: publish event
 
-        return UserSmallResource::fromArray($userModel->toArray());
+        return UserDetailsResource::fromArray($userModel->toArray());
     }
 }
