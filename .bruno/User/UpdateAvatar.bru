@@ -1,0 +1,21 @@
+meta {
+  name: UpdateAvatar
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/users/5f1013d5-1371-440c-97d8-bd7ba798b7f7/avatar
+  body: multipartForm
+  auth: none
+}
+
+body:json {
+  {
+    "a": "a"
+  }
+}
+
+body:multipart-form {
+  avatar: @file(/home/jotade/Sin título.png)
+}
