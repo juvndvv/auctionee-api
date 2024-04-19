@@ -63,4 +63,9 @@ class UserEloquentRepository implements UserRepositoryPort
     {
         return EloquentUserModel::query()->where('uuid', $uuid)->update(['avatar' => $avatar]);
     }
+
+    public function delete(string $uuid): int
+    {
+        return EloquentUserModel::query()->where("uuid", $uuid)->delete();
+    }
 }
