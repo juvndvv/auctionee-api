@@ -14,7 +14,12 @@ class UserEloquentRepository implements UserRepositoryPort
         return EloquentUserModel::all();
     }
 
-    public function findByUsername(string $username): Model
+    public function findByUuid(string $uuid): ?Model
+    {
+        return EloquentUserModel::query()->where('uuid', $uuid)->first();
+    }
+
+    public function findByUsername(string $username): ?Model
     {
         return EloquentUserModel::query()->where('username', $username)->first();
     }
@@ -52,5 +57,10 @@ class UserEloquentRepository implements UserRepositoryPort
     public function updatePassword(string $password): Model
     {
         // TODO: Implement updatePassword() method.
+    }
+
+    public function updateAvatar(string $uuid, string $avatar): int
+    {
+        return EloquentUserModel::query()->where('uuid', $uuid)->update(['avatar' => $avatar]);
     }
 }

@@ -14,6 +14,8 @@ use App\Auction\Domain\Ports\Inbound\FindAllAuctionUseCasePort;
 use App\Auction\Domain\Ports\Inbound\FindAuctionByIdUseCasePort;
 use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
 use App\Auction\Infraestructure\Repositories\EloquentAuctionRepository;
+use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
+use App\Shared\Infraestructure\Repositories\ImageCloudfareR2Repository;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use App\UserManagement\Infraestructure\Repositories\UserEloquentRepository;
 use Illuminate\Support\ServiceProvider;
@@ -27,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(AuctionRepositoryPort::class, EloquentAuctionRepository::class);
         $this->app->singleton(UserRepositoryPort::class, UserEloquentRepository::class);
+        $this->app->singleton(ImageRepositoryPort::class, ImageCloudfareR2Repository::class);
     }
 
     /**

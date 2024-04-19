@@ -3,9 +3,9 @@
 namespace App\UserManagement\Application\Create;
 
 use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\UserManagement\Application\Resources\UserSmallResource;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
-use Resources\UserSmallResource;
 
 class CreateUserCommandHandler extends CommandHandler
 {
@@ -18,7 +18,8 @@ class CreateUserCommandHandler extends CommandHandler
             $command->name(),
             $command->username(),
             $command->email(),
-            $command->password()
+            $command->password(),
+            $command->avatar()
         );
 
         // Persists

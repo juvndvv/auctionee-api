@@ -23,7 +23,8 @@ class EloquentUserModel extends Authenticatable
         'name',
         'username',
         'email',
-        'password'
+        'password',
+        'avatar'
     ];
 
     /**

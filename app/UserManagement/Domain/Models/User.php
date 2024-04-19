@@ -8,6 +8,7 @@ use App\UserManagement\Domain\Events\UserDeletedEvent;
 use App\UserManagement\Domain\Events\UserUpdatedEvent;
 use App\UserManagement\Domain\Models\ValueObjects\UserEmail;
 use App\UserManagement\Domain\Models\ValueObjects\UserId;
+use App\UserManagement\Domain\Models\ValueObjects\UserAvatar;
 use App\UserManagement\Domain\Models\ValueObjects\UserName;
 use App\UserManagement\Domain\Models\ValueObjects\UserPassword;
 use App\UserManagement\Domain\Models\ValueObjects\UserUsername;
@@ -19,17 +20,19 @@ class User extends AggregateRoot
     private UserUsername $username;
     private UserEmail $email;
     private UserPassword $password;
+    private UserAvatar $avatar;
 
-    public function __construct(string $id, string $name, string $username, string $email, string $password)
+    public function __construct(string $id, string $name, string $username, string $email, string $password, string $avatar)
     {
         $this->id = new UserId($id);
         $this->name = new UserName($name);
         $this->username = new UserUsername($username);
         $this->email = new UserEmail($email);
         $this->password = new UserPassword($password);
+        $this->avatar = new UserAvatar($avatar);
     }
 
-    public static function create($name, $username, $email, $password): User
+    public static function create($name, $username, $email, $password, $avatar): User
     {
         $generatedId = UserId::random();
         $user = new self(
@@ -37,7 +40,8 @@ class User extends AggregateRoot
             $name,
             $username,
             $email,
-            $password
+            $password,
+            $avatar
         );
         $user->record(new UserCreatedEvent($generatedId, $name, $username, $email, $password));
         return $user;
@@ -50,7 +54,8 @@ class User extends AggregateRoot
             $data['name'],
             $data['username'],
             $data['email'],
-            $data['password']
+            $data['password'],
+            $data['avatar']
         );
     }
 
@@ -62,6 +67,7 @@ class User extends AggregateRoot
             'username' => $this->username->value(),
             'email' => $this->email->value(),
             'password' => $this->password->value(),
+            'avatar' => $this->avatar->value(),
         ];
     }
 
@@ -76,7 +82,7 @@ class User extends AggregateRoot
     {
         $old = $this->username->value();
         $this->username = new UserUsername($new);
-        $this->record(new UserUpdatedEvent($this->id(), "UserUsername",$new, $old));
+        $this->record(new UserUpdatedEvent($this->id(), "UserUsername", $new, $old));
     }
 
     public function updateEmail(string $new): void
@@ -121,5 +127,10 @@ class User extends AggregateRoot
     public function password(): string
     {
         return $this->password->value();
+    }
+
+    public function avatar(): string
+    {
+        return $this->avatar->value();
     }
 }

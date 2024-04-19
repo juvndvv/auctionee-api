@@ -3,9 +3,8 @@
 namespace App\UserManagement\Application\FindByUsername;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
+use App\UserManagement\Application\Resources\UserDetailsResource;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class FindByUsernameQueryHandler
 {
@@ -15,13 +14,16 @@ class FindByUsernameQueryHandler
     /**
      * @throws NotFoundException
      */
-    public function __invoke(FindByUsernameQuery $query): Model
+    public function __invoke(FindByUsernameQuery $query): array
     {
-        try {
-            return $this->userRepository->findByUsername($query->username());
+        $username = $query->username();
 
-        } catch (ModelNotFoundException $exception) {
-            throw new NotFoundException('Usuario ' . $query->username() . ' no encontrado');
+        $user = $this->userRepository->findByUsername($username);
+
+        if (is_null($user)) {
+            throw new NotFoundException("Usuario $username no encontrado");
         }
+
+        return UserDetailsResource::fromArray($user->toArray());
     }
 }

@@ -22,11 +22,11 @@ class FindUserByUsernameController extends Controller
             $result = $this->queryBus->handle($query);
             return new JsonResponse($result);
 
-        } catch (NotFoundException $exception) {
-            return Response::NO_CONTENT($exception->getMessage());
+        } catch (NotFoundException $e) {
+            return Response::NO_CONTENT();
 
-        } catch (Exception $exception) {
-            dd($exception);
+        } catch (Exception $e) {
+            return Response::SERVER_ERROR();
         }
     }
 }
