@@ -5,13 +5,18 @@ namespace App\Shared\Domain\Bus\Events;
 use App\Shared\Domain\Models\ValueObjects\Uuid;
 use App\Shared\Domain\Utils;
 use DateTimeImmutable;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
+use Illuminate\Foundation\Events\Dispatchable;
 
-abstract class DomainEvent
+abstract class DomainEvent implements ShouldBroadcastNow
 {
-    private readonly string $eventId;
-    private readonly string $occurredOn;
+    use Dispatchable, InteractsWithSockets;
 
-    public function __construct(private readonly string $aggregateId, string $eventId = null, string $occurredOn = null)
+    protected readonly string $eventId;
+    protected readonly string $occurredOn;
+
+    public function __construct(protected readonly string $aggregateId, protected readonly array $body, string $eventId = null, string $occurredOn = null)
     {
         $this->eventId = $eventId ?: Uuid::random()->value();
         $this->occurredOn = $occurredOn ?: Utils::dateToString(new DateTimeImmutable());
@@ -26,7 +31,15 @@ abstract class DomainEvent
 
     abstract public static function eventName(): string;
 
-    abstract public function toPrimitives(): array;
+    public function toPrimitives(): array
+    {
+        return [
+            'aggregate_id' => $this->aggregateId,
+            'event_id' => $this->eventId,
+            'occurred_on' => $this->occurredOn,
+            'body' => $this->body,
+        ];
+    }
 
     final public function aggregateId(): string
     {
@@ -43,4 +56,5 @@ abstract class DomainEvent
         return $this->occurredOn;
     }
 
+    abstract public function dispatchSelf(): void;
 }

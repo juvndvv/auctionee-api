@@ -28,7 +28,8 @@ class EloquentUserModel extends Authenticatable
         'email',
         'password',
         'avatar',
-        'birth'
+        'birth',
+        'role'
     ];
 
     /**

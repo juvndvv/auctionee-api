@@ -5,7 +5,7 @@ namespace App\Shared\Domain\Models\ValueObjects;
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
-abstract class Uuid
+class Uuid
 {
     final public function __construct(protected string $value)
     {
