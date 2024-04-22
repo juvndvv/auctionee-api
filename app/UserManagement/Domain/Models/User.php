@@ -5,6 +5,7 @@ namespace App\UserManagement\Domain\Models;
 use App\Shared\Domain\Models\AggregateRoot;
 use App\UserManagement\Domain\Events\UserBlockedEvent;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
+use App\UserManagement\Domain\Events\UserDeletedEvent;
 use App\UserManagement\Domain\Events\UserUnblockedEvent;
 use App\UserManagement\Domain\Events\UserUpdatedEvent;
 use App\UserManagement\Domain\Models\ValueObjects\UserBirth;
@@ -132,7 +133,7 @@ class User extends AggregateRoot
 
     public function delete(): void
     {
-        //$this->record(new UserDeletedEvent($this->id));
+        $this->record(new UserDeletedEvent($this->id(), now()->toString()));
     }
 
     public function block(): void

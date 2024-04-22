@@ -3,15 +3,19 @@
 namespace App\UserManagement\Application\DeleteUser;
 
 use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Domain\Bus\Events\EventBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 
 class DeleteUserCommandHandler extends CommandHandler
 {
-    public function __construct(private readonly UserRepositoryPort $userRepository)
+    public function __construct(private readonly EventBus $eventBus, private readonly UserRepositoryPort $userRepository)
     {}
 
+    /**
+     * @throws NotFoundException
+     */
     public function __invoke(DeleteUserCommand $command): void
     {
         $uuid = $command->uuid();
@@ -27,7 +31,8 @@ class DeleteUserCommandHandler extends CommandHandler
         $user = User::fromPrimitives($userDb->toArray());
         $user->delete();
 
-        // TODO publish event
+        // Publish events
+        $this->eventBus->dispatch(...$user->pullDomainEvents());
 
         // Persist
         $this->userRepository->delete($user->id());

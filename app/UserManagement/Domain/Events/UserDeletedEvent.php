@@ -11,19 +11,19 @@ class UserDeletedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(array $message, string $ocurredOn, string $eventId = null)
+    public function __construct(public string $uuid, string $ocurredOn, string $eventId = null)
     {
-        parent::__construct($message, $ocurredOn, self::eventName(), $eventId);
+        parent::__construct($ocurredOn, self::eventName(), $eventId);
     }
 
     public function broadcastOn(): array
     {
-        return [UserDeletedEvent::eventName()];
+        return [self::eventName()];
     }
 
     public function broadcastAs(): string
     {
-        return UserDeletedEvent::eventName();
+        return self::eventName();
     }
 
     public static function eventName(): string
