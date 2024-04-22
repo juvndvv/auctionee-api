@@ -10,12 +10,14 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 abstract class DomainEvent implements ShouldBroadcastNow
 {
     public $eventId;
+    public $message;
     public $eventType;
     public $ocurredOn;
 
-    public function __construct(string $ocurredOn, string $eventType, string $eventId = null)
+    public function __construct(string $ocurredOn, array $message,  string $eventType, string $eventId = null)
     {
         $this->ocurredOn = $ocurredOn;
+        $this->message = $message;
         $this->eventType = $eventType;
         $this->eventId = $eventId ?: Uuid::random()->value();
     }
