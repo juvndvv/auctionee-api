@@ -11,7 +11,7 @@ class UserCreatedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(public string $uuid, string $ocurredOn, string $eventId = null)
+    public function __construct(public array $message, string $ocurredOn, string $eventId = null)
     {
         parent::__construct($ocurredOn, self::eventName(), $eventId);
     }

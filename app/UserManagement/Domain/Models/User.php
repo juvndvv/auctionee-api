@@ -64,7 +64,7 @@ class User extends AggregateRoot
             $role
         );
 
-        $user->record(new UserCreatedEvent($generatedId, now()->toString()));
+        $user->record(new UserCreatedEvent($user->toPrimitives(), now()->toString()));
 
         return $user;
     }

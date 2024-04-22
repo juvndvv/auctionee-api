@@ -9,6 +9,9 @@ return Application::configure(basePath: dirname(__DIR__))
         api: __DIR__.'/../routes/api.php',
         health: '/up',
     )
+    ->withEvents(discover: [
+        __DIR__.'/../app/Shared/Infraestructure/Listeners'
+    ])
     ->withMiddleware(function (Middleware $middleware) {
         //
     })

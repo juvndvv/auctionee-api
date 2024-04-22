@@ -50,7 +50,7 @@ readonly class CreateUserController
             return Response::UNPROCESSABLE_ENTITY("Errores de validación en el usuario", $e->validator->getMessageBag());
 
         } catch (Exception $e) {
-            dd($e);
+            echo $e->getMessage();
             return Response::SERVER_ERROR();
         }
     }
