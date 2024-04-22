@@ -2,57 +2,29 @@
 
 namespace App\UserManagement\Domain\Events;
 
-use App\Shared\Domain\Bus\Events\DomainEvent;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class UserCreatedEvent extends DomainEvent
+class UserCreatedEvent implements ShouldBroadcastNow
 {
-    public function __construct(
-        string $aggregateId,
-        private readonly string $name,
-        private readonly string $username,
-        private readonly string $email,
-        string $eventId = null,
-        string $occurredOn = null)
+    use Dispatchable, InteractsWithSockets;
+
+    public $message;
+
+    public function __construct($message)
     {
-        parent::__construct($aggregateId, $eventId, $occurredOn);
+        $this->message = $message;
     }
 
-    public static function fromPrimitives(string $aggregateId, array $body, string $eventId, string $occurredOn): DomainEvent
+    public function broadcastOn(): array
     {
-        return new self(
-            $aggregateId,
-            $body['name'],
-            $body['username'],
-            $body['email'],
-        );
+        return ['user-created'];
     }
 
-    public static function eventName(): string
+    public function broadcastAs(): string
     {
-        return 'user.created';
-    }
-
-    public function toPrimitives(): array
-    {
-        return [
-            'name' => $this->name,
-            'username' => $this->username,
-            'email' => $this->email,
-        ];
-    }
-
-    public function name(): string
-    {
-        return $this->name;
-    }
-
-    public function username(): string
-    {
-        return $this->username;
-    }
-
-    public function email(): string
-    {
-        return $this->email;
+        return 'user-created';
     }
 }

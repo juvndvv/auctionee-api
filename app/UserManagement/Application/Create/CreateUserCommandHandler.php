@@ -3,6 +3,7 @@
 namespace App\UserManagement\Application\Create;
 
 use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\UserManagement\Domain\Events\UserCreatedEvent;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 
@@ -26,6 +27,6 @@ class CreateUserCommandHandler extends CommandHandler
         // Persists
         $userModel = $this->userRepository->create($user->toPrimitives());
 
-        // TODO: publish event
+        UserCreatedEvent::dispatch($userModel);
     }
 }

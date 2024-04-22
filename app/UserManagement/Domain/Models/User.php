@@ -48,7 +48,7 @@ class User extends AggregateRoot
     public static function create($name, $username, $email, $password, $avatar, $birth, $role): User
     {
         $generatedId = UserId::random();
-        $user = new self(
+        return new self(
             $generatedId,
             $name,
             $username,
@@ -58,8 +58,6 @@ class User extends AggregateRoot
             $birth,
             $role
         );
-        $user->record(new UserCreatedEvent($generatedId, $name, $username, $email, $password));
-        return $user;
     }
 
     public static function fromPrimitives(array $data): User
