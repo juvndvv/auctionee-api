@@ -3,7 +3,10 @@
 namespace App\UserManagement\Domain\Models;
 
 use App\Shared\Domain\Models\AggregateRoot;
+use App\UserManagement\Domain\Events\UserBlockedEvent;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
+use App\UserManagement\Domain\Events\UserUnblockedEvent;
+use App\UserManagement\Domain\Events\UserUpdatedEvent;
 use App\UserManagement\Domain\Models\ValueObjects\UserBirth;
 use App\UserManagement\Domain\Models\ValueObjects\UserEmail;
 use App\UserManagement\Domain\Models\ValueObjects\UserId;
@@ -60,7 +63,7 @@ class User extends AggregateRoot
             $role
         );
 
-        $user->record(new UserCreatedEvent($user->toPrimitives(), now()));
+        $user->record(new UserCreatedEvent($generatedId, now()->toString()));
 
         return $user;
     }
@@ -97,35 +100,34 @@ class User extends AggregateRoot
     {
         $old = $this->avatar->value();
         $this->avatar = new UserAvatar($new);
-        //$this->record(new UserUpdatedEvent($this->id, "UserAvatar", $new, $old));
+        $this->record(new UserUpdatedEvent("avatar", $old, $new, now()->toString()));
     }
 
     public function updateName(string $new): void
     {
         $old = $this->name->value();
         $this->name = new UserName($new);
-        //$this->record(new UserUpdatedEvent($this->id, "user.name", $new, $old));
+        $this->record(new UserUpdatedEvent("name", $new, $old, now()->toString()));
     }
 
     public function updateUsername(string $new): void
     {
         $old = $this->username->value();
         $this->username = new UserUsername($new);
-        //$this->record(new UserUpdatedEvent($this->id, "user.username", $new, $old));
+        $this->record(new UserUpdatedEvent("username", $new, $old, now()->toString()));
     }
 
     public function updateEmail(string $new): void
     {
         $old = $this->email->value();
         $this->email = new UserEmail($new);
-        //$this->record(new UserUpdatedEvent($this->id(), "user.email", $new, $old));
+        $this->record(new UserUpdatedEvent("email", $new, $old, now()->toString()));
     }
 
     public function updatePassword(string $new): void
     {
-        $old = $this->password->value();
         $this->password = new UserPassword($new);
-        //$this->record(new UserUpdatedEvent($this->id, "user.password", $new, $old));
+        $this->record(new UserUpdatedEvent("password", "", "", now()->toString()));
     }
 
     public function delete(): void
@@ -136,11 +138,13 @@ class User extends AggregateRoot
     public function block(): void
     {
         $this->role = new UserRole(2);
+        $this->record(new UserBlockedEvent($this->id(), now()->toString()));
     }
 
     public function unblock(): void
     {
         $this->role = new UserRole(0);
+        $this->record(new UserUnblockedEvent($this->id(), now()->toString()));
     }
 
     public function id(): string

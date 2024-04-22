@@ -40,7 +40,6 @@ class EloquentUserModel extends Authenticatable
     protected function casts(): array
     {
         return [
-            'birth' => 'datetime:d-m-Y',
         ];
     }
 }

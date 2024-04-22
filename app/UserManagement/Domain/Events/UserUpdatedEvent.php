@@ -3,57 +3,31 @@
 namespace App\UserManagement\Domain\Events;
 
 use App\Shared\Domain\Bus\Events\DomainEvent;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class UserUpdatedEvent extends DomainEvent
 {
-    public function __construct(
-        string $aggregateId,
-        private readonly string $field,
-        private readonly string $old,
-        private readonly string $new,
-        string $eventId = null,
-        string $occurredOn = null
-    ) {
-        parent::__construct($aggregateId, $eventId, $occurredOn);
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public function __construct(public string $field, public string $old, public string $new, string $ocurredOn, string $eventId = null)
+    {
+        parent::__construct($ocurredOn, self::eventName(), $eventId);
     }
 
-    public static function fromPrimitives(string $aggregateId, array $body, string $eventId, string $occurredOn): DomainEvent
+    public function broadcastOn(): array
     {
-        return new self(
-            $aggregateId,
-            $body['field'],
-            $body['old'],
-            $body['new']
-        );
+        return [UserUpdatedEvent::eventName()];
+    }
+
+    public function broadcastAs(): string
+    {
+        return UserUpdatedEvent::eventName();
     }
 
     public static function eventName(): string
     {
-        return 'user.updated';
-    }
-
-    public function toPrimitives(): array
-    {
-        return [
-            'aggregateId' => $this->aggregateId(),
-            'field' => $this->field,
-            'old' => $this->old,
-            'new' => $this->new
-        ];
-    }
-
-    public function field(): string
-    {
-        return $this->field;
-    }
-
-    public function old(): string
-    {
-        return $this->old;
-    }
-
-    public function new(): string
-    {
-        return $this->new;
+        return 'user-updated';
     }
 }

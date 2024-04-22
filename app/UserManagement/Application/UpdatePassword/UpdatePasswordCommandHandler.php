@@ -3,6 +3,7 @@
 namespace App\UserManagement\Application\UpdatePassword;
 
 use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Domain\Bus\Events\EventBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\UserManagement\Application\UpdateName\UpdateNameCommand;
 use App\UserManagement\Domain\Models\User;
@@ -11,7 +12,7 @@ use RuntimeException;
 
 class UpdatePasswordCommandHandler extends CommandHandler
 {
-    public function __construct(private readonly UserRepositoryPort $userRepository)
+    public function __construct(private readonly EventBus $eventBus, private readonly UserRepositoryPort $userRepository)
     {}
 
     public function __invoke(UpdatePasswordCommand $command): void
@@ -35,5 +36,7 @@ class UpdatePasswordCommandHandler extends CommandHandler
         if ($updates < 1) {
             throw new RuntimeException("Ha ocurrido un error al actualizar el email");
         }
+
+        $this->eventBus->dispatch(...$user->pullDomainEvents());
     }
 }

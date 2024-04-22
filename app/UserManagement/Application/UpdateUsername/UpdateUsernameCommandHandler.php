@@ -2,6 +2,7 @@
 
 namespace App\UserManagement\Application\UpdateUsername;
 
+use App\Shared\Domain\Bus\Events\EventBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
@@ -9,7 +10,7 @@ use RuntimeException;
 
 class UpdateUsernameCommandHandler
 {
-    public function __construct(private readonly UserRepositoryPort $userRepository)
+    public function __construct(private readonly EventBus $eventBus, private readonly UserRepositoryPort $userRepository)
     {}
 
     /**
@@ -36,5 +37,7 @@ class UpdateUsernameCommandHandler
         if ($updates < 1) {
             throw new RuntimeException("Ha ocurrido un error al actualizar el email");
         }
+
+        $this->eventBus->dispatch(...$user->pullDomainEvents());
     }
 }

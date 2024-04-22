@@ -4,6 +4,7 @@ namespace App\UserManagement\Application\FindByUsername;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\UserManagement\Application\Resources\UserDetailsResource;
+use App\UserManagement\Application\Resources\UserSmallResource;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 
 class FindByUsernameQueryHandler
@@ -24,6 +25,6 @@ class FindByUsernameQueryHandler
             throw new NotFoundException("Usuario $username no encontrado");
         }
 
-        return UserDetailsResource::fromArray($user->toArray());
+        return UserSmallResource::fromArray($user->toArray());
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar')->nullable();
-            $table->date('birth');
+            $table->dateTime('birth');
             $table->integer('role')->default(0);    // 0 user, 1 blocked, 2 admin
             $table->timestamps();
         });

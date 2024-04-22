@@ -3,33 +3,31 @@
 namespace App\UserManagement\Domain\Events;
 
 use App\Shared\Domain\Bus\Events\DomainEvent;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class UserDeletedEvent extends DomainEvent
 {
-    public function __construct(
-        string $aggregateId,
-        string $eventId = null,
-        string $occurredOn = null
-    ) {
-        parent::__construct($aggregateId, $eventId, $occurredOn);
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public function __construct(array $message, string $ocurredOn, string $eventId = null)
+    {
+        parent::__construct($message, $ocurredOn, self::eventName(), $eventId);
     }
 
-    public static function fromPrimitives(string $aggregateId, array $body, string $eventId, string $occurredOn): DomainEvent
+    public function broadcastOn(): array
     {
-        return new self(
-            $aggregateId,
-        );
+        return [UserDeletedEvent::eventName()];
+    }
+
+    public function broadcastAs(): string
+    {
+        return UserDeletedEvent::eventName();
     }
 
     public static function eventName(): string
     {
-        return 'user.deleted';
-    }
-
-    public function toPrimitives(): array
-    {
-        return [
-            'aggregateId' => $this->aggregateId(),
-        ];
+        return 'user-deleted';
     }
 }

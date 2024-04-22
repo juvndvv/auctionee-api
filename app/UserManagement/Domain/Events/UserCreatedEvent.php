@@ -2,22 +2,18 @@
 
 namespace App\UserManagement\Domain\Events;
 
+use App\Shared\Domain\Bus\Events\DomainEvent;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserCreatedEvent implements ShouldBroadcastNow
+class UserCreatedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
-    public $ocurredOn;
-
-    public function __construct($message, $occurredOn)
+    public function __construct(public string $uuid, string $ocurredOn, string $eventId = null)
     {
-        $this->message = $message;
-        $this->ocurredOn = $occurredOn;
+        parent::__construct($ocurredOn, self::eventName(), $eventId);
     }
 
     public function broadcastOn(): array
@@ -34,5 +30,4 @@ class UserCreatedEvent implements ShouldBroadcastNow
     {
         return 'user-created';
     }
-
 }

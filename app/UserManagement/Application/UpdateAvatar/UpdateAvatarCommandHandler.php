@@ -3,6 +3,7 @@
 namespace App\UserManagement\Application\UpdateAvatar;
 
 use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Domain\Bus\Events\EventBus;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
@@ -11,7 +12,7 @@ use RuntimeException;
 
 class UpdateAvatarCommandHandler extends CommandHandler
 {
-    public function __construct(private readonly ImageRepositoryPort $imageRepository, private readonly UserRepositoryPort  $userRepository)
+    public function __construct(private readonly EventBus $eventBus, private readonly ImageRepositoryPort $imageRepository, private readonly UserRepositoryPort  $userRepository)
     {}
 
     public function __invoke(UpdateAvatarCommand $command): string
@@ -29,7 +30,6 @@ class UpdateAvatarCommandHandler extends CommandHandler
         // Use case
         $user = User::fromPrimitives($dbUser->toArray());
         $old = $user->avatar();
-        $user->updateAvatar($new);
 
         // Delete image if is not default
         if ($old !== env("DEFAULT_AVATAR")) {
@@ -38,13 +38,14 @@ class UpdateAvatarCommandHandler extends CommandHandler
 
         // Save new avatar
         $newPath = $this->imageRepository->store("avatars", $new);
+        $user->updateAvatar($newPath);
         $updates = $this->userRepository->updateAvatar($uuid, $newPath);
-
-        // TODO publish events
 
         if ($updates !== 1) {
             throw new RuntimeException('Ha ocurrido un error al intentar actualizar el avatar');
         }
+
+        $this->eventBus->dispatch(...$user->pullDomainEvents());
 
         return $newPath;
     }

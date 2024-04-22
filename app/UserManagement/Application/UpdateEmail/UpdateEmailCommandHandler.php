@@ -2,15 +2,15 @@
 
 namespace App\UserManagement\Application\UpdateEmail;
 
+use App\Shared\Domain\Bus\Events\EventBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use RuntimeException;
 
 class UpdateEmailCommandHandler
 {
-    public function __construct(private readonly UserRepositoryPort $userRepository)
+    public function __construct(private readonly EventBus $eventBus, private readonly UserRepositoryPort $userRepository)
     {}
 
     public function __invoke(UpdateEmailCommand $command): void
@@ -36,6 +36,6 @@ class UpdateEmailCommandHandler
             throw new RuntimeException("Ha ocurrido un error al actualizar el email");
         }
 
-        // TODO publish event
+        $this->eventBus->dispatch(...$user->pullDomainEvents());
     }
 }
