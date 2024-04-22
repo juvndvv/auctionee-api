@@ -101,51 +101,74 @@ class User extends AggregateRoot
     {
         $old = $this->avatar->value();
         $this->avatar = new UserAvatar($new);
-        $this->record(new UserUpdatedEvent("avatar", $old, $new, now()->toString()));
+        $this->record(new UserUpdatedEvent(
+            [
+                'field' =>'avatar',
+                'old' => $old,
+                'new' => $new
+        ], now()->toString()));
     }
 
     public function updateName(string $new): void
     {
         $old = $this->name->value();
         $this->name = new UserName($new);
-        $this->record(new UserUpdatedEvent("name", $new, $old, now()->toString()));
+        $this->record(new UserUpdatedEvent(
+            [
+                'field' =>'name',
+                'old' => $old,
+                'new' => $new
+            ], now()->toString()));
     }
 
     public function updateUsername(string $new): void
     {
         $old = $this->username->value();
         $this->username = new UserUsername($new);
-        $this->record(new UserUpdatedEvent("username", $new, $old, now()->toString()));
+        $this->record(new UserUpdatedEvent(
+            [
+                'field' =>'username',
+                'old' => $old,
+                'new' => $new
+            ], now()->toString()));
     }
 
     public function updateEmail(string $new): void
     {
         $old = $this->email->value();
         $this->email = new UserEmail($new);
-        $this->record(new UserUpdatedEvent("email", $new, $old, now()->toString()));
+        $this->record(new UserUpdatedEvent(
+            [
+                'field' =>'email',
+                'old' => $old,
+                'new' => $new
+            ], now()->toString()));
     }
 
     public function updatePassword(string $new): void
     {
         $this->password = new UserPassword($new);
-        $this->record(new UserUpdatedEvent("password", "", "", now()->toString()));
+        $this->record(new UserUpdatedEvent(
+            [
+                'field' =>'password',
+            ], now()->toString()));
     }
 
     public function delete(): void
     {
-        $this->record(new UserDeletedEvent($this->id(), now()->toString()));
+        $this->record(new UserDeletedEvent($this->toPrimitives(), now()->toString()));
     }
 
     public function block(): void
     {
         $this->role = new UserRole(2);
-        $this->record(new UserBlockedEvent($this->id(), now()->toString()));
+        $this->record(new UserBlockedEvent($this->toPrimitives(), now()->toString()));
     }
 
     public function unblock(): void
     {
         $this->role = new UserRole(0);
-        $this->record(new UserUnblockedEvent($this->id(), now()->toString()));
+        $this->record(new UserUnblockedEvent($this->toPrimitives(), now()->toString()));
     }
 
     public function id(): string
