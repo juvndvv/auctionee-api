@@ -27,7 +27,8 @@ class EloquentUserModel extends Authenticatable
         'username',
         'email',
         'password',
-        'avatar'
+        'avatar',
+        'birth'
     ];
 
     /**
@@ -38,7 +39,7 @@ class EloquentUserModel extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            'birth' => 'datetime:d-m-Y',
         ];
     }
 }

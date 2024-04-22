@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-class CreateUserController
+readonly class CreateUserController
 {
     public function __construct(
         private readonly CommandBus $commandBus,
@@ -27,6 +27,7 @@ class CreateUserController
             $email = $request->input('email');
             $password = $request->input('password');
             $avatar = $request->file('avatar');
+            $birth = $request->input('birth');
 
             // Upload the image
             if ($avatar) {
@@ -38,7 +39,7 @@ class CreateUserController
             }
 
             // Create the user
-            $command = new CreateUserCommand($name, $username, $email, $password, $avatar, 0);
+            $command = new CreateUserCommand($name, $username, $email, $password, $avatar, $birth, 0);
             $resource = $this->commandBus->handle($command);
 
             // TODO: generate and return token
@@ -49,6 +50,7 @@ class CreateUserController
             return Response::UNPROCESSABLE_ENTITY("Errores de validación en el usuario", $e->validator->getMessageBag());
 
         } catch (Exception $e) {
+            dd($e);
             return Response::SERVER_ERROR();
         }
     }
@@ -61,6 +63,7 @@ class CreateUserController
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string',
             'avatar' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
+            'birth' => 'required|date',
         ]);
     }
 }

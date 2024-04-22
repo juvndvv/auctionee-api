@@ -4,8 +4,7 @@ namespace App\UserManagement\Domain\Models;
 
 use App\Shared\Domain\Models\AggregateRoot;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
-use App\UserManagement\Domain\Events\UserDeletedEvent;
-use App\UserManagement\Domain\Events\UserUpdatedEvent;
+use App\UserManagement\Domain\Models\ValueObjects\UserBirth;
 use App\UserManagement\Domain\Models\ValueObjects\UserEmail;
 use App\UserManagement\Domain\Models\ValueObjects\UserId;
 use App\UserManagement\Domain\Models\ValueObjects\UserAvatar;
@@ -22,6 +21,8 @@ class User extends AggregateRoot
     private UserEmail $email;
     private UserPassword $password;
     private UserAvatar $avatar;
+    private UserBirth $birth;
+
     private UserRole $role;
 
     public function __construct(
@@ -31,6 +32,7 @@ class User extends AggregateRoot
         string $email,
         string $password,
         string $avatar,
+        string $birth,
         int $role
     ) {
         $this->id = new UserId($uuid);
@@ -39,10 +41,11 @@ class User extends AggregateRoot
         $this->email = new UserEmail($email);
         $this->password = $password === "" ? new UserPassword($password) : new UserPassword("123");
         $this->avatar = new UserAvatar($avatar);
+        $this->birth = new UserBirth($birth);
         $this->role = new UserRole($role);
     }
 
-    public static function create($name, $username, $email, $password, $avatar, $role): User
+    public static function create($name, $username, $email, $password, $avatar, $birth, $role): User
     {
         $generatedId = UserId::random();
         $user = new self(
@@ -52,6 +55,7 @@ class User extends AggregateRoot
             $email,
             $password,
             $avatar,
+            $birth,
             $role
         );
         $user->record(new UserCreatedEvent($generatedId, $name, $username, $email, $password));
@@ -67,6 +71,7 @@ class User extends AggregateRoot
             $data['email'],
             $data['password'],
             $data['avatar'],
+            $data['birth'],
             $data['role']
         );
     }
@@ -80,6 +85,7 @@ class User extends AggregateRoot
             'email' => $this->email->value(),
             'password' => $this->password->value(),
             'avatar' => $this->avatar->value(),
+            'birth' => $this->birth->value(),
             'role' => $this->role->value(),
         ];
     }

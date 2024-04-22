@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/users', CreateUserController::class);
 Route::get('/users', FindAllUserController::class);
 Route::get('/users/{uuid}', FindUserByUuidController::class);
-Route::get('/users/{username}', FindUserByUsernameController::class);
+Route::get('/users/username/{username}', FindUserByUsernameController::class);
 Route::delete('/users/{uuid}', DeleteUserController::class);
 Route::post('/users/{uuid}/avatar', UpdateUserAvatarController::class);
 Route::put('/users/{uuid}/email', UpdateUserEmailController::class);
