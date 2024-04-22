@@ -16,7 +16,9 @@ class SendWelcomeEmailCommandHandler extends CommandHandler
     public function __invoke(SendWelcomeEmailCommand $command): void
     {
         $to = $command->to();
-        $email = $this->emailRepository->getWelcomeEmail($to);
+        $name = $command->name();
+
+        $email = $this->emailRepository->getWelcomeEmail($to, $name);
         $this->emailSender->send($email);
     }
 }

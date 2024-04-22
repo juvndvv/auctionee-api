@@ -6,5 +6,5 @@ use App\Retention\Email\Domain\Model\Email;
 
 interface EmailRepositoryPort
 {
-    public function getWelcomeEmail(string $to): Email;
+    public function getWelcomeEmail(string $to, string $name): Email;
 }

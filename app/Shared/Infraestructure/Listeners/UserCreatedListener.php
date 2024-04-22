@@ -26,7 +26,7 @@ class UserCreatedListener
      */
     public function handle(UserCreatedEvent $event): void
     {
-        $command = new SendWelcomeEmailCommand($event->message['email']);
+        $command = new SendWelcomeEmailCommand($event->message['email'], $event->message['name']);
         $this->commandBus->handle($command);
     }
 }
