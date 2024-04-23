@@ -62,7 +62,8 @@
 
 ## Financial
 
-- [ ] Modelado de la base de datos
+- [x] Modelado de la base de datos
+- [x] Modelado del repositorio
 - [ ] Modelado del dominio
 - [ ] Listener UserCreatedEvent Caso de uso de crear Wallet
 - [ ] Listener UserDeletedEvent Caso de uso de eliminar Wallet
