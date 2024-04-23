@@ -1,14 +1,4 @@
 
-## Infraestructura
-
-- [ ] Pedir dominios
-- [ ] VPS para desplegar la API
-- [ ] Buscar donde desplegar el Frontend
-- [x] Configuración de Sail
-- [x] Configurar Pusher
-- [x] Configurar Cloudflare
-- [x] Configurar Resend
-
 ## Arquitectura
 
 - [x] Bus de eventos con Pusher
@@ -62,6 +52,7 @@
 - [ ] Endpoint Caso de uso de eliminar amigo
 - [ ] Endpoint Caso de uso de obtener lista de amigos
 - [ ] Endpoint Caso de uso de guardar mensaje
+- [ ] Endpoint Caso de uso de recuperar mensajes de una conversacion
 
 ## Financial
 
@@ -82,6 +73,17 @@
 - [ ] Endpoint Caso de uso de eliminar subasta
 - [ ] Endpoint Caso de uso de pujar en subasta
 - [ ] Endpoint Caso de uso de finalizar subasta
+
+## Miscelaneo
+
+- [ ] Paginar respuestas grandes
+- [ ] Pedir dominios
+- [ ] VPS para desplegar la API
+- [ ] Buscar donde desplegar el Frontend
+- [x] Configuración de Sail
+- [x] Configurar Pusher
+- [x] Configurar Cloudflare
+- [x] Configurar Resend
 
 ## Dudas
 
