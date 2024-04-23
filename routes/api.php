@@ -3,6 +3,8 @@
 use App\Review\Infraestructure\Controllers\FindUserReviewsController;
 use App\Review\Infraestructure\Controllers\PlaceReviewController;
 use App\Review\Infraestructure\Controllers\RemoveReviewController;
+use App\Review\Infraestructure\Controllers\UpdateDescriptionController;
+use App\Review\Infraestructure\Controllers\UpdateRatingController;
 use App\UserManagement\Infraestructure\Controllers\BlockUserController;
 use App\UserManagement\Infraestructure\Controllers\CreateUserController;
 use App\UserManagement\Infraestructure\Controllers\DeleteUserController;
@@ -35,3 +37,5 @@ Route::get('/users/{uuid}/reviews', FindUserReviewsController::class);
 // Reviews
 Route::post('/reviews', PlaceReviewController::class);
 Route::delete('/reviews/{uuid}', RemoveReviewController::class);
+Route::put('/reviews/{uuid}/rating', UpdateRatingController::class);
+Route::put('/reviews/{uuid}/description', UpdateDescriptionController::class);

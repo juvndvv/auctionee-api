@@ -85,7 +85,7 @@ class Review extends AggregateRoot
 
     public function updateDescription(string $description): void
     {
-        $old = $this->rating();
+        $old = $this->description();
         $this->description = new ReviewDescription($description);
         $this->record(new DescriptionUpdatedEvent([
             'old' => $old,

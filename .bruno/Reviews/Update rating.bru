@@ -1,0 +1,17 @@
+meta {
+  name: Update rating
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{url}}/reviews/7cc18deb-5836-43d3-93be-eaaf20c8ae79/rating
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "rating": 5
+  }
+}

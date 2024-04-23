@@ -1,0 +1,17 @@
+meta {
+  name: Update description
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{url}}/reviews/7cc18deb-5836-43d3-93be-eaaf20c8ae79/description
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "description": "Esta es la descripcion actualizada"
+  }
+}

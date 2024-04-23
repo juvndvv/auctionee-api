@@ -2,11 +2,12 @@
 
 namespace App\Review\Domain\Events;
 
+use App\Shared\Domain\Bus\Events\DomainEvent;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class DescriptionUpdatedEvent
+class DescriptionUpdatedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
