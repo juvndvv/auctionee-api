@@ -2,7 +2,9 @@
 
 namespace App\Review\Domain\Models\ValueObjects;
 
-class ReviewDescription
+use App\Shared\Domain\Models\ValueObjects\TextValueObject;
+
+class ReviewDescription extends TextValueObject
 {
 
 }

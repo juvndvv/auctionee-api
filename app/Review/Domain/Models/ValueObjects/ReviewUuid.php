@@ -2,7 +2,9 @@
 
 namespace App\Review\Domain\Models\ValueObjects;
 
-class ReviewUuid
+use App\Shared\Domain\Models\ValueObjects\Uuid;
+
+class ReviewUuid extends Uuid
 {
 
 }

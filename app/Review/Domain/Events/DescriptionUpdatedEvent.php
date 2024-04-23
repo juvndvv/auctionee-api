@@ -2,13 +2,11 @@
 
 namespace App\Review\Domain\Events;
 
-use App\Shared\Domain\Bus\Events\DomainEvent;
-use App\UserManagement\Domain\Events\UserCreatedEvent;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ReviewPlacedEvent extends DomainEvent
+class DescriptionUpdatedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,16 +17,16 @@ class ReviewPlacedEvent extends DomainEvent
 
     public function broadcastOn(): array
     {
-        return [ReviewPlacedEvent::eventName()];
+        return [DescriptionUpdatedEvent::eventName()];
     }
 
     public function broadcastAs(): string
     {
-        return ReviewPlacedEvent::eventName();
+        return DescriptionUpdatedEvent::eventName();
     }
 
     public static function eventName(): string
     {
-        return 'review-placed';
+        return 'review-description-updated';
     }
 }
