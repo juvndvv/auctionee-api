@@ -19,14 +19,10 @@ Social
 
 Financial
 
-- agregar dinero
-- retirar dinero
-- enviar dinero a amigos
-
-[ ] Modelado del dominio
-[ ] Caso de uso de crear Wallet
-[ ] Caso de uso de eliminar Wallet
-[ ] Caso de uso de hacer transaccion
+- [ ] Modelado del dominio
+- [ ] Caso de uso de crear Wallet
+- [ ] Caso de uso de eliminar Wallet
+- [ ] Caso de uso de hacer transaccion
 
 Auction
 
