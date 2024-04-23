@@ -1,32 +1,36 @@
 
-Eventos
-- Escuchar todos los eventos y guardarlos
-- Devolverlos de manera paginada
-- Posibilidad de filtrar por el tipo de evento
+## Email
 
-Social
+- [ ] Definir que casos faltan para enviar emails
 
-- amistad
-- peticiones de amistad
-- mensajeria
+## Notificaciones
 
-- enviar peticion de amistad
-- aceptar peticion
-- rechazar peticion
-- obtener lista de amigos
+- [ ] Definir que eventos generan notificaciones
+- [ ] Caso de uso de enviar notificacion
+- [ ] Caso de uso de guardar notificacion
+- [ ] Caso de uso de marcar como leida
 
-- enviar mensaje
+## Social
 
-Financial
+- [ ] Modelado del dominio
+- [ ] Caso de uso de enviar peticion de amistad
+- [ ] Caso de uso de aceptar peticion de amistad
+- [ ] Caso de uso de rechazar peticion de amistad
+- [ ] Caso de uso de eliminar amigo
+- [ ] Caso de uso de obtener lista de amigos
+- [ ] Caso de uso de guardar mensaje
+
+## Financial
 
 - [ ] Modelado del dominio
 - [ ] Caso de uso de crear Wallet
 - [ ] Caso de uso de eliminar Wallet
 - [ ] Caso de uso de hacer transaccion
 
-Auction
+## Auction
 
-- crear subasta
-- editar subasta
-- eliminar subasta
-- pujar en subasta
+- [ ] Modelado del dominio
+- [ ] Caso de uso de crear subasta
+- [ ] Caso de uso de editar subasta
+- [ ] Caso de uso de eliminar subasta
+- [ ] Caso de uso de pujar en subasta
