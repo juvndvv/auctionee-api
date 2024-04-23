@@ -81,3 +81,7 @@
 - [ ] Endpoint Caso de uso de eliminar subasta
 - [ ] Endpoint Caso de uso de pujar en subasta
 - [ ] Endpoint Caso de uso de finalizar subasta
+
+## Dudas
+
+Necesito crear una lista de transacciones, como es mejor hacerlo en el dominio: Collection, crear una entidad que internamente sea una collection...
