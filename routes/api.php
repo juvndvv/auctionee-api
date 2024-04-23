@@ -2,6 +2,7 @@
 
 use App\Review\Infraestructure\Controllers\FindUserReviewsController;
 use App\Review\Infraestructure\Controllers\PlaceReviewController;
+use App\Review\Infraestructure\Controllers\RemoveReviewController;
 use App\UserManagement\Infraestructure\Controllers\BlockUserController;
 use App\UserManagement\Infraestructure\Controllers\CreateUserController;
 use App\UserManagement\Infraestructure\Controllers\DeleteUserController;
@@ -33,3 +34,4 @@ Route::get('/users/{uuid}/reviews', FindUserReviewsController::class);
 
 // Reviews
 Route::post('/reviews', PlaceReviewController::class);
+Route::delete('/reviews/{uuid}', RemoveReviewController::class);

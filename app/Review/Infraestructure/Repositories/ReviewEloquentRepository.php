@@ -7,10 +7,31 @@ use App\Review\Infraestructure\Repositories\Models\EloquentReviewModel;
 
 class ReviewEloquentRepository implements ReviewRepositoryPort
 {
+    public function findByUuid(string $uuid)
+    {
+        return EloquentReviewModel::query()->where("uuid", $uuid)->firstOrFail();
+    }
+
+    public function findByReviewerUuid(string $reviewerUuid)
+    {
+        return EloquentReviewModel::query()
+            ->select(
+                "reviews.uuid",
+                "users.username",
+                "users.avatar",
+                "reviews.rating",
+                "reviews.description",
+                "reviews.created_at")
+            ->join("users", "users.uuid", "=", "reviews.reviewed_uuid")
+            ->where("reviews.reviewer_uuid", $reviewerUuid)
+            ->get();
+    }
+
     public function findByReviewedUuid(string $reviewedUuid)
     {
         return EloquentReviewModel::query()
             ->select(
+                "reviews.uuid",
                 "users.username",
                 "users.avatar",
                 "reviews.rating",
@@ -34,5 +55,10 @@ class ReviewEloquentRepository implements ReviewRepositoryPort
     public function updateDescription(string $uuid, string $description)
     {
         return EloquentReviewModel::query()->where('uuid', $uuid)->update(['description' => $description]);
+    }
+
+    public function remove(string $uuid)
+    {
+        return EloquentReviewModel::query()->where('uuid', $uuid)->delete();
     }
 }

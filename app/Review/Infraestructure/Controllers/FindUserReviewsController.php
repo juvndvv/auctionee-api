@@ -10,7 +10,6 @@ use Exception;
 
 class FindUserReviewsController
 {
-
     public function __construct(private readonly QueryBus $queryBus)
     {}
 

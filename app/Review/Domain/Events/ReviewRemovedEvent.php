@@ -2,11 +2,12 @@
 
 namespace App\Review\Domain\Events;
 
+use App\Shared\Domain\Bus\Events\DomainEvent;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ReviewRemovedEvent
+class ReviewRemovedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

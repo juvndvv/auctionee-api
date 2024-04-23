@@ -35,8 +35,8 @@ class Review extends AggregateRoot
             $data['uuid'],
             $data['rating'],
             $data['description'],
-            $data['reviewerId'],
-            $data['reviewedId']
+            $data['reviewer_uuid'],
+            $data['reviewed_uuid']
         );
     }
 

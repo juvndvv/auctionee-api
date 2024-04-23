@@ -6,8 +6,11 @@ use App\Review\Domain\Models\Review;
 
 interface ReviewRepositoryPort
 {
-    public function findByReviewedUuid(string $userUuid);
+    public function findByUuid(string $uuid);
+    public function findByReviewerUuid(string $reviewerUuid);
+    public function findByReviewedUuid(string $reviewedUuid);
     public function create(array $data);
     public function updateRating($uuid, int $rating);
     public function updateDescription(string $uuid, string $description);
+    public function remove(string $uuid);
 }
