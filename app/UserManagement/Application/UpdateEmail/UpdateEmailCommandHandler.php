@@ -2,13 +2,14 @@
 
 namespace App\UserManagement\Application\UpdateEmail;
 
+use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Bus\Events\EventBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use RuntimeException;
 
-class UpdateEmailCommandHandler
+class UpdateEmailCommandHandler extends CommandHandler
 {
     public function __construct(private readonly EventBus $eventBus, private readonly UserRepositoryPort $userRepository)
     {}

@@ -3,7 +3,6 @@
 namespace App\Shared\Infraestructure\Listeners;
 
 use App\Retention\Email\Application\SendEmailCommand;
-use App\Retention\EventMonitoring\Application\Place\PlaceEventCommand;
 use App\Shared\Domain\Bus\Command\CommandBus;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
 

@@ -2,7 +2,9 @@
 
 namespace App\Financial\Application\MakeTransaction;
 
-class MakeTransactionCommandHandler
+use App\Shared\Domain\Bus\Command\CommandHandler;
+
+class MakeTransactionCommandHandler extends CommandHandler
 {
 
 }

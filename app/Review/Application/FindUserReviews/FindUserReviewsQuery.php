@@ -2,7 +2,9 @@
 
 namespace App\Review\Application\FindUserReviews;
 
-class FindUserReviewsQuery
+use App\Shared\Domain\Bus\Query\Query;
+
+class FindUserReviewsQuery extends Query
 {
     public function __construct(private readonly string $reviewedUuid)
     {}

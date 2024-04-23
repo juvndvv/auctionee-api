@@ -2,7 +2,9 @@
 
 namespace App\UserManagement\Application\UpdateUsername;
 
-class UpdateUsernameCommand
+use App\Shared\Domain\Bus\Command\Command;
+
+class UpdateUsernameCommand extends Command
 {
     public function __construct(private readonly string $uuid, private readonly string $username)
     {}

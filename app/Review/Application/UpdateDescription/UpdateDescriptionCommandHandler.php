@@ -4,12 +4,13 @@ namespace App\Review\Application\UpdateDescription;
 
 use App\Review\Domain\Models\Review;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
+use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Bus\Events\EventBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use http\Exception\RuntimeException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class UpdateDescriptionCommandHandler
+class UpdateDescriptionCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly ReviewRepositoryPort $reviewRepository,

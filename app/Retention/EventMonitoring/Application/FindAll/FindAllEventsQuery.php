@@ -2,7 +2,9 @@
 
 namespace App\Retention\EventMonitoring\Application\FindAll;
 
-class FindAllEventsQuery
+use App\Shared\Domain\Bus\Query\Query;
+
+class FindAllEventsQuery extends Query
 {
 
 }

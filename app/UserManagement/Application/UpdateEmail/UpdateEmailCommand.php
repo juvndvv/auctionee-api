@@ -2,7 +2,9 @@
 
 namespace App\UserManagement\Application\UpdateEmail;
 
-class UpdateEmailCommand
+use App\Shared\Domain\Bus\Command\Command;
+
+class UpdateEmailCommand extends Command
 {
     public function __construct(private readonly string $uuid, private readonly string $email)
     {}

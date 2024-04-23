@@ -2,7 +2,9 @@
 
 namespace App\Review\Application\FindUserAverage;
 
-class FindUserAverageQuery
+use App\Shared\Domain\Bus\Query\Query;
+
+class FindUserAverageQuery extends Query
 {
     public function __construct(private readonly string $userUuid)
     {}

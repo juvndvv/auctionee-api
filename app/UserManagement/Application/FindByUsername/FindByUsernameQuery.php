@@ -2,7 +2,9 @@
 
 namespace App\UserManagement\Application\FindByUsername;
 
-class FindByUsernameQuery
+use App\Shared\Domain\Bus\Query\Query;
+
+class FindByUsernameQuery extends Query
 {
     public function __construct(private readonly string $username)
     {}

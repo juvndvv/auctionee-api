@@ -3,9 +3,10 @@
 namespace App\Review\Application\FindUserReviews;
 
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
+use App\Shared\Domain\Bus\Query\QueryHandler;
 use App\Shared\Domain\Exceptions\NoContentException;
 
-class FindUserReviewsQueryHandler
+class FindUserReviewsQueryHandler extends QueryHandler
 {
     public function __construct(private ReviewRepositoryPort $reviewRepository)
     {}

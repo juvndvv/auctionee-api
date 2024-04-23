@@ -2,7 +2,9 @@
 
 namespace App\Review\Application\UpdateDescription;
 
-class UpdateDescriptionCommand
+use App\Shared\Domain\Bus\Command\Command;
+
+class UpdateDescriptionCommand extends Command
 {
     public function __construct(
         private readonly string $uuid,

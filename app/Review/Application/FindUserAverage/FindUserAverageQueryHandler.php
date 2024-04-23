@@ -3,8 +3,9 @@
 namespace App\Review\Application\FindUserAverage;
 
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
+use App\Shared\Domain\Bus\Query\QueryHandler;
 
-class FindUserAverageQueryHandler
+class FindUserAverageQueryHandler extends QueryHandler
 {
     public function __construct(private readonly ReviewRepositoryPort $reviewRepository)
     {}

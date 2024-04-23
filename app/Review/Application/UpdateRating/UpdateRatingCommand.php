@@ -2,7 +2,9 @@
 
 namespace App\Review\Application\UpdateRating;
 
-class UpdateRatingCommand
+use App\Shared\Domain\Bus\Command\Command;
+
+class UpdateRatingCommand extends Command
 {
     public function __construct(
         private readonly string $uuid,

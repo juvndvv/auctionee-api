@@ -2,7 +2,9 @@
 
 namespace App\UserManagement\Application\UnblockUser;
 
-class UnblockUserCommand
+use App\Shared\Domain\Bus\Command\Command;
+
+class UnblockUserCommand extends Command
 {
     public function __construct(private readonly string $uuid)
     {}

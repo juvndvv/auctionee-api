@@ -2,7 +2,10 @@
 
 namespace App\Review\Application\PlaceReview;
 
-class PlaceReviewCommand
+
+use App\Shared\Domain\Bus\Query\Query;
+
+class PlaceReviewCommand extends Query
 {
     public function __construct(
         private readonly string $reviewerUuid,

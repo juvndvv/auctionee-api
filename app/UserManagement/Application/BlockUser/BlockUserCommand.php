@@ -2,7 +2,9 @@
 
 namespace App\UserManagement\Application\BlockUser;
 
-class BlockUserCommand
+use App\Shared\Domain\Bus\Command\Command;
+
+class BlockUserCommand extends Command
 {
     public function __construct(private readonly string $uuid)
     {}

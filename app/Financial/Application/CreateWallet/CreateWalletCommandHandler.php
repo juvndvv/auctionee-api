@@ -2,7 +2,9 @@
 
 namespace App\Financial\Application\CreateWallet;
 
-class CreateWalletCommandHandler
+use App\Shared\Domain\Bus\Command\CommandHandler;
+
+class CreateWalletCommandHandler extends CommandHandler
 {
 
 }

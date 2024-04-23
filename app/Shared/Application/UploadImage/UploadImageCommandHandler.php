@@ -2,9 +2,10 @@
 
 namespace App\Shared\Application\UploadImage;
 
+use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
 
-class UploadImageCommandHandler
+class UploadImageCommandHandler extends CommandHandler
 {
     public function __construct(private readonly ImageRepositoryPort $imageRepository)
     {}

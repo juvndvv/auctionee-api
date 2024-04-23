@@ -2,11 +2,12 @@
 
 namespace App\UserManagement\Application\BlockUser;
 
+use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Bus\Events\EventBus;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 
-class BlockUserCommandHandler
+class BlockUserCommandHandler extends CommandHandler
 {
     public function __construct(private readonly EventBus $eventBus, private UserRepositoryPort $userRepository)
     {

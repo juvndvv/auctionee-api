@@ -2,7 +2,9 @@
 
 namespace App\Financial\Domain\Models;
 
-class Wallet
-{
+use App\Shared\Domain\Models\AggregateRoot;
 
+class Wallet extends AggregateRoot
+{
+    
 }

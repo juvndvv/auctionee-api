@@ -3,6 +3,8 @@
 namespace App\UserManagement\Application\FindAll;
 
 
-class FindAllUserQuery
+use App\Shared\Domain\Bus\Query\Query;
+
+class FindAllUserQuery extends Query
 {
 }
