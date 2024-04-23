@@ -1,5 +1,6 @@
 <?php
 
+use App\Retention\EventMonitoring\Infraestructure\Controllers\FindAllEventsController;
 use App\Review\Infraestructure\Controllers\FindUserAverageRatingController;
 use App\Review\Infraestructure\Controllers\FindUserReviewsController;
 use App\Review\Infraestructure\Controllers\PlaceReviewController;
@@ -41,3 +42,6 @@ Route::post('/reviews', PlaceReviewController::class);
 Route::delete('/reviews/{uuid}', RemoveReviewController::class);
 Route::put('/reviews/{uuid}/rating', UpdateRatingController::class);
 Route::put('/reviews/{uuid}/description', UpdateDescriptionController::class);
+
+// Events
+Route::get("/events", FindAllEventsController::class);

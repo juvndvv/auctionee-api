@@ -2,7 +2,8 @@
 
 namespace App\Retention\EventMonitoring\Domain\Models\ValueObjects;
 
-class EventType
-{
+use App\Shared\Domain\Models\ValueObjects\StringValueObject;
 
+class EventType extends StringValueObject
+{
 }

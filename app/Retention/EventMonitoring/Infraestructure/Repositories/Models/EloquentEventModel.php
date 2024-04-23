@@ -2,7 +2,18 @@
 
 namespace App\Retention\EventMonitoring\Infraestructure\Repositories\Models;
 
-class EloquentEventModel
-{
+use Illuminate\Database\Eloquent\Model;
 
+class EloquentEventModel extends Model
+{
+    protected $table = "events";
+
+    protected $primaryKey = "uuid";
+
+    protected $fillable = [
+        "uuid",
+        "type",
+        "message",
+        "ocurred_on"
+    ];
 }

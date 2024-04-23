@@ -2,12 +2,12 @@
 
 namespace App\Shared\Infraestructure\Providers;
 
-use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
-use App\Auction\Infraestructure\Repositories\EloquentAuctionRepository;
 use App\Retention\Email\Domain\Ports\Outbound\EmailRepositoryPort;
 use App\Retention\Email\Domain\Ports\Outbound\EmailSenderPort;
 use App\Retention\Email\Infraestructure\EmailSender\ResendEmailSender;
 use App\Retention\Email\Infraestructure\Repositories\InMemoryEmailRepository;
+use App\Retention\EventMonitoring\Domain\Ports\Outbound\EventRepositoryPort;
+use App\Retention\EventMonitoring\Infraestructure\Repositories\EloquentEventRepository;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Review\Infraestructure\Repositories\ReviewEloquentRepository;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
@@ -37,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(EmailRepositoryPort::class, InMemoryEmailRepository::class);
         $this->app->singleton(EmailSenderPort::class, ResendEmailSender::class);
         $this->app->singleton(ReviewRepositoryPort::class, ReviewEloquentRepository::class);
+        $this->app->singleton(EventRepositoryPort::class, EloquentEventRepository::class);
     }
 
     /**

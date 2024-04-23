@@ -2,7 +2,9 @@
 
 namespace App\Retention\EventMonitoring\Domain\Models\ValueObjects;
 
-class EventUuid
+use App\Shared\Domain\Models\ValueObjects\Uuid;
+
+class EventUuid extends Uuid
 {
 
 }

@@ -2,7 +2,8 @@
 
 namespace App\Retention\EventMonitoring\Domain\Models\ValueObjects;
 
-class EventMessage
-{
+use App\Shared\Domain\Models\ValueObjects\JsonValueObject;
 
+class EventMessage extends JsonValueObject
+{
 }
