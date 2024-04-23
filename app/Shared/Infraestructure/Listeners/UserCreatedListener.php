@@ -24,11 +24,11 @@ class UserCreatedListener
     public function handle(UserCreatedEvent $event): void
     {
         $this->sendWelcomeEmail($event);
+        // TODO crear wallet para el usuario
     }
 
     public function sendWelcomeEmail(UserCreatedEvent $event): void
     {
-        // Send welcome email
         $command = new SendEmailCommand($event->message['email'], $event->message['name'], "welcome");
         $this->commandBus->handle($command);
     }
