@@ -16,9 +16,9 @@ class EloquentReviewModel extends Model
 
     protected $fillable = [
         'uuid',
-        'reviewer_id',
-        'reviewer_id',
-        'review',
+        'reviewer_uuid',
+        'reviewed_uuid',
+        'description',
         'rating'
     ];
 }

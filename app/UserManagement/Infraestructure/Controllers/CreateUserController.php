@@ -42,14 +42,13 @@ readonly class CreateUserController
             $command = new CreateUserCommand($name, $username, $email, $password, $avatar, $birth, 0);
             $resource = $this->commandBus->handle($command);
 
-            // TODO: generate and return token
-
-            return Response::CREATED($resource, "Usuario creado satisfactoriamente", "/users/" . $username);
+            return Response::CREATED("Usuario creado satisfactoriamente", "/users/" . $username);
 
         } catch (ValidationException $e) {
             return Response::UNPROCESSABLE_ENTITY("Errores de validación en el usuario", $e->validator->getMessageBag());
 
         } catch (Exception $e) {
+            dd($e);
             return Response::SERVER_ERROR();
         }
     }

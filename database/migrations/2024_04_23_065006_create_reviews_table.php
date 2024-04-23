@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->string('uuid')->primary();
-            $table->string('reviewer_id');
-            $table->string('reviewed_id');
-            $table->text('review')->nullable();
+            $table->string('reviewer_uuid');
+            $table->string('reviewed_uuid');
+            $table->text('description')->nullable();
             $table->tinyInteger('rating');
             $table->timestamps();
 
-            $table->foreign('reviewed_id')->references('uuid')->on('users');
-            $table->foreign('reviewer_id')->references('uuid')->on('users');
+            $table->foreign('reviewed_uuid')->references('uuid')->on('users');
+            $table->foreign('reviewer_uuid')->references('uuid')->on('users');
         });
     }
 

@@ -46,8 +46,8 @@ class Review extends AggregateRoot
             'uuid' => $this->uuid(),
             'rating' => $this->rating(),
             'description' => $this->description(),
-            'reviewerId' => $this->reviewerId(),
-            'reviewedId' => $this->reviewedId(),
+            'reviewer_uuid' => $this->reviewerId(),
+            'reviewed_uuid' => $this->reviewedId(),
         ];
     }
 

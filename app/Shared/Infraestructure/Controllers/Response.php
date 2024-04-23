@@ -30,10 +30,9 @@ class Response
         ], STATUS::HTTP_OK);
     }
 
-    public static function CREATED($data = null, $message = "", $url = ""): JsonResponse
+    public static function CREATED($message = "", $url = ""): JsonResponse
     {
         return response()->json([
-            'data' => $data,
             'message' => $message,
             'url' => $url,
             'status' => "CREATED"
