@@ -22,6 +22,7 @@
 ## User
 
 - [x] Modelado de la base de datos
+- [x] Modelado del repositorio
 - [x] Modelado del dominio
 - [x] Endpoint Caso de uso de crear usuario
 - [x] Endpoint Caso de uso de borrar usuario
@@ -52,6 +53,7 @@
 ## Social
 
 - [ ] Modelado de la base de datos
+- [ ] Modelado del repositorio
 - [ ] Modelado del dominio
 - [ ] Endpoint Caso de uso de enviar peticion de amistad
 - [ ] Endpoint Caso de uso de aceptar peticion de amistad
@@ -62,7 +64,8 @@
 
 ## Financial
 
-- [ ] Modelado de la base de datos
+- [x] Modelado de la base de datos
+- [x] Modelado del repositorio
 - [ ] Modelado del dominio
 - [ ] Listener UserCreatedEvent Caso de uso de crear Wallet
 - [ ] Listener UserDeletedEvent Caso de uso de eliminar Wallet
@@ -71,6 +74,7 @@
 ## Auction
 
 - [ ] Modelado de la base de datos
+- [ ] Modelado del repositorio
 - [ ] Modelado del dominio
 - [ ] Endpoint Caso de uso de crear subasta
 - [ ] Endpoint Caso de uso de editar subasta
