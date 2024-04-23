@@ -1,18 +1,36 @@
-# Auctionee API
 
-## Casa de subastas
+Eventos
+- Escuchar todos los eventos y guardarlos
+- Devolverlos de manera paginada
+- Posibilidad de filtrar por el tipo de evento
 
-- Auction
-  - Product
-    - Nombre
-    - Descripcion
-    - Galeria de imagenes
-  - Precio inicial
-  - Fecha de inicio
-  - Duracion
-  - Pujas
+Social
 
-# Resolver
-[ ] Generación de IDs
-[ ] Eventos
-[ ] Autenticación con sanctum
+- amistad
+- peticiones de amistad
+- mensajeria
+
+- enviar peticion de amistad
+- aceptar peticion
+- rechazar peticion
+- obtener lista de amigos
+
+- enviar mensaje
+
+Financial
+
+- agregar dinero
+- retirar dinero
+- enviar dinero a amigos
+
+[ ] Modelado del dominio
+[ ] Caso de uso de crear Wallet
+[ ] Caso de uso de eliminar Wallet
+[ ] Caso de uso de hacer transaccion
+
+Auction
+
+- crear subasta
+- editar subasta
+- eliminar subasta
+- pujar en subasta
