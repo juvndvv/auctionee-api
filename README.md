@@ -1,6 +1,17 @@
 
+## Infraestructura
+
+- [x] Bus de eventos con Pusher
+- [x] Bus de comandos en memoria
+- [x] Bus de queries en memoria
+- [x] Caso de uso de subir imagenes a Cloudflare R2
+- [x] Caso de uso de eliminar imagenes de Cloudflare R2
+- [x] Establecer excepciones
+- [x] Respuestas globales
+
 ## User
 
+- [x] Modelado de la base de datos
 - [x] Modelado del dominio
 - [x] Endpoint Caso de uso de crear usuario
 - [x] Endpoint Caso de uso de borrar usuario
@@ -22,6 +33,7 @@
 ## Notificaciones
 
 - [ ] Definir que eventos generan notificaciones
+- [ ] Modelado de la base de datos
 - [ ] Modelado del dominio
 - [ ] Listener Caso de uso de enviar notificacion
 - [ ] Listener Caso de uso de guardar notificacion
@@ -29,6 +41,7 @@
 
 ## Social
 
+- [ ] Modelado de la base de datos
 - [ ] Modelado del dominio
 - [ ] Endpoint Caso de uso de enviar peticion de amistad
 - [ ] Endpoint Caso de uso de aceptar peticion de amistad
@@ -39,6 +52,7 @@
 
 ## Financial
 
+- [ ] Modelado de la base de datos
 - [ ] Modelado del dominio
 - [ ] Listener UserCreatedEvent Caso de uso de crear Wallet
 - [ ] Listener UserDeletedEvent Caso de uso de eliminar Wallet
@@ -46,6 +60,7 @@
 
 ## Auction
 
+- [ ] Modelado de la base de datos
 - [ ] Modelado del dominio
 - [ ] Endpoint Caso de uso de crear subasta
 - [ ] Endpoint Caso de uso de editar subasta
