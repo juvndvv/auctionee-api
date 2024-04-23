@@ -6,8 +6,8 @@
 - [x] Bus de queries en memoria
 - [x] Caso de uso de subir imagenes a Cloudflare R2
 - [x] Caso de uso de eliminar imagenes de Cloudflare R2
-- [x] Establecer excepciones
-- [x] Respuestas globales
+- [x] Establecer excepciones globales
+- [x] Establecer respuestas globales
 
 ## User
 
@@ -87,4 +87,6 @@
 
 ## Dudas
 
-Necesito crear una lista de transacciones, como es mejor hacerlo en el dominio: Collection, crear una entidad que internamente sea una collection...
+Necesito crear una lista de transacciones y una galeria de imagenes, como es mejor hacerlo en el dominio: Collection, crear una entidad que internamente sea una collection...
+
+Devolver acciones en las respuestas es habitual? Si es asi, como guardo los endpoints para no tener que hardcodearlos en todos los sitios?
