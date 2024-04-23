@@ -6,6 +6,7 @@ use App\Review\Application\PlaceReview\PlaceReviewCommand;
 use App\Shared\Domain\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\Controller;
 use App\Shared\Infraestructure\Controllers\Response;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -32,9 +33,7 @@ class PlaceReviewController extends Controller
         } catch (ValidationException $e) {
             return Response::UNPROCESSABLE_ENTITY("Errores de validación en el usuario", $e->validator->getMessageBag());
 
-        } catch (\Exception $e) {
-
-            dd($e);
+        } catch (Exception $e) {
             return Response::SERVER_ERROR();
         }
     }

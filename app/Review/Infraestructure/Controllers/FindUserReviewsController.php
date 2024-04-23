@@ -4,7 +4,9 @@ namespace App\Review\Infraestructure\Controllers;
 
 use App\Review\Application\FindUserReviews\FindUserReviewsQuery;
 use App\Shared\Domain\Bus\Query\QueryBus;
+use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infraestructure\Controllers\Response;
+use Exception;
 
 class FindUserReviewsController
 {
@@ -14,10 +16,17 @@ class FindUserReviewsController
 
     public function __invoke(string $uuid)
     {
-        $query = new FindUserReviewsQuery($uuid);
+        try {
+            $query = new FindUserReviewsQuery($uuid);
+            $resource = $this->queryBus->handle($query);
 
-        $resource = $this->queryBus->handle($query);
+            return Response::OK($resource, "Reviews encontradas");
 
-        return Response::OK($resource, "Reviews encontradas");
+        } catch (NoContentException) {
+            return Response::NO_CONTENT();
+
+        } catch (Exception $e) {
+            return Response::SERVER_ERROR();
+        }
     }
 }

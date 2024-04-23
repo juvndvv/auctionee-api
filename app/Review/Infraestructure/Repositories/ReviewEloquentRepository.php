@@ -7,7 +7,7 @@ use App\Review\Infraestructure\Repositories\Models\EloquentReviewModel;
 
 class ReviewEloquentRepository implements ReviewRepositoryPort
 {
-    public function findByUserUuid(string $userUuid)
+    public function findByReviewedUuid(string $reviewedUuid)
     {
         return EloquentReviewModel::query()
             ->select(
@@ -17,6 +17,7 @@ class ReviewEloquentRepository implements ReviewRepositoryPort
                 "reviews.description",
                 "reviews.created_at")
             ->join("users", "users.uuid", "=", "reviews.reviewer_uuid")
+            ->where("reviews.reviewed_uuid", $reviewedUuid)
             ->get();
     }
 
