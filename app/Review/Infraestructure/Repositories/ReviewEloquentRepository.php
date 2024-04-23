@@ -61,4 +61,11 @@ class ReviewEloquentRepository implements ReviewRepositoryPort
     {
         return EloquentReviewModel::query()->where('uuid', $uuid)->delete();
     }
+
+    public function findUserAverageRating(string $userUuid)
+    {
+        return EloquentReviewModel::query()
+            ->where("reviewed_uuid", "=", $userUuid)
+            ->avg("rating");
+    }
 }

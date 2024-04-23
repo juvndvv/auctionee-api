@@ -13,4 +13,5 @@ interface ReviewRepositoryPort
     public function updateRating($uuid, int $rating);
     public function updateDescription(string $uuid, string $description);
     public function remove(string $uuid);
+    public function findUserAverageRating(string $userUuid);
 }

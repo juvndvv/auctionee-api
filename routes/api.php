@@ -1,5 +1,6 @@
 <?php
 
+use App\Review\Infraestructure\Controllers\FindUserAverageRatingController;
 use App\Review\Infraestructure\Controllers\FindUserReviewsController;
 use App\Review\Infraestructure\Controllers\PlaceReviewController;
 use App\Review\Infraestructure\Controllers\RemoveReviewController;
@@ -33,6 +34,7 @@ Route::put('/users/{uuid}/password', UpdateUserPasswordController::class);
 Route::get('/users/{uuid}/block', BlockUserController::class);
 Route::get('/users/{uuid}/unblock', UnblockUserController::class);
 Route::get('/users/{uuid}/reviews', FindUserReviewsController::class);
+Route::get("/users/{uuid}/rating", FindUserAverageRatingController::class);
 
 // Reviews
 Route::post('/reviews', PlaceReviewController::class);
