@@ -4,8 +4,17 @@ meta {
   seq: 1
 }
 
-get {
+post {
   url: {{url}}/reviews
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "reviewerUuid": "2a42bdc7-d4d5-41cb-bceb-df77335b8ee2",
+    "reviewedUuid": "54e24c0d-8f0e-4dcd-ac97-5edd15f86c4e",
+    "description": "Review de ejemplo",
+    "rating": 2
+  }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Review\Infraestructure\Controllers\FindUserReviewsController;
 use App\Review\Infraestructure\Controllers\PlaceReviewController;
 use App\UserManagement\Infraestructure\Controllers\BlockUserController;
 use App\UserManagement\Infraestructure\Controllers\CreateUserController;
@@ -28,6 +29,7 @@ Route::put('/users/{uuid}/username', UpdateUserUsernameController::class);
 Route::put('/users/{uuid}/password', UpdateUserPasswordController::class);
 Route::get('/users/{uuid}/block', BlockUserController::class);
 Route::get('/users/{uuid}/unblock', UnblockUserController::class);
+Route::get('/users/{uuid}/reviews', FindUserReviewsController::class);
 
 // Reviews
 Route::post('/reviews', PlaceReviewController::class);

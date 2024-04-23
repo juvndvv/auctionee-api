@@ -9,7 +9,15 @@ class ReviewEloquentRepository implements ReviewRepositoryPort
 {
     public function findByUserUuid(string $userUuid)
     {
-        return EloquentReviewModel::query()->where("user_id", $userUuid)->get();
+        return EloquentReviewModel::query()
+            ->select(
+                "users.username",
+                "users.avatar",
+                "reviews.rating",
+                "reviews.description",
+                "reviews.created_at")
+            ->join("users", "users.uuid", "=", "reviews.reviewer_uuid")
+            ->get();
     }
 
     public function create(array $data)
