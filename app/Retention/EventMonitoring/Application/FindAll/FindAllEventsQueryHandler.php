@@ -3,6 +3,7 @@
 namespace App\Retention\EventMonitoring\Application\FindAll;
 
 use App\Retention\EventMonitoring\Domain\Ports\Outbound\EventRepositoryPort;
+use App\Retention\EventMonitoring\Domain\Resources\EventResource;
 use App\Shared\Domain\Exceptions\NoContentException;
 
 class FindAllEventsQueryHandler
@@ -18,6 +19,12 @@ class FindAllEventsQueryHandler
             throw new NoContentException("No se encontraron eventos");
         }
 
-        return $events;
+        $eventResourceArr = [];
+
+        foreach ($events as $event) {
+            $eventResourceArr[] = EventResource::fromArray($event->toArray());
+        }
+
+        return $eventResourceArr;
     }
 }

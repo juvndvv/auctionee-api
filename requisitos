@@ -29,3 +29,7 @@ Subasta
 - editar subasta
 - eliminar subasta
 - pujar en subasta
+
+TODO
+
+[ ] añadir listeners de los eventos para persistirlos
