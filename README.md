@@ -1,6 +1,16 @@
 
 ## Infraestructura
 
+- [ ] Pedir dominios
+- [ ] VPS para desplegar la API
+- [ ] Buscar donde desplegar el Frontend
+- [x] Configuración de Sail
+- [x] Configurar Pusher
+- [x] Configurar Cloudflare
+- [x] Configurar Resend
+
+## Arquitectura
+
 - [x] Bus de eventos con Pusher
 - [x] Bus de comandos en memoria
 - [x] Bus de queries en memoria
