@@ -39,6 +39,7 @@
 ## Email
 
 - [x] Modelado del dominio
+- [ ] Reestructurar las carpetas (mover lo de Shared o Retention)
 - [ ] Definir que casos faltan para enviar emails
 
 ## Notificaciones
