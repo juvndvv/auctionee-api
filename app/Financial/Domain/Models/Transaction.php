@@ -39,12 +39,14 @@ class Transaction
     }
 
     /**
+     * @param string $remitentWalletUuid
      * @return array
      */
-    public function toPrimitives(): array
+    public function toPrimitives(string $remitentWalletUuid): array
     {
         return [
             'uuid' => $this->uuid(),
+            'remitent_wallet_uuid' => $remitentWalletUuid,
             'destination_wallet_uuid' => $this->destinationWalletUuid(),
             'amount' => $this->amount(),
         ];
@@ -108,11 +110,11 @@ class Transaction
      * @param Collection<self> $collection
      * @return array
      */
-    public static function getPrimitivesFromCollection(Collection $collection): array
+    public static function getPrimitivesFromCollection(Collection $collection, string $remitentUuid): array
     {
         return array_map(
-            function (array $transaction) {
-                return $transaction->toPrimitives();
+            function (Transaction $transaction) use ($remitentUuid) {
+                return $transaction->toPrimitives($remitentUuid);
             }, $collection->toArray());
     }
 }

@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class WalletEloquentRepository implements WalletRepositoryPort
 {
-
     /**
      * @param Wallet $wallet
      * @return void
@@ -42,7 +41,7 @@ class WalletEloquentRepository implements WalletRepositoryPort
      * @return Wallet
      * @throws NotFoundException
      */
-    public function findWalletByUserUuid(string $userUuid): Wallet
+    public function findByUserUuid(string $userUuid): Wallet
     {
         try {
             $walletDb = EloquentWalletModel::query()
@@ -53,5 +52,76 @@ class WalletEloquentRepository implements WalletRepositoryPort
         } catch (ModelNotFoundException $e) {
             throw new NotFoundException("Wallet no encontrada");
         }
+    }
+
+    /**
+     * @param string $uuid
+     * @return Wallet
+     * @throws NotFoundException
+     */
+    public function findByUuid(string $uuid): Wallet
+    {
+        try {
+            $walletDb = EloquentWalletModel::query()
+                ->where('uuid', $uuid)
+                ->firstOrFail();
+            return Wallet::fromPrimitives($walletDb->toArray());
+
+        } catch (ModelNotFoundException $e) {
+            throw new NotFoundException("Wallet no encontrada");
+        }
+    }
+
+    /**
+     * @param string $uuid
+     * @return bool
+     */
+    public function existsByUuid(string $uuid): bool
+    {
+        return EloquentWalletModel::query()
+            ->where('uuid', $uuid)
+            ->exists();
+    }
+
+    /**
+     * @param string $uuid
+     * @param float $amount
+     * @return void
+     */
+    public function withdraw(string $uuid, float $amount): void
+    {
+        $currentAmount = self::findAmountByUuid($uuid);
+
+        EloquentWalletModel::query()
+            ->where('uuid', $uuid)
+            ->firstOrFail()
+            ->update(['amount' => $currentAmount - $amount]);
+    }
+
+    /**
+     * @param string $uuid
+     * @param float $amount
+     * @return void
+     */
+    public function deposit(string $uuid, float $amount): void
+    {
+        $currentAmount = self::findAmountByUuid($uuid);
+
+        EloquentWalletModel::query()
+            ->where('uuid', $uuid)
+            ->firstOrFail()
+            ->update(['amount' => $currentAmount + $amount]);    }
+
+    /**
+     * @param string $uuid
+     * @return float
+     */
+    public function findAmountByUuid(string $uuid): float
+    {
+        return EloquentWalletModel::query()
+            ->select('amount')
+            ->where('uuid', $uuid)
+            ->first()
+            ->getAttribute('amount');
     }
 }

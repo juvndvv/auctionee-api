@@ -3,6 +3,7 @@
 namespace App\Financial\Domain\Models;
 
 use App\Financial\Domain\Events\TransactionPlaced;
+use App\Financial\Domain\Exeptions\NotEnoughFoundsException;
 use App\Financial\Domain\Models\ValueObjects\WalletAmount;
 use App\Financial\Domain\Models\ValueObjects\WalletUuid;
 use App\Shared\Domain\Models\AggregateRoot;
@@ -13,7 +14,7 @@ use InvalidArgumentException;
 class Wallet extends AggregateRoot
 {
     private readonly WalletUuid $uuid;
-    private readonly WalletAmount $amount;
+    private WalletAmount $amount;
     private readonly UserId $userId;
     private readonly Collection $transactions;
 
@@ -119,19 +120,19 @@ class Wallet extends AggregateRoot
      *
      * @param string $destinationWalletUuid
      * @param float $amount
-     * @throws InvalidArgumentException
      * @return void
+     * @throws NotEnoughFoundsException
      */
     public function makeTransaction(string $destinationWalletUuid, float $amount): void
     {
         if (!$this->hasEnoughMoney($amount)) {
-            throw new InvalidArgumentException("No existe suficiente dinero");
+            throw new NotEnoughFoundsException("No existe suficiente dinero");
         }
 
         $transaction = Transaction::create($destinationWalletUuid, $amount);
         $this->transactions->add($transaction);
 
-        $this->record(new TransactionPlaced($transaction->toPrimitives(), now()->toString()));
+        $this->record(new TransactionPlaced($transaction->toPrimitives($this->uuid()), now()->toString()));
     }
 
     /**
@@ -142,6 +143,29 @@ class Wallet extends AggregateRoot
      */
     public function hasEnoughMoney(float $amount): bool
     {
-        return $amount >= $this->amount->value();
+        return $amount <= $this->amount->value();
+    }
+
+    /**
+     * @param float $amount
+     * @return void
+     * @throws InvalidArgumentException
+     */
+    public function withdraw(float $amount): void
+    {
+        if (!$this->hasEnoughMoney($amount)) {
+            throw new InvalidArgumentException("No existe suficiente dinero");
+        }
+
+        $this->amount = new WalletAmount($this->amount->value() - $amount);
+    }
+
+    /**
+     * @param float $amount
+     * @return void
+     */
+    public function deposit(float $amount): void
+    {
+        $this->amount = new WalletAmount($this->amount->value() + $amount);
     }
 }

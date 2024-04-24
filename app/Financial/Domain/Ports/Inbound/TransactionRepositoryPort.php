@@ -17,5 +17,5 @@ interface TransactionRepositoryPort
      * @param Transaction $transaction
      * @return void
      */
-    public function create(Transaction $transaction): void;
+    public function create(string $remitentUuid, Transaction $transaction): void;
 }

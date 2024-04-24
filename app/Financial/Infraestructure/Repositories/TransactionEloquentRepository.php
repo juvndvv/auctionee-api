@@ -27,9 +27,9 @@ class TransactionEloquentRepository implements TransactionRepositoryPort
      * @param Transaction $transaction
      * @return void
      */
-    public function create(Transaction $transaction): void
+    public function create(string $remitentUuid, Transaction $transaction): void
     {
-        $transactionDb = $transaction->toPrimitives();
+        $transactionDb = $transaction->toPrimitives($remitentUuid);
         EloquentTransactionModel::query()->create($transactionDb);
     }
 }

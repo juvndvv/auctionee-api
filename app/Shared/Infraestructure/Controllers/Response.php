@@ -13,6 +13,14 @@ class Response
         ], STATUS::HTTP_NO_CONTENT);
     }
 
+    public static function BAD_REQUEST($message): JsonResponse
+    {
+        return response()->json([
+            'message' => $message,
+            'status' => "BAD_REQUEST",
+        ], STATUS::HTTP_BAD_REQUEST);
+    }
+
     public static function NOT_FOUND($message = ""): JsonResponse
     {
         return response()->json([

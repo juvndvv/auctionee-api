@@ -16,6 +16,7 @@ class UserDetailsResource
             "role" => match ($data["role"]) {
                 1 => "ADMIN",
                 2 => "BLOCKED",
+                3 => "DELETED",
                 default =>  "USER"
             },
             "created_at" => $data['created_at'],
