@@ -61,6 +61,7 @@
 - [x] Modelado del dominio
 - [x] Listener UserCreatedEvent Caso de uso de crear Wallet
 - [x] Endpoint Caso de uso de hacer transaccion
+- [ ] Endpoint Caso de uso de buscar transacciones por uuid de Wallet
 
 ## Auction
 
