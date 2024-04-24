@@ -2,14 +2,15 @@
 
 namespace App\Social\Domain\Models;
 
+use App\Shared\Domain\Models\AggregateRoot;
+use App\Social\Domain\Events\MessageSendedEvent;
 use App\UserManagement\Domain\Models\ValueObjects\UserId;
 use Illuminate\Support\Collection;
 
-class ChatRoom
+class ChatRoom extends AggregateRoot
 {
     private UserId $left;
     private UserId $right;
-
     private Collection $messages;
 
     /**
@@ -36,6 +37,12 @@ class ChatRoom
 
     public function messages(): array
     {
-        return $this->messages;
+        return $this->messages->toArray();
+    }
+
+    public function addMessage(Message $message): void
+    {
+        $this->messages->add($message);
+        $this->record(new MessageSendedEvent($message->toPrimitives(), now()->toString()));
     }
 }
