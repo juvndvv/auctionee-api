@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('friend_requests', function (Blueprint $table) {
-            $table->id();
+            $table->string('uuid')->primary();
+            $table->string('sender_uuid');
+            $table->string('receiver_uuid');
             $table->timestamps();
+
+            $table->foreign('sender_uuid')->references('uuid')->on('users');
+            $table->foreign('receiver_uuid')->references('uuid')->on('users');
         });
     }
 
