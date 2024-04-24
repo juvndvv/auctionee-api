@@ -97,16 +97,20 @@ class Wallet extends AggregateRoot
     /**
      * Creates a wallet
      *
-     * @param array $data
+     * @param float $amount
+     * @param string $userUuid
+     * @param Collection $transactions
      * @return self
      */
-    public static function create(array $data): self
+    public static function create(float $amount, string $userUuid, Collection $transactions = new Collection()): self
     {
+        $uuid = WalletUuid::random();
+
         return new self(
-            $data['uuid'],
-            $data['amount'],
-            $data['user_uuid'],
-            $data['transactions']
+            $uuid,
+            $amount,
+            $userUuid,
+            $transactions
         );
     }
 
