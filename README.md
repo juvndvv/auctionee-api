@@ -61,7 +61,7 @@
 - [x] Modelado del dominio
 - [x] Listener UserCreatedEvent Caso de uso de crear Wallet
 - [x] Endpoint Caso de uso de hacer transaccion
-- [ ] Endpoint Caso de uso de buscar transacciones por uuid de Wallet
+- [x] Endpoint Caso de uso de buscar transacciones por uuid de Wallet
 
 ## Auction
 
@@ -79,6 +79,7 @@
 - [ ] Paginar respuestas grandes
 - [ ] Pedir dominios
 - [ ] VPS para desplegar la API
+- [ ] Workflow de Github para desplegar back y front
 - [ ] Buscar donde desplegar el Frontend
 - [x] Configuración de Sail
 - [x] Configurar Pusher

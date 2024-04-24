@@ -1,5 +1,6 @@
 <?php
 
+use App\Financial\Infraestructure\Controllers\FindTransactionsByWalletUuidController;
 use App\Financial\Infraestructure\Controllers\FindWalletByUserUuidController;
 use App\Financial\Infraestructure\Controllers\MakeTransactionController;
 use App\Retention\EventMonitoring\Infraestructure\Controllers\FindAllEventsController;
@@ -42,6 +43,7 @@ Route::get("/users/{uuid}/wallet", FindWalletByUserUuidController::class);
 
 // Wallets
 Route::get("/wallets/{uuid}/transfer", MakeTransactionController::class);
+Route::get("/wallets/{uuid}/transactions", FindTransactionsByWalletUuidController::class);
 
 // Reviews
 Route::post('/reviews', PlaceReviewController::class);

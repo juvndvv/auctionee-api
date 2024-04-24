@@ -16,7 +16,8 @@ class TransactionEloquentRepository implements TransactionRepositoryPort
     public function findByWalletUuid(string $walletUuid): Collection
     {
         $transactionsDb = EloquentTransactionModel::query()
-            ->where('wallet_uuid', $walletUuid)
+            ->where('remitent_wallet_uuid', $walletUuid)
+            ->orWhere('destination_wallet_uuid', $walletUuid)
             ->get()
             ->toArray();
 
