@@ -1,0 +1,17 @@
+meta {
+  name: Deposito
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/wallets/0e0aed2e-ccbc-4d54-980f-cb801797dd3d/deposit
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "amount": 1000
+  }
+}

@@ -44,6 +44,7 @@ Route::get("/users/{uuid}/wallet", FindWalletByUserUuidController::class);
 // Wallets
 Route::get("/wallets/{uuid}/transfer", MakeTransactionController::class);
 Route::get("/wallets/{uuid}/transactions", FindTransactionsByWalletUuidController::class);
+Route::post("/wallets/{uuid}/deposit", \App\Financial\Infraestructure\Controllers\DepositMoneyController::class);
 
 // Reviews
 Route::post('/reviews', PlaceReviewController::class);

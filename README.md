@@ -62,6 +62,8 @@
 - [x] Listener UserCreatedEvent Caso de uso de crear Wallet
 - [x] Endpoint Caso de uso de hacer transaccion
 - [x] Endpoint Caso de uso de buscar transacciones por uuid de Wallet
+- [ ] Endpoint Caso de uso de ingresar dinero
+- [ ] Endpoint Caso de uso de retirar dinero
 
 ## Auction
 
