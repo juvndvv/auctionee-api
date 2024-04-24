@@ -8,6 +8,7 @@ use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Controllers\Controller;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 class FindWalletByUserUuidController extends Controller
 {
@@ -16,11 +17,11 @@ class FindWalletByUserUuidController extends Controller
     )
     {}
 
-    public function __invoke(string $uuid)
+    public function __invoke(string $uuid): JsonResponse
     {
         try {
             $query = new FindWalletByUserUuidQuery($uuid);
-            $resource = $this->queryBus->handle($query)->toArray();
+            $resource = $this->queryBus->handle($query);
             return Response::OK($resource, "Wallet encontrada");
 
         } catch (NotFoundException $e) {

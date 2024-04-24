@@ -13,7 +13,7 @@ class FindWalletByUserUuidQueryHandler extends QueryHandler
     )
     {}
 
-    public function __invoke(FindWalletByUserUuidQuery $query): WalletResource
+    public function __invoke(FindWalletByUserUuidQuery $query): array
     {
         $userUuid = $query->userUuid();
         $wallet = $this->walletRepository->findWalletByUserUuid($userUuid);
