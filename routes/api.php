@@ -1,8 +1,10 @@
 <?php
 
+use App\Financial\Infraestructure\Controllers\DepositMoneyController;
 use App\Financial\Infraestructure\Controllers\FindTransactionsByWalletUuidController;
 use App\Financial\Infraestructure\Controllers\FindWalletByUserUuidController;
 use App\Financial\Infraestructure\Controllers\MakeTransactionController;
+use App\Financial\Infraestructure\Controllers\WithdrawMoneyController;
 use App\Retention\EventMonitoring\Infraestructure\Controllers\FindAllEventsController;
 use App\Review\Infraestructure\Controllers\FindUserAverageRatingController;
 use App\Review\Infraestructure\Controllers\FindUserReviewsController;
@@ -44,7 +46,8 @@ Route::get("/users/{uuid}/wallet", FindWalletByUserUuidController::class);
 // Wallets
 Route::get("/wallets/{uuid}/transfer", MakeTransactionController::class);
 Route::get("/wallets/{uuid}/transactions", FindTransactionsByWalletUuidController::class);
-Route::post("/wallets/{uuid}/deposit", \App\Financial\Infraestructure\Controllers\DepositMoneyController::class);
+Route::post("/wallets/{uuid}/deposit", DepositMoneyController::class);
+Route::post("/wallets/{uuid}/withdraw", WithdrawMoneyController::class);
 
 // Reviews
 Route::post('/reviews', PlaceReviewController::class);

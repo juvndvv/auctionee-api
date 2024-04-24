@@ -154,7 +154,7 @@ class Wallet extends AggregateRoot
     public function withdraw(float $amount): void
     {
         if (!$this->hasEnoughMoney($amount)) {
-            throw new InvalidArgumentException("No existe suficiente dinero");
+            throw new NotEnoughFoundsException("No existe suficiente dinero");
         }
 
         $this->amount = new WalletAmount($this->amount->value() - $amount);
