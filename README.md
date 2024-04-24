@@ -61,7 +61,7 @@
 - [x] Modelado del dominio
 - [x] Listener UserCreatedEvent Caso de uso de crear Wallet
 - [ ] Listener UserDeletedEvent Caso de uso de eliminar Wallet
-- [ ] Endpoint Caso de uso de hacer transaccion
+- [x] Endpoint Caso de uso de hacer transaccion
 
 ## Auction
 
