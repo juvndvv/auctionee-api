@@ -34,7 +34,7 @@
 
 ## Notificaciones
 
-- [ ] Definir que eventos generan notificaciones
+- [ ] Definir que eventos generan notificaciones y a quien
 - [ ] Modelado de la base de datos
 - [ ] Modelado del dominio
 - [ ] Listener Caso de uso de enviar notificacion
@@ -81,7 +81,7 @@
 - [ ] Paginar respuestas grandes
 - [ ] Pedir dominios
 - [ ] VPS para desplegar la API
-- [ ] Workflow de Github para desplegar back y front
+- [ ] Workflow de GitHub para desplegar back y front
 - [ ] Buscar donde desplegar el Frontend
 - [x] Configuración de Sail
 - [x] Configurar Pusher
