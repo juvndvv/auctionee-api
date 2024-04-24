@@ -6,6 +6,13 @@ meta {
 
 get {
   url: {{url}}/wallets/0e0aed2e-ccbc-4d54-980f-cb801797dd3d/transfer
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "destination_wallet": "76a3a477-84b9-4cfc-aeea-13639e28661b",
+    "amount": 83.8
+  }
 }
