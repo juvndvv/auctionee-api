@@ -25,6 +25,7 @@
 - [x] Endpoint Caso de uso de actualizar nombre
 - [x] Endpoint Caso de uso de actualizar contraseña
 - [x] Endpoint Caso de uso de actualizar el nombre de usuario
+- [ ] Endpoint Caso de uso de autenticarse
 
 ## Email
 
@@ -51,7 +52,7 @@
 - [ ] Endpoint Caso de uso de rechazar peticion de amistad
 - [ ] Endpoint Caso de uso de eliminar amigo
 - [ ] Endpoint Caso de uso de obtener lista de amigos
-- [ ] Endpoint Caso de uso de guardar mensaje
+- [ ] Endpoint Caso de uso de guardar mensaje (crea conversacion si no existe)
 - [ ] Endpoint Caso de uso de eliminar un mensaje
 - [ ] Endpoint Caso de uso de recuperar mensajes de una conversacion
 
@@ -86,6 +87,8 @@
 - [ ] VPS para desplegar la API
 - [ ] Workflow de GitHub para desplegar back y front
 - [ ] Buscar donde desplegar el Frontend
+- [ ] Asegurar la API
+- [ ] Establecer rate limit
 - [x] Configuración de Sail
 - [x] Configurar Pusher
 - [x] Configurar Cloudflare
