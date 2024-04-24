@@ -65,7 +65,7 @@ class Wallet extends AggregateRoot
      */
     public function toPrimitives(): array
     {
-        $transactions = Transaction::getPrimitivesFromCollection($this->transactions);
+        $transactions = Transaction::getPrimitivesFromCollection($this->transactions, $this->uuid);
 
         return [
             'uuid' => $this->uuid->value(),
