@@ -64,6 +64,7 @@
 - [x] Endpoint Caso de uso de buscar transacciones por uuid de Wallet
 - [x] Endpoint Caso de uso de ingresar dinero
 - [x] Endpoint Caso de uso de retirar dinero
+- [ ] Hacer que los ingresos y retiradas apunten a wallets del sistema y generen transacciones
 
 ## Auction
 
