@@ -68,6 +68,7 @@
 
 ## Auction
 
+- [ ] Mirar como programar tareas
 - [ ] Modelado de la base de datos
 - [ ] Modelado del repositorio
 - [ ] Modelado del dominio
