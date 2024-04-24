@@ -2,21 +2,34 @@
 
 namespace App\Financial\Infraestructure\Repositories;
 
+use App\Financial\Domain\Models\Transaction;
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Infraestructure\Repositories\Models\EloquentTransactionModel;
+use Illuminate\Support\Collection;
 
 class TransactionEloquentRepository implements TransactionRepositoryPort
 {
-    public function findByWalletUuid(string $walletUuid)
+    /**
+     * @param string $walletUuid
+     * @return Collection<Transaction>
+     */
+    public function findByWalletUuid(string $walletUuid): Collection
     {
-        return EloquentTransactionModel::query()
-            ->where("remitent_wallet_uuid", $walletUuid)
-            ->orWhere("destination_wallet_uuid", $walletUuid)
-            ->get();
+        $transactionsDb = EloquentTransactionModel::query()
+            ->where('wallet_uuid', $walletUuid)
+            ->get()
+            ->toArray();
+
+        return Transaction::getCollectionFromPrimitivesArray($transactionsDb);
     }
 
-    public function create(array $data)
+    /**
+     * @param Transaction $transaction
+     * @return void
+     */
+    public function create(Transaction $transaction): void
     {
-        EloquentTransactionModel::query()->create($data);
+        $transactionDb = $transaction->toPrimitives();
+        EloquentTransactionModel::query()->create($transactionDb);
     }
 }

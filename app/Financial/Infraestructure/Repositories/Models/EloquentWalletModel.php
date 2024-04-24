@@ -2,10 +2,13 @@
 
 namespace App\Financial\Infraestructure\Repositories\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentWalletModel extends Model
 {
+    use HasUuids;
+
     protected $table = 'wallets';
 
     protected $primaryKey = 'uuid';

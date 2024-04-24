@@ -44,9 +44,9 @@ class Transaction
     public function toPrimitives(): array
     {
         return [
-            $this->uuid(),
-            $this->destinationWalletUuid(),
-            $this->amount(),
+            'uuid' => $this->uuid(),
+            'destination_wallet_uuid' => $this->destinationWalletUuid(),
+            'amount' => $this->amount(),
         ];
     }
 

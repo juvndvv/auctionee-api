@@ -2,9 +2,25 @@
 
 namespace App\Financial\Domain\Ports\Inbound;
 
+use App\Financial\Domain\Models\Wallet;
+
 interface WalletRepositoryPort
 {
-    public function create(array $data);
-    public function delete(array $data);
-    public function findWalletByUserUuid(string $userUuid);
+    /**
+     * @param Wallet $data
+     * @return void
+     */
+    public function create(Wallet $wallet): void;
+
+    /**
+     * @param string $uuid
+     * @return void
+     */
+    public function delete(string $uuid): void;
+
+    /**
+     * @param string $userUuid
+     * @return Wallet
+     */
+    public function findWalletByUserUuid(string $userUuid): Wallet;
 }

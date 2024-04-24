@@ -2,6 +2,10 @@
 
 namespace App\Shared\Infraestructure\Providers;
 
+use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
+use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
+use App\Financial\Infraestructure\Repositories\TransactionEloquentRepository;
+use App\Financial\Infraestructure\Repositories\WalletEloquentRepository;
 use App\Retention\Email\Domain\Ports\Outbound\EmailRepositoryPort;
 use App\Retention\Email\Domain\Ports\Outbound\EmailSenderPort;
 use App\Retention\Email\Infraestructure\EmailSender\ResendEmailSender;
@@ -38,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(EmailSenderPort::class, ResendEmailSender::class);
         $this->app->singleton(ReviewRepositoryPort::class, ReviewEloquentRepository::class);
         $this->app->singleton(EventRepositoryPort::class, EloquentEventRepository::class);
+        $this->app->singleton(WalletRepositoryPort::class, WalletEloquentRepository::class);
+        $this->app->singleton(TransactionRepositoryPort::class, TransactionEloquentRepository::class);
     }
 
     /**

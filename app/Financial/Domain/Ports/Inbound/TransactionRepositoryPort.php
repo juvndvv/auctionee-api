@@ -14,8 +14,8 @@ interface TransactionRepositoryPort
     public function findByWalletUuid(string $walletUuid): Collection;
 
     /**
-     * @param Transaction $data
+     * @param Transaction $transaction
      * @return void
      */
-    public function create(Transaction $data): void;
+    public function create(Transaction $transaction): void;
 }

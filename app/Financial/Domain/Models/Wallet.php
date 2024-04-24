@@ -44,7 +44,12 @@ class Wallet extends AggregateRoot
      */
     public static function fromPrimitives(array $data): self
     {
-        $transactions = Transaction::getCollectionFromPrimitivesArray($data['transactions']);
+        if (isset($data['transactions'])) {
+            $transactions = Transaction::getCollectionFromPrimitivesArray($data['transactions']);
+
+        } else {
+            $transactions = new Collection();
+        }
 
         return new self(
             $data['uuid'],
@@ -64,7 +69,7 @@ class Wallet extends AggregateRoot
         return [
             'uuid' => $this->uuid->value(),
             'amount' => $this->amount->value(),
-            'userUuid' => $this->userId->value(),
+            'user_uuid' => $this->userId->value(),
             'transactions' => $transactions
         ];
     }
