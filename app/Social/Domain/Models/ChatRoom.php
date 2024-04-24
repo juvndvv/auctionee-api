@@ -5,7 +5,7 @@ namespace App\Social\Domain\Models;
 use App\UserManagement\Domain\Models\ValueObjects\UserId;
 use Illuminate\Support\Collection;
 
-class Chat
+class ChatRoom
 {
     private UserId $left;
     private UserId $right;
