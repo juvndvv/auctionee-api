@@ -28,6 +28,17 @@ interface BaseRepositoryPort
     public function findOneByPrimaryKeyOrFail(string $primaryKey): Model;
 
     /**
+     * Busca y devuelve modelos por el valor <i>value</i> de un campo <i>field</i>. Lanza ModelNotFound si
+     * no lo encuentra
+     *
+     * @param string $field
+     * @param string $value
+     * @return Model
+     * @throws ModelNotFoundException
+     */
+    public function findByFieldValue(string $field, string $value): Model|Collection;
+
+    /**
      * Registra el modelo en la base de datos
      *
      * @param array $data
@@ -43,6 +54,7 @@ interface BaseRepositoryPort
      * @param string $field
      * @param string $new
      * @return void
+     * @throws ModelNotFoundException
      */
     public function updateFieldByPrimaryKey(string $primaryKey, string $field, string $new): void;
 
@@ -63,13 +75,8 @@ interface BaseRepositoryPort
     public function existsByPrimaryKey(string $primaryKey): bool;
 
     /**
-     * Busca y devuelve modelos por el valor <i>value</i> de un campo <i>field</i>. Lanza ModelNotFound si
-     * no lo encuentra
-     *
-     * @param string $field
-     * @param string $value
-     * @return Model
-     * @throws ModelNotFoundException
+     * Comprueba si existe un modelo por el valor <i>value</i> de un campo <i>field</i>. Lanza
+     * ModelNotFound si no lo encuentra
      */
-    public function findByFieldValue(string $field, string $value): Model|Collection;
+    public function existsByFieldValue(string $field, string $value): bool;
 }

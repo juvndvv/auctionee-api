@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 
 class FriendshipEloquentRepository extends BaseRepository implements FriendshipRepositoryPort
 {
-    public const ENTITY_NAME = 'Friendship';
+    public const ENTITY_NAME = 'friendship';
 
     public function __construct()
     {

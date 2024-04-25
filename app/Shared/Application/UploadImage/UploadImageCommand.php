@@ -2,12 +2,15 @@
 
 namespace App\Shared\Application\UploadImage;
 
-use App\Shared\Infraestructure\Bus\Command\Command;
+use App\Shared\Application\Command;
 use Illuminate\Http\UploadedFile;
 
 class UploadImageCommand extends Command
 {
-    public function __construct(private readonly string $folder, private readonly UploadedFile $uploadedFile)
+    private function __construct(
+        private readonly string $folder,
+        private readonly UploadedFile $uploadedFile
+    )
     {}
 
     public function folder(): string

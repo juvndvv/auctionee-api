@@ -2,7 +2,7 @@
 
 namespace App\Financial\Application\WithdrawMoney;
 
-use App\Shared\Infraestructure\Bus\Command\Command;
+use App\Shared\Application\Command;
 
 class WithdrawMoneyCommand extends Command
 {

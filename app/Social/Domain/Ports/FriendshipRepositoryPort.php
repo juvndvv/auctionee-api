@@ -3,7 +3,6 @@
 namespace App\Social\Domain\Ports;
 
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 interface FriendshipRepositoryPort extends BaseRepositoryPort

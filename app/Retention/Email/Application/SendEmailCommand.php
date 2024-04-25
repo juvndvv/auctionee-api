@@ -2,13 +2,10 @@
 
 namespace App\Retention\Email\Application;
 
-use App\Shared\Infraestructure\Bus\Command\Command;
+use App\Shared\Application\Command;
 
 class SendEmailCommand extends Command
 {
-    public function __construct(private readonly string $to, private readonly string $name, private readonly string $type)
-    {}
-
     public function to(): string
     {
         return $this->to;

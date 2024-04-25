@@ -3,20 +3,18 @@
 namespace App\UserManagement\Infraestructure\Controllers;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infraestructure\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
-use App\UserManagement\Application\DeleteUser\DeleteUserCommand;
+use App\UserManagement\Application\Commands\DeleteUser\DeleteUserCommand;
 use Exception;
+use Illuminate\Http\Request;
 
-class DeleteUserController
+final class DeleteUserController extends CommandController
 {
-    public function __construct(private readonly CommandBus $commandBus)
-    {}
-
     public function __invoke(string $uuid)
     {
         try {
-            $command = new DeleteUserCommand($uuid);
+            $command = DeleteUserCommand::create($uuid);
             $this->commandBus->handle($command);
 
             return Response::OK($uuid, "Usuario borrado correctamente");
@@ -25,8 +23,12 @@ class DeleteUserController
             return Response::NOT_FOUND("El usuario $uuid no existe");
 
         } catch (Exception $e) {
-            dd($e);
             return Response::SERVER_ERROR();
         }
+    }
+
+    static function validate(Request $request): void
+    {
+        // TODO: Implement validate() method.
     }
 }

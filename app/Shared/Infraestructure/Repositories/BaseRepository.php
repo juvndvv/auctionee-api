@@ -84,12 +84,17 @@ abstract class BaseRepository implements BaseRepositoryPort
 
     public function findByFieldValue(string $field, string $value): Model|Collection
     {
-        $model = $this->builder->where($field, $value)->get();
+        $builders = $this->builder->where($field, $value)->get();
 
-        if (is_null($model)) {
+        if (is_null($builders)) {
             throw new ModelNotFoundException("No se ha encontrado el " . $field . " con el valor " . $value);
         }
 
-        return $model;
+        return $builders;
+    }
+
+    public function existsByFieldValue(string $field, string $value): bool
+    {
+        return $this->builder->where($field, $value)->exists();
     }
 }

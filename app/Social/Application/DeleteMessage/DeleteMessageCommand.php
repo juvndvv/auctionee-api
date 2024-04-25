@@ -2,7 +2,7 @@
 
 namespace App\Social\Application\DeleteMessage;
 
-use App\Shared\Infraestructure\Bus\Command\Command;
+use App\Shared\Application\Command;
 
 class DeleteMessageCommand extends Command
 {

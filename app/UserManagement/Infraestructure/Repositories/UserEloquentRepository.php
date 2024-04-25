@@ -2,80 +2,69 @@
 
 namespace App\UserManagement\Infraestructure\Repositories;
 
+use App\Shared\Infraestructure\Repositories\BaseRepository;
+use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use App\UserManagement\Infraestructure\Repositories\Models\EloquentUserModel;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class UserEloquentRepository implements UserRepositoryPort
+class UserEloquentRepository extends BaseRepository implements UserRepositoryPort
 {
-    public function findAll(): Collection
+    private const ENTITY_NAME = 'user';
+
+    public function __construct()
     {
-        return EloquentUserModel::all();
+        $this->setBuilderFromModel(EloquentUserModel::query()->getModel());
+        $this->setEntityName(self::ENTITY_NAME);
     }
 
-    public function findByUuid(string $uuid): ?Model
+    public function findByUuid(string $uuid): Model
     {
-        return EloquentUserModel::query()->where('uuid', $uuid)->first();
+        return parent::findOneByPrimaryKeyOrFail($uuid);
     }
 
-    public function findByUsername(string $username): ?Model
+    public function findByUsername(string $username): Model
     {
-        return EloquentUserModel::query()->where('username', $username)->first();
+        return parent::findByFieldValue(User::SERIALIZED_USERNAME, $username);
     }
 
-    public function create(array $data): Model
+    public function updateName(string $uuid, string $name): void
     {
-        return EloquentUserModel::query()->create($data);
-    }
-
-    public function existsByEmail(string $email): bool
-    {
-        return EloquentUserModel::query()->where('email', $email)->exists();
-    }
-
-    public function existsByUsername(string $username): bool
-    {
-        return EloquentUserModel::query()->where('username', $username)->exists();
-    }
-
-    public function updateName(string $uuid, string $name): int
-    {
-        return EloquentUserModel::query()->findOrFail($uuid)->update(['name' => $name]);
+        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_USERNAME, $name);
     }
 
     public function updateUsername(string $uuid, string $username): int
     {
-        return EloquentUserModel::query()->findOrFail($uuid)->update(['username' => $username]);
+        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_USERNAME, $username);
     }
 
-    public function updateEmail(string $uuid, string $email): int
+    public function updateEmail(string $uuid, string $email): void
     {
-        return EloquentUserModel::query()->findOrFail($uuid)->update(['email' => $email]);
+        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_EMAIL, $email);
     }
 
-    public function updatePassword(string $uuid, string $password): int
+    public function updatePassword(string $uuid, string $password): void
     {
-        return EloquentUserModel::query()->findOrFail($uuid)->update(['uuid' => $password]);
+        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_PASSWORD, $password);
     }
 
-    public function updateAvatar(string $uuid, string $avatar): int
+    public function updateAvatar(string $uuid, string $avatar): void
     {
-        return EloquentUserModel::query()->where('uuid', $uuid)->update(['avatar' => $avatar]);
+        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_AVATAR, $avatar);
     }
 
-    public function delete(string $uuid): int
+    public function delete(string $uuid): void
     {
-        return EloquentUserModel::query()->findOrFail($uuid)->update(['role' => 3]);
+        parent::deleteByPrimaryKey($uuid);
     }
 
-    public function block(string $uuid): int
+    public function block(string $uuid): void
     {
-        return EloquentUserModel::query()->where("uuid", $uuid)->update(['role' => 2]);
+        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_ROLE, User::BLOCKED_ROLE);
     }
 
-    public function unblock(string $uuid): int
+    public function unblock(string $uuid): void
     {
-        return EloquentUserModel::query()->where("uuid", $uuid)->update(['role' => 0]);
+        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_ROLE, User::USER_ROLE);
     }
 }

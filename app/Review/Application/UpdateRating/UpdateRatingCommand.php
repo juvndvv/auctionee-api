@@ -2,7 +2,7 @@
 
 namespace App\Review\Application\UpdateRating;
 
-use App\Shared\Infraestructure\Bus\Command\Command;
+use App\Shared\Application\Command;
 
 class UpdateRatingCommand extends Command
 {

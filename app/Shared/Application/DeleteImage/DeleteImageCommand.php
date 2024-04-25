@@ -2,11 +2,11 @@
 
 namespace App\Shared\Application\DeleteImage;
 
-use App\Shared\Infraestructure\Bus\Command\Command;
+use App\Shared\Application\Command;
 
 class DeleteImageCommand extends Command
 {
-    public function __construct(private readonly string $path)
+    private function __construct(private readonly string $path)
     {}
 
     public function path(): string

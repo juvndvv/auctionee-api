@@ -3,20 +3,16 @@
 namespace App\UserManagement\Infraestructure\Controllers;
 
 use App\Shared\Application\UploadImage\UploadImageCommand;
-use App\Shared\Infraestructure\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
-use App\UserManagement\Application\Create\CreateUserCommand;
+use App\UserManagement\Application\Commands\Create\CreateUserCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-readonly class CreateUserController
+final class CreateUserController extends CommandController
 {
-    public function __construct(
-        private readonly CommandBus $commandBus,
-    ) {}
-
     public function __invoke(Request $request): JsonResponse
     {
         try {
@@ -31,7 +27,7 @@ readonly class CreateUserController
 
             // Upload the image
             if ($avatar) {
-                $avatarCommand = new UploadImageCommand("avatars", $avatar);
+                $avatarCommand = UploadImageCommand::create("avatars", $avatar);
                 $avatar = $this->commandBus->handle($avatarCommand);
 
             } else {
@@ -39,8 +35,8 @@ readonly class CreateUserController
             }
 
             // Create the user
-            $command = new CreateUserCommand($name, $username, $email, $password, $avatar, $birth, 0);
-            $resource = $this->commandBus->handle($command);
+            $command = CreateUserCommand::create($name, $username, $email, $password, $avatar, $birth, 0);
+            $this->commandBus->handle($command);
 
             return Response::CREATED("Usuario creado satisfactoriamente", "/users/" . $username);
 
@@ -48,7 +44,6 @@ readonly class CreateUserController
             return Response::UNPROCESSABLE_ENTITY("Errores de validación en el usuario", $e->validator->getMessageBag());
 
         } catch (Exception $e) {
-            dd($e);
             return Response::SERVER_ERROR();
         }
     }

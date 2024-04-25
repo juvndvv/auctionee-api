@@ -2,7 +2,7 @@
 
 namespace App\Social\Application\SendMessage;
 
-use App\Shared\Infraestructure\Bus\Command\Command;
+use App\Shared\Application\Command;
 
 class SendMessageCommand extends Command
 {

@@ -2,19 +2,22 @@
 
 namespace App\UserManagement\Infraestructure\Controllers;
 
-use App\Shared\Infraestructure\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
-use App\UserManagement\Application\BlockUser\BlockUserCommand;
+use App\UserManagement\Application\Commands\BlockUser\BlockUserCommand;
+use Illuminate\Http\Request;
 
-class BlockUserController
+final class BlockUserController extends CommandController
 {
-    public function __construct(private readonly CommandBus $commandBus)
-    {}
-
     public function __invoke(string $uuid)
     {
-        $command = new BlockUserCommand($uuid);
+        $command = BlockUserCommand::create($uuid);
         $this->commandBus->handle($command);
         return Response::OK($uuid, "Usuario bloqueado correctamente.");
+    }
+
+    static function validate(Request $request): void
+    {
+        // TODO: Implement validate() method.
     }
 }

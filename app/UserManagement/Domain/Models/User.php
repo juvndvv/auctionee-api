@@ -2,6 +2,7 @@
 
 namespace App\UserManagement\Domain\Models;
 
+use App\Shared\Application\Creatable;
 use App\Shared\Domain\Models\AggregateRoot;
 use App\UserManagement\Domain\Events\UserBlockedEvent;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
@@ -19,6 +20,19 @@ use App\UserManagement\Domain\Models\ValueObjects\UserUsername;
 
 class User extends AggregateRoot
 {
+    public const SERIALIZED_UUID = 'uuid';
+    public const SERIALIZED_NAME = 'name';
+    public const SERIALIZED_USERNAME = 'username';
+    public const SERIALIZED_EMAIL = 'email';
+    public const SERIALIZED_PASSWORD = 'password';
+    public const SERIALIZED_AVATAR = 'avatar';
+    public const SERIALIZED_BIRTH = 'birth';
+    public const SERIALIZED_ROLE = 'role';
+
+    public const USER_ROLE = 0;
+    public const ADMIN_ROLE = 1;
+    public const BLOCKED_ROLE = 2;
+
     private UserId $id;
     private UserName $name;
     private UserUsername $username;
@@ -72,28 +86,28 @@ class User extends AggregateRoot
     public static function fromPrimitives(array $data): User
     {
         return new self(
-            $data['uuid'],
-            $data['name'],
-            $data['username'],
-            $data['email'],
-            $data['password'],
-            $data['avatar'],
-            $data['birth'],
-            $data['role']
+            $data[self::SERIALIZED_UUID],
+            $data[self::SERIALIZED_NAME],
+            $data[self::SERIALIZED_USERNAME],
+            $data[self::SERIALIZED_EMAIL],
+            $data[self::SERIALIZED_PASSWORD],
+            $data[self::SERIALIZED_AVATAR],
+            $data[self::SERIALIZED_BIRTH],
+            $data[self::SERIALIZED_ROLE]
         );
     }
 
     public function toPrimitives(): array
     {
         return [
-            'uuid' => $this->id->value(),
-            'name' => $this->name->value(),
-            'username' => $this->username->value(),
-            'email' => $this->email->value(),
-            'password' => $this->password->value(),
-            'avatar' => $this->avatar->value(),
-            'birth' => $this->birth->value(),
-            'role' => $this->role->value(),
+            self::SERIALIZED_UUID => $this->id->value(),
+            self::SERIALIZED_NAME => $this->name->value(),
+            self::SERIALIZED_USERNAME => $this->username->value(),
+            self::SERIALIZED_EMAIL => $this->email->value(),
+            self::SERIALIZED_PASSWORD => $this->password->value(),
+            self::SERIALIZED_AVATAR => $this->avatar->value(),
+            self::SERIALIZED_BIRTH => $this->birth->value(),
+            self::SERIALIZED_ROLE => $this->role->value(),
         ];
     }
 

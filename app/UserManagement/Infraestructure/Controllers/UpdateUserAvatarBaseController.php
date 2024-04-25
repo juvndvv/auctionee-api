@@ -1,0 +1,40 @@
+<?php
+
+namespace App\UserManagement\Infraestructure\Controllers;
+
+use App\Shared\Infraestructure\Controllers\CommandController;
+use App\Shared\Infraestructure\Controllers\Response;
+use App\UserManagement\Application\Commands\UpdateAvatar\UpdateAvatarCommand;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+
+final class UpdateUserAvatarBaseController extends CommandController
+{
+    public function __invoke(string $uuid, Request $request)
+    {
+        try {
+            self::validate($request);
+
+            $avatar = $request->file("avatar");
+
+            $command = UpdateAvatarCommand::create($uuid, $avatar);
+            $newPath = $this->commandBus->handle($command);
+
+            return Response::OK($newPath, "Avatar actualizado correctamente");
+
+        } catch (ModelNotFoundException $e) {
+            return Response::NOT_FOUND($e->getMessage());
+
+        } catch (Exception $e) {
+            return Response::SERVER_ERROR();
+        }
+    }
+
+    public static function validate(Request $request): void
+    {
+        $request->validate([
+            "avatar" => "required|image|mimes:jpeg,png,jpg,webp|max:2048"
+        ]);
+    }
+}
