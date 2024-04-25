@@ -2,31 +2,30 @@
 
 namespace App\UserManagement\Infraestructure\Controllers;
 
-use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
-use App\UserManagement\Application\Commands\UpdateName\UpdateNameCommand;
+use App\UserManagement\Application\Commands\UpdatePassword\UpdatePasswordCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-final class UpdateUserNameBaseController extends ValidatedCommandController
+final class UpdateUserPasswordController extends ValidatedCommandController
 {
     public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {
             self::validate($request);
 
-            $name = $request["name"];
+            $password = $request["password"];
 
-            $command = UpdateNameCommand::create($uuid, $name);
+            $command = UpdatePasswordCommand::create($uuid, $password);
             $this->commandBus->handle($command);
 
-            return Response::OK($name, "Nombre actualizado correctamente");
+            return Response::OK($password, "Contraseña actualizada correctamente");
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación en el nombre", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY("Errores de validación en la contraseña", $e->validator->getMessageBag());
 
         } catch (Exception $e) {
             return Response::SERVER_ERROR();
@@ -36,7 +35,7 @@ final class UpdateUserNameBaseController extends ValidatedCommandController
     public static function validate(Request $request): void
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
         ]);
     }
 }

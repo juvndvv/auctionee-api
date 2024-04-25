@@ -9,7 +9,7 @@ use App\UserManagement\Application\Queries\FindAll\FindAllUserQuery;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-final class FindAllUserBaseController extends QueryController
+final class FindAllUserController extends QueryController
 {
     private const DEFAULT_OFFSET = 0;
     private const DEFAULT_LIMIT = 10;

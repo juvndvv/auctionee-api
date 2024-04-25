@@ -7,9 +7,8 @@ use App\Shared\Infraestructure\Controllers\QueryController;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\Queries\FindByUuid\FindByUuidQuery;
 use Exception;
-use Illuminate\Http\Request;
 
-final class FindUserByUuidBaseController extends QueryController
+final class FindUserByUuidController extends QueryController
 {
     public function __invoke(string $uuid)
     {

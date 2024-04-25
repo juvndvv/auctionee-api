@@ -5,7 +5,6 @@ namespace App\UserManagement\Infraestructure\Controllers;
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\Commands\UnblockUser\UnblockUserCommand;
-use Illuminate\Http\Request;
 
 final class UnblockUserController extends CommandController
 {

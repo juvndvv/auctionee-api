@@ -8,9 +8,8 @@ use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\Queries\FindByUsername\FindByUsernameQuery;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
-final class FindUserByUsernameBaseController extends QueryController
+final class FindUserByUsernameController extends QueryController
 {
     public function __invoke(string $id): JsonResponse
     {

@@ -11,13 +11,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-final class UpdateUserUsernameBaseController extends ValidatedCommandController
+final class UpdateUserNameController extends ValidatedCommandController
 {
     public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {
             self::validate($request);
-            $name = $request["username"];
+
+            $name = $request["name"];
 
             $command = UpdateNameCommand::create($uuid, $name);
             $this->commandBus->handle($command);
@@ -25,7 +26,7 @@ final class UpdateUserUsernameBaseController extends ValidatedCommandController
             return Response::OK($name, "Nombre actualizado correctamente");
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación en el nombre de usuario", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY("Errores de validación en el nombre", $e->validator->getMessageBag());
 
         } catch (Exception $e) {
             return Response::SERVER_ERROR();
@@ -35,7 +36,7 @@ final class UpdateUserUsernameBaseController extends ValidatedCommandController
     public static function validate(Request $request): void
     {
         $request->validate([
-            'username' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
         ]);
     }
 }

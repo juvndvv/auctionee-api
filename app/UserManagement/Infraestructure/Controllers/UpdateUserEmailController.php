@@ -3,7 +3,6 @@
 namespace App\UserManagement\Infraestructure\Controllers;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
 use App\UserManagement\Application\Commands\UpdateEmail\UpdateEmailCommand;
@@ -11,7 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-final class UpdateUserEmailBaseController extends ValidatedCommandController
+final class UpdateUserEmailController extends ValidatedCommandController
 {
     public function __invoke($uuid, Request $request)
     {
