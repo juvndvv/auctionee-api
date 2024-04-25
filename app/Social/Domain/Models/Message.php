@@ -59,4 +59,8 @@ class Message
         $uuid = MessageUuid::random();
         return new self($uuid, $senderUuid, $content);
     }
+
+    public function delete(): void
+    {
+    }
 }

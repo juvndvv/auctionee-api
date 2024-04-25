@@ -3,6 +3,7 @@
 namespace App\Social\Domain\Models;
 
 use App\Shared\Domain\Models\AggregateRoot;
+use App\Social\Domain\Events\MessageDeletedEvent;
 use App\Social\Domain\Events\MessageSentEvent;
 use App\Social\Domain\Models\ValueObjects\ChatRoomUuid;
 use App\UserManagement\Domain\Models\ValueObjects\UserId;
@@ -113,15 +114,24 @@ class ChatRoom extends AggregateRoot
     public function addMessage(string $senderUuid, string $content): void
     {
         $message = Message::create($senderUuid, $content);
-
-        if ($this->left() === $message->senderUuid()) {
-            $destination = $this->right();
-
-        } else {
-            $destination = $this->left();
-        }
+        $destination = $this->getDestinationUuid($message);
 
         $this->messages->add($message);
         $this->record(new MessageSentEvent($destination, $message->toPrimitives($this->uuid()), now()->toString()));
+    }
+
+    public function deleteMessage(Message $message): void
+    {
+        $destination = $this->getDestinationUuid($message);
+        $this->record(new MessageDeletedEvent($destination, [], now()->toString()));
+    }
+
+    private function getDestinationUuid(Message $message): string
+    {
+        if ($this->left() === $message->senderUuid()) {
+            return $this->right();
+        }
+
+        return $this->left();
     }
 }
