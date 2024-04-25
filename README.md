@@ -54,6 +54,7 @@
 - [ ] Endpoint Caso de uso de obtener lista de amigos
 - [x] Endpoint Caso de uso de crear un chat
 - [x] Endpoint Caso de uso de guardar mensaje
+- [x] Endpoint Caso de uso de recuperar los chats de un usuario
 - [ ] Endpoint Caso de uso de eliminar un mensaje
 - [ ] Endpoint Caso de uso de recuperar mensajes de una conversacion
 

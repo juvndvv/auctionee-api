@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Social\Infraestructure\Controllers;
+
+use App\Shared\Domain\Bus\Command\CommandBus;
+use App\Shared\Domain\Bus\Query\QueryBus;
+use App\Shared\Domain\Exceptions\NoContentException;
+use App\Shared\Infraestructure\Controllers\Controller;
+use App\Shared\Infraestructure\Controllers\Response;
+use App\Social\Application\FindChatRoomsByUserUuid\FindChatRoomsByUserUuidQuery;
+use Exception;
+
+class FindChatRoomsByUserUuidController extends Controller
+{
+    public function __construct(
+        private readonly QueryBus $queryBus
+    )
+    {}
+
+    public function __invoke(string $userUuid)
+    {
+        try {
+            $query = new FindChatRoomsByUserUuidQuery($userUuid);
+            $resources = $this->queryBus->handle($query);
+
+            return Response::OK($resources, "Chats encontrados");
+
+        } catch (NoContentException $e) {
+            return Response::NO_CONTENT();
+
+        } catch (Exception $e) {
+            return Response::SERVER_ERROR();
+        }
+    }
+}
