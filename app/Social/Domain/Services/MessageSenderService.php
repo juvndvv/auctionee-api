@@ -9,11 +9,11 @@ use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 class MessageSenderService
 {
     public function __construct(
-        private ChatMessagesRepositoryPort $chatMessagesRepository,
+        private readonly ChatMessagesRepositoryPort $chatMessagesRepository
     )
     {}
 
-    public function __invoke(ChatRoom $chatRoom, string $senderUuid, string $content): void
+    public function __invoke(string $senderUuid, string $content, ChatRoom $chatRoom): void
     {
         $message = Message::create($senderUuid, $content);
         $chatRoom->addMessage($message);

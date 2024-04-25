@@ -3,17 +3,25 @@
 namespace App\Social\Domain\Models;
 
 use App\Social\Domain\Models\ValueObjects\MessageContent;
+use App\Social\Domain\Models\ValueObjects\MessageUuid;
 use App\UserManagement\Domain\Models\ValueObjects\UserId;
 
 class Message
 {
+    private MessageUuid $messageUuid;
     private UserId $senderUuid;
     private MessageContent $content;
 
-    public function __construct(string $senderUuid, string $content)
+    public function __construct(string $uuid, string $senderUuid, string $content)
     {
+        $this->messageUuid = new MessageUuid($uuid);
         $this->senderUuid = new UserId($senderUuid);
         $this->content = new MessageContent($content);
+    }
+
+    public function messageUuid(): string
+    {
+        return $this->messageUuid->value();
     }
 
     public function senderUuid(): string
@@ -26,16 +34,29 @@ class Message
         return $this->content->value();
     }
 
-    public function toPrimitives(): array
+    public static function fromPrimitives(array $data): self
+    {
+
+        return new self(
+            $data['uuid'],
+            $data['sender_uuid'],
+            $data['content']
+        );
+    }
+
+    public function toPrimitives(string $chatRoomUuid): array
     {
         return [
-            'user_uuid' => $this->senderUuid(),
+            'uuid' => $this->messageUuid(),
+            'chat_room_uuid' => $chatRoomUuid,
+            'sender_uuid' => $this->senderUuid(),
             'content' => $this->content()
         ];
     }
 
     public static function create(string $senderUuid, string $content): self
     {
-        return new self($senderUuid, $content);
+        $uuid = MessageUuid::random();
+        return new self($uuid, $senderUuid, $content);
     }
 }

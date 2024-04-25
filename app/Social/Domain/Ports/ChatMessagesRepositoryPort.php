@@ -3,8 +3,19 @@
 namespace App\Social\Domain\Ports;
 
 use App\Social\Domain\Models\Message;
+use Illuminate\Support\Collection;
 
 interface ChatMessagesRepositoryPort
 {
-    public function save(Message $message): void;
+    /**
+     * @param array $data
+     * @return void
+     */
+    public function save(array $data): void;
+
+    /**
+     * @param string $chatRoomUuid
+     * @return Collection<Message>
+     */
+    public function findAllByChatRoomUuid(string $chatRoomUuid): Collection;
 }

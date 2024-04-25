@@ -12,6 +12,7 @@ use App\Review\Infraestructure\Controllers\PlaceReviewController;
 use App\Review\Infraestructure\Controllers\RemoveReviewController;
 use App\Review\Infraestructure\Controllers\UpdateDescriptionController;
 use App\Review\Infraestructure\Controllers\UpdateRatingController;
+use App\Social\Infraestructure\Controllers\SendMessageController;
 use App\UserManagement\Infraestructure\Controllers\BlockUserController;
 use App\UserManagement\Infraestructure\Controllers\CreateUserController;
 use App\UserManagement\Infraestructure\Controllers\DeleteUserController;
@@ -57,3 +58,6 @@ Route::put('/reviews/{uuid}/description', UpdateDescriptionController::class);
 
 // Events
 Route::get("/events", FindAllEventsController::class);
+
+// Chat rooms
+Route::post("/chat/{uuid}/send", SendMessageController::class);

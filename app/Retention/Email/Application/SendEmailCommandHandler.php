@@ -15,7 +15,7 @@ class SendEmailCommandHandler extends CommandHandler
 
     public function __invoke(SendEmailCommand $command): void
     {
-        $to = "jdanielforga@gmail.com";
+        $to = $command->to();
         $name = $command->name();
         $type = $command->type();
 

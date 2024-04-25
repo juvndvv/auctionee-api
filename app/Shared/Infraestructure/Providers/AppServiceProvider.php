@@ -17,6 +17,10 @@ use App\Review\Infraestructure\Repositories\ReviewEloquentRepository;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
 use App\Shared\Infraestructure\Listeners\UserCreatedListener;
 use App\Shared\Infraestructure\Repositories\ImageCloudfareR2Repository;
+use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
+use App\Social\Domain\Ports\ChatRoomRepositoryPort;
+use App\Social\Infraestructure\Repositories\ChatMessagesEloquentRepository;
+use App\Social\Infraestructure\Repositories\ChatRoomEloquentRepository;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use App\UserManagement\Infraestructure\Repositories\UserEloquentRepository;
@@ -44,6 +48,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(EventRepositoryPort::class, EloquentEventRepository::class);
         $this->app->singleton(WalletRepositoryPort::class, WalletEloquentRepository::class);
         $this->app->singleton(TransactionRepositoryPort::class, TransactionEloquentRepository::class);
+        $this->app->singleton(ChatRoomRepositoryPort::class, ChatRoomEloquentRepository::class);
+        $this->app->singleton(ChatMessagesRepositoryPort::class, ChatMessagesEloquentRepository::class);
     }
 
     /**

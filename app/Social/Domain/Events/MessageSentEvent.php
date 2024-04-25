@@ -7,18 +7,21 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSendedEvent extends DomainEvent
+class MessageSentEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(array $message, string $ocurredOn, string $eventId = null)
+    private readonly string $destinationUuid;
+
+    public function __construct(string $destinationUuid, array $message, string $ocuredOn, string $eventId = null)
     {
-        parent::__construct($ocurredOn, $message, self::eventName(), $eventId);
+        parent::__construct($ocuredOn, $message, self::eventName(), $eventId);
+        $this->destinationUuid = $destinationUuid;
     }
 
     public function broadcastOn(): array
     {
-        return [self::eventName()];
+        return ['messages.' . $this->destinationUuid];
     }
 
     public function broadcastAs(): string
@@ -28,6 +31,6 @@ class MessageSendedEvent extends DomainEvent
 
     public static function eventName(): string
     {
-        return 'message-sended';
+        return 'message.received';
     }
 }
