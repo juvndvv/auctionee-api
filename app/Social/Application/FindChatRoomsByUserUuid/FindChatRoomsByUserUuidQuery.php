@@ -3,7 +3,6 @@
 namespace App\Social\Application\FindChatRoomsByUserUuid;
 
 use App\Shared\Domain\Bus\Command\Command;
-use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 
 class FindChatRoomsByUserUuidQuery extends Command
 {
