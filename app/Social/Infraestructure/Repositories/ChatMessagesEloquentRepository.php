@@ -17,7 +17,10 @@ class ChatMessagesEloquentRepository implements ChatMessagesRepositoryPort
 
     public function findAllByChatRoomUuid(string $chatRoomUuid): Collection
     {
-        return EloquentMessageModel::query()->where('chat_room_uuid', $chatRoomUuid)->get();
+        return EloquentMessageModel::query()
+            ->where('chat_room_uuid', $chatRoomUuid)
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     public function delete(string $uuid): void

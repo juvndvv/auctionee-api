@@ -15,6 +15,7 @@ use App\Review\Infraestructure\Controllers\UpdateRatingController;
 use App\Social\Infraestructure\Controllers\CreateChatRoomController;
 use App\Social\Infraestructure\Controllers\DeleteChatMessageController;
 use App\Social\Infraestructure\Controllers\FindChatRoomsByUserUuidController;
+use App\Social\Infraestructure\Controllers\FindMessagesByChatRoomUuidController;
 use App\Social\Infraestructure\Controllers\SendMessageController;
 use App\UserManagement\Infraestructure\Controllers\BlockUserController;
 use App\UserManagement\Infraestructure\Controllers\CreateUserController;
@@ -66,4 +67,5 @@ Route::get("/events", FindAllEventsController::class);
 // Chat rooms
 Route::post("/chats", CreateChatRoomController::class);
 Route::post("/chats/{uuid}/send", SendMessageController::class);
+Route::get("/chats/{uuid}/messages", FindMessagesByChatRoomUuidController::class);
 Route::delete("/chats/{chatUuid}/messages/{messageUuid}", DeleteChatMessageController::class);
