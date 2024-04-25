@@ -45,14 +45,15 @@
 ## Social
 
 - [x] Modelado de la base de datos
-- [ ] Modelado del dominio
+- [x] Modelado del dominio
 - [ ] Modelado del repositorio
 - [ ] Endpoint Caso de uso de enviar peticion de amistad
 - [ ] Endpoint Caso de uso de aceptar peticion de amistad
 - [ ] Endpoint Caso de uso de rechazar peticion de amistad
 - [ ] Endpoint Caso de uso de eliminar amigo
 - [ ] Endpoint Caso de uso de obtener lista de amigos
-- [ ] Endpoint Caso de uso de guardar mensaje (crea conversacion si no existe)
+- [ ] Endpoint de iniciar un chat
+- [x] Endpoint Caso de uso de guardar mensaje
 - [ ] Endpoint Caso de uso de eliminar un mensaje
 - [ ] Endpoint Caso de uso de recuperar mensajes de una conversacion
 
