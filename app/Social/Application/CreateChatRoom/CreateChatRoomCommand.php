@@ -2,7 +2,7 @@
 
 namespace App\Social\Application\CreateChatRoom;
 
-use App\Shared\Application\Command;
+use App\Shared\Application\Commands\Command;
 
 class CreateChatRoomCommand extends Command
 {

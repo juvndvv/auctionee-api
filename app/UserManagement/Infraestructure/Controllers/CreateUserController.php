@@ -2,16 +2,17 @@
 
 namespace App\UserManagement\Infraestructure\Controllers;
 
-use App\Shared\Application\UploadImage\UploadImageCommand;
+use App\Shared\Application\Commands\UploadImage\UploadImageCommand;
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
+use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
 use App\UserManagement\Application\Commands\Create\CreateUserCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-final class CreateUserController extends CommandController
+final class CreateUserController extends ValidatedCommandController
 {
     public function __invoke(Request $request): JsonResponse
     {

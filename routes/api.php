@@ -14,9 +14,9 @@ use App\Review\Infraestructure\Controllers\UpdateDescriptionController;
 use App\Review\Infraestructure\Controllers\UpdateRatingController;
 use App\Social\Infraestructure\Controllers\CreateChatRoomBaseController;
 use App\Social\Infraestructure\Controllers\DeleteChatMessageBaseController;
-use App\Social\Infraestructure\Controllers\FindChatRoomsByUserUuidBaseController;
-use App\Social\Infraestructure\Controllers\FindFriendListByUserUuidBaseController;
-use App\Social\Infraestructure\Controllers\FindMessagesByChatRoomUuidBaseController;
+use App\Social\Infraestructure\Controllers\FindChatRoomsByUserUuidController;
+use App\Social\Infraestructure\Controllers\FindFriendListByUserUuidController;
+use App\Social\Infraestructure\Controllers\FindMessagesByChatRoomUuidController;
 use App\Social\Infraestructure\Controllers\SendMessageBaseController;
 use App\UserManagement\Infraestructure\Controllers\BlockUserController;
 use App\UserManagement\Infraestructure\Controllers\CreateUserController;
@@ -48,8 +48,8 @@ Route::get('/users/{uuid}/unblock', UnblockUserController::class);
 Route::get('/users/{uuid}/reviews', FindUserReviewsController::class);
 Route::get("/users/{uuid}/rating", FindUserAverageRatingController::class);
 Route::get("/users/{uuid}/wallet", FindWalletByUserUuidBaseController::class);
-Route::get("/users/{uuid}/chats", FindChatRoomsByUserUuidBaseController::class);
-Route::get("/users/{uuid}/friends", FindFriendListByUserUuidBaseController::class);
+Route::get("/users/{uuid}/chats", FindChatRoomsByUserUuidController::class);
+Route::get("/users/{uuid}/friends", FindFriendListByUserUuidController::class);
 
 // Wallets
 Route::get("/wallets/{uuid}/transfer", MakeTransactionBaseController::class);
@@ -69,5 +69,5 @@ Route::get("/events", FindAllEventsBaseController::class);
 // Chat rooms
 Route::post("/chats", CreateChatRoomBaseController::class);
 Route::post("/chats/{uuid}/send", SendMessageBaseController::class);
-Route::get("/chats/{uuid}/messages", FindMessagesByChatRoomUuidBaseController::class);
+Route::get("/chats/{uuid}/messages", FindMessagesByChatRoomUuidController::class);
 Route::delete("/chats/{chatUuid}/messages/{messageUuid}", DeleteChatMessageBaseController::class);

@@ -5,21 +5,19 @@ namespace App\Social\Infraestructure\Controllers;
 use App\Shared\Domain\Exceptions\BadRequestException;
 use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\BaseController;
+use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Social\Application\CreateChatRoom\CreateChatRoomCommand;
 use Exception;
 use Illuminate\Http\Request;
 
-class CreateChatRoomBaseController extends BaseController
+final class CreateChatRoomBaseController extends CommandController
 {
-    public function __construct(
-        private readonly CommandBus $commandBus
-    )
-    {}
-
     public function __invoke(Request $request)
     {
         try {
+            self::validate($request);
+
             $leftUuid = $request->input("left_uuid");
             $rightUuid = $request->input("right_uuid");
 
@@ -34,5 +32,10 @@ class CreateChatRoomBaseController extends BaseController
         } catch (Exception $e) {
             return Response::SERVER_ERROR();
         }
+    }
+
+    static function validate(Request $request): void
+    {
+        // TODO: Implement validate() method.
     }
 }

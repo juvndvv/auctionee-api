@@ -2,7 +2,7 @@
 
 namespace App\UserManagement\Application\Commands\UpdateAvatar;
 
-use App\Shared\Application\Command;
+use App\Shared\Application\Commands\Command;
 use Illuminate\Http\UploadedFile;
 
 class UpdateAvatarCommand extends Command

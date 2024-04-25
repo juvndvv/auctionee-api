@@ -2,7 +2,7 @@
 
 namespace App\UserManagement\Application\Commands\UpdatePassword;
 
-use App\Shared\Application\Command;
+use App\Shared\Application\Commands\Command;
 
 class UpdatePasswordCommand extends Command
 {

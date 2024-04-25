@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Shared\Application\UploadImage;
+namespace App\Shared\Application\Commands\UploadImage;
 
-use App\Shared\Application\Command;
+use App\Shared\Application\Commands\Command;
 use Illuminate\Http\UploadedFile;
 
 class UploadImageCommand extends Command

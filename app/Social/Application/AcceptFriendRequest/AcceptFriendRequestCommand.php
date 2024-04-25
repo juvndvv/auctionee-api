@@ -2,7 +2,7 @@
 
 namespace App\Social\Application\AcceptFriendRequest;
 
-use App\Shared\Application\Command;
+use App\Shared\Application\Commands\Command;
 
 class AcceptFriendRequestCommand extends Command
 {

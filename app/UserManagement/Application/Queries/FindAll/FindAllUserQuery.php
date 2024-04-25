@@ -2,7 +2,7 @@
 
 namespace App\UserManagement\Application\Queries\FindAll;
 
-use App\Shared\Application\Query;
+use App\Shared\Application\Queries\Query;
 
 class FindAllUserQuery extends Query
 {

@@ -15,9 +15,4 @@ final class UnblockUserController extends CommandController
         $this->commandBus->handle($command);
         return Response::OK($uuid, "Usuario desbloqueado correctamente.");
     }
-
-    static function validate(Request $request): void
-    {
-        // TODO: Implement validate() method.
-    }
 }

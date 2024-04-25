@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\Application\DeleteImage;
+namespace App\Shared\Application\Commands\DeleteImage;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;

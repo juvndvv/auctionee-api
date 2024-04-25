@@ -4,12 +4,13 @@ namespace App\UserManagement\Infraestructure\Controllers;
 
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
+use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
 use App\UserManagement\Application\Commands\UpdateAvatar\UpdateAvatarCommand;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
-final class UpdateUserAvatarBaseController extends CommandController
+final class UpdateUserAvatarBaseController extends ValidatedCommandController
 {
     public function __invoke(string $uuid, Request $request)
     {

@@ -5,24 +5,21 @@ namespace App\Social\Infraestructure\Controllers;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infraestructure\Bus\Query\QueryBus;
 use App\Shared\Infraestructure\Controllers\BaseController;
+use App\Shared\Infraestructure\Controllers\QueryController;
 use App\Shared\Infraestructure\Controllers\Response;
-use App\Social\Application\FindChatRoomsByUserUuid\FindChatRoomsByUserUuidQuery;
+use App\Social\Application\FindFriendListByUserUuid\FindFriendListByUserUuidQuery;
 use Exception;
+use Illuminate\Http\Request;
 
-class FindChatRoomsByUserUuidBaseController extends BaseController
+final class FindFriendListByUserUuidController extends QueryController
 {
-    public function __construct(
-        private readonly QueryBus $queryBus
-    )
-    {}
-
     public function __invoke(string $userUuid)
     {
         try {
-            $query = new FindChatRoomsByUserUuidQuery($userUuid);
+            $query = FindFriendListByUserUuidQuery::create($userUuid);
             $resources = $this->queryBus->handle($query);
 
-            return Response::OK($resources, "Chats encontrados");
+            return Response::OK($resources, "Amigos encontrados");
 
         } catch (NoContentException $e) {
             return Response::NO_CONTENT();

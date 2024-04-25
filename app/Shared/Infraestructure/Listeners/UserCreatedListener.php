@@ -14,13 +14,13 @@ final class UserCreatedListener extends BaseListener
         $this->createWallet($event);
     }
 
-    public function sendWelcomeEmail(UserCreatedEvent $event): void
+    private function sendWelcomeEmail(UserCreatedEvent $event): void
     {
         $command = SendEmailCommand::create($event->message['email'], $event->message['name'], "welcome");
         $this->commandBus->handle($command);
     }
 
-    public function createWallet(UserCreatedEvent $event): void
+    private function createWallet(UserCreatedEvent $event): void
     {
         $command = new CreateWalletCommand($event->message['uuid']);
         $this->commandBus->handle($command);

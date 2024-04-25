@@ -4,13 +4,14 @@ namespace App\UserManagement\Infraestructure\Controllers;
 
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
+use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
 use App\UserManagement\Application\Commands\UpdateName\UpdateNameCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-final class UpdateUserNameBaseController extends CommandController
+final class UpdateUserNameBaseController extends ValidatedCommandController
 {
     public function __invoke(string $uuid, Request $request): JsonResponse
     {

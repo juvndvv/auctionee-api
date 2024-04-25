@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\Response as STATUS;
 
 abstract class BaseController
 {
-    abstract static function validate(Request $request): void;
-
     public static function noContent(): JsonResponse
     {
         return response()->json([

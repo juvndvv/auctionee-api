@@ -5,19 +5,20 @@ namespace App\Social\Infraestructure\Controllers;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\BaseController;
+use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Social\Application\DeleteMessage\DeleteMessageCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
-class DeleteChatMessageBaseController extends BaseController
+final class DeleteChatMessageBaseController extends CommandController
 {
-    public function __construct(private readonly CommandBus $commandBus)
-    {}
-
     public function __invoke(string $chatUuid, string $messageUuid): JsonResponse
     {
         try {
+            self::validate(new Request());
+
             $command = new DeleteMessageCommand($chatUuid, $messageUuid);
             $this->commandBus->handle($command);
 
@@ -29,5 +30,10 @@ class DeleteChatMessageBaseController extends BaseController
         } catch (Exception $e) {
             return Response::SERVER_ERROR();
         }
+    }
+
+    static function validate(Request $request): void
+    {
+        // TODO: Implement validate() method.
     }
 }

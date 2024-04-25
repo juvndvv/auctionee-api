@@ -2,7 +2,7 @@
 
 namespace App\Financial\Application\DeleteWallet;
 
-use App\Shared\Application\Command;
+use App\Shared\Application\Commands\Command;
 
 class DeleteWalletCommand extends Command
 {

@@ -2,7 +2,7 @@
 
 namespace App\Financial\Application\DepositMoney;
 
-use App\Shared\Application\Command;
+use App\Shared\Application\Commands\Command;
 
 class DepositMoneyCommand extends Command
 {

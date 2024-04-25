@@ -2,7 +2,7 @@
 
 namespace App\Retention\Email\Application;
 
-use App\Shared\Application\Command;
+use App\Shared\Application\Commands\Command;
 
 class SendEmailCommand extends Command
 {

@@ -3,7 +3,7 @@
 namespace App\UserManagement\Application\Queries\FindByUsername;
 
 
-use App\Shared\Application\Query;
+use App\Shared\Application\Queries\Query;
 
 class FindByUsernameQuery extends Query
 {

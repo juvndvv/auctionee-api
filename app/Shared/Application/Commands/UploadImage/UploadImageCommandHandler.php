@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\Application\UploadImage;
+namespace App\Shared\Application\Commands\UploadImage;
 
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
 use App\Shared\Infraestructure\Bus\Command\CommandHandler;

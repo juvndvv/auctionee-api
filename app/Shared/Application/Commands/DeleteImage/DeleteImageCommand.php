@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Shared\Application\DeleteImage;
+namespace App\Shared\Application\Commands\DeleteImage;
 
-use App\Shared\Application\Command;
+use App\Shared\Application\Commands\Command;
 
 class DeleteImageCommand extends Command
 {

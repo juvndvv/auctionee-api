@@ -32,9 +32,4 @@ final class FindAllUserBaseController extends QueryController
             return Response::SERVER_ERROR();
         }
     }
-
-    static function validate(Request $request): void
-    {
-        // TODO: Implement validate() method.
-    }
 }
