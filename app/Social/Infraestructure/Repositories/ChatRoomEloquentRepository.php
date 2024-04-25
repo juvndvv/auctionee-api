@@ -17,6 +17,14 @@ class ChatRoomEloquentRepository implements ChatRoomRepositoryPort
 
     public function create(ChatRoom $chatRoom): void
     {
-        // TODO: Implement create() method.
+        EloquentChatRoomModel::query()->create($chatRoom->toPrimitives());
+    }
+
+    public function existsByLeftAndRight(string $leftUuid, string $rightUuid): bool
+    {
+        return EloquentChatRoomModel::query()
+            ->where("left_uuid", $leftUuid)
+            ->where("right_uuid", $rightUuid)
+            ->exists();
     }
 }

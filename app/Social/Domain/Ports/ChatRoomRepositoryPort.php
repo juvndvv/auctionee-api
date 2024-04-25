@@ -8,4 +8,5 @@ interface ChatRoomRepositoryPort
 {
     public function findByUuid(string $uuid): ChatRoom;
     public function create(ChatRoom $chatRoom): void;
+    public function existsByLeftAndRight(string $leftUuid, string $rightUuid): bool;
 }
