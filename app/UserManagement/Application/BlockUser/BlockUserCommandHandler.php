@@ -2,8 +2,8 @@
 
 namespace App\UserManagement\Application\BlockUser;
 
-use App\Shared\Domain\Bus\Command\CommandHandler;
-use App\Shared\Domain\Bus\Events\EventBus;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
+use App\Shared\Infraestructure\Bus\Events\EventBus;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 

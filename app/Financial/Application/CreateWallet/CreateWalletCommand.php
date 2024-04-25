@@ -2,7 +2,7 @@
 
 namespace App\Financial\Application\CreateWallet;
 
-use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Infraestructure\Bus\Command\Command;
 
 class CreateWalletCommand extends Command
 {

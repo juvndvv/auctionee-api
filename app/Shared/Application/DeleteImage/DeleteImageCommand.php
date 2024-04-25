@@ -2,7 +2,7 @@
 
 namespace App\Shared\Application\DeleteImage;
 
-use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Infraestructure\Bus\Command\Command;
 
 class DeleteImageCommand extends Command
 {

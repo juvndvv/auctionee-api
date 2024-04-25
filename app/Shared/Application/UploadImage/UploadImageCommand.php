@@ -2,7 +2,7 @@
 
 namespace App\Shared\Application\UploadImage;
 
-use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Infraestructure\Bus\Command\Command;
 use Illuminate\Http\UploadedFile;
 
 class UploadImageCommand extends Command

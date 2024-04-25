@@ -4,7 +4,7 @@ namespace App\Financial\Application\FindWalletByUserUuid;
 
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Financial\Domain\Resources\WalletResource;
-use App\Shared\Domain\Bus\Query\QueryHandler;
+use App\Shared\Infraestructure\Bus\Query\QueryHandler;
 
 class FindWalletByUserUuidQueryHandler extends QueryHandler
 {

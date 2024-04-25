@@ -3,7 +3,7 @@
 namespace App\UserManagement\Infraestructure\Controllers;
 
 use App\Shared\Application\UploadImage\UploadImageCommand;
-use App\Shared\Domain\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\Create\CreateUserCommand;
 use Exception;

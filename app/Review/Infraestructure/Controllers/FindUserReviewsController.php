@@ -3,8 +3,8 @@
 namespace App\Review\Infraestructure\Controllers;
 
 use App\Review\Application\FindUserReviews\FindUserReviewsQuery;
-use App\Shared\Domain\Bus\Query\QueryBus;
 use App\Shared\Domain\Exceptions\NoContentException;
+use App\Shared\Infraestructure\Bus\Query\QueryBus;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;
 

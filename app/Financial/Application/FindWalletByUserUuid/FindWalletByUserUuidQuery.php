@@ -2,7 +2,7 @@
 
 namespace App\Financial\Application\FindWalletByUserUuid;
 
-use App\Shared\Domain\Bus\Query\Query;
+use App\Shared\Infraestructure\Bus\Query\Query;
 
 class FindWalletByUserUuidQuery extends Query
 {

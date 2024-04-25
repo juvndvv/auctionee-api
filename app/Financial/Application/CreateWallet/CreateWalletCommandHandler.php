@@ -4,7 +4,7 @@ namespace App\Financial\Application\CreateWallet;
 
 use App\Financial\Domain\Models\Wallet;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
-use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
 
 class CreateWalletCommandHandler extends CommandHandler
 {

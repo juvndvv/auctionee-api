@@ -2,9 +2,8 @@
 
 namespace App\Social\Application\FindMessagesByChatRoomUuid;
 
-use App\Shared\Domain\Bus\Query\QueryHandler;
+use App\Shared\Infraestructure\Bus\Query\QueryHandler;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
-use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 
 class FindMessagesByChatRoomUuidQueryHandler extends QueryHandler
 {

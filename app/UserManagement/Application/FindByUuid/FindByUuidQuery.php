@@ -2,7 +2,7 @@
 
 namespace App\UserManagement\Application\FindByUuid;
 
-use App\Shared\Domain\Bus\Query\Query;
+use App\Shared\Infraestructure\Bus\Query\Query;
 
 class FindByUuidQuery extends Query
 {

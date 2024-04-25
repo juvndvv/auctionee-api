@@ -2,8 +2,7 @@
 
 namespace App\Review\Domain\Events;
 
-use App\Shared\Domain\Bus\Events\DomainEvent;
-use App\UserManagement\Domain\Events\UserCreatedEvent;
+use App\Shared\Infraestructure\Bus\Events\DomainEvent;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

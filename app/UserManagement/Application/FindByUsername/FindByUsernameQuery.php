@@ -2,7 +2,7 @@
 
 namespace App\UserManagement\Application\FindByUsername;
 
-use App\Shared\Domain\Bus\Query\Query;
+use App\Shared\Infraestructure\Bus\Query\Query;
 
 class FindByUsernameQuery extends Query
 {

@@ -2,7 +2,7 @@
 
 namespace App\Review\Application\FindUserAverage;
 
-use App\Shared\Domain\Bus\Query\Query;
+use App\Shared\Infraestructure\Bus\Query\Query;
 
 class FindUserAverageQuery extends Query
 {

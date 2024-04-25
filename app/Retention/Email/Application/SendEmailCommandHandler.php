@@ -4,7 +4,7 @@ namespace App\Retention\Email\Application;
 
 use App\Retention\Email\Domain\Ports\Outbound\EmailRepositoryPort;
 use App\Retention\Email\Domain\Ports\Outbound\EmailSenderPort;
-use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
 
 class SendEmailCommandHandler extends CommandHandler
 {

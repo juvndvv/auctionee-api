@@ -3,7 +3,7 @@
 namespace App\Review\Application\FindUserAverage;
 
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
-use App\Shared\Domain\Bus\Query\QueryHandler;
+use App\Shared\Infraestructure\Bus\Query\QueryHandler;
 
 class FindUserAverageQueryHandler extends QueryHandler
 {

@@ -4,8 +4,8 @@ namespace App\Financial\Infraestructure\Controllers;
 
 use App\Financial\Application\MakeTransaction\MakeTransactionCommand;
 use App\Financial\Domain\Exeptions\NotEnoughFoundsException;
-use App\Shared\Domain\Bus\Command\CommandBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
+use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\Controller;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;

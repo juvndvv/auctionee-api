@@ -2,8 +2,8 @@
 
 namespace App\UserManagement\Infraestructure\Controllers;
 
-use App\Shared\Domain\Bus\Command\CommandBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
+use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\DeleteUser\DeleteUserCommand;
 use Exception;

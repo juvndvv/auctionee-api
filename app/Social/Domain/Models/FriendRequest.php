@@ -10,4 +10,5 @@ class FriendRequest
     private FriendRequestUuid $uuid;
     private UserId $sender;
     private UserId $reveiver;
+
 }

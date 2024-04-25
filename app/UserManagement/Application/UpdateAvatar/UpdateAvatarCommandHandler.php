@@ -2,9 +2,9 @@
 
 namespace App\UserManagement\Application\UpdateAvatar;
 
-use App\Shared\Domain\Bus\Command\CommandHandler;
-use App\Shared\Domain\Bus\Events\EventBus;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
+use App\Shared\Infraestructure\Bus\Events\EventBus;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

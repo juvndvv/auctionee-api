@@ -2,7 +2,7 @@
 
 namespace App\UserManagement\Application\UpdateName;
 
-use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Infraestructure\Bus\Command\Command;
 
 class UpdateNameCommand extends Command
 {

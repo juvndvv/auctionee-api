@@ -2,8 +2,8 @@
 
 namespace App\Shared\Application\UploadImage;
 
-use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
 
 class UploadImageCommandHandler extends CommandHandler
 {

@@ -19,8 +19,10 @@ use App\Shared\Infraestructure\Listeners\UserCreatedListener;
 use App\Shared\Infraestructure\Repositories\ImageCloudfareR2Repository;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
+use App\Social\Domain\Ports\FriendshipRepositoryPort;
 use App\Social\Infraestructure\Repositories\ChatMessagesEloquentRepository;
 use App\Social\Infraestructure\Repositories\ChatRoomEloquentRepository;
+use App\Social\Infraestructure\Repositories\FriendshipEloquentRepository;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use App\UserManagement\Infraestructure\Repositories\UserEloquentRepository;
@@ -28,7 +30,6 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-
     protected $listen = [
         UserCreatedEvent::class => [
             UserCreatedListener::class
@@ -50,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(TransactionRepositoryPort::class, TransactionEloquentRepository::class);
         $this->app->singleton(ChatRoomRepositoryPort::class, ChatRoomEloquentRepository::class);
         $this->app->singleton(ChatMessagesRepositoryPort::class, ChatMessagesEloquentRepository::class);
+        $this->app->singleton(FriendshipRepositoryPort::class, FriendshipEloquentRepository::class);
     }
 
     /**

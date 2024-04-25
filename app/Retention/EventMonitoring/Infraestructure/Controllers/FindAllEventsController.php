@@ -3,8 +3,8 @@
 namespace App\Retention\EventMonitoring\Infraestructure\Controllers;
 
 use App\Retention\EventMonitoring\Application\FindAll\FindAllEventsQuery;
-use App\Shared\Domain\Bus\Query\QueryBus;
 use App\Shared\Domain\Exceptions\NoContentException;
+use App\Shared\Infraestructure\Bus\Query\QueryBus;
 use App\Shared\Infraestructure\Controllers\Controller;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;

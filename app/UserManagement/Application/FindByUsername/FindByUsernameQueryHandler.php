@@ -2,8 +2,8 @@
 
 namespace App\UserManagement\Application\FindByUsername;
 
-use App\Shared\Domain\Bus\Query\QueryHandler;
 use App\Shared\Domain\Exceptions\NotFoundException;
+use App\Shared\Infraestructure\Bus\Query\QueryHandler;
 use App\UserManagement\Application\Resources\UserSmallResource;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 

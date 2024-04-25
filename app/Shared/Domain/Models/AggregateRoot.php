@@ -2,8 +2,6 @@
 
 namespace App\Shared\Domain\Models;
 
-use App\Shared\Domain\Bus\Events\DomainEvent;
-
 abstract class AggregateRoot
 {
     private array $domainEvents = [];

@@ -3,8 +3,8 @@
 namespace App\Review\Infraestructure\Controllers;
 
 use App\Review\Application\UpdateRating\UpdateRatingCommand;
-use App\Shared\Domain\Bus\Command\CommandBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
+use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;
 use Illuminate\Http\Request;

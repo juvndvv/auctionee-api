@@ -2,7 +2,7 @@
 
 namespace App\UserManagement\Application\Create;
 
-use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Infraestructure\Bus\Command\Command;
 
 class CreateUserCommand extends Command
 {

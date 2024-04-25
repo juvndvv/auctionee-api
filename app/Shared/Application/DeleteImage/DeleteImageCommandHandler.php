@@ -2,9 +2,9 @@
 
 namespace App\Shared\Application\DeleteImage;
 
-use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
 
 class DeleteImageCommandHandler extends CommandHandler
 {

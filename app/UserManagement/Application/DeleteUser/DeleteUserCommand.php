@@ -2,7 +2,7 @@
 
 namespace App\UserManagement\Application\DeleteUser;
 
-use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Infraestructure\Bus\Command\Command;
 
 class DeleteUserCommand extends Command
 {

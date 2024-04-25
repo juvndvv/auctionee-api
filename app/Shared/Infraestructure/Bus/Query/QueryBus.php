@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\Domain\Bus\Query;
+namespace App\Shared\Infraestructure\Bus\Query;
 
 use Illuminate\Support\Facades\App;
 use ReflectionClass;

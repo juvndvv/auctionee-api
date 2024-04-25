@@ -3,7 +3,7 @@
 namespace App\Financial\Application\DepositMoney;
 
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
-use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
 
 class DepositMoneyCommandHandler extends CommandHandler
 {

@@ -2,8 +2,8 @@
 
 namespace App\UserManagement\Application\FindByUuid;
 
-use App\Shared\Domain\Bus\Query\QueryHandler;
 use App\Shared\Domain\Exceptions\NotFoundException;
+use App\Shared\Infraestructure\Bus\Query\QueryHandler;
 use App\UserManagement\Application\Resources\UserDetailsResource;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\Domain\Bus\Events;
+namespace App\Shared\Infraestructure\Bus\Events;
 
 use App\Retention\EventMonitoring\Domain\Ports\Outbound\EventRepositoryPort;
 

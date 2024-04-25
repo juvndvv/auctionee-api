@@ -4,8 +4,8 @@ namespace App\Retention\EventMonitoring\Application\FindAll;
 
 use App\Retention\EventMonitoring\Domain\Ports\Outbound\EventRepositoryPort;
 use App\Retention\EventMonitoring\Domain\Resources\EventResource;
-use App\Shared\Domain\Bus\Query\QueryHandler;
 use App\Shared\Domain\Exceptions\NoContentException;
+use App\Shared\Infraestructure\Bus\Query\QueryHandler;
 
 class FindAllEventsQueryHandler extends QueryHandler
 {

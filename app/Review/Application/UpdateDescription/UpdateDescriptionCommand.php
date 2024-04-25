@@ -2,7 +2,7 @@
 
 namespace App\Review\Application\UpdateDescription;
 
-use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Infraestructure\Bus\Command\Command;
 
 class UpdateDescriptionCommand extends Command
 {

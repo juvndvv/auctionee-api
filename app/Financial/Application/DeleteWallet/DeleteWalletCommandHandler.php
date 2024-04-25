@@ -3,7 +3,7 @@
 namespace App\Financial\Application\DeleteWallet;
 
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
-use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
 
 class DeleteWalletCommandHandler extends CommandHandler
 {

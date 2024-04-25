@@ -4,7 +4,7 @@ namespace App\Shared\Infraestructure\Listeners;
 
 use App\Financial\Application\CreateWallet\CreateWalletCommand;
 use App\Retention\Email\Application\SendEmailCommand;
-use App\Shared\Domain\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
 
 class UserCreatedListener

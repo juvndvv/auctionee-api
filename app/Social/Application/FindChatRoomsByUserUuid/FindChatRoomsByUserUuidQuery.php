@@ -2,7 +2,7 @@
 
 namespace App\Social\Application\FindChatRoomsByUserUuid;
 
-use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Infraestructure\Bus\Command\Command;
 
 class FindChatRoomsByUserUuidQuery extends Command
 {

@@ -2,7 +2,7 @@
 
 namespace App\UserManagement\Application\UpdateEmail;
 
-use App\Shared\Domain\Bus\Command\Command;
+use App\Shared\Infraestructure\Bus\Command\Command;
 
 class UpdateEmailCommand extends Command
 {

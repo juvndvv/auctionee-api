@@ -3,7 +3,7 @@
 namespace App\Review\Infraestructure\Controllers;
 
 use App\Review\Application\PlaceReview\PlaceReviewCommand;
-use App\Shared\Domain\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\Controller;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;

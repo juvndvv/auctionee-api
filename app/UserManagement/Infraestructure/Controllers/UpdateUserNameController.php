@@ -2,8 +2,7 @@
 
 namespace App\UserManagement\Infraestructure\Controllers;
 
-use App\Shared\Domain\Bus\Command\Command;
-use App\Shared\Domain\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\Controller;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\UpdateName\UpdateNameCommand;

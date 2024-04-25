@@ -2,7 +2,7 @@
 
 namespace App\Social\Infraestructure\Controllers;
 
-use App\Shared\Domain\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\Controller;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Social\Application\SendMessage\SendMessageCommand;

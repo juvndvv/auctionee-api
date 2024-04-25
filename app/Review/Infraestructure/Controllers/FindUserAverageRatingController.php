@@ -3,7 +3,7 @@
 namespace App\Review\Infraestructure\Controllers;
 
 use App\Review\Application\FindUserAverage\FindUserAverageQuery;
-use App\Shared\Domain\Bus\Query\QueryBus;
+use App\Shared\Infraestructure\Bus\Query\QueryBus;
 use App\Shared\Infraestructure\Controllers\Response;
 
 class FindUserAverageRatingController

@@ -3,7 +3,7 @@
 namespace App\Financial\Infraestructure\Controllers;
 
 use App\Financial\Application\FindTransactionsByWalletUuid\FindTransactionsByWalletUuidQuery;
-use App\Shared\Domain\Bus\Query\QueryBus;
+use App\Shared\Infraestructure\Bus\Query\QueryBus;
 use App\Shared\Infraestructure\Controllers\Controller;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;

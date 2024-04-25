@@ -2,10 +2,9 @@
 
 namespace App\UserManagement\Infraestructure\Controllers;
 
-use App\Shared\Domain\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Bus\Command\CommandBus;
 use App\Shared\Infraestructure\Controllers\Controller;
 use App\Shared\Infraestructure\Controllers\Response;
-use App\UserManagement\Application\UpdateName\UpdateNameCommand;
 use App\UserManagement\Application\UpdatePassword\UpdatePasswordCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;

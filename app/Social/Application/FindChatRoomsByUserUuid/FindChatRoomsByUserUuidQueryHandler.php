@@ -2,7 +2,7 @@
 
 namespace App\Social\Application\FindChatRoomsByUserUuid;
 
-use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
 use App\Social\Domain\Models\ChatRoom;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 

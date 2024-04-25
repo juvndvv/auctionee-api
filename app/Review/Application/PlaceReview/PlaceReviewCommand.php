@@ -3,7 +3,7 @@
 namespace App\Review\Application\PlaceReview;
 
 
-use App\Shared\Domain\Bus\Query\Query;
+use App\Shared\Infraestructure\Bus\Query\Query;
 
 class PlaceReviewCommand extends Query
 {

@@ -15,6 +15,7 @@ use App\Review\Infraestructure\Controllers\UpdateRatingController;
 use App\Social\Infraestructure\Controllers\CreateChatRoomController;
 use App\Social\Infraestructure\Controllers\DeleteChatMessageController;
 use App\Social\Infraestructure\Controllers\FindChatRoomsByUserUuidController;
+use App\Social\Infraestructure\Controllers\FindFriendListByUserUuidController;
 use App\Social\Infraestructure\Controllers\FindMessagesByChatRoomUuidController;
 use App\Social\Infraestructure\Controllers\SendMessageController;
 use App\UserManagement\Infraestructure\Controllers\BlockUserController;
@@ -48,6 +49,7 @@ Route::get('/users/{uuid}/reviews', FindUserReviewsController::class);
 Route::get("/users/{uuid}/rating", FindUserAverageRatingController::class);
 Route::get("/users/{uuid}/wallet", FindWalletByUserUuidController::class);
 Route::get("/users/{uuid}/chats", FindChatRoomsByUserUuidController::class);
+Route::get("/users/{uuid}/friends", FindFriendListByUserUuidController::class);
 
 // Wallets
 Route::get("/wallets/{uuid}/transfer", MakeTransactionController::class);

@@ -2,10 +2,9 @@
 
 namespace App\UserManagement\Application\UpdatePassword;
 
-use App\Shared\Domain\Bus\Command\CommandHandler;
-use App\Shared\Domain\Bus\Events\EventBus;
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\UserManagement\Application\UpdateName\UpdateNameCommand;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
+use App\Shared\Infraestructure\Bus\Events\EventBus;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use RuntimeException;

@@ -4,8 +4,8 @@ namespace App\Financial\Application\MakeTransaction;
 
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
-use App\Shared\Domain\Bus\Command\CommandHandler;
-use App\Shared\Domain\Bus\Events\EventBus;
+use App\Shared\Infraestructure\Bus\Command\CommandHandler;
+use App\Shared\Infraestructure\Bus\Events\EventBus;
 
 class MakeTransactionCommandHandler extends CommandHandler
 {

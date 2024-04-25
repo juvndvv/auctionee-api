@@ -5,7 +5,7 @@ namespace App\Financial\Application\FindTransactionsByWalletUuid;
 use App\Financial\Domain\Models\Transaction;
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Domain\Resources\TransactionResource;
-use App\Shared\Domain\Bus\Query\QueryHandler;
+use App\Shared\Infraestructure\Bus\Query\QueryHandler;
 
 class FindTransactionsByWalletUuidQueryHandler extends QueryHandler
 {
