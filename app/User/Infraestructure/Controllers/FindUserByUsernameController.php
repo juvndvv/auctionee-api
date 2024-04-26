@@ -1,11 +1,11 @@
 <?php
 
-namespace App\UserManagement\Infraestructure\Controllers;
+namespace App\User\Infraestructure\Controllers;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Controllers\QueryController;
 use App\Shared\Infraestructure\Controllers\Response;
-use App\UserManagement\Application\Queries\FindByUsername\FindByUsernameQuery;
+use App\User\Application\Queries\FindByUsername\FindByUsernameQuery;
 use Exception;
 use Illuminate\Http\JsonResponse;
 

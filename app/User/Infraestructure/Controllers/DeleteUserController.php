@@ -1,11 +1,11 @@
 <?php
 
-namespace App\UserManagement\Infraestructure\Controllers;
+namespace App\User\Infraestructure\Controllers;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
-use App\UserManagement\Application\Commands\DeleteUser\DeleteUserCommand;
+use App\User\Application\Commands\DeleteUser\DeleteUserCommand;
 use Exception;
 
 final class DeleteUserController extends CommandController

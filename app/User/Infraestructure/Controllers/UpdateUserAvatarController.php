@@ -1,10 +1,10 @@
 <?php
 
-namespace App\UserManagement\Infraestructure\Controllers;
+namespace App\User\Infraestructure\Controllers;
 
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
-use App\UserManagement\Application\Commands\UpdateAvatar\UpdateAvatarCommand;
+use App\User\Application\Commands\UpdateAvatar\UpdateAvatarCommand;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;

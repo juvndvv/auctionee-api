@@ -1,11 +1,11 @@
 <?php
 
-namespace App\UserManagement\Infraestructure\Controllers;
+namespace App\User\Infraestructure\Controllers;
 
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infraestructure\Controllers\QueryController;
 use App\Shared\Infraestructure\Controllers\Response;
-use App\UserManagement\Application\Queries\FindAll\FindAllUserQuery;
+use App\User\Application\Queries\FindAll\FindAllUserQuery;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

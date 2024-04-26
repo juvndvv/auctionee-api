@@ -1,11 +1,10 @@
 <?php
 
-namespace App\UserManagement\Infraestructure\Controllers;
+namespace App\User\Infraestructure\Controllers;
 
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
-use App\UserManagement\Application\Commands\UpdateName\UpdateNameCommand;
-use App\UserManagement\Application\Commands\UpdateUsername\UpdateUsernameCommand;
+use App\User\Application\Commands\UpdateUsername\UpdateUsernameCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

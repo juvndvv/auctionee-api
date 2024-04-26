@@ -1,11 +1,11 @@
 <?php
 
-namespace App\UserManagement\Infraestructure\Controllers;
+namespace App\User\Infraestructure\Controllers;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
-use App\UserManagement\Application\Commands\UpdatePassword\UpdatePasswordCommand;
+use App\User\Application\Commands\UpdatePassword\UpdatePasswordCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

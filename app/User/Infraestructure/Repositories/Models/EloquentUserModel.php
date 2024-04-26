@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UserManagement\Infraestructure\Repositories\Models;
+namespace App\User\Infraestructure\Repositories\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

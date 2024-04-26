@@ -1,11 +1,10 @@
 <?php
 
-namespace App\UserManagement\Infraestructure\Controllers;
+namespace App\User\Infraestructure\Controllers;
 
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
-use App\UserManagement\Application\Commands\BlockUser\BlockUserCommand;
-use Illuminate\Http\Request;
+use App\User\Application\Commands\BlockUser\BlockUserCommand;
 
 final class BlockUserController extends CommandController
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\UserManagement\Infraestructure\Controllers;
+namespace App\User\Infraestructure\Controllers;
 
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
-use App\UserManagement\Application\Commands\UnblockUser\UnblockUserCommand;
+use App\User\Application\Commands\UnblockUser\UnblockUserCommand;
 
 final class UnblockUserController extends CommandController
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\UserManagement\Infraestructure\Controllers;
+namespace App\User\Infraestructure\Controllers;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
-use App\UserManagement\Application\Commands\UpdateEmail\UpdateEmailCommand;
+use App\User\Application\Commands\UpdateEmail\UpdateEmailCommand;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
