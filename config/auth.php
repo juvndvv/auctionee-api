@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | UserManagement Defaults
+    | User Defaults
     |--------------------------------------------------------------------------
     |
     | This option defines the default authentication "guard" and password
@@ -20,7 +20,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | UserManagement Guards
+    | User Guards
     |--------------------------------------------------------------------------
     |
     | Next, you may define every authentication guard for your application.
