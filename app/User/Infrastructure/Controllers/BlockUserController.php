@@ -1,0 +1,17 @@
+<?php
+
+namespace App\User\Infrastructure\Controllers;
+
+use App\Shared\Infrastucture\Controllers\CommandController;
+use App\Shared\Infrastucture\Controllers\Response;
+use App\User\Application\Commands\BlockUser\BlockUserCommand;
+
+final class BlockUserController extends CommandController
+{
+    public function __invoke(string $uuid)
+    {
+        $command = BlockUserCommand::create($uuid);
+        $this->commandBus->handle($command);
+        return Response::OK($uuid, "Usuario bloqueado correctamente.");
+    }
+}

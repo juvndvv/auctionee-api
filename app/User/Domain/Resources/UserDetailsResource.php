@@ -2,7 +2,7 @@
 
 namespace App\User\Domain\Resources;
 
-class UserDetailsResource
+final class UserDetailsResource
 {
     public static function fromArray(array $data): array
     {

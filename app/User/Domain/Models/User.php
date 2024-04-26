@@ -17,7 +17,7 @@ use App\User\Domain\Models\ValueObjects\UserPassword;
 use App\User\Domain\Models\ValueObjects\UserRole;
 use App\User\Domain\Models\ValueObjects\UserUsername;
 
-class User extends AggregateRoot
+final class User extends AggregateRoot
 {
     public const SERIALIZED_UUID = 'uuid';
     public const SERIALIZED_NAME = 'name';

@@ -4,7 +4,7 @@ namespace App\User\Domain\Models\ValueObjects;
 
 use InvalidArgumentException;
 
-class UserRole
+final class UserRole
 {
     const  USER = 0;
     const ADMIN = 1;

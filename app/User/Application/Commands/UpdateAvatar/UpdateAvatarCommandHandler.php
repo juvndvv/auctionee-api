@@ -2,9 +2,9 @@
 
 namespace App\User\Application\Commands\UpdateAvatar;
 
-use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
 use App\Shared\Application\Commands\CommandHandler;
-use App\Shared\Infraestructure\Bus\EventBus;
+use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
+use App\Shared\Infrastucture\Bus\EventBus;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 
 final class UpdateAvatarCommandHandler extends CommandHandler
