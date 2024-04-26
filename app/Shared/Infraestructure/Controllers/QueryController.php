@@ -6,6 +6,8 @@ use App\Shared\Infraestructure\Bus\QueryBus;
 
 abstract class QueryController extends BaseController
 {
-    public function __construct(protected readonly QueryBus $queryBus)
+    public function __construct(
+        protected readonly QueryBus $queryBus
+    )
     {}
 }

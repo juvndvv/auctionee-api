@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             USER::SERIALIZED_UUID => '5bfdc240-1780-423a-9688-fd9c50d2d661',
             User::SERIALIZED_NAME => 'Juan Daniel Forner',
             User::SERIALIZED_USERNAME => 'juvndv',
-            User::SERIALIZED_EMAIL => 'jd@jotade.dev',
+            User::SERIALIZED_EMAIL => 'jdanielforga@gmail.com',
             User::SERIALIZED_AVATAR => env('DEFAULT_AVATAR'),
             User::SERIALIZED_PASSWORD => 'jaja',
             User::SERIALIZED_BIRTH => '1990-01-01',

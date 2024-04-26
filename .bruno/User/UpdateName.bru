@@ -5,7 +5,13 @@ meta {
 }
 
 put {
-  url: {{url}}/users/as/name
-  body: none
+  url: {{url}}/users/5bfdc240-1780-423a-9688-fd9c50d2d661/name
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "name": "Carla de la Fuente"
+  }
 }

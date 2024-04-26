@@ -3,6 +3,8 @@
 namespace App\Shared\Infraestructure\Listeners;
 
 use App\Financial\Application\DeleteWallet\DeleteWalletCommand;
+use App\Retention\Email\Application\SendEmailCommand;
+use App\Retention\Email\Domain\Model\Email;
 use App\UserManagement\Domain\Events\UserDeletedEvent;
 use App\UserManagement\Domain\Models\User;
 
@@ -11,6 +13,16 @@ class UserDeletedListener extends BaseListener
     public function handle(UserDeletedEvent $event): void
     {
         $this->deleteWallet($event);
+        $this->sendDeletedEmail($event);
+    }
+
+    public function sendDeletedEmail(UserDeletedEvent $event): void
+    {
+        $to = $event->message['email'];
+        $name = $event->message['name'];
+
+        $command = SendEmailCommand::create($to, $name, Email::DELETED);
+        $this->commandBus->handle($command);
     }
 
     public function deleteWallet(UserDeletedEvent $event): void

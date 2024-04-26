@@ -17,9 +17,6 @@ return new class extends Migration
             $table->string('destination_wallet_uuid');
             $table->float('amount');
             $table->timestamps();
-
-            $table->foreign('remittent_wallet_uuid')->references('uuid')->on('wallets');
-            $table->foreign('destination_wallet_uuid')->references('uuid')->on('wallets');
         });
     }
 

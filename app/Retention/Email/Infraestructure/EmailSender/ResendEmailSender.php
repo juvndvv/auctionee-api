@@ -13,7 +13,7 @@ class ResendEmailSender implements EmailSenderPort
         Resend::emails()->send([
            'from' => env("MAIL_FROM_ADDRESS"),
            'to' => $email->to(),
-           'subject' => 'Bienvenido a ' . env('APP_NAME'),
+           'subject' => $email->subject(),
             'html' => $email->content()
         ]);
     }

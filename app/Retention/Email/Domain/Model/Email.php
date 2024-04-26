@@ -8,8 +8,13 @@ class Email
     public const UPDATED = 'updated';
     public const BLOCKED = 'blocked';
     public const UNBLOCKED = 'unblocked';
+    public const DELETED = 'deleted';
 
-    public function __construct(private readonly string $to, private readonly string $content)
+    public function __construct(
+        private readonly string $to,
+        private readonly string $content,
+        private readonly string $subject
+    )
     {}
 
     public function to(): string
@@ -20,5 +25,10 @@ class Email
     public function content(): string
     {
         return $this->content;
+    }
+
+    public function subject(): string
+    {
+        return $this->subject;
     }
 }

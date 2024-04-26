@@ -15,9 +15,4 @@ final class BlockUserController extends CommandController
         $this->commandBus->handle($command);
         return Response::OK($uuid, "Usuario bloqueado correctamente.");
     }
-
-    static function validate(Request $request): void
-    {
-        // TODO: Implement validate() method.
-    }
 }

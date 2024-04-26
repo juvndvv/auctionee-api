@@ -118,7 +118,8 @@ class User extends AggregateRoot
             [
                 'field' =>'avatar',
                 'old' => $old,
-                'new' => $new
+                'new' => $new,
+                'user' => $this->toPrimitives()
         ], now()->toString()));
     }
 
@@ -130,7 +131,8 @@ class User extends AggregateRoot
             [
                 'field' =>'name',
                 'old' => $old,
-                'new' => $new
+                'new' => $new,
+                'user' => $this->toPrimitives()
             ], now()->toString()));
     }
 
@@ -142,7 +144,8 @@ class User extends AggregateRoot
             [
                 'field' =>'username',
                 'old' => $old,
-                'new' => $new
+                'new' => $new,
+                'user' => $this->toPrimitives()
             ], now()->toString()));
     }
 
@@ -154,7 +157,8 @@ class User extends AggregateRoot
             [
                 'field' =>'email',
                 'old' => $old,
-                'new' => $new
+                'new' => $new,
+                'user' => $this->toPrimitives()
             ], now()->toString()));
     }
 
@@ -164,6 +168,7 @@ class User extends AggregateRoot
         $this->record(new UserUpdatedEvent(
             [
                 'field' =>'password',
+                'user' => $this->toPrimitives()
             ], now()->toString()));
     }
 
