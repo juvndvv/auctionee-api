@@ -6,11 +6,12 @@ use App\Review\Application\Command\UpdateRating\UpdateRatingCommand;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
+use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-final class UpdateRatingController extends CommandController
+final class UpdateRatingController extends ValidatedCommandController
 {
     public function __invoke(string $uuid, Request $request)
     {
@@ -19,7 +20,7 @@ final class UpdateRatingController extends CommandController
 
             $rating = $request['rating'];
 
-            $command = new UpdateRatingCommand($uuid, $rating);
+            $command = UpdateRatingCommand::create($uuid, $rating);
             $this->commandBus->handle($command);
 
             return Response::OK($rating, "Rating actualizado correctamente");
@@ -31,12 +32,11 @@ final class UpdateRatingController extends CommandController
             return Response::NOT_FOUND($e->getMessage());
 
         } catch (Exception $e) {
-            dd($e);
             return Response::SERVER_ERROR();
         }
     }
 
-    public static function validate(Request $request)
+    public static function validate(Request $request): void
     {
         $request->validate([
             'rating' => 'required|integer|between:1,5',

@@ -3,13 +3,13 @@
 namespace App\Review\Infraestructure\Controllers;
 
 use App\Review\Application\Command\PlaceReview\PlaceReviewCommand;
-use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
+use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-final class PlaceReviewBaseController extends CommandController
+final class PlaceReviewBaseController extends ValidatedCommandController
 {
     public function __invoke(Request $request)
     {

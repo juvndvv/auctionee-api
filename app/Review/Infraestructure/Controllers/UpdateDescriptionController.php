@@ -6,10 +6,11 @@ use App\Review\Application\Command\UpdateDescription\UpdateDescriptionCommand;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
+use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-final class UpdateDescriptionController extends CommandController
+final class UpdateDescriptionController extends ValidatedCommandController
 {
     public function __invoke(string $uuid, Request $request)
     {
@@ -18,7 +19,7 @@ final class UpdateDescriptionController extends CommandController
 
             $description = $request['description'];
 
-            $command = new UpdateDescriptionCommand($uuid, $description);
+            $command = UpdateDescriptionCommand::create($uuid, $description);
             $this->commandBus->handle($command);
 
             return Response::OK($description, "Descripcion actualizada correctamente");
@@ -34,7 +35,7 @@ final class UpdateDescriptionController extends CommandController
         }
     }
 
-    public static function validate(Request $request)
+    public static function validate(Request $request): void
     {
         $request->validate([
             'description' => 'required|string',
