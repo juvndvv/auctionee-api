@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Review\Application\UpdateDescription;
+namespace App\Review\Application\Command\UpdateDescription;
 
 use App\Shared\Application\Commands\Command;
 
 class UpdateDescriptionCommand extends Command
 {
-    public function __construct(
+    private function __construct(
         private readonly string $uuid,
-        private readonly string $description)
+        private readonly string $description
+    )
     {}
 
     public function uuid(): string
@@ -19,5 +20,10 @@ class UpdateDescriptionCommand extends Command
     public function description(): string
     {
         return $this->description;
+    }
+
+    public static function create(string $uuid, string $description): UpdateDescriptionCommand
+    {
+        return new self($uuid, $description);
     }
 }

@@ -4,8 +4,8 @@ namespace App\User\Application\Queries\FindAll;
 
 use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
-use App\UserManagement\Domain\Resources\UserDetailsResource;
+use App\User\Domain\Ports\Outbound\UserRepositoryPort;
+use App\User\Domain\Resources\UserDetailsResource;
 
 final class FindAllUserQueryHandler extends QueryHandler
 {

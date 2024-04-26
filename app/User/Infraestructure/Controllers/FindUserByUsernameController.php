@@ -11,16 +11,16 @@ use Illuminate\Http\JsonResponse;
 
 final class FindUserByUsernameController extends QueryController
 {
-    public function __invoke(string $id): JsonResponse
+    public function __invoke(string $username): JsonResponse
     {
         try {
-            $query = FindByUsernameQuery::create($id);
+            $query = FindByUsernameQuery::create($username);
             $result = $this->queryBus->handle($query);
 
-            return new JsonResponse($result);
+            return Response::OK($result, "Usuario encontrado satisfactoriamente");
 
         } catch (NotFoundException $e) {
-            return Response::NO_CONTENT();
+            return Response::NOT_FOUND("El usuario $username no existe");
 
         } catch (Exception $e) {
             return Response::SERVER_ERROR();

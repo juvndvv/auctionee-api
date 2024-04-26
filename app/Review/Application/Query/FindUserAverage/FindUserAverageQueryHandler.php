@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Review\Application\FindUserAverage;
+namespace App\Review\Application\Query\FindUserAverage;
 
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Shared\Application\Commands\QueryHandler;

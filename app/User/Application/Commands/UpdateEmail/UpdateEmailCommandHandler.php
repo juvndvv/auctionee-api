@@ -1,10 +1,10 @@
 <?php
 
-namespace App\UserManagement\Application\Commands\UpdateEmail;
+namespace App\User\Application\Commands\UpdateEmail;
 
 use App\Shared\Application\Commands\CommandHandler;
 use App\Shared\Infraestructure\Bus\EventBus;
-use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
+use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 
 class UpdateEmailCommandHandler extends CommandHandler
 {

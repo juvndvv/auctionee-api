@@ -2,15 +2,12 @@
 
 namespace App\Review\Infraestructure\Controllers;
 
-use App\Review\Application\FindUserAverage\FindUserAverageQuery;
-use App\Shared\Infraestructure\Bus\QueryBus;
+use App\Review\Application\Query\FindUserAverage\FindUserAverageQuery;
+use App\Shared\Infraestructure\Controllers\QueryController;
 use App\Shared\Infraestructure\Controllers\Response;
 
-class FindUserAverageRatingController
+final class FindUserAverageRatingController extends QueryController
 {
-    public function __construct(private readonly QueryBus $queryBus)
-    {}
-
     public function __invoke(string $uuid)
     {
         $avg = $this->queryBus->handle(new FindUserAverageQuery($uuid));

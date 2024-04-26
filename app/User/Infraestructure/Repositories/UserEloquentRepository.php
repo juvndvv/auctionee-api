@@ -3,9 +3,9 @@
 namespace App\User\Infraestructure\Repositories;
 
 use App\Shared\Infraestructure\Repositories\BaseRepository;
-use App\UserManagement\Domain\Models\User;
-use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
-use App\UserManagement\Infraestructure\Repositories\Models\EloquentUserModel;
+use App\User\Domain\Models\User;
+use App\User\Domain\Ports\Outbound\UserRepositoryPort;
+use App\User\Infraestructure\Repositories\Models\EloquentUserModel;
 
 class UserEloquentRepository extends BaseRepository implements UserRepositoryPort
 {
@@ -25,7 +25,7 @@ class UserEloquentRepository extends BaseRepository implements UserRepositoryPor
 
     public function findByUsername(string $username): User
     {
-        $userDb = parent::findByFieldValue(User::SERIALIZED_USERNAME, $username);
+        $userDb = parent::findByFieldValue(User::SERIALIZED_USERNAME, $username)['0'];
         return User::fromPrimitives($userDb->toArray());
     }
 

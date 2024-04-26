@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Financial\Domain\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use App\Financial\Domain\Models\Wallet;
-use App\UserManagement\Domain\Models\User;
+use App\User\Domain\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         // Default users
         DB::table('users')->insert([
             User::SERIALIZED_UUID => 'U0000000-0000-0000-0000-000000000000',
@@ -73,7 +72,7 @@ class DatabaseSeeder extends Seeder
             USER::SERIALIZED_UUID => 'c0ba5e6c-461f-42b0-a568-3fe93e144811',
             User::SERIALIZED_NAME => 'Jose Domingas',
             User::SERIALIZED_USERNAME => 'jdfs',
-            User::SERIALIZED_EMAIL => 'jdfs@jotade.dev',
+            User::SERIALIZED_EMAIL => 'jdfsiescamp@gmail.com',
             User::SERIALIZED_AVATAR => env('DEFAULT_AVATAR'),
             User::SERIALIZED_PASSWORD => 'jaja',
             User::SERIALIZED_BIRTH => '1990-01-01',

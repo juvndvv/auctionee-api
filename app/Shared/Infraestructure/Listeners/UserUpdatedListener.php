@@ -4,9 +4,9 @@ namespace App\Shared\Infraestructure\Listeners;
 
 use App\Retention\Email\Application\SendEmailCommand;
 use App\Retention\Email\Domain\Model\Email;
-use App\UserManagement\Domain\Events\UserUpdatedEvent;
+use App\User\Domain\Events\UserUpdatedEvent;
 
-class UserUpdatedListener extends BaseListener
+final class UserUpdatedListener extends BaseListener
 {
     public function handle(UserUpdatedEvent $event): void
     {

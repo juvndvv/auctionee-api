@@ -3,11 +3,11 @@
 namespace App\Shared\Infraestructure\Repositories;
 
 use App\Shared\Domain\Exceptions\NoContentException;
+use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Exceptions\TooManyRowsException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 
 abstract class BaseRepository implements BaseRepositoryPort
@@ -15,23 +15,11 @@ abstract class BaseRepository implements BaseRepositoryPort
     protected Builder $builder;
     protected string $entityName;
 
-    /**
-     * Establece el builder para hacer las queries
-     *
-     * @param Model $model
-     * @return void
-     */
     protected function setBuilderFromModel(Model $model): void
     {
         $this->builder = $model::query();
     }
 
-    /**
-     * Establece el nombre de la entidad
-     *
-     * @param string $entityName
-     * @return void
-     */
     protected function setEntityName(string $entityName): void
     {
         $this->entityName = $entityName;
@@ -53,7 +41,7 @@ abstract class BaseRepository implements BaseRepositoryPort
         $model = $this->builder->where('uuid', $primaryKey)->get()->first();
 
         if (is_null($model)) {
-            throw new ModelNotFoundException("No se ha encontrado"
+            throw new NotFoundException("No se ha encontrado"
                 . $this->entityName . " con el id " . $primaryKey);
         }
 
@@ -95,10 +83,10 @@ abstract class BaseRepository implements BaseRepositoryPort
 
     public function findByFieldValue(string $field, string $value): Collection
     {
-        $builders = $this->builder->where($field, $value)->get();
+        $builders = $this->builder->where($field, '=', $value)->get();
 
-        if (is_null($builders)) {
-            throw new ModelNotFoundException("No se ha encontrado el " . $field . " con el valor " . $value);
+        if ($builders->isEmpty()) {
+            throw new NotFoundException("No se ha encontrado el " . $field . " con el valor " . $value);
         }
 
         return $builders;

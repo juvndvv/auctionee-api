@@ -6,7 +6,7 @@ use App\Shared\Domain\Models\AggregateRoot;
 use App\Social\Domain\Events\FriendshipCreatedEvent;
 use App\Social\Domain\Events\FriendshipDeletedEvent;
 use App\Social\Domain\Models\ValueObjects\FriendshipUuid;
-use App\UserManagement\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserId;
 use Illuminate\Queue\SerializesModels;
 
 class Friendship extends AggregateRoot

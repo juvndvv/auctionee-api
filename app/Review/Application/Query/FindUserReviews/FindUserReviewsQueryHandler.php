@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Review\Application\FindUserReviews;
+namespace App\Review\Application\Query\FindUserReviews;
 
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Shared\Application\Commands\QueryHandler;

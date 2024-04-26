@@ -2,17 +2,14 @@
 
 namespace App\Review\Infraestructure\Controllers;
 
-use App\Review\Application\FindUserReviews\FindUserReviewsQuery;
+use App\Review\Application\Query\FindUserReviews\FindUserReviewsQuery;
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Infraestructure\Bus\QueryBus;
+use App\Shared\Infraestructure\Controllers\QueryController;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;
 
-class FindUserReviewsController
+final class FindUserReviewsController extends QueryController
 {
-    public function __construct(private readonly QueryBus $queryBus)
-    {}
-
     public function __invoke(string $uuid)
     {
         try {

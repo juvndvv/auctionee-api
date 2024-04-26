@@ -16,4 +16,9 @@ final class FindByUsernameQuery extends Query
     {
         return $this->username;
     }
+
+    public static function create(string $username): FindByUsernameQuery
+    {
+        return new self($username);
+    }
 }

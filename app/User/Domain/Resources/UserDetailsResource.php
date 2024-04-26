@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UserManagement\Domain\Resources;
+namespace App\User\Domain\Resources;
 
 class UserDetailsResource
 {

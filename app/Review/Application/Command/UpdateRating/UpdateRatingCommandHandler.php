@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Review\Application\UpdateDescription;
+namespace App\Review\Application\Command\UpdateRating;
 
 use App\Review\Domain\Models\Review;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
-use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Application\Commands\CommandHandler;
+use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Bus\EventBus;
-use http\Exception\RuntimeException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use RuntimeException;
 
-class UpdateDescriptionCommandHandler extends CommandHandler
+class UpdateRatingCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly ReviewRepositoryPort $reviewRepository,
@@ -21,21 +21,21 @@ class UpdateDescriptionCommandHandler extends CommandHandler
     /**
      * @throws NotFoundException
      */
-    public function __invoke(UpdateDescriptionCommand $command): void
+    public function __invoke(UpdateRatingCommand $command): void
     {
         try {
             $uuid = $command->uuid();
-            $description = $command->description();
+            $rating = $command->rating();
 
             $dbReview = $this->reviewRepository->findByUuid($uuid);
 
             $review = Review::fromPrimitives($dbReview->toArray());
-            $review->updateDescription($description);
+            $review->updateRating($rating);
 
-            $updates = $this->reviewRepository->updateDescription($uuid, $description);
+            $updates = $this->reviewRepository->updateRating($uuid, $rating);
 
             if ($updates < 1) {
-                throw new RuntimeException("Ha ocurrido un error al actualizar la descripcion");
+                throw new RuntimeException("Ha ocurrido un error al actualizar el rating");
             }
 
             $this->eventBus->dispatch(...$review->pullDomainEvents());

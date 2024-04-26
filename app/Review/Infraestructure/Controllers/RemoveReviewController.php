@@ -2,17 +2,14 @@
 
 namespace App\Review\Infraestructure\Controllers;
 
-use App\Review\Application\RemoveReview\RemoveReviewCommand;
+use App\Review\Application\Command\RemoveReview\RemoveReviewCommand;
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infraestructure\Bus\CommandBus;
+use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;
 
-class RemoveReviewController
+final class RemoveReviewController extends CommandController
 {
-    public function __construct(private readonly CommandBus $commandBus)
-    {}
-
     public function __invoke(string $uuid)
     {
         try {

@@ -6,7 +6,7 @@ use App\Shared\Domain\Models\AggregateRoot;
 use App\Social\Domain\Events\MessageDeletedEvent;
 use App\Social\Domain\Events\MessageSentEvent;
 use App\Social\Domain\Models\ValueObjects\ChatRoomUuid;
-use App\UserManagement\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserId;
 use Illuminate\Support\Collection;
 
 class ChatRoom extends AggregateRoot

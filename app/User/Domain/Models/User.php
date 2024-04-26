@@ -1,21 +1,21 @@
 <?php
 
-namespace App\UserManagement\Domain\Models;
+namespace App\User\Domain\Models;
 
 use App\Shared\Domain\Models\AggregateRoot;
-use App\UserManagement\Domain\Events\UserBlockedEvent;
-use App\UserManagement\Domain\Events\UserCreatedEvent;
-use App\UserManagement\Domain\Events\UserDeletedEvent;
-use App\UserManagement\Domain\Events\UserUnblockedEvent;
-use App\UserManagement\Domain\Events\UserUpdatedEvent;
-use App\UserManagement\Domain\Models\ValueObjects\UserBirth;
-use App\UserManagement\Domain\Models\ValueObjects\UserEmail;
-use App\UserManagement\Domain\Models\ValueObjects\UserId;
-use App\UserManagement\Domain\Models\ValueObjects\UserAvatar;
-use App\UserManagement\Domain\Models\ValueObjects\UserName;
-use App\UserManagement\Domain\Models\ValueObjects\UserPassword;
-use App\UserManagement\Domain\Models\ValueObjects\UserRole;
-use App\UserManagement\Domain\Models\ValueObjects\UserUsername;
+use App\User\Domain\Events\UserBlockedEvent;
+use App\User\Domain\Events\UserCreatedEvent;
+use App\User\Domain\Events\UserDeletedEvent;
+use App\User\Domain\Events\UserUnblockedEvent;
+use App\User\Domain\Events\UserUpdatedEvent;
+use App\User\Domain\Models\ValueObjects\UserBirth;
+use App\User\Domain\Models\ValueObjects\UserEmail;
+use App\User\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserAvatar;
+use App\User\Domain\Models\ValueObjects\UserName;
+use App\User\Domain\Models\ValueObjects\UserPassword;
+use App\User\Domain\Models\ValueObjects\UserRole;
+use App\User\Domain\Models\ValueObjects\UserUsername;
 
 class User extends AggregateRoot
 {

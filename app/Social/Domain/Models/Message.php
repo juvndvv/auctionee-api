@@ -4,7 +4,7 @@ namespace App\Social\Domain\Models;
 
 use App\Social\Domain\Models\ValueObjects\MessageContent;
 use App\Social\Domain\Models\ValueObjects\MessageUuid;
-use App\UserManagement\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserId;
 
 class Message
 {

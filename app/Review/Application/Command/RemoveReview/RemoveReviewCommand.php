@@ -1,10 +1,10 @@
 <?php
 
-namespace App\User\Application\Queries\FindByUuid;
+namespace App\Review\Application\Command\RemoveReview;
 
-use App\Shared\Application\Queries\Query;
+use App\Shared\Application\Commands\Command;
 
-final class FindByUuidQuery extends Query
+class RemoveReviewCommand extends Command
 {
     private function __construct(
         private readonly string $uuid
@@ -16,7 +16,7 @@ final class FindByUuidQuery extends Query
         return $this->uuid;
     }
 
-    public static function create(string $uuid): self
+    public static function create(string $uuid): RemoveReviewCommand
     {
         return new self($uuid);
     }

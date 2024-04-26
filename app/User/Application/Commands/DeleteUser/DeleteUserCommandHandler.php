@@ -4,7 +4,7 @@ namespace App\User\Application\Commands\DeleteUser;
 
 use App\Shared\Application\Commands\CommandHandler;
 use App\Shared\Infraestructure\Bus\EventBus;
-use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
+use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 
 final class DeleteUserCommandHandler extends CommandHandler
 {

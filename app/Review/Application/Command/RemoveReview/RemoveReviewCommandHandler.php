@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Review\Application\RemoveReview;
+namespace App\Review\Application\Command\RemoveReview;
 
 use App\Review\Domain\Models\Review;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
-use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Application\Commands\CommandHandler;
+use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Bus\EventBus;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

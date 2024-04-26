@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Review\Application\PlaceReview;
+namespace App\Review\Application\Command\PlaceReview;
 
 
-use App\Shared\Infraestructure\Bus\Query\Query;
+use App\Shared\Application\Queries\Query;
 
 class PlaceReviewCommand extends Query
 {
-    public function __construct(
+    private function __construct(
         private readonly string $reviewerUuid,
         private readonly string $reviewedUuid,
         private readonly string $description,
@@ -33,5 +33,10 @@ class PlaceReviewCommand extends Query
     public function rating(): int
     {
         return $this->rating;
+    }
+
+    public static function create(string $reviewerUuid, string $reviewedUuid, string $description, int $rating): PlaceReviewCommand
+    {
+        return new self($reviewerUuid, $reviewedUuid, $description, $rating);
     }
 }

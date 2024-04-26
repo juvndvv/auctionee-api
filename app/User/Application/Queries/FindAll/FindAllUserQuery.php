@@ -21,4 +21,9 @@ final class FindAllUserQuery extends Query
     {
         return $this->limit;
     }
+
+    public static function create(int $offset, int $limit): self
+    {
+        return new self($offset, $limit);
+    }
 }

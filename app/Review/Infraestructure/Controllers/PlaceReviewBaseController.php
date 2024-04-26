@@ -2,19 +2,15 @@
 
 namespace App\Review\Infraestructure\Controllers;
 
-use App\Review\Application\PlaceReview\PlaceReviewCommand;
-use App\Shared\Infraestructure\Bus\CommandBus;
-use App\Shared\Infraestructure\Controllers\BaseController;
+use App\Review\Application\Command\PlaceReview\PlaceReviewCommand;
+use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-class PlaceReviewBaseController extends BaseController
+final class PlaceReviewBaseController extends CommandController
 {
-    public function __construct(private readonly CommandBus $commandBus)
-    {}
-
     public function __invoke(Request $request)
     {
         try {

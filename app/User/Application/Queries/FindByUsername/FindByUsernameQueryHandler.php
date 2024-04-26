@@ -4,8 +4,8 @@ namespace App\User\Application\Queries\FindByUsername;
 
 use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
-use App\UserManagement\Domain\Resources\UserSmallResource;
+use App\User\Domain\Ports\Outbound\UserRepositoryPort;
+use App\User\Domain\Resources\UserSmallResource;
 
 final class FindByUsernameQueryHandler extends QueryHandler
 {
@@ -20,7 +20,6 @@ final class FindByUsernameQueryHandler extends QueryHandler
     public function __invoke(FindByUsernameQuery $query): array
     {
         $username = $query->username();
-        $user = $this->userRepository->findByUsername($username);
-        return UserSmallResource::fromArray($user->toArray());
+        return $this->userRepository->findByUsername($username)->toPrimitives();
     }
 }

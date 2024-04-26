@@ -2,19 +2,15 @@
 
 namespace App\Review\Infraestructure\Controllers;
 
-use App\Review\Application\UpdateDescription\UpdateDescriptionCommand;
+use App\Review\Application\Command\UpdateDescription\UpdateDescriptionCommand;
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infraestructure\Bus\CommandBus;
+use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-class UpdateDescriptionController
+final class UpdateDescriptionController extends CommandController
 {
-
-    public function __construct(private readonly CommandBus $commandBus)
-    {}
-
     public function __invoke(string $uuid, Request $request)
     {
         try {

@@ -4,8 +4,8 @@ namespace App\User\Application\Commands\Create;
 
 use App\Shared\Application\Commands\CommandHandler;
 use App\Shared\Infraestructure\Bus\EventBus;
-use App\UserManagement\Domain\Models\User;
-use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
+use App\User\Domain\Models\User;
+use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 
 final class CreateUserCommandHandler extends CommandHandler
 {

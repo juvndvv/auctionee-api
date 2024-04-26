@@ -46,12 +46,13 @@ class DeleteWalletService
 
         $newTransactions = $transactions->map(
             function (Transaction $transaction) use ($deletingWalletUuid) {
-                   if ($transaction->remittentWalletUuid() === $deletingWalletUuid) {
+                   if ($transaction->remittentWalletUuid() == $deletingWalletUuid) {
                        $transaction->updateRemittent(self::DELETED_WALLET_UUID);
 
-                   } elseif ($transaction->remittentWalletUuid() === $deletingWalletUuid) {
+                   } elseif ($transaction->destinationWalletUuid() == $deletingWalletUuid) {
                        $transaction->updateDestination(self::DELETED_WALLET_UUID);
                    }
+
                    return $transaction;
         });
 

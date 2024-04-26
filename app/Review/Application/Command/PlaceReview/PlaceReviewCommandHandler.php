@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Review\Application\PlaceReview;
+namespace App\Review\Application\Command\PlaceReview;
 
 use App\Review\Domain\Models\Review;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
@@ -10,8 +10,8 @@ use App\Shared\Infraestructure\Bus\EventBus;
 class PlaceReviewCommandHandler extends QueryHandler
 {
     public function __construct(
-        private readonly ReviewRepositoryPort $reviewRepository,
-        private readonly EventBus $eventBus
+        private readonly ReviewRepositoryPort   $reviewRepository,
+        private readonly EventBus               $eventBus
     ) {}
 
     public function __invoke(PlaceReviewCommand $command): void

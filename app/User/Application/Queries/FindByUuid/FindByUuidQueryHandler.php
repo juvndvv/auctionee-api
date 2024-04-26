@@ -3,8 +3,9 @@
 namespace App\User\Application\Queries\FindByUuid;
 
 use App\Shared\Application\Commands\QueryHandler;
-use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
-use App\UserManagement\Domain\Resources\UserDetailsResource;
+use App\Shared\Domain\Exceptions\NotFoundException;
+use App\User\Domain\Ports\Outbound\UserRepositoryPort;
+use App\User\Domain\Resources\UserDetailsResource;
 
 final class FindByUuidQueryHandler extends QueryHandler
 {
@@ -13,10 +14,12 @@ final class FindByUuidQueryHandler extends QueryHandler
     )
     {}
 
+    /**
+     * @throws NotFoundException
+     */
     public function __invoke(FindByUuidQuery $query): array
     {
         $uuid = $query->uuid();
-        $user = $this->userRepository->findByUuid($uuid);
-        return UserDetailsResource::fromArray($user->toArray());
+        return $this->userRepository->findByUuid($uuid)->toPrimitives();
     }
 }

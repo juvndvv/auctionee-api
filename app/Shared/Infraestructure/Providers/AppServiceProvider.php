@@ -15,8 +15,11 @@ use App\Retention\EventMonitoring\Infraestructure\Repositories\EloquentEventRepo
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Review\Infraestructure\Repositories\ReviewEloquentRepository;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
+use App\Shared\Infraestructure\Listeners\UserBlockedListener;
 use App\Shared\Infraestructure\Listeners\UserCreatedListener;
 use App\Shared\Infraestructure\Listeners\UserDeletedListener;
+use App\Shared\Infraestructure\Listeners\UserUnblockedListener;
+use App\Shared\Infraestructure\Listeners\UserUpdatedListener;
 use App\Shared\Infraestructure\Repositories\ImageCloudfareR2Repository;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
@@ -24,10 +27,13 @@ use App\Social\Domain\Ports\FriendshipRepositoryPort;
 use App\Social\Infraestructure\Repositories\ChatMessagesEloquentRepository;
 use App\Social\Infraestructure\Repositories\ChatRoomEloquentRepository;
 use App\Social\Infraestructure\Repositories\FriendshipEloquentRepository;
-use App\UserManagement\Domain\Events\UserCreatedEvent;
-use App\UserManagement\Domain\Events\UserDeletedEvent;
-use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
-use App\UserManagement\Infraestructure\Repositories\UserEloquentRepository;
+use App\User\Domain\Events\UserBlockedEvent;
+use App\User\Domain\Events\UserCreatedEvent;
+use App\User\Domain\Events\UserDeletedEvent;
+use App\User\Domain\Events\UserUnblockedEvent;
+use App\User\Domain\Events\UserUpdatedEvent;
+use App\User\Domain\Ports\Outbound\UserRepositoryPort;
+use App\User\Infraestructure\Repositories\UserEloquentRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,6 +44,15 @@ class AppServiceProvider extends ServiceProvider
         ],
         UserDeletedEvent::class => [
             UserDeletedListener::class
+        ],
+        UserUpdatedEvent::class => [
+            UserUpdatedListener::class
+        ],
+        UserBlockedEvent::class => [
+            UserBlockedListener::class
+        ],
+        UserUnblockedEvent::class => [
+            UserUnblockedListener::class
         ]
     ];
 

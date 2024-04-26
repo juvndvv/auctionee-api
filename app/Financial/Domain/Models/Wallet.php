@@ -7,9 +7,8 @@ use App\Financial\Domain\Exeptions\NotEnoughFoundsException;
 use App\Financial\Domain\Models\ValueObjects\WalletAmount;
 use App\Financial\Domain\Models\ValueObjects\WalletUuid;
 use App\Shared\Domain\Models\AggregateRoot;
-use App\UserManagement\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserId;
 use Illuminate\Support\Collection;
-use InvalidArgumentException;
 
 class Wallet extends AggregateRoot
 {

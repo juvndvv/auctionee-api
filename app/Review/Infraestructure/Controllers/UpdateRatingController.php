@@ -2,19 +2,16 @@
 
 namespace App\Review\Infraestructure\Controllers;
 
-use App\Review\Application\UpdateRating\UpdateRatingCommand;
+use App\Review\Application\Command\UpdateRating\UpdateRatingCommand;
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infraestructure\Bus\CommandBus;
+use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-class UpdateRatingController
+final class UpdateRatingController extends CommandController
 {
-    public function __construct(private readonly CommandBus $commandBus)
-    {}
-
     public function __invoke(string $uuid, Request $request)
     {
         try {

@@ -4,8 +4,9 @@ namespace App\Review\Infraestructure\Repositories;
 
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Review\Infraestructure\Repositories\Models\EloquentReviewModel;
+use App\Shared\Infraestructure\Repositories\BaseRepository;
 
-class ReviewEloquentRepository implements ReviewRepositoryPort
+class ReviewEloquentRepository extends BaseRepository implements ReviewRepositoryPort
 {
     public function findByUuid(string $uuid)
     {

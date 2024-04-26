@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Review\Application\UpdateRating;
+namespace App\Review\Application\Command\UpdateRating;
 
 use App\Shared\Application\Commands\Command;
 
 class UpdateRatingCommand extends Command
 {
-    public function __construct(
+    private function __construct(
         private readonly string $uuid,
-        private readonly int $rating)
+        private readonly int    $rating
+    )
     {}
 
     public function uuid(): string
@@ -19,5 +20,10 @@ class UpdateRatingCommand extends Command
     public function rating(): string
     {
         return $this->rating;
+    }
+
+    public static function create(string $uuid, int $rating): UpdateRatingCommand
+    {
+        return new self($uuid, $rating);
     }
 }

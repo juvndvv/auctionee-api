@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class EloquentUserModel extends Authenticatable
+final class EloquentUserModel extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens, HasUuids;
 

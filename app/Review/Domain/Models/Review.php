@@ -10,7 +10,7 @@ use App\Review\Domain\Models\ValueObjects\ReviewDescription;
 use App\Review\Domain\Models\ValueObjects\ReviewRating;
 use App\Review\Domain\Models\ValueObjects\ReviewUuid;
 use App\Shared\Domain\Models\AggregateRoot;
-use App\UserManagement\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserId;
 
 class Review extends AggregateRoot
 {

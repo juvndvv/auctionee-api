@@ -3,6 +3,7 @@
 namespace App\Shared\Domain\Ports\Outbound;
 
 use App\Shared\Domain\Exceptions\NoContentException;
+use App\Shared\Domain\Exceptions\NotFoundException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
@@ -34,7 +35,7 @@ interface BaseRepositoryPort
      * @param string $field
      * @param string $value
      * @return mixed
-     * @throws ModelNotFoundException
+     * @throws NotFoundException
      */
     public function findByFieldValue(string $field, string $value): mixed;
 
@@ -54,7 +55,7 @@ interface BaseRepositoryPort
      * @param string $field
      * @param string $new
      * @return void
-     * @throws ModelNotFoundException
+     * @throws NotFoundException
      */
     public function updateFieldByPrimaryKey(string $primaryKey, string $field, string $new): void;
 

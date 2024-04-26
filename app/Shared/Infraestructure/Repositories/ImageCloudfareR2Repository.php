@@ -6,7 +6,7 @@ use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-class ImageCloudfareR2Repository implements ImageRepositoryPort
+final class ImageCloudfareR2Repository implements ImageRepositoryPort
 {
 
     public function store(string $folder, UploadedFile $file): string

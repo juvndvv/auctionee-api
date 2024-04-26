@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UserManagement\Domain\Events;
+namespace App\User\Domain\Events;
 
 use App\Shared\Domain\Events\DomainEvent;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -28,6 +28,6 @@ class UserUnblockedEvent extends DomainEvent
 
     public static function eventName(): string
     {
-        return 'block';
+        return 'unblocked';
     }
 }

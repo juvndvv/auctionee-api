@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UserManagement\Domain\Models\ValueObjects;
+namespace App\User\Domain\Models\ValueObjects;
 
 use App\Shared\Domain\Models\ValueObjects\EmailValueObject;
 

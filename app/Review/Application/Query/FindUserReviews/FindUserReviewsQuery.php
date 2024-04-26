@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Review\Application\FindUserReviews;
+namespace App\Review\Application\Query\FindUserReviews;
 
 use App\Shared\Infraestructure\Bus\Query\Query;
 

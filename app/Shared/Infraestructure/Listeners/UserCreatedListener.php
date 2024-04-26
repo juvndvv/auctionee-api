@@ -5,7 +5,7 @@ namespace App\Shared\Infraestructure\Listeners;
 use App\Financial\Application\CreateWallet\CreateWalletCommand;
 use App\Retention\Email\Application\SendEmailCommand;
 use App\Retention\Email\Domain\Model\Email;
-use App\UserManagement\Domain\Events\UserCreatedEvent;
+use App\User\Domain\Events\UserCreatedEvent;
 
 final class UserCreatedListener extends BaseListener
 {

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\UserManagement\Domain\Ports\Outbound;
+namespace App\User\Domain\Ports\Outbound;
 
+use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
-use App\UserManagement\Domain\Models\User;
+use App\User\Domain\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -15,7 +16,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      *
      * @param string $uuid
      * @return User
-     * @throws ModelNotFoundException
+     * @throws NotFoundException
      */
     public function findByUuid(string $uuid): User;
 
@@ -24,7 +25,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      *
      * @param string $username
      * @return Model
-     * @throws ModelNotFoundException
+     * @throws NotFoundException
      */
     public function findByUsername(string $username): User;
 
@@ -34,7 +35,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @param string $uuid
      * @param string $name
      * @return void
-     * @throws ModelNotFoundException
+     * @throws NotFoundException
      */
     public function updateName(string $uuid, string $name): void;
 
@@ -44,7 +45,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @param string $uuid
      * @param string $username
      * @return void
-     * @throws ModelNotFoundException
+     * @throws NotFoundException
      */
     public function updateUsername(string $uuid, string $username): void;
 
@@ -54,7 +55,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @param string $uuid
      * @param string $password
      * @return void
-     * @throws ModelNotFoundException
+     * @throws NotFoundException
      */
     public function updatePassword(string $uuid, string $password): void;
 
@@ -64,7 +65,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @param string $uuid
      * @param string $email
      * @return void
-     * @throws ModelNotFoundException
+     * @throws NotFoundException
      */
     public function updateEmail(string $uuid, string $email): void;
 
