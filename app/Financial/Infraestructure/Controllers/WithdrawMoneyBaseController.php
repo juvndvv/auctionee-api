@@ -2,7 +2,7 @@
 
 namespace App\Financial\Infraestructure\Controllers;
 
-use App\Financial\Application\WithdrawMoney\WithdrawMoneyCommand;
+use App\Financial\Application\Query\WithdrawMoney\WithdrawMoneyCommand;
 use App\Financial\Domain\Exeptions\NotEnoughFoundsException;
 use App\Shared\Infraestructure\Bus\CommandBus;
 use App\Shared\Infraestructure\Controllers\BaseController;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\DeleteWallet;
+namespace App\Financial\Application\Command\DeleteWallet;
 
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
@@ -19,11 +19,16 @@ class DeleteWalletCommandHandler extends CommandHandler
     {
         $userUuid = $command->userUuid();
 
+        // Query wallet
         $wallet = $this->walletRepository->findByUserUuid($userUuid);
         $transactions = $this->transactionRepository->findByWalletUuid($wallet->uuid());
         $wallet->setTransactions($transactions);
 
-        $service = DeleteWalletService::create($this->walletRepository, $this->transactionRepository);
-        $service->execute($wallet);
+        // Invoke the service
+        DeleteWalletService::__invoke($wallet);
+
+        // Persist data
+        $this->transactionRepository->updateCollection($wallet->transactions());
+        $this->walletRepository->deleteByPrimaryKey($wallet->uuid());
     }
 }

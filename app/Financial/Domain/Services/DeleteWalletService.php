@@ -11,27 +11,6 @@ class DeleteWalletService
 {
     public const DELETED_WALLET_UUID = 'WD000000-0000-0000-0000-000000000000';
 
-    private function __construct(
-        private readonly WalletRepositoryPort       $walletRepository,
-        private readonly TransactionRepositoryPort  $transactionRepository
-    )
-    {}
-
-    /**
-     * Crea una instancia de la clase
-     *
-     * @param WalletRepositoryPort $walletRepository
-     * @param TransactionRepositoryPort $transactionRepository
-     * @return self
-     */
-    public static function create(
-        WalletRepositoryPort        $walletRepository,
-        TransactionRepositoryPort   $transactionRepository
-    ): self
-    {
-        return new self($walletRepository, $transactionRepository);
-    }
-
     /**
      * Recorre transacciones y cambia el valor del uuid de la wallet que se va a eliminar a
      * el valor de la wallet que hace referencia a usuario eliminado
@@ -39,7 +18,7 @@ class DeleteWalletService
      * @param Wallet $wallet
      * @return void
      */
-    public function execute(Wallet $wallet)
+    public static function __invoke(Wallet $wallet): void
     {
         $deletingWalletUuid = $wallet->uuid();
         $transactions = $wallet->transactions();
@@ -56,7 +35,6 @@ class DeleteWalletService
                    return $transaction;
         });
 
-        $this->transactionRepository->updateCollection($newTransactions);
-        $this->walletRepository->deleteByPrimaryKey($deletingWalletUuid);
+        $wallet->setTransactions($newTransactions);
     }
 }

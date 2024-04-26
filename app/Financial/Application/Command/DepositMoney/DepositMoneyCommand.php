@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\DepositMoney;
+namespace App\Financial\Application\Command\DepositMoney;
 
 use App\Shared\Application\Commands\Command;
 

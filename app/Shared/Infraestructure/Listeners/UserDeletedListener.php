@@ -2,7 +2,7 @@
 
 namespace App\Shared\Infraestructure\Listeners;
 
-use App\Financial\Application\DeleteWallet\DeleteWalletCommand;
+use App\Financial\Application\Command\DeleteWallet\DeleteWalletCommand;
 use App\Retention\Email\Application\SendEmailCommand;
 use App\Retention\Email\Domain\Model\Email;
 use App\User\Domain\Events\UserDeletedEvent;

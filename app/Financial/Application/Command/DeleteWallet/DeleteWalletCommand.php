@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\DeleteWallet;
+namespace App\Financial\Application\Command\DeleteWallet;
 
 use App\Shared\Application\Commands\Command;
 

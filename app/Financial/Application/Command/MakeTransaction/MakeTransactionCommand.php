@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\MakeTransaction;
+namespace App\Financial\Application\Command\MakeTransaction;
 
 use App\Shared\Application\Commands\Command;
 

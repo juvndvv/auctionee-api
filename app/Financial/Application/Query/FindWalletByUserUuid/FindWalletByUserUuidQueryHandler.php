@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\FindWalletByUserUuid;
+namespace App\Financial\Application\Query\FindWalletByUserUuid;
 
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Financial\Domain\Resources\WalletResource;

@@ -2,7 +2,7 @@
 
 namespace App\Financial\Infraestructure\Controllers;
 
-use App\Financial\Application\FindWalletByUserUuid\FindWalletByUserUuidQuery;
+use App\Financial\Application\Query\FindWalletByUserUuid\FindWalletByUserUuidQuery;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Bus\QueryBus;
 use App\Shared\Infraestructure\Controllers\BaseController;

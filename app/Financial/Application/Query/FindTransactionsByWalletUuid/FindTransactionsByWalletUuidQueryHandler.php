@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\FindTransactionsByWalletUuid;
+namespace App\Financial\Application\Query\FindTransactionsByWalletUuid;
 
 use App\Financial\Domain\Models\Transaction;
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;

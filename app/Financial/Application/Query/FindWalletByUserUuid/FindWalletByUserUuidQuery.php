@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\FindWalletByUserUuid;
+namespace App\Financial\Application\Query\FindWalletByUserUuid;
 
 use App\Shared\Infraestructure\Bus\Query\Query;
 

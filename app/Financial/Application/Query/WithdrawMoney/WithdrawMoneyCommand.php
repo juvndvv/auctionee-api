@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\WithdrawMoney;
+namespace App\Financial\Application\Query\WithdrawMoney;
 
 use App\Shared\Application\Commands\Command;
 

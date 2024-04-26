@@ -2,7 +2,7 @@
 
 namespace App\Financial\Infraestructure\Controllers;
 
-use App\Financial\Application\DepositMoney\DepositMoneyCommand;
+use App\Financial\Application\Command\DepositMoney\DepositMoneyCommand;
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;

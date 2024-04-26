@@ -2,7 +2,7 @@
 
 namespace App\Financial\Infraestructure\Controllers;
 
-use App\Financial\Application\MakeTransaction\MakeTransactionCommand;
+use App\Financial\Application\Command\MakeTransaction\MakeTransactionCommand;
 use App\Financial\Domain\Exeptions\NotEnoughFoundsException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Bus\CommandBus;

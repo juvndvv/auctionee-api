@@ -2,7 +2,7 @@
 
 namespace App\Financial\Infraestructure\Controllers;
 
-use App\Financial\Application\FindTransactionsByWalletUuid\FindTransactionsByWalletUuidQuery;
+use App\Financial\Application\Query\FindTransactionsByWalletUuid\FindTransactionsByWalletUuidQuery;
 use App\Shared\Infraestructure\Bus\QueryBus;
 use App\Shared\Infraestructure\Controllers\BaseController;
 use App\Shared\Infraestructure\Controllers\Response;

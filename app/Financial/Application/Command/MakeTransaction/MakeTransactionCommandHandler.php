@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\MakeTransaction;
+namespace App\Financial\Application\Command\MakeTransaction;
 
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;

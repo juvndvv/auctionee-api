@@ -2,7 +2,7 @@
 
 namespace App\Shared\Infraestructure\Listeners;
 
-use App\Financial\Application\CreateWallet\CreateWalletCommand;
+use App\Financial\Application\Command\CreateWallet\CreateWalletCommand;
 use App\Retention\Email\Application\SendEmailCommand;
 use App\Retention\Email\Domain\Model\Email;
 use App\User\Domain\Events\UserCreatedEvent;

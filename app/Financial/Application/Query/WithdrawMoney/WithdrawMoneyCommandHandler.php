@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\WithdrawMoney;
+namespace App\Financial\Application\Query\WithdrawMoney;
 
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Shared\Application\Commands\CommandHandler;

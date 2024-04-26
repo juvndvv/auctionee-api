@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\CreateWallet;
+namespace App\Financial\Application\Command\CreateWallet;
 
 use App\Shared\Application\Commands\Command;
 

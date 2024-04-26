@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Financial\Application\CreateWallet;
+namespace App\Financial\Application\Command\CreateWallet;
 
 use App\Financial\Domain\Models\Wallet;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
