@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "jotade/auctionee",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "API for an auction web page.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {

@@ -11,15 +11,21 @@ class Email
     public const DELETED = 'deleted';
 
     public function __construct(
+        private readonly string $from,
         private readonly string $to,
         private readonly string $content,
-        private readonly string $subject
+        private readonly string $subject,
     )
     {}
 
     public function to(): string
     {
         return $this->to;
+    }
+
+    public function from(): string
+    {
+        return $this->from;
     }
 
     public function content(): string

@@ -18,7 +18,7 @@ class DeleteWalletService
      * @param Wallet $wallet
      * @return void
      */
-    public static function __invoke(Wallet $wallet): void
+    public static function execute(Wallet $wallet): void
     {
         $deletingWalletUuid = $wallet->uuid();
         $transactions = $wallet->transactions();

@@ -11,7 +11,6 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withEvents(discover: [
         __DIR__.'/../app/Shared/Infraestructure/Listeners',
-        __DIR__.'/../app/Retention/EventMonitoring/Infraestructure/Listeners',
     ])
     ->withMiddleware(function (Middleware $middleware) {
         //

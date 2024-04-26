@@ -11,7 +11,7 @@ class ResendEmailSender implements EmailSenderPort
     public function send(Email $email)
     {
         Resend::emails()->send([
-           'from' => env("MAIL_FROM_ADDRESS"),
+           'from' => $email->from(),
            'to' => $email->to(),
            'subject' => $email->subject(),
             'html' => $email->content()

@@ -25,7 +25,7 @@ class DeleteWalletCommandHandler extends CommandHandler
         $wallet->setTransactions($transactions);
 
         // Invoke the service
-        DeleteWalletService::__invoke($wallet);
+        DeleteWalletService::execute($wallet);
 
         // Persist data
         $this->transactionRepository->updateCollection($wallet->transactions());
