@@ -13,14 +13,13 @@ final class RemoveReviewController extends CommandController
     public function __invoke(string $uuid)
     {
         try {
-            $this->commandBus->handle(new RemoveReviewCommand($uuid));
+            $this->commandBus->handle(RemoveReviewCommand::create($uuid));
             return Response::OK($uuid, "Review eliminada satisfactoriamente");
 
         } catch (NotFoundException $e) {
             return Response::NOT_FOUND($e->getMessage());
 
         } catch (Exception $e) {
-            dd($e);
             return Response::SERVER_ERROR();
         }
     }

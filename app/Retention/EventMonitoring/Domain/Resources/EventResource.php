@@ -4,7 +4,7 @@ namespace App\Retention\EventMonitoring\Domain\Resources;
 
 use App\Retention\EventMonitoring\Domain\Models\Event;
 
-class EventResource
+final class EventResource
 {
     public static function fromArray(array $data)
     {

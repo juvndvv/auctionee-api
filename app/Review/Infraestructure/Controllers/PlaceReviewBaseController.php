@@ -21,7 +21,7 @@ final class PlaceReviewBaseController extends CommandController
             $description = $request['description'];
             $rating = $request['rating'];
 
-            $command = new PlaceReviewCommand($reviewerUuid, $reviewedUuid, $description, $rating);
+            $command = PlaceReviewCommand::create($reviewerUuid, $reviewedUuid, $description, $rating);
             $this->commandBus->handle($command);
 
             return Response::CREATED("Review creada satisfactoriamente", "/user/" . $reviewedUuid . "/reviews");
