@@ -2,8 +2,8 @@
 
 namespace App\Retention\EventMonitoring\Domain\Ports\Outbound;
 
-interface EventRepositoryPort
+use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
+
+interface EventRepositoryPort extends BaseRepositoryPort
 {
-    public function create(array $data);
-    public function findAll();
 }

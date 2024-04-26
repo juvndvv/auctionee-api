@@ -17,8 +17,8 @@ final class UserCreatedListener extends BaseListener
 
     private function sendWelcomeEmail(UserCreatedEvent $event): void
     {
-        $to = $event->message['email'];
-        $name = $event->message['name'];
+        $to = $event->payload['email'];
+        $name = $event->payload['name'];
 
         $command = SendEmailCommand::create($to, $name, Email::WELCOME);
         $this->commandBus->handle($command);
@@ -26,7 +26,7 @@ final class UserCreatedListener extends BaseListener
 
     private function createWallet(UserCreatedEvent $event): void
     {
-        $uuid = $event->message['uuid'];
+        $uuid = $event->payload['uuid'];
 
         $command = new CreateWalletCommand($uuid);
         $this->commandBus->handle($command);

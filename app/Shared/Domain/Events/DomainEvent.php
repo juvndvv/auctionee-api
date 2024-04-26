@@ -9,15 +9,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 
 abstract class DomainEvent implements ShouldBroadcastNow
 {
-    public $eventId;
-    public $message;
-    public $eventType;
-    public $ocurredOn;
+    public string $eventId;
+    public array $payload;
+    public string $eventType;
+    public string $occurredOn;
 
-    public function __construct(string $ocurredOn, array $message, string $eventType, string $eventId = null)
+    public function __construct(string $occurredOn, array $payload, string $eventType, string $eventId = null)
     {
-        $this->ocurredOn = $ocurredOn;
-        $this->message = $message;
+        $this->occurredOn = $occurredOn;
+        $this->payload = $payload;
         $this->eventType = $eventType;
         $this->eventId = $eventId ?: Uuid::random()->value();
     }
@@ -27,4 +27,9 @@ abstract class DomainEvent implements ShouldBroadcastNow
     abstract public function broadcastAs(): string;
 
     abstract public static function eventName(): string;
+
+    public static function create(string $occurredOn, array $payload, string $eventType, string $eventId = null): self
+    {
+        return new static($occurredOn, $payload, $eventType, $eventId);
+    }
 }

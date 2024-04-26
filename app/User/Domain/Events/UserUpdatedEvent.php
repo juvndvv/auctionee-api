@@ -11,9 +11,9 @@ class UserUpdatedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(array $message, string $ocurredOn, string $eventId = null)
+    public function __construct(array $payload, string $ocurredOn, string $eventId = null)
     {
-        parent::__construct($ocurredOn, $message, self::eventName(), $eventId);
+        parent::__construct($ocurredOn, $payload, self::eventName(), $eventId);
     }
 
     public function broadcastOn(): array
@@ -28,6 +28,6 @@ class UserUpdatedEvent extends DomainEvent
 
     public static function eventName(): string
     {
-        return 'update';
+        return 'user.updated';
     }
 }

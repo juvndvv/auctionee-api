@@ -2,7 +2,6 @@
 
 namespace App\Review\Application\Command\PlaceReview;
 
-
 use App\Shared\Application\Queries\Query;
 
 class PlaceReviewCommand extends Query

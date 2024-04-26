@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\App;
 use ReflectionClass;
 use ReflectionException;
 
-class CommandBus
+final readonly class CommandBus
 {
     /**
      * @throws ReflectionException

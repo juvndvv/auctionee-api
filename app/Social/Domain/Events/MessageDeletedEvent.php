@@ -13,9 +13,9 @@ class MessageDeletedEvent extends DomainEvent
 
     private readonly string $destinationUuid;
 
-    public function __construct(string $destinationUuid, array $message, string $ocuredOn, string $eventId = null)
+    public function __construct(string $destinationUuid, array $payload, string $ocuredOn, string $eventId = null)
     {
-        parent::__construct($ocuredOn, $message, self::eventName(), $eventId);
+        parent::__construct($ocuredOn, $payload, self::eventName(), $eventId);
         $this->destinationUuid = $destinationUuid;
     }
 

@@ -11,9 +11,9 @@ class FriendshipCreatedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(array $message, string $occurredOn, string $eventId = null)
+    public function __construct(array $payload, string $occurredOn, string $eventId = null)
     {
-        parent::__construct($occurredOn, $message, self::eventName(), $eventId);
+        parent::__construct($occurredOn, $payload, self::eventName(), $eventId);
     }
 
     public function broadcastOn(): array

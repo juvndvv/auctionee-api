@@ -5,7 +5,7 @@ use App\Financial\Infraestructure\Controllers\FindTransactionsByWalletUuidBaseCo
 use App\Financial\Infraestructure\Controllers\FindWalletByUserUuidBaseController;
 use App\Financial\Infraestructure\Controllers\MakeTransactionBaseController;
 use App\Financial\Infraestructure\Controllers\WithdrawMoneyBaseController;
-use App\Retention\EventMonitoring\Infraestructure\Controllers\FindAllEventsBaseController;
+use App\Retention\EventMonitoring\Infraestructure\Controllers\FindAllEventsController;
 use App\Review\Infraestructure\Controllers\FindUserAverageRatingController;
 use App\Review\Infraestructure\Controllers\FindUserReviewsController;
 use App\Review\Infraestructure\Controllers\PlaceReviewBaseController;
@@ -63,7 +63,7 @@ Route::put('/reviews/{uuid}/rating', UpdateRatingController::class);
 Route::put('/reviews/{uuid}/description', UpdateDescriptionController::class);
 
 // Events
-Route::get("/events", FindAllEventsBaseController::class);
+Route::get("/events", FindAllEventsController::class);
 
 // Chat rooms
 Route::post("/chats", CreateChatRoomBaseController::class);

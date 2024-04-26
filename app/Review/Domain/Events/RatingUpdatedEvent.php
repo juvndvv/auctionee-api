@@ -11,14 +11,14 @@ class RatingUpdatedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(array $message, string $ocurredOn, string $eventId = null)
+    public function __construct(array $payload, string $ocurredOn, string $eventId = null)
     {
-        parent::__construct($ocurredOn, $message, self::eventName(), $eventId);
+        parent::__construct($ocurredOn, $payload, self::eventName(), $eventId);
     }
 
     public function broadcastOn(): array
     {
-        return [RatingUpdatedEvent::eventName()];
+        return ['reviews'];
     }
 
     public function broadcastAs(): string
@@ -28,6 +28,6 @@ class RatingUpdatedEvent extends DomainEvent
 
     public static function eventName(): string
     {
-        return 'review-rating-updated';
+        return 'review.rating.updated';
     }
 }

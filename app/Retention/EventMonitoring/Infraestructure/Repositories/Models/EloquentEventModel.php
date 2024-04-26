@@ -2,18 +2,19 @@
 
 namespace App\Retention\EventMonitoring\Infraestructure\Repositories\Models;
 
+use App\Retention\EventMonitoring\Domain\Models\Event;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentEventModel extends Model
 {
     protected $table = "events";
 
-    protected $primaryKey = "uuid";
+    protected $primaryKey = Event::SERIALIZED_UUID;
 
     protected $fillable = [
-        "uuid",
-        "type",
-        "message",
-        "ocurred_on"
+        Event::SERIALIZED_UUID,
+        Event::SERIALIZED_TYPE,
+        Event::SERIALIZED_PAYLOAD,
+        Event::SERIALIZED_OCCURRED_ON
     ];
 }

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\App;
 use ReflectionClass;
 use ReflectionException;
 
-class QueryBus
+final readonly class QueryBus
 {
     /**
      * @throws ReflectionException

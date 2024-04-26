@@ -4,21 +4,24 @@ namespace App\Retention\EventMonitoring\Infraestructure\Controllers;
 
 use App\Retention\EventMonitoring\Application\FindAll\FindAllEventsQuery;
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Infraestructure\Bus\QueryBus;
-use App\Shared\Infraestructure\Controllers\BaseController;
+use App\Shared\Infraestructure\Controllers\QueryController;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class FindAllEventsBaseController extends BaseController
+final class FindAllEventsController extends QueryController
 {
-    public function __construct(private readonly QueryBus $queryBus)
-    {}
+    private const DEFAULT_OFFSET = 0;
+    private const DEFAULT_LIMIT = 10;
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): JsonResponse
     {
         try {
-            $query = new FindAllEventsQuery();
+            $offset = $request->query->getInt('offset', self::DEFAULT_OFFSET);
+            $limit = $request->query->getInt('limit', self::DEFAULT_LIMIT);
+
+            $query = FindAllEventsQuery::create($offset, $limit);
             $resources = $this->queryBus->handle($query);
 
             return Response::OK($resources, "Eventos encontrados");
@@ -27,6 +30,7 @@ class FindAllEventsBaseController extends BaseController
             return Response::NO_CONTENT();
 
         } catch (Exception $e) {
+            dd($e);
             return Response::SERVER_ERROR();
         }
     }

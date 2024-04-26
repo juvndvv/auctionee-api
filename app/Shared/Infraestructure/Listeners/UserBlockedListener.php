@@ -15,8 +15,8 @@ final class UserBlockedListener extends BaseListener
 
     public function sendDeletedEmail(UserBlockedEvent $event): void
     {
-        $to = $event->message['email'];
-        $name = $event->message['name'];
+        $to = $event->payload['email'];
+        $name = $event->payload['name'];
 
         $command = SendEmailCommand::create($to, $name, Email::BLOCKED);
         $this->commandBus->handle($command);

@@ -9,16 +9,17 @@ use App\Shared\Domain\Exceptions\NoContentException;
 
 class FindAllEventsQueryHandler extends QueryHandler
 {
-    public function __construct(private readonly EventRepositoryPort $eventRepository)
+    public function __construct(
+        private readonly EventRepositoryPort $eventRepository
+    )
     {}
 
+    /**
+     * @throws NoContentException
+     */
     public function __invoke(FindAllEventsQuery $query): array
     {
         $events = $this->eventRepository->findAll();
-
-        if ($events->count() === 0) {
-            throw new NoContentException("No se encontraron eventos");
-        }
 
         // Map to resource
         $eventResourceArr = [];

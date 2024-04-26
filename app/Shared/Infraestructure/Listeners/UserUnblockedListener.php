@@ -15,8 +15,8 @@ final class UserUnblockedListener extends BaseListener
 
     public function sendDeletedEmail(UserUnblockedEvent $event): void
     {
-        $to = $event->message['email'];
-        $name = $event->message['name'];
+        $to = $event->payload['email'];
+        $name = $event->payload['name'];
 
         $command = SendEmailCommand::create($to, $name, Email::UNBLOCKED);
         $this->commandBus->handle($command);

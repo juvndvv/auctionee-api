@@ -2,19 +2,18 @@
 
 namespace App\Retention\EventMonitoring\Infraestructure\Repositories;
 
+use App\Retention\EventMonitoring\Domain\Models\Event;
 use App\Retention\EventMonitoring\Domain\Ports\Outbound\EventRepositoryPort;
 use App\Retention\EventMonitoring\Infraestructure\Repositories\Models\EloquentEventModel;
+use App\Shared\Infraestructure\Repositories\BaseRepository;
 
-class EloquentEventRepository implements EventRepositoryPort
+class EloquentEventRepository extends BaseRepository implements EventRepositoryPort
 {
+    private const ENTITY_NAME = Event::class;
 
-    public function create(array $data)
+    public function __construct()
     {
-        EloquentEventModel::query()->create($data);
-    }
-
-    public function findAll()
-    {
-        return EloquentEventModel::all();
+        $this->setEntityName(self::ENTITY_NAME);
+        $this->setBuilderFromModel(EloquentEventModel::query()->getModel());
     }
 }

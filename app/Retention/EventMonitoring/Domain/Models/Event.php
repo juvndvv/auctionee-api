@@ -9,36 +9,41 @@ use App\Retention\EventMonitoring\Domain\Models\ValueObjects\EventUuid;
 
 class Event
 {
+    public const SERIALIZED_UUID = 'uuid';
+    public const SERIALIZED_TYPE = 'type';
+    public const SERIALIZED_PAYLOAD = 'payload';
+    public const SERIALIZED_OCCURRED_ON = 'occurred_on';
+
     private readonly EventUuid $uuid;
     private readonly EventType $type;
-    private readonly EventMessage $message;
+    private readonly EventMessage $payload;
     private readonly EventOcurredOn $occurredOn;
 
     public function __construct(string $uuid, string $type, string $message, string $occurredOn)
     {
         $this->uuid = new EventUuid($uuid);
         $this->type = new EventType($type);
-        $this->message = new EventMessage($message);
+        $this->payload = new EventMessage($message);
         $this->occurredOn = new EventOcurredOn($occurredOn);
     }
 
-    public static function fromPrimitives(array $data)
+    public static function fromPrimitives(array $data): Event
     {
         return new self(
-            $data['uuid'],
-            $data['type'],
-            $data['message'],
-            $data['occurredOn']
+            $data[self::SERIALIZED_UUID],
+            $data[self::SERIALIZED_TYPE],
+            $data[self::SERIALIZED_PAYLOAD],
+            $data[self::SERIALIZED_OCCURRED_ON]
         );
     }
 
-    public function toPrimitives()
+    public function toPrimitives(): array
     {
         return [
-            'uuid' => $this->uuid(),
-            'type' => $this->type(),
-            'message' => $this->message(),
-            'occurred_on' => $this->occurredOn()
+            self::SERIALIZED_UUID => $this->uuid(),
+            self::SERIALIZED_TYPE => $this->type(),
+            self::SERIALIZED_PAYLOAD => $this->message(),
+            self::SERIALIZED_OCCURRED_ON => $this->occurredOn()
         ];
     }
 
@@ -52,9 +57,9 @@ class Event
         return $this->type->value();
     }
 
-    public function message(): string
+    public function payload(): string
     {
-        return $this->message->value();
+        return $this->payload->value();
     }
 
     public function occurredOn(): string

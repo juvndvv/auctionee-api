@@ -15,8 +15,8 @@ final class UserUpdatedListener extends BaseListener
 
     private function sendUpdatedEmail(UserUpdatedEvent $event): void
     {
-        $to = $event->message['user']['email'];
-        $name = $event->message['user']['name'];
+        $to = $event->payload['user']['email'];
+        $name = $event->payload['user']['name'];
 
         $command = SendEmailCommand::create($to, $name, Email::UPDATED);
         $this->commandBus->handle($command);

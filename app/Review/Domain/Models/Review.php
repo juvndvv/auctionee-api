@@ -14,13 +14,25 @@ use App\User\Domain\Models\ValueObjects\UserId;
 
 class Review extends AggregateRoot
 {
+    public const SERIALIZED_UUID = 'uuid';
+    public const SERIALIZED_REVIEWER_UUID = 'reviewer_uuid';
+    public const SERIALIZED_REVIEWED_UUID = 'reviewed_uuid';
+    public const SERIALIZED_DESCRIPTION = 'description';
+    public const SERIALIZED_RATING = 'rating';
+
     private ReviewUuid $uuid;
     private ReviewRating $rating;
     private ReviewDescription $description;
     private UserId $reviewerId;
     private UserId $reviewedId;
 
-    public function __construct(string $uuid, int $rating, string $description, string $reviewerId, string $reviewedId)
+    public function __construct(
+        string  $uuid,
+        int     $rating,
+        string  $description,
+        string  $reviewerId,
+        string  $reviewedId
+    )
     {
         $this->uuid = new ReviewUuid($uuid);
         $this->rating = new ReviewRating($rating);
@@ -29,43 +41,40 @@ class Review extends AggregateRoot
         $this->reviewedId = new UserId($reviewedId);
     }
 
-    public static function fromPrimitives(array $data): self
+    public function uuid(): string
     {
-        return new self(
-            $data['uuid'],
-            $data['rating'],
-            $data['description'],
-            $data['reviewer_uuid'],
-            $data['reviewed_uuid']
-        );
+        return $this->uuid->value();
+    }
+
+    public function rating(): int
+    {
+        return $this->rating->value();
+    }
+
+    public function description(): string
+    {
+        return $this->description->value();
+    }
+
+    public function reviewerId(): string
+    {
+        return $this->reviewerId->value();
+    }
+
+    public function reviewedId(): string
+    {
+        return $this->reviewedId->value();
     }
 
     public function toPrimitives(): array
     {
         return [
-            'uuid' => $this->uuid(),
-            'rating' => $this->rating(),
-            'description' => $this->description(),
-            'reviewer_uuid' => $this->reviewerId(),
-            'reviewed_uuid' => $this->reviewedId(),
+            self::SERIALIZED_UUID => $this->uuid(),
+            self::SERIALIZED_RATING => $this->rating(),
+            self::SERIALIZED_DESCRIPTION => $this->description(),
+            self::SERIALIZED_REVIEWER_UUID => $this->reviewerId(),
+            self::SERIALIZED_REVIEWED_UUID => $this->reviewedId(),
         ];
-    }
-
-    // Use cases
-    public static function create(string $rating, string $description, string $reviewerId, string $reviewedId): self
-    {
-        $generatedUuid = ReviewUuid::random();
-        $review = new self(
-            $generatedUuid,
-            $rating,
-            $description,
-            $reviewerId,
-            $reviewedId
-        );
-
-        $review->record(new ReviewPlacedEvent($review->toPrimitives(), now()->toString()));
-
-        return $review;
     }
 
     public function delete(): void
@@ -93,29 +102,35 @@ class Review extends AggregateRoot
         ], now()->toString()));
     }
 
-    // Getters
-    public function uuid(): string
+    public static function create(
+        string $rating,
+        string $description,
+        string $reviewerId,
+        string $reviewedId
+    ): self
     {
-        return $this->uuid->value();
+        $generatedUuid = ReviewUuid::random();
+        $review = new self(
+            $generatedUuid,
+            $rating,
+            $description,
+            $reviewerId,
+            $reviewedId
+        );
+
+        $review->record(new ReviewPlacedEvent($review->toPrimitives(), now()->toString()));
+
+        return $review;
     }
 
-    public function rating(): int
+    public static function fromPrimitives(array $data): self
     {
-        return $this->rating->value();
-    }
-
-    public function description(): string
-    {
-        return $this->description->value();
-    }
-
-    public function reviewerId(): string
-    {
-        return $this->reviewerId->value();
-    }
-
-    public function reviewedId(): string
-    {
-        return $this->reviewedId->value();
+        return new self(
+            $data[self::SERIALIZED_UUID],
+            $data[self::SERIALIZED_RATING],
+            $data[self::SERIALIZED_DESCRIPTION],
+            $data[self::SERIALIZED_REVIEWER_UUID],
+            $data[self::SERIALIZED_REVIEWED_UUID],
+        );
     }
 }

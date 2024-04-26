@@ -18,8 +18,8 @@ final class UserDeletedListener extends BaseListener
 
     public function sendDeletedEmail(UserDeletedEvent $event): void
     {
-        $to = $event->message['email'];
-        $name = $event->message['name'];
+        $to = $event->payload['email'];
+        $name = $event->payload['name'];
 
         $command = SendEmailCommand::create($to, $name, Email::DELETED);
         $this->commandBus->handle($command);
@@ -27,7 +27,7 @@ final class UserDeletedListener extends BaseListener
 
     public function deleteWallet(UserDeletedEvent $event): void
     {
-        $userUuid = $event->message[User::SERIALIZED_UUID];
+        $userUuid = $event->payload[User::SERIALIZED_UUID];
         $command = DeleteWalletCommand::create($userUuid);
         $this->commandBus->handle($command);
     }
