@@ -16,6 +16,7 @@ use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Review\Infraestructure\Repositories\ReviewEloquentRepository;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
 use App\Shared\Infraestructure\Listeners\UserCreatedListener;
+use App\Shared\Infraestructure\Listeners\UserDeletedListener;
 use App\Shared\Infraestructure\Repositories\ImageCloudfareR2Repository;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
@@ -24,6 +25,7 @@ use App\Social\Infraestructure\Repositories\ChatMessagesEloquentRepository;
 use App\Social\Infraestructure\Repositories\ChatRoomEloquentRepository;
 use App\Social\Infraestructure\Repositories\FriendshipEloquentRepository;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
+use App\UserManagement\Domain\Events\UserDeletedEvent;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use App\UserManagement\Infraestructure\Repositories\UserEloquentRepository;
 use Illuminate\Support\ServiceProvider;
@@ -33,6 +35,9 @@ class AppServiceProvider extends ServiceProvider
     protected $listen = [
         UserCreatedEvent::class => [
             UserCreatedListener::class
+        ],
+        UserDeletedEvent::class => [
+            UserDeletedListener::class
         ]
     ];
 

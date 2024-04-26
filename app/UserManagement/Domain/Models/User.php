@@ -2,7 +2,6 @@
 
 namespace App\UserManagement\Domain\Models;
 
-use App\Shared\Application\Creatable;
 use App\Shared\Domain\Models\AggregateRoot;
 use App\UserManagement\Domain\Events\UserBlockedEvent;
 use App\UserManagement\Domain\Events\UserCreatedEvent;
@@ -170,7 +169,7 @@ class User extends AggregateRoot
 
     public function delete(): void
     {
-        $this->record(new UserDeletedEvent($this->toPrimitives(), now()->toString()));
+        $this->record(new UserDeletedEvent(self::toPrimitives(), now()->toString()));
     }
 
     public function block(): void

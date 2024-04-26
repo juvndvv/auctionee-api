@@ -13,10 +13,15 @@ use InvalidArgumentException;
 
 class Wallet extends AggregateRoot
 {
+    public const SERIALIZED_UUID = 'uuid';
+    public const SERIALIZED_AMOUNT = 'amount';
+    public const SERIALIZED_USER_UUID = 'user_uuid';
+    public const SERIALIZED_TRANSACTIONS = 'transactions';
+
     private readonly WalletUuid $uuid;
     private WalletAmount $amount;
     private readonly UserId $userId;
-    private readonly Collection $transactions;
+    private Collection $transactions;
 
     /**
      * @param string $uuid
@@ -28,7 +33,7 @@ class Wallet extends AggregateRoot
         string $uuid,
         float $amount,
         string $userId,
-        Collection $transactions
+        Collection $transactions = new Collection()
     )
     {
         $this->uuid = new WalletUuid($uuid);
@@ -45,18 +50,10 @@ class Wallet extends AggregateRoot
      */
     public static function fromPrimitives(array $data): self
     {
-        if (isset($data['transactions'])) {
-            $transactions = Transaction::getCollectionFromPrimitivesArray($data['transactions']);
-
-        } else {
-            $transactions = new Collection();
-        }
-
         return new self(
-            $data['uuid'],
-            $data['amount'],
-            $data['user_uuid'],
-            $transactions
+            $data[self::SERIALIZED_UUID],
+            $data[self::SERIALIZED_AMOUNT],
+            $data[self::SERIALIZED_USER_UUID],
         );
     }
 
@@ -65,13 +62,13 @@ class Wallet extends AggregateRoot
      */
     public function toPrimitives(): array
     {
-        $transactions = Transaction::getPrimitivesFromCollection($this->transactions, $this->uuid);
+        $transactionPrimitives = Transaction::mapPrimitivesFromCollection($this->transactions());
 
         return [
-            'uuid' => $this->uuid->value(),
-            'amount' => $this->amount->value(),
-            'user_uuid' => $this->userId->value(),
-            'transactions' => $transactions
+            self::SERIALIZED_UUID => $this->uuid->value(),
+            self::SERIALIZED_AMOUNT => $this->amount->value(),
+            self::SERIALIZED_USER_UUID => $this->userId->value(),
+            self::SERIALIZED_TRANSACTIONS => $transactionPrimitives
         ];
     }
 
@@ -93,6 +90,15 @@ class Wallet extends AggregateRoot
     public function userId(): string
     {
         return $this->userId->value();
+    }
+
+    /**
+     * @param Collection<Transaction> $transactions
+     * @return void
+     */
+    public function setTransactions(Collection $transactions): void
+    {
+        $this->transactions = $transactions;
     }
 
     /**
@@ -149,7 +155,7 @@ class Wallet extends AggregateRoot
     /**
      * @param float $amount
      * @return void
-     * @throws InvalidArgumentException
+     * @throws NotEnoughFoundsException
      */
     public function withdraw(float $amount): void
     {

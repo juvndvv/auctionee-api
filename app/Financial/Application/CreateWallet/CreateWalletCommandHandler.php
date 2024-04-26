@@ -4,7 +4,7 @@ namespace App\Financial\Application\CreateWallet;
 
 use App\Financial\Domain\Models\Wallet;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
-use App\Shared\Infraestructure\Bus\Command\CommandHandler;
+use App\Shared\Application\Commands\CommandHandler;
 
 class CreateWalletCommandHandler extends CommandHandler
 {
@@ -19,6 +19,6 @@ class CreateWalletCommandHandler extends CommandHandler
         $userUuid = $command->userUuid();
 
         $wallet = Wallet::create($amount, $userUuid);
-        $this->walletRepository->create($wallet);
+        $this->walletRepository->create($wallet->toPrimitives());
     }
 }

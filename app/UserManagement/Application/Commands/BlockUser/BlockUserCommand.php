@@ -15,4 +15,9 @@ class BlockUserCommand extends Command
     {
         return $this->uuid;
     }
+
+    public static function create(string $uuid): BlockUserCommand
+    {
+        return new self($uuid);
+    }
 }

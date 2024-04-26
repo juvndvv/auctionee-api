@@ -7,7 +7,6 @@ use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\UserManagement\Application\Commands\DeleteUser\DeleteUserCommand;
 use Exception;
-use Illuminate\Http\Request;
 
 final class DeleteUserController extends CommandController
 {
@@ -25,10 +24,5 @@ final class DeleteUserController extends CommandController
         } catch (Exception $e) {
             return Response::SERVER_ERROR();
         }
-    }
-
-    static function validate(Request $request): void
-    {
-        // TODO: Implement validate() method.
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Social\Application\FindFriendListByUserUuid;
 
+use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Infraestructure\Bus\Query\QueryHandler;
 use App\Social\Domain\Ports\FriendshipRepositoryPort;
 
 class FindFriendListByUserUuidQueryHandler extends QueryHandler

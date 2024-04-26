@@ -2,9 +2,8 @@
 
 namespace App\UserManagement\Application\Commands\UnblockUser;
 
-use App\Shared\Infraestructure\Bus\Command\CommandHandler;
-use App\Shared\Infraestructure\Bus\Events\EventBus;
-use App\UserManagement\Domain\Models\User;
+use App\Shared\Application\Commands\CommandHandler;
+use App\Shared\Infraestructure\Bus\EventBus;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 
 class UnblockUserCommandHandler extends CommandHandler
@@ -15,15 +14,12 @@ class UnblockUserCommandHandler extends CommandHandler
     )
     {}
 
-    public function __invoke(UnblockUserCommand $command)
+    public function __invoke(UnblockUserCommand $command): void
     {
         $uuid = $command->uuid();
 
         // Retrieve from db
-        $userDb = $this->userRepository->findByUuid($uuid);
-
-        // Use case
-        $user = User::fromPrimitives($userDb->toArray());
+        $user = $this->userRepository->findByUuid($uuid);
         $user->unblock();
 
         // Persistence

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->string('uuid')->primary();
-            $table->string('remitent_wallet_uuid');
+            $table->string('remittent_wallet_uuid');
             $table->string('destination_wallet_uuid');
             $table->float('amount');
             $table->timestamps();
 
-            $table->foreign('remitent_wallet_uuid')->references('uuid')->on('wallets');
+            $table->foreign('remittent_wallet_uuid')->references('uuid')->on('wallets');
             $table->foreign('destination_wallet_uuid')->references('uuid')->on('wallets');
         });
     }

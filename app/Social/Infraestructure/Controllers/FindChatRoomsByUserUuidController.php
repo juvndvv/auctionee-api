@@ -3,8 +3,6 @@
 namespace App\Social\Infraestructure\Controllers;
 
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Infraestructure\Bus\Query\QueryBus;
-use App\Shared\Infraestructure\Controllers\BaseController;
 use App\Shared\Infraestructure\Controllers\QueryController;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Social\Application\FindChatRoomsByUserUuid\FindChatRoomsByUserUuidQuery;

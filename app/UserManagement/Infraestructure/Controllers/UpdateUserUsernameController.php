@@ -5,6 +5,7 @@ namespace App\UserManagement\Infraestructure\Controllers;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
 use App\UserManagement\Application\Commands\UpdateName\UpdateNameCommand;
+use App\UserManagement\Application\Commands\UpdateUsername\UpdateUsernameCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ final class UpdateUserUsernameController extends ValidatedCommandController
             self::validate($request);
             $name = $request["username"];
 
-            $command = UpdateNameCommand::create($uuid, $name);
+            $command = UpdateUsernameCommand::create($uuid, $name);
             $this->commandBus->handle($command);
 
             return Response::OK($name, "Nombre actualizado correctamente");

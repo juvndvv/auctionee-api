@@ -3,7 +3,7 @@
 namespace App\Social\Application\CreateChatRoom;
 
 use App\Shared\Domain\Exceptions\BadRequestException;
-use App\Shared\Infraestructure\Bus\Command\CommandHandler;
+use App\Shared\Application\Commands\CommandHandler;
 use App\Social\Domain\Models\ChatRoom;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 

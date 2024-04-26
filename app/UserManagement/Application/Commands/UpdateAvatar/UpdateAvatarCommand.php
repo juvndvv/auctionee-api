@@ -22,4 +22,9 @@ class UpdateAvatarCommand extends Command
     {
         return $this->new;
     }
+
+    public static function create(string $uuid, UploadedFile $new): self
+    {
+        return new self($uuid, $new);
+    }
 }

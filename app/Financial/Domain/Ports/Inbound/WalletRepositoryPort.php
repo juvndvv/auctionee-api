@@ -3,30 +3,23 @@
 namespace App\Financial\Domain\Ports\Inbound;
 
 use App\Financial\Domain\Models\Wallet;
+use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-interface WalletRepositoryPort
+interface WalletRepositoryPort extends BaseRepositoryPort
 {
     /**
-     * @param Wallet $wallet
-     * @return void
-     */
-    public function create(Wallet $wallet): void;
-
-    /**
-     * @param string $uuid
-     * @return void
-     */
-    public function delete(string $uuid): void;
-
-    /**
      * @param string $userUuid
-     * @return Wallet
+     * @return Model<Wallet>
+     * @throws ModelNotFoundException
      */
     public function findByUserUuid(string $userUuid): Wallet;
 
     /**
      * @param string $uuid
-     * @return Wallet
+     * @return Model<Wallet>
+     * @throws ModelNotFoundException
      */
     public function findByUuid(string $uuid): Wallet;
 
@@ -36,9 +29,19 @@ interface WalletRepositoryPort
      */
     public function existsByUuid(string $uuid): bool;
 
-    public function withdraw(string $uuid, float $amount): void;
+    /**
+     * @param string $uuid
+     * @param float $amount
+     * @return void
+     * @throws ModelNotFoundException
+     */
+    public function updateAmount(string $uuid, float $amount): void;
 
-    public function deposit(string $uuid, float $amount): void;
-
+    /**
+     * Busca la columna <i>amount</i> por la clave primaria
+     *
+     * @param string $uuid
+     * @return float
+     */
     public function findAmountByUuid(string $uuid): float;
 }

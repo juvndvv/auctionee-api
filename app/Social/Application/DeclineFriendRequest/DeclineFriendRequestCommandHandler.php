@@ -2,7 +2,7 @@
 
 namespace App\Social\Application\DeclineFriendRequest;
 
-use App\Shared\Infraestructure\Bus\Command\CommandHandler;
+use App\Shared\Application\Commands\CommandHandler;
 
 class DeclineFriendRequestCommandHandler extends CommandHandler
 {

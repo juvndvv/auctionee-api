@@ -2,7 +2,7 @@
 
 namespace App\UserManagement\Domain\Events;
 
-use App\Shared\Infraestructure\Bus\Events\DomainEvent;
+use App\Shared\Domain\Events\DomainEvent;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -18,7 +18,7 @@ class UserCreatedEvent extends DomainEvent
 
     public function broadcastOn(): array
     {
-        return [UserCreatedEvent::eventName()];
+        return ['users'];
     }
 
     public function broadcastAs(): string
@@ -28,6 +28,6 @@ class UserCreatedEvent extends DomainEvent
 
     public static function eventName(): string
     {
-        return 'user-created';
+        return 'created';
     }
 }

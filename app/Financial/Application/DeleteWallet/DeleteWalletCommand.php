@@ -7,12 +7,17 @@ use App\Shared\Application\Commands\Command;
 class DeleteWalletCommand extends Command
 {
     public function __construct(
-        private readonly string $uuid,
+        private readonly string $userUuid,
     )
     {}
 
-    public function uuid(): string
+    public static function create(string $userUuid): self
     {
-        return $this->uuid;
+        return new self($userUuid);
+    }
+
+    public function userUuid(): string
+    {
+        return $this->userUuid;
     }
 }

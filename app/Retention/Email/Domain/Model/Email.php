@@ -4,6 +4,11 @@ namespace App\Retention\Email\Domain\Model;
 
 class Email
 {
+    public const WELCOME = 'welcome';
+    public const UPDATED = 'updated';
+    public const BLOCKED = 'blocked';
+    public const UNBLOCKED = 'unblocked';
+
     public function __construct(private readonly string $to, private readonly string $content)
     {}
 

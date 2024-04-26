@@ -3,6 +3,7 @@
 namespace App\Shared\Infraestructure\Repositories;
 
 use App\Shared\Domain\Exceptions\NoContentException;
+use App\Shared\Domain\Exceptions\TooManyRowsException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -47,10 +48,9 @@ abstract class BaseRepository implements BaseRepositoryPort
         return $models;
     }
 
-
-    public function findOneByPrimaryKeyOrFail(string $primaryKey): Model
+    public function findOneByPrimaryKeyOrFail(string $primaryKey): mixed
     {
-        $model = $this->builder->findOrFail($primaryKey);
+        $model = $this->builder->where('uuid', $primaryKey)->get()->first();
 
         if (is_null($model)) {
             throw new ModelNotFoundException("No se ha encontrado"
@@ -77,12 +77,23 @@ abstract class BaseRepository implements BaseRepositoryPort
         $model->delete();
     }
 
+    public function deleteByFieldValue(string $field, string $value): void
+    {
+        $model = self::findByFieldValue($field, $value);
+
+        if ($model instanceof Collection) {
+            throw new TooManyRowsException("Hay mas de una coincidencia para el valor dado");
+        }
+
+        $model->delete();
+    }
+
     public function existsByPrimaryKey(string $primaryKey): bool
     {
         return $this->builder->find($primaryKey)->exists();
     }
 
-    public function findByFieldValue(string $field, string $value): Model|Collection
+    public function findByFieldValue(string $field, string $value): Collection
     {
         $builders = $this->builder->where($field, $value)->get();
 

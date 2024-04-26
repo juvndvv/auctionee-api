@@ -2,9 +2,8 @@
 
 namespace App\UserManagement\Application\Commands\BlockUser;
 
-use App\Shared\Infraestructure\Bus\Command\CommandHandler;
-use App\Shared\Infraestructure\Bus\Events\EventBus;
-use App\UserManagement\Domain\Models\User;
+use App\Shared\Application\Commands\CommandHandler;
+use App\Shared\Infraestructure\Bus\EventBus;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 
 class BlockUserCommandHandler extends CommandHandler
@@ -20,10 +19,7 @@ class BlockUserCommandHandler extends CommandHandler
         $uuid = $command->uuid();
 
         // Retrieve from db
-        $userDb = $this->userRepository->findByUuid($uuid);
-
-        // Use case
-        $user = User::fromPrimitives($userDb->toArray());
+        $user = $this->userRepository->findByUuid($uuid);
         $user->block();
 
         // Persistence

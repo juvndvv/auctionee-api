@@ -4,7 +4,7 @@ namespace App\UserManagement\Application\Commands\Create;
 
 use App\Shared\Application\Commands\Command;
 
-class CreateUserCommand extends Command
+final class CreateUserCommand extends Command
 {
     private function __construct(
         private readonly string $name,
@@ -16,6 +16,19 @@ class CreateUserCommand extends Command
         private readonly int $role
     )
     {}
+
+    public static function create(
+        string $name,
+        string $username,
+        string $email,
+        string $password,
+        string $avatar,
+        string $birth,
+        int $role
+    ): CreateUserCommand
+    {
+        return new self($name, $username, $email, $password, $avatar, $birth, $role);
+    }
 
     public function name(): string
     {

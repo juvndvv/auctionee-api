@@ -2,8 +2,8 @@
 
 namespace App\UserManagement\Application\Queries\FindAll;
 
+use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Infraestructure\Bus\Query\QueryHandler;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use App\UserManagement\Domain\Resources\UserDetailsResource;
 

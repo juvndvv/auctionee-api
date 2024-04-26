@@ -15,4 +15,9 @@ class UnblockUserCommand extends Command
     {
         return $this->uuid;
     }
+
+    public static function create(string $uuid): UnblockUserCommand
+    {
+        return new self($uuid);
+    }
 }

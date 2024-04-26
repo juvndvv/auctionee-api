@@ -4,7 +4,7 @@ namespace App\Review\Infraestructure\Controllers;
 
 use App\Review\Application\RemoveReview\RemoveReviewCommand;
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infraestructure\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Bus\CommandBus;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;
 

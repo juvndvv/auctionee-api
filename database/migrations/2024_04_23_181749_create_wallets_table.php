@@ -16,8 +16,6 @@ return new class extends Migration
             $table->float('amount');
             $table->string('user_uuid');
             $table->timestamps();
-
-            $table->foreign('user_uuid')->references('uuid')->on('users');
         });
     }
 

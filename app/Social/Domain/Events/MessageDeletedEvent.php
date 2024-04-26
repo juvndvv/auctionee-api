@@ -2,7 +2,7 @@
 
 namespace App\Social\Domain\Events;
 
-use App\Shared\Infraestructure\Bus\Events\DomainEvent;
+use App\Shared\Domain\Events\DomainEvent;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

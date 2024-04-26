@@ -21,4 +21,9 @@ class UpdateEmailCommand extends Command
     {
         return $this->email;
     }
+
+    public static function create(string $uuid, string $email): UpdateEmailCommand
+    {
+        return new self($uuid, $email);
+    }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infraestructure\Bus\Events;
+namespace App\Shared\Domain\Events;
 
 use App\Shared\Domain\Models\ValueObjects\Uuid;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;

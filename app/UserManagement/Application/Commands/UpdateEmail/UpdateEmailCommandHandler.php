@@ -2,12 +2,9 @@
 
 namespace App\UserManagement\Application\Commands\UpdateEmail;
 
-use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infraestructure\Bus\Command\CommandHandler;
-use App\Shared\Infraestructure\Bus\Events\EventBus;
-use App\UserManagement\Domain\Models\User;
+use App\Shared\Application\Commands\CommandHandler;
+use App\Shared\Infraestructure\Bus\EventBus;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
-use RuntimeException;
 
 class UpdateEmailCommandHandler extends CommandHandler
 {
@@ -22,24 +19,9 @@ class UpdateEmailCommandHandler extends CommandHandler
         $uuid = $command->uuid();
         $email = $command->email();
 
-        // Fetch data
-        $dbUser = $this->userRepository->findByUuid($uuid);
-
-        if (is_null($dbUser)) {
-            throw new NotFoundException("El usuario con uuid $uuid no existe");
-        }
-
-        // Use case
-        $user = User::fromPrimitives($dbUser->toArray());
-        $user->updateEmail($email);
-
-        // Persistence
-        $updates = $this->userRepository->updateEmail($uuid, $user->email());
-
-        if ($updates < 1) {
-            throw new RuntimeException("Ha ocurrido un error al actualizar el email");
-        }
-
-        $this->eventBus->dispatch(...$user->pullDomainEvents());
+        $user = $this->userRepository->findByUuid($uuid);           // Query
+        $user->updateEmail($email);                                 // Use case
+        $this->userRepository->updateEmail($uuid, $user->email());  // Persistence
+        $this->eventBus->dispatch(...$user->pullDomainEvents());    // Publish events
     }
 }

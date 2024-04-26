@@ -2,6 +2,7 @@
 
 namespace App\UserManagement\Infraestructure\Controllers;
 
+use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Shared\Infraestructure\Controllers\ValidatedCommandController;
 use App\UserManagement\Application\Commands\UpdatePassword\UpdatePasswordCommand;
@@ -23,6 +24,9 @@ final class UpdateUserPasswordController extends ValidatedCommandController
             $this->commandBus->handle($command);
 
             return Response::OK($password, "Contraseña actualizada correctamente");
+
+        } catch (NotFoundException $e) {
+            return Response::NOT_FOUND($e->getMessage());
 
         } catch (ValidationException $e) {
             return Response::UNPROCESSABLE_ENTITY("Errores de validación en la contraseña", $e->validator->getMessageBag());

@@ -2,7 +2,7 @@
 
 namespace App\Shared\Infraestructure\Controllers;
 
-use App\Shared\Infraestructure\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Bus\CommandBus;
 
 class CommandController extends BaseController
 {

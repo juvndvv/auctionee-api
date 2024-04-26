@@ -2,7 +2,7 @@
 
 namespace App\Social\Application\DeleteFriend;
 
-use App\Shared\Infraestructure\Bus\Command\CommandHandler;
+use App\Shared\Application\Commands\CommandHandler;
 
 class DeleteFriendCommandHandler extends CommandHandler
 {

@@ -5,117 +5,40 @@ namespace App\Financial\Infraestructure\Repositories;
 use App\Financial\Domain\Models\Wallet;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Financial\Infraestructure\Repositories\Models\EloquentWalletModel;
-use App\Shared\Domain\Exceptions\NotFoundException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Shared\Infraestructure\Repositories\BaseRepository;
 
-class WalletEloquentRepository implements WalletRepositoryPort
+class WalletEloquentRepository extends BaseRepository implements WalletRepositoryPort
 {
-    /**
-     * @param Wallet $wallet
-     * @return void
-     */
-    public function create(Wallet $wallet): void
+private const ENTITY_NAME = 'wallet';
+
+    public function __construct()
     {
-        $walletDb = $wallet->toPrimitives();
-        EloquentWalletModel::query()->create($walletDb);
+        $this->setBuilderFromModel(EloquentWalletModel::query()->getModel());
+        $this->setEntityName(self::ENTITY_NAME);
     }
 
-    /**
-     * @param string $uuid
-     * @return void
-     * @throws NotFoundException
-     */
-    public function delete(string $uuid): void
-    {
-        try {
-            EloquentWalletModel::query()->findOrFail($uuid)->delete();
-
-        } catch (ModelNotFoundException $e) {
-            throw new NotFoundException("Wallet no encontrada");
-        }
-
-    }
-
-    /**
-     * @param string $userUuid
-     * @return Wallet
-     * @throws NotFoundException
-     */
     public function findByUserUuid(string $userUuid): Wallet
     {
-        try {
-            $walletDb = EloquentWalletModel::query()
-                ->where('user_uuid', $userUuid)
-                ->firstOrFail();
-            return Wallet::fromPrimitives($walletDb->toArray());
-
-        } catch (ModelNotFoundException $e) {
-            throw new NotFoundException("Wallet no encontrada");
-        }
+        $walletDb = parent::findByFieldValue(Wallet::SERIALIZED_USER_UUID, $userUuid);
+        return Wallet::fromPrimitives($walletDb->toArray()['0']);
     }
 
-    /**
-     * @param string $uuid
-     * @return Wallet
-     * @throws NotFoundException
-     */
     public function findByUuid(string $uuid): Wallet
     {
-        try {
-            $walletDb = EloquentWalletModel::query()
-                ->where('uuid', $uuid)
-                ->firstOrFail();
-            return Wallet::fromPrimitives($walletDb->toArray());
-
-        } catch (ModelNotFoundException $e) {
-            throw new NotFoundException("Wallet no encontrada");
-        }
+        $walletDb = parent::findOneByPrimaryKeyOrFail($uuid);
+        return Wallet::fromPrimitives($walletDb->toArray());
     }
 
-    /**
-     * @param string $uuid
-     * @return bool
-     */
     public function existsByUuid(string $uuid): bool
     {
-        return EloquentWalletModel::query()
-            ->where('uuid', $uuid)
-            ->exists();
+        return parent::existsByFieldValue(Wallet::SERIALIZED_UUID, $uuid);
     }
 
-    /**
-     * @param string $uuid
-     * @param float $amount
-     * @return void
-     */
-    public function withdraw(string $uuid, float $amount): void
+    public function updateAmount(string $uuid, float $amount): void
     {
-        $currentAmount = self::findAmountByUuid($uuid);
-
-        EloquentWalletModel::query()
-            ->where('uuid', $uuid)
-            ->firstOrFail()
-            ->update(['amount' => $currentAmount - $amount]);
+        parent::updateFieldByPrimaryKey($uuid, Wallet::SERIALIZED_AMOUNT, $amount);
     }
 
-    /**
-     * @param string $uuid
-     * @param float $amount
-     * @return void
-     */
-    public function deposit(string $uuid, float $amount): void
-    {
-        $currentAmount = self::findAmountByUuid($uuid);
-
-        EloquentWalletModel::query()
-            ->where('uuid', $uuid)
-            ->firstOrFail()
-            ->update(['amount' => $currentAmount + $amount]);    }
-
-    /**
-     * @param string $uuid
-     * @return float
-     */
     public function findAmountByUuid(string $uuid): float
     {
         return EloquentWalletModel::query()

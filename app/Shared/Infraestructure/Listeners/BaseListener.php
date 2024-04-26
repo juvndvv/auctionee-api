@@ -2,7 +2,7 @@
 
 namespace App\Shared\Infraestructure\Listeners;
 
-use App\Shared\Infraestructure\Bus\Command\CommandBus;
+use App\Shared\Infraestructure\Bus\CommandBus;
 
 abstract class BaseListener
 {

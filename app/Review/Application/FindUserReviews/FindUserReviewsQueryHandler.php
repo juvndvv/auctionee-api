@@ -3,8 +3,8 @@
 namespace App\Review\Application\FindUserReviews;
 
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
+use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Infraestructure\Bus\Query\QueryHandler;
 
 class FindUserReviewsQueryHandler extends QueryHandler
 {

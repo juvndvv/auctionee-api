@@ -21,4 +21,9 @@ class UpdatePasswordCommand extends Command
     {
         return $this->password;
     }
+
+    public static function create(string $uuid, string $password): UpdatePasswordCommand
+    {
+        return new self($uuid, $password);
+    }
 }

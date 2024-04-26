@@ -3,11 +3,22 @@
 namespace App\UserManagement\Domain\Ports\Outbound;
 
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
+use App\UserManagement\Domain\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 interface UserRepositoryPort extends BaseRepositoryPort
 {
+
+    /**
+     * Busca el usuario por uuid. Lanza ModelNotFound si no lo encuentra.
+     *
+     * @param string $uuid
+     * @return User
+     * @throws ModelNotFoundException
+     */
+    public function findByUuid(string $uuid): User;
+
     /**
      * Busca el usuario por el nombre de usuario. Lanza ModelNotFound si no lo encuentra
      *
@@ -15,7 +26,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @return Model
      * @throws ModelNotFoundException
      */
-    public function findByUsername(string $username): Model;
+    public function findByUsername(string $username): User;
 
     /**
      * Actualiza el nombre del usuario. Lanza excepcion si no existe.
@@ -26,6 +37,16 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @throws ModelNotFoundException
      */
     public function updateName(string $uuid, string $name): void;
+
+    /**
+     * Actualiza el username. Lanza excepcion si no existe
+     *
+     * @param string $uuid
+     * @param string $username
+     * @return void
+     * @throws ModelNotFoundException
+     */
+    public function updateUsername(string $uuid, string $username): void;
 
     /**
      * Actualiza la password del usuario. Lanza excepcion si no existe.
@@ -55,14 +76,6 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @return void
      */
     public function updateAvatar(string $uuid, string $avatar): void;
-
-    /**
-     * Elimina el usuario. Lanza excepcion si no existe.
-     *
-     * @param string $uuid
-     * @return void
-     */
-    public function delete(string $uuid): void;
 
     /**
      * Bloquea al usuario. Lanza excepcion si no existe.

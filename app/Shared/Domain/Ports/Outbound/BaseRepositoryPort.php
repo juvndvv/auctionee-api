@@ -20,23 +20,23 @@ interface BaseRepositoryPort
     public function findAll(int $offset = 0, int $limit = 20): Collection;
 
     /**
-     * Busca un modelo por su clave primaria. Lanza excepcion si no encuentra
+     * Busca un modelo por su clave primaria y devuelve su modelo de dominio. Lanza excepcion si no encuentra
      *
      * @param string $primaryKey
-     * @return Model
+     * @return mixed
      */
-    public function findOneByPrimaryKeyOrFail(string $primaryKey): Model;
+    public function findOneByPrimaryKeyOrFail(string $primaryKey): mixed;
 
     /**
-     * Busca y devuelve modelos por el valor <i>value</i> de un campo <i>field</i>. Lanza ModelNotFound si
-     * no lo encuentra
+     * Busca y devuelve modelos por el valor <i>value</i> de un campo <i>field</i>. Lanza ModelNotFound si.
+     * no lo encuentra. Devuelve una instancia del modelo del dominio
      *
      * @param string $field
      * @param string $value
-     * @return Model
+     * @return mixed
      * @throws ModelNotFoundException
      */
-    public function findByFieldValue(string $field, string $value): Model|Collection;
+    public function findByFieldValue(string $field, string $value): mixed;
 
     /**
      * Registra el modelo en la base de datos
@@ -65,6 +65,15 @@ interface BaseRepositoryPort
      * @return void
      */
     public function deleteByPrimaryKey(string $primaryKey): void;
+
+    /**
+     * Elimina el modelo por el valor <i>value</i> de un campo <i>field</i>
+     *
+     * @param string $field
+     * @param string $value
+     * @return void
+     */
+    public function deleteByFieldValue(string $field, string $value): void;
 
     /**
      * Comprueba si existe un modelo por su clave primaria

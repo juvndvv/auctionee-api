@@ -11,6 +11,11 @@ class DeleteUserCommand extends Command
     )
     {}
 
+    public static function create(string $uuid): DeleteUserCommand
+    {
+        return new self($uuid);
+    }
+
     public function uuid(): string
     {
         return $this->uuid;

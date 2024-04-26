@@ -21,4 +21,9 @@ class UpdateNameCommand extends Command
     {
         return $this->name;
     }
+
+    public static function create(string $uuid, string $name): UpdateNameCommand
+    {
+        return new self($uuid, $name);
+    }
 }

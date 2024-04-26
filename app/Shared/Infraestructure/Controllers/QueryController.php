@@ -2,7 +2,7 @@
 
 namespace App\Shared\Infraestructure\Controllers;
 
-use App\Shared\Infraestructure\Bus\Query\QueryBus;
+use App\Shared\Infraestructure\Bus\QueryBus;
 
 abstract class QueryController extends BaseController
 {

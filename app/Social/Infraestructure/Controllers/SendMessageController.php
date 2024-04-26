@@ -2,8 +2,6 @@
 
 namespace App\Social\Infraestructure\Controllers;
 
-use App\Shared\Infraestructure\Bus\Command\CommandBus;
-use App\Shared\Infraestructure\Controllers\BaseController;
 use App\Shared\Infraestructure\Controllers\QueryController;
 use App\Shared\Infraestructure\Controllers\Response;
 use App\Social\Application\SendMessage\SendMessageCommand;

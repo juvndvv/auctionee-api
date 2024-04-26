@@ -3,8 +3,6 @@
 namespace App\Financial\Infraestructure\Controllers;
 
 use App\Financial\Application\DepositMoney\DepositMoneyCommand;
-use App\Shared\Infraestructure\Bus\Command\CommandBus;
-use App\Shared\Infraestructure\Controllers\BaseController;
 use App\Shared\Infraestructure\Controllers\CommandController;
 use App\Shared\Infraestructure\Controllers\Response;
 use Exception;

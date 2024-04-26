@@ -6,7 +6,6 @@ use App\Shared\Infraestructure\Repositories\BaseRepository;
 use App\UserManagement\Domain\Models\User;
 use App\UserManagement\Domain\Ports\Outbound\UserRepositoryPort;
 use App\UserManagement\Infraestructure\Repositories\Models\EloquentUserModel;
-use Illuminate\Database\Eloquent\Model;
 
 class UserEloquentRepository extends BaseRepository implements UserRepositoryPort
 {
@@ -18,22 +17,24 @@ class UserEloquentRepository extends BaseRepository implements UserRepositoryPor
         $this->setEntityName(self::ENTITY_NAME);
     }
 
-    public function findByUuid(string $uuid): Model
+    public function findByUuid(string $uuid): User
     {
-        return parent::findOneByPrimaryKeyOrFail($uuid);
+        $userDb = parent::findOneByPrimaryKeyOrFail($uuid);
+        return User::fromPrimitives($userDb->toArray());
     }
 
-    public function findByUsername(string $username): Model
+    public function findByUsername(string $username): User
     {
-        return parent::findByFieldValue(User::SERIALIZED_USERNAME, $username);
+        $userDb = parent::findByFieldValue(User::SERIALIZED_USERNAME, $username);
+        return User::fromPrimitives($userDb->toArray());
     }
 
     public function updateName(string $uuid, string $name): void
     {
-        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_USERNAME, $name);
+        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_NAME, $name);
     }
 
-    public function updateUsername(string $uuid, string $username): int
+    public function updateUsername(string $uuid, string $username): void
     {
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_USERNAME, $username);
     }
@@ -51,11 +52,6 @@ class UserEloquentRepository extends BaseRepository implements UserRepositoryPor
     public function updateAvatar(string $uuid, string $avatar): void
     {
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_AVATAR, $avatar);
-    }
-
-    public function delete(string $uuid): void
-    {
-        parent::deleteByPrimaryKey($uuid);
     }
 
     public function block(string $uuid): void

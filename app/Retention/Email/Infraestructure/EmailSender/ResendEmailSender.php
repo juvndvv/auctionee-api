@@ -8,7 +8,6 @@ use Resend\Laravel\Facades\Resend;
 
 class ResendEmailSender implements EmailSenderPort
 {
-
     public function send(Email $email)
     {
         Resend::emails()->send([

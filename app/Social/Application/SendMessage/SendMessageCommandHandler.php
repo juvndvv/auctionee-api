@@ -2,8 +2,8 @@
 
 namespace App\Social\Application\SendMessage;
 
-use App\Shared\Infraestructure\Bus\Command\CommandHandler;
-use App\Shared\Infraestructure\Bus\Events\EventBus;
+use App\Shared\Application\Commands\CommandHandler;
+use App\Shared\Infraestructure\Bus\EventBus;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 

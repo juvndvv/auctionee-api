@@ -2,7 +2,7 @@
 
 namespace App\Social\Application\SendFriendRequest;
 
-use App\Shared\Infraestructure\Bus\Command\CommandHandler;
+use App\Shared\Application\Commands\CommandHandler;
 
 class SendFriendRequestCommandHandler extends CommandHandler
 {
