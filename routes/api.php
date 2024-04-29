@@ -8,7 +8,7 @@ use App\Financial\Infrastructure\Controllers\WithdrawMoneyBaseController;
 use App\Retention\EventMonitoring\Infrastructure\Controllers\FindAllEventsController;
 use App\Review\Infrastructure\Controllers\FindUserAverageRatingController;
 use App\Review\Infrastructure\Controllers\FindUserReviewsController;
-use App\Review\Infrastructure\Controllers\PlaceReviewBaseController;
+use App\Review\Infrastructure\Controllers\PlaceReviewController;
 use App\Review\Infrastructure\Controllers\RemoveReviewController;
 use App\Review\Infrastructure\Controllers\UpdateDescriptionController;
 use App\Review\Infrastructure\Controllers\UpdateRatingController;
@@ -59,7 +59,7 @@ Route::post("/wallets/{uuid}/deposit", DepositMoneyBaseController::class);
 Route::post("/wallets/{uuid}/withdraw", WithdrawMoneyBaseController::class);
 
 // Reviews
-Route::post('/reviews', PlaceReviewBaseController::class);
+Route::post('/reviews', PlaceReviewController::class);
 Route::delete('/reviews/{uuid}', RemoveReviewController::class);
 Route::put('/reviews/{uuid}/rating', UpdateRatingController::class);
 Route::put('/reviews/{uuid}/description', UpdateDescriptionController::class);

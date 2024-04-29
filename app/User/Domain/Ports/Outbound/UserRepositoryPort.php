@@ -112,7 +112,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
     public function unblock(string $uuid): void;
 
     /**
-     * Returns token if email and password are correct
+     * Devuelve el token si el email y la contraseña son correctos
      *
      * @param string $email
      * @param string $password

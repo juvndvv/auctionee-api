@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-final class PlaceReviewBaseController extends ValidatedCommandController
+final class PlaceReviewController extends ValidatedCommandController
 {
     public function __invoke(Request $request): JsonResponse
     {

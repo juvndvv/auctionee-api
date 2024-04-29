@@ -23,25 +23,12 @@ final class UpdateRatingCommandHandler extends CommandHandler
      */
     public function __invoke(UpdateRatingCommand $command): void
     {
-        try {
-            $uuid = $command->uuid();
-            $rating = $command->rating();
+        $uuid = $command->uuid();
+        $rating = $command->rating();
 
-            $dbReview = $this->reviewRepository->findByUuid($uuid);
-
-            $review = Review::fromPrimitives($dbReview->toArray());
-            $review->updateRating($rating);
-
-            $updates = $this->reviewRepository->updateRating($uuid, $rating);
-
-            if ($updates < 1) {
-                throw new RuntimeException("Ha ocurrido un error al actualizar el rating");
-            }
-
-            $this->eventBus->dispatch(...$review->pullDomainEvents());
-
-        } catch (ModelNotFoundException $e) {
-            throw new NotFoundException("La review con uuid {$uuid} no existe");
-        }
+        $review = $this->reviewRepository->findByUuid($uuid);       // Query data
+        $review->updateRating($rating);                             // Use case
+        $this->reviewRepository->updateRating($uuid, $rating);      // Persistence
+        $this->eventBus->dispatch(...$review->pullDomainEvents());  // Publish events
     }
 }

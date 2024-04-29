@@ -18,7 +18,7 @@ final class ReviewRemovedEvent extends DomainEvent
 
     public function broadcastOn(): array
     {
-        return [reviews];
+        return ['reviews'];
     }
 
     public function broadcastAs(): string

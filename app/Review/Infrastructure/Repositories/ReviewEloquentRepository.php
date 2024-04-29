@@ -2,74 +2,64 @@
 
 namespace App\Review\Infrastructure\Repositories;
 
+use App\Review\Domain\Models\Review;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
-use App\Review\Domain\Resources\ReviewDetailsResource;
 use App\Review\Infrastructure\Repositories\Models\EloquentReviewModel;
 use App\Shared\Infrastucture\Repositories\BaseRepository;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
-class ReviewEloquentRepository extends BaseRepository implements ReviewRepositoryPort
+final class ReviewEloquentRepository extends BaseRepository implements ReviewRepositoryPort
 {
-    public function findByUuid(string $uuid)
+    private const ENTITY_NAME = 'review';
+
+    public function __construct()
     {
-        return EloquentReviewModel::query()->where("uuid", $uuid)->firstOrFail();
+        $this->setBuilderFromModel(EloquentReviewModel::query()->getModel());
+        $this->setEntityName(self::ENTITY_NAME);
     }
 
-    public function findByReviewerUuid(string $reviewerUuid): ReviewDetailsResource
+    public function findAll(int $offset = 0, int $limit = 20): Collection
     {
-        $userDb = EloquentReviewModel::query()
-            ->select(
-                "reviews.uuid",
-                "users.username",
-                "users.avatar",
-                "reviews.rating",
-                "reviews.description",
-                "reviews.created_at")
-            ->join("users", "users.uuid", "=", "reviews.reviewed_uuid")
-            ->where("reviews.reviewer_uuid", $reviewerUuid)
-            ->get();
-
-        dd($userDb);
+        $reviews = parent::findAll($offset, $limit);
+        return $reviews->map(fn ($review) => Review::fromPrimitives($review->toArray()));
     }
 
-    public function findByReviewedUuid(string $reviewedUuid): Collection
+    public function findByUuid(string $uuid): Review
     {
-        return EloquentReviewModel::query()
-            ->select(
-                "reviews.uuid",
-                "users.username",
-                "users.avatar",
-                "reviews.rating",
-                "reviews.description",
-                "reviews.created_at")
-            ->join("users", "users.uuid", "=", "reviews.reviewer_uuid")
-            ->where("reviews.reviewed_uuid", $reviewedUuid)
-            ->get();
+        $reviewDb = parent::findByFieldValue(Review::SERIALIZED_UUID, $uuid)['0'];
+        return Review::fromPrimitives($reviewDb->toArray());
     }
 
-    public function create(array $data): void
+    public function findByReviewerUuid(string $reviewerUuid): Review
     {
-        EloquentReviewModel::query()->create($data);
+        $reviewDb = parent::findByFieldValue(Review::SERIALIZED_REVIEWER_UUID, $reviewerUuid)['0'];
+        return Review::fromPrimitives($reviewDb->toArray());
+    }
+
+    public function findByReviewedUuid(string $reviewedUuid): Review
+    {
+        $reviewDb = parent::findByFieldValue(Review::SERIALIZED_REVIEWED_UUID, $reviewedUuid)['0'];
+        return Review::fromPrimitives($reviewDb->toArray());
     }
 
     public function updateRating($uuid, int $rating): void
     {
-        EloquentReviewModel::query()->where('uuid', $uuid)->update(['rating' => $rating]);
+        parent::updateFieldByPrimaryKey($uuid, Review::SERIALIZED_RATING, $rating);
     }
 
     public function updateDescription(string $uuid, string $description): void
     {
-        EloquentReviewModel::query()->where('uuid', $uuid)->update(['description' => $description]);
+        parent::updateFieldByPrimaryKey($uuid, Review::SERIALIZED_DESCRIPTION, $description);
     }
 
     public function remove(string $uuid): void
     {
-        EloquentReviewModel::query()->where('uuid', $uuid)->delete();
+        parent::deleteByPrimaryKey($uuid);
     }
 
     public function findUserAverageRating(string $userUuid): float
     {
-        return EloquentReviewModel::query()
+        return $this->builder
             ->where("reviewed_uuid", "=", $userUuid)
             ->avg("rating");
     }

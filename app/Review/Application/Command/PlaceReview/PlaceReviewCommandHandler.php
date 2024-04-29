@@ -21,13 +21,8 @@ final class PlaceReviewCommandHandler extends QueryHandler
         $reviewerUuid = $command->reviewerUuid();
         $reviewedUuid = $command->reviewedUuid();
 
-        // Use case
-        $review = Review::create($rating, $description, $reviewerUuid, $reviewedUuid);
-
-        // Persistence
-        $this->reviewRepository->create($review->toPrimitives());
-
-        // Publish events
-        $this->eventBus->dispatch(...$review->pullDomainEvents());
+        $review = Review::create($rating, $description, $reviewerUuid, $reviewedUuid);  // Use case
+        $this->reviewRepository->create($review->toPrimitives());                       // Persistence
+        $this->eventBus->dispatch(...$review->pullDomainEvents());                      // Publish events
     }
 }

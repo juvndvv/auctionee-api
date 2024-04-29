@@ -10,7 +10,7 @@ use App\Shared\Infrastucture\Bus\EventBus;
 use http\Exception\RuntimeException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class UpdateDescriptionCommandHandler extends CommandHandler
+final class UpdateDescriptionCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly ReviewRepositoryPort $reviewRepository,
@@ -23,25 +23,12 @@ class UpdateDescriptionCommandHandler extends CommandHandler
      */
     public function __invoke(UpdateDescriptionCommand $command): void
     {
-        try {
             $uuid = $command->uuid();
             $description = $command->description();
 
-            $dbReview = $this->reviewRepository->findByUuid($uuid);
-
-            $review = Review::fromPrimitives($dbReview->toArray());
-            $review->updateDescription($description);
-
-            $updates = $this->reviewRepository->updateDescription($uuid, $description);
-
-            if ($updates < 1) {
-                throw new RuntimeException("Ha ocurrido un error al actualizar la descripcion");
-            }
-
-            $this->eventBus->dispatch(...$review->pullDomainEvents());
-
-        } catch (ModelNotFoundException $e) {
-            throw new NotFoundException("La review con uuid {$uuid} no existe");
-        }
+            $review = $this->reviewRepository->findByUuid($uuid);               // Query data
+            $review->updateDescription($description);                           // Use case
+            $this->reviewRepository->updateDescription($uuid, $description);    // Persistence
+            $this->eventBus->dispatch(...$review->pullDomainEvents());          // Publish event
     }
 }

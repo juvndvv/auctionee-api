@@ -16,27 +16,16 @@ final class RemoveReviewCommandHandler extends CommandHandler
         private readonly EventBus $eventBus)
     {}
 
-    public function __invoke(RemoveReviewCommand $command)
+    /**
+     * @throws NotFoundException
+     */
+    public function __invoke(RemoveReviewCommand $command): void
     {
-        try {
             $uuid = $command->uuid();
 
-            // Fetch data
-            $reviewDb = $this->reviewRepository->findByUuid($uuid);
-
-            // Use case
-            $review = Review::fromPrimitives($reviewDb->toArray());
-            $review->delete();
-
-            // Persistence
-            $this->reviewRepository->remove($review->uuid());
-
-            // Events
-            $this->eventBus->dispatch(...$review->pullDomainEvents());
-
-        } catch (ModelNotFoundException $e) {
-            throw new NotFoundException("La review con uuid {$uuid} no existe");
-        }
-
+            $review = $this->reviewRepository->findByUuid($uuid);       // Query data
+            $review->delete();                                          // Use case
+            $this->reviewRepository->remove($review->uuid());           // Persistence
+            $this->eventBus->dispatch(...$review->pullDomainEvents());  // Publish events
     }
 }

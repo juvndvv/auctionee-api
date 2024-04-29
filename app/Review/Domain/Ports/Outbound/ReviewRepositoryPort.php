@@ -3,15 +3,69 @@
 namespace App\Review\Domain\Ports\Outbound;
 
 use App\Review\Domain\Models\Review;
+use App\Shared\Domain\Exceptions\NoContentException;
+use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
+use Illuminate\Support\Collection;
 
 interface ReviewRepositoryPort extends BaseRepositoryPort
 {
-    public function findByUuid(string $uuid);
-    public function findByReviewerUuid(string $reviewerUuid);
-    public function findByReviewedUuid(string $reviewedUuid);
-    public function updateRating($uuid, int $rating);
-    public function updateDescription(string $uuid, string $description);
-    public function remove(string $uuid);
-    public function findUserAverageRating(string $userUuid);
+    /**
+     * @param int $offset
+     * @param int $limit
+     * @return Collection<Review>
+     * @throws NoContentException
+     */
+    public function findAll(int $offset = 0, int $limit = 20): Collection;
+
+    /**
+     * @param string $uuid
+     * @return Review
+     * @throws NotFoundException
+     */
+    public function findByUuid(string $uuid): Review;
+
+    /**
+     * @param string $reviewerUuid
+     * @return Review
+     * @throws NotFoundException
+     */
+    public function findByReviewerUuid(string $reviewerUuid): Review;
+
+    /**
+     * @param string $reviewedUuid
+     * @return Review
+     * @throws NotFoundException
+     */
+    public function findByReviewedUuid(string $reviewedUuid): Review;
+
+    /**
+     * @param $uuid
+     * @param int $rating
+     * @return void
+     * @throws NotFoundException
+     */
+    public function updateRating($uuid, int $rating): void;
+
+    /**
+     * @param string $uuid
+     * @param string $description
+     * @return void
+     * @throws NotFoundException
+     */
+    public function updateDescription(string $uuid, string $description): void;
+
+    /**
+     * @param string $uuid
+     * @return void
+     * @throws NotFoundException
+     */
+    public function remove(string $uuid): void;
+
+    /**
+     * @param string $userUuid
+     * @return float
+     * @throws NotFoundException
+     */
+    public function findUserAverageRating(string $userUuid): float;
 }
