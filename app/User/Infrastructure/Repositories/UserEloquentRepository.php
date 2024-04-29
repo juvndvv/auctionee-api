@@ -3,8 +3,6 @@
 namespace App\User\Infrastructure\Repositories;
 
 use App\Shared\Domain\Exceptions\BadRequestException;
-use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastructure\Repositories\BaseRepository;
 use App\User\Domain\Models\User;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
@@ -18,17 +16,10 @@ final class UserEloquentRepository extends BaseRepository implements UserReposit
 
     public function __construct()
     {
-        $this->setBuilderFromModel(EloquentUserModel::query()->getModel());
+        $this->setModel(EloquentUserModel::query()->getModel());
         $this->setEntityName(self::ENTITY_NAME);
     }
 
-    /**
-     * @param int $offset
-     * @param int $limit
-     * @return Collection<User>
-     * @throws NoContentException
-     */
-    #[Override]
     public function findAll(int $offset = 0, int $limit = 20): Collection
     {
         $users = parent::findAll($offset, $limit);
@@ -67,25 +58,16 @@ final class UserEloquentRepository extends BaseRepository implements UserReposit
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_PASSWORD, $password);
     }
 
-    /**
-     * @throws NotFoundException
-     */
     public function updateAvatar(string $uuid, string $avatar): void
     {
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_AVATAR, $avatar);
     }
 
-    /**
-     * @throws NotFoundException
-     */
     public function block(string $uuid): void
     {
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_ROLE, User::BLOCKED_ROLE);
     }
 
-    /**
-     * @throws NotFoundException
-     */
     public function unblock(string $uuid): void
     {
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_ROLE, User::USER_ROLE);
@@ -93,7 +75,7 @@ final class UserEloquentRepository extends BaseRepository implements UserReposit
 
     public function authenticate(string $email, string $password): string
     {
-        $userDb = $this->builder->where('email', $email)->where('password', $password)->first();
+        $userDb = $this->model->where('email', $email)->where('password', $password)->first();
 
         if (!$userDb) {
             throw new BadRequestException("Email o contraseña incorrecta");

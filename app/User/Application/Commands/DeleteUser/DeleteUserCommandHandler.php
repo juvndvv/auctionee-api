@@ -16,6 +16,7 @@ final class DeleteUserCommandHandler extends CommandHandler
     {}
 
     /**
+     * @param DeleteUserCommand $command
      * @throws NotFoundException
      */
     public function __invoke(DeleteUserCommand $command): void

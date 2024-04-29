@@ -61,17 +61,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(UserRepositoryPort::class, UserEloquentRepository::class);
-        $this->app->singleton(ImageRepositoryPort::class, ImageCloudfareR2Repository::class);
-        $this->app->singleton(EmailRepositoryPort::class, InMemoryEmailRepository::class);
-        $this->app->singleton(EmailSenderPort::class, ResendEmailSender::class);
-        $this->app->singleton(ReviewRepositoryPort::class, ReviewEloquentRepository::class);
-        $this->app->singleton(EventRepositoryPort::class, EloquentEventRepository::class);
-        $this->app->singleton(WalletRepositoryPort::class, WalletEloquentRepository::class);
-        $this->app->singleton(TransactionRepositoryPort::class, TransactionEloquentRepository::class);
-        $this->app->singleton(ChatRoomRepositoryPort::class, ChatRoomEloquentRepository::class);
-        $this->app->singleton(ChatMessagesRepositoryPort::class, ChatMessagesEloquentRepository::class);
-        $this->app->singleton(FriendshipRepositoryPort::class, FriendshipEloquentRepository::class);
+        $this->app->bind(UserRepositoryPort::class, UserEloquentRepository::class);
+        $this->app->bind(ImageRepositoryPort::class, ImageCloudfareR2Repository::class);
+        $this->app->bind(EmailRepositoryPort::class, InMemoryEmailRepository::class);
+        $this->app->bind(EmailSenderPort::class, ResendEmailSender::class);
+        $this->app->bind(ReviewRepositoryPort::class, ReviewEloquentRepository::class);
+        $this->app->bind(EventRepositoryPort::class, EloquentEventRepository::class);
+        $this->app->bind(WalletRepositoryPort::class, WalletEloquentRepository::class);
+        $this->app->bind(TransactionRepositoryPort::class, TransactionEloquentRepository::class);
+        $this->app->bind(ChatRoomRepositoryPort::class, ChatRoomEloquentRepository::class);
+        $this->app->bind(ChatMessagesRepositoryPort::class, ChatMessagesEloquentRepository::class);
+        $this->app->bind(FriendshipRepositoryPort::class, FriendshipEloquentRepository::class);
     }
 
     /**

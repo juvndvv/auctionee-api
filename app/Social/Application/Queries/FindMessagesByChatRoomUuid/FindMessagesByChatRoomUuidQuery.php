@@ -2,7 +2,8 @@
 
 namespace App\Social\Application\Queries\FindMessagesByChatRoomUuid;
 
-use App\Shared\Infraestructure\Bus\Query\Query;
+
+use App\Shared\Application\Queries\Query;
 
 class FindMessagesByChatRoomUuidQuery extends Query
 {

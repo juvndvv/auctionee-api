@@ -14,7 +14,7 @@ final class WalletEloquentRepository extends BaseRepository implements WalletRep
 
     public function __construct()
     {
-        $this->setBuilderFromModel(EloquentWalletModel::query()->getModel());
+        $this->setModel(EloquentWalletModel::query()->getModel());
         $this->setEntityName(self::ENTITY_NAME);
     }
 

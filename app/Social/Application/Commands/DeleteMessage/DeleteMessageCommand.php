@@ -4,7 +4,7 @@ namespace App\Social\Application\Commands\DeleteMessage;
 
 use App\Shared\Application\Commands\Command;
 
-class DeleteMessageCommand extends Command
+final class DeleteMessageCommand extends Command
 {
     public function __construct(
         private readonly string $chatRoomUuid,
@@ -20,10 +20,5 @@ class DeleteMessageCommand extends Command
     public function messageUuid(): string
     {
         return $this->messageUuid;
-    }
-
-    public function ownerUuid(): string
-    {
-        return $this->ownerUuid;
     }
 }

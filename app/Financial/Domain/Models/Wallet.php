@@ -2,7 +2,7 @@
 
 namespace App\Financial\Domain\Models;
 
-use App\Financial\Domain\Events\TransactionPlaced;
+use App\Financial\Domain\Events\TransactionPlacedEvent;
 use App\Financial\Domain\Exceptions\NotEnoughFoundsException;
 use App\Financial\Domain\Models\ValueObjects\WalletAmount;
 use App\Financial\Domain\Models\ValueObjects\WalletUuid;
@@ -137,7 +137,7 @@ final class Wallet extends AggregateRoot
         $transaction = Transaction::create($this->uuid(), $destinationWalletUuid, $amount);
         $this->transactions->add($transaction);
 
-        $this->record(new TransactionPlaced($transaction->toPrimitives(), now()->toString()));
+        $this->record(new TransactionPlacedEvent($transaction->toPrimitives(), now()->toString()));
     }
 
     /**
@@ -163,6 +163,8 @@ final class Wallet extends AggregateRoot
         }
 
         $this->amount = new WalletAmount($this->amount->value() - $amount);
+
+
     }
 
     /**

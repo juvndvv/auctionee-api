@@ -7,7 +7,7 @@ use App\Shared\Domain\Exceptions\BadRequestException;
 use App\Social\Domain\Models\ChatRoom;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 
-class CreateChatRoomCommandHandler extends CommandHandler
+final class CreateChatRoomCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly ChatRoomRepositoryPort $chatRoomRepository

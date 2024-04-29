@@ -92,6 +92,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @param string $uuid
      * @param string $avatar
      * @return void
+     * @throws NotFoundException
      */
     public function updateAvatar(string $uuid, string $avatar): void;
 
@@ -100,6 +101,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      *
      * @param string $uuid
      * @return void
+     * @throws NotFoundException
      */
     public function block(string $uuid): void;
 
@@ -108,6 +110,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      *
      * @param string $uuid
      * @return void
+     * @throws NotFoundException
      */
     public function unblock(string $uuid): void;
 

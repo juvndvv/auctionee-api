@@ -4,6 +4,7 @@ namespace App\Social\Application\Queries\FindMessagesByChatRoomUuid;
 
 use App\Shared\Application\Commands\QueryHandler;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
+use Illuminate\Support\Collection;
 
 class FindMessagesByChatRoomUuidQueryHandler extends QueryHandler
 {
@@ -12,7 +13,7 @@ class FindMessagesByChatRoomUuidQueryHandler extends QueryHandler
     )
     {}
 
-    public function __invoke(FindMessagesByChatRoomUuidQuery $query)
+    public function __invoke(FindMessagesByChatRoomUuidQuery $query): Collection
     {
         $uuid = $query->uuid();
         return $this->chatMessageRepository->findAllByChatRoomUuid($uuid);

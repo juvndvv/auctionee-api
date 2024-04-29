@@ -15,7 +15,7 @@ final class TransactionEloquentRepository extends BaseRepository implements Tran
     public function __construct()
     {
         $this->setEntityName(self::ENTITY_NAME);
-        $this->setBuilderFromModel(EloquentTransactionModel::query()->getModel());
+        $this->setModel(EloquentTransactionModel::query()->getModel());
     }
 
     public function findByWalletUuid(string $walletUuid): Collection

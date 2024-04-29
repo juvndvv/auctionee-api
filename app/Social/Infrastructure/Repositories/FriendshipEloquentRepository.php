@@ -13,7 +13,7 @@ class FriendshipEloquentRepository extends BaseRepository implements FriendshipR
 
     public function __construct()
     {
-        self::setBuilderFromModel(EloquentFriendshipModel::query()->getModel());
+        self::setModel(EloquentFriendshipModel::query()->getModel());
         self::setEntityName(self::ENTITY_NAME);
     }
 

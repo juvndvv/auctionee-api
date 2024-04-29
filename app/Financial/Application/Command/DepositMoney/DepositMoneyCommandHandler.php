@@ -20,6 +20,6 @@ final class DepositMoneyCommandHandler extends CommandHandler
         $wallet = $this->walletRepository->findByUuid($walletUuid);
         $wallet->deposit($amount);
 
-        $this->walletRepository->deposit($walletUuid, $amount);
+        $this->walletRepository->updateAmount($walletUuid, $amount);
     }
 }

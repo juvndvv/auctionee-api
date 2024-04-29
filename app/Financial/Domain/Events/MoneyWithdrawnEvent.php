@@ -7,7 +7,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-final class TransactionPlaced extends DomainEvent
+class MoneyWithdrawnEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -23,11 +23,11 @@ final class TransactionPlaced extends DomainEvent
 
     public function broadcastAs(): string
     {
-        return TransactionPlaced::eventName();
+        return self::eventName();
     }
 
     public static function eventName(): string
     {
-        return 'transaction.placed';
+        return 'money.withdrawn';
     }
 }

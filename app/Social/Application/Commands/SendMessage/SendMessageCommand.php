@@ -4,7 +4,7 @@ namespace App\Social\Application\Commands\SendMessage;
 
 use App\Shared\Application\Commands\Command;
 
-class SendMessageCommand extends Command
+final class SendMessageCommand extends Command
 {
     public function __construct(
         private readonly string $chatRoomUuid,

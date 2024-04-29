@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Social\Domain\Events;
+namespace App\Financial\Domain\Events;
 
 use App\Shared\Domain\Events\DomainEvent;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FriendshipCreatedEvent extends DomainEvent
+final class TransactionPlacedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -18,16 +18,16 @@ class FriendshipCreatedEvent extends DomainEvent
 
     public function broadcastOn(): array
     {
-        return [self::eventName()];
+        return ['transactions'];
     }
 
     public function broadcastAs(): string
     {
-        return self::eventName();
+        return TransactionPlacedEvent::eventName();
     }
 
     public static function eventName(): string
     {
-        return 'friendship.created';
+        return 'transaction.placed';
     }
 }

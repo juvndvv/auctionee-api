@@ -22,7 +22,7 @@ final class DeleteUserController extends CommandController
         } catch (NotFoundException) {
             return Response::NOT_FOUND("El usuario $uuid no existe");
 
-        } catch (Exception $e) {
+        } catch (Exception) {
             return Response::SERVER_ERROR();
         }
     }

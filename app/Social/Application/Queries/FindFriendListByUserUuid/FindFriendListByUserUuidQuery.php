@@ -2,9 +2,10 @@
 
 namespace App\Social\Application\Queries\FindFriendListByUserUuid;
 
-use App\Shared\Infraestructure\Bus\Query\Query;
 
-class FindFriendListByUserUuidQuery extends Query
+use App\Shared\Application\Queries\Query;
+
+final class FindFriendListByUserUuidQuery extends Query
 {
     public function __construct(
         private readonly string $userUuid

@@ -4,9 +4,9 @@ namespace App\Social\Application\Commands\CreateChatRoom;
 
 use App\Shared\Application\Commands\Command;
 
-class CreateChatRoomCommand extends Command
+final class CreateChatRoomCommand extends Command
 {
-    public function __construct(
+    private function __construct(
         private readonly string $leftUuid,
         private readonly string $rightUuid,
     )
@@ -21,4 +21,6 @@ class CreateChatRoomCommand extends Command
     {
         return $this->rightUuid;
     }
+
+
 }

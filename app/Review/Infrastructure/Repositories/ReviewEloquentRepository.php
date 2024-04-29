@@ -13,11 +13,11 @@ use Illuminate\Support\Collection;
 
 final class ReviewEloquentRepository extends BaseRepository implements ReviewRepositoryPort
 {
-    private const ENTITY_NAME = 'review';
+    private const string ENTITY_NAME = 'review';
 
     public function __construct()
     {
-        $this->setBuilderFromModel(EloquentReviewModel::query()->getModel());
+        $this->setModel(EloquentReviewModel::query()->getModel());
         $this->setEntityName(self::ENTITY_NAME);
     }
 
@@ -85,7 +85,7 @@ final class ReviewEloquentRepository extends BaseRepository implements ReviewRep
 
     public function findUserAverageRating(string $userUuid): UserAverageProjection
     {
-        return UserAverageProjection::create(floatval($this->builder
+        return UserAverageProjection::create(floatval($this->model
             ->where("reviewed_uuid", "=", $userUuid)
             ->avg("rating")));
     }

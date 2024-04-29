@@ -4,7 +4,6 @@ namespace App\Financial\Domain\Ports\Inbound;
 
 use App\Financial\Domain\Models\Wallet;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 interface WalletRepositoryPort extends BaseRepositoryPort

@@ -9,7 +9,7 @@ use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class DeleteMessageCommandHandler extends CommandHandler
+final class DeleteMessageCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly ChatRoomRepositoryPort $chatRoomRepository,

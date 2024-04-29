@@ -14,6 +14,6 @@ class EloquentEventRepository extends BaseRepository implements EventRepositoryP
     public function __construct()
     {
         $this->setEntityName(self::ENTITY_NAME);
-        $this->setBuilderFromModel(EloquentEventModel::query()->getModel());
+        $this->setModel(EloquentEventModel::query()->getModel());
     }
 }

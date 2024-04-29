@@ -2,9 +2,9 @@
 
 namespace App\Social\Application\Queries\FindChatRoomsByUserUuid;
 
-use App\Shared\Application\Commands\Command;
+use App\Shared\Application\Queries\Query;
 
-class FindChatRoomsByUserUuidQuery extends Command
+final class FindChatRoomsByUserUuidQuery extends Query
 {
     public function __construct(
         private readonly string $uuid

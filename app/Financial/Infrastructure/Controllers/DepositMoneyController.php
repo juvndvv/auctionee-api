@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class DepositMoneyController extends CommandController
 {
+
     public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {

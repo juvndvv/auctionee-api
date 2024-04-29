@@ -7,7 +7,7 @@ use App\Shared\Infrastructure\Bus\EventBus;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 
-class SendMessageCommandHandler extends CommandHandler
+final class SendMessageCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly ChatMessagesRepositoryPort $chatMessageRepository,

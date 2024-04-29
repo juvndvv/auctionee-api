@@ -2,8 +2,10 @@
 
 namespace App\Financial\Application\Command\WithdrawMoney;
 
+use App\Financial\Domain\Exceptions\NotEnoughFoundsException;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Shared\Application\Commands\CommandHandler;
+
 
 final class WithdrawMoneyCommandHandler extends CommandHandler
 {
@@ -12,7 +14,10 @@ final class WithdrawMoneyCommandHandler extends CommandHandler
     )
     {}
 
-    public function __invoke(WithdrawMoneyCommand $command)
+    /**
+     * @throws NotEnoughFoundsException
+     */
+    public function __invoke(WithdrawMoneyCommand $command): void
     {
         $uuid = $command->uuid();
         $amount = $command->amount();
@@ -20,6 +25,6 @@ final class WithdrawMoneyCommandHandler extends CommandHandler
         $wallet = $this->walletRepository->findByUuid($uuid);
         $wallet->withdraw($amount);
 
-        $this->walletRepository->withdraw($uuid, $amount);
+        $this->walletRepository->updateAmount($uuid, $wallet->amount());
     }
 }
