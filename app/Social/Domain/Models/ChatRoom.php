@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Social\Domain\Models;
 
@@ -9,7 +9,7 @@ use App\Social\Domain\Models\ValueObjects\ChatRoomUuid;
 use App\User\Domain\Models\ValueObjects\UserId;
 use Illuminate\Support\Collection;
 
-class ChatRoom extends AggregateRoot
+final class ChatRoom extends AggregateRoot
 {
     public const string SERIALIZED_UUID = 'uuid';
     public const string SERIALIZED_LEFT_UUID = 'left_uuid';
@@ -45,9 +45,9 @@ class ChatRoom extends AggregateRoot
     public static function fromPrimitives(array $data): self
     {
         return new self(
-            $data['uuid'],
-            $data['left_uuid'],
-            $data['right_uuid'],
+            $data[self::SERIALIZED_UUID],
+            $data[self::SERIALIZED_LEFT_UUID],
+            $data[self::SERIALIZED_RIGHT_UUID],
         );
     }
 
@@ -57,9 +57,9 @@ class ChatRoom extends AggregateRoot
     public function toPrimitives(): array
     {
         return [
-            'uuid' => $this->uuid(),
-            'left_uuid' => $this->left(),
-            'right_uuid' => $this->right()
+            self::SERIALIZED_UUID => $this->uuid(),
+            self::SERIALIZED_LEFT_UUID => $this->left(),
+            self::SERIALIZED_RIGHT_UUID => $this->right()
         ];
     }
 
@@ -73,7 +73,7 @@ class ChatRoom extends AggregateRoot
      */
     public function uuid(): string
     {
-        return $this->uuid;
+        return $this->uuid->value();
     }
 
     /**
@@ -105,14 +105,15 @@ class ChatRoom extends AggregateRoot
      * @param string $rightUuid
      * @return self
      */
-    public static function create(string $leftUuid, string $rightUuid)
+    public static function create(string $leftUuid, string $rightUuid): self
     {
-        $uuid = ChatRoomUuid::random();
+        $uuid = ChatRoomUuid::random()->value();
         return new self($uuid, $leftUuid, $rightUuid);
     }
 
     /**
-     * @param Message $message
+     * @param string $senderUuid
+     * @param string $content
      * @return void
      */
     public function addMessage(string $senderUuid, string $content): void

@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Social\Application\Commands\CreateChatRoom;
 
 use App\Shared\Application\Commands\CommandHandler;
-use App\Shared\Domain\Exceptions\BadRequestException;
 use App\Social\Domain\Models\ChatRoom;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 
@@ -19,13 +18,8 @@ final class CreateChatRoomCommandHandler extends CommandHandler
         $leftUuid = $command->leftUuid();
         $rightUuid = $command->rightUuid();
 
-        $exists = $this->chatRoomRepository->existsByLeftAndRight($leftUuid, $rightUuid);
-        if ($exists) {
-            throw new BadRequestException("La sala ya existe");
-        }
-
         $chatRoom = ChatRoom::create($leftUuid, $rightUuid);
 
-        $this->chatRoomRepository->create($chatRoom);
+        $this->chatRoomRepository->create($chatRoom->toPrimitives());
     }
 }

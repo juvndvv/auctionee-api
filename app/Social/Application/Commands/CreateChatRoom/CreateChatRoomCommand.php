@@ -22,5 +22,8 @@ final class CreateChatRoomCommand extends Command
         return $this->rightUuid;
     }
 
-
+    public static function create(string $leftUuid, string $rightUuid): CreateChatRoomCommand
+    {
+        return new self($leftUuid, $rightUuid);
+    }
 }

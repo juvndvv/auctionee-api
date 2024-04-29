@@ -6,6 +6,9 @@ use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use Illuminate\Support\Collection;
 
+/**
+ * Interfaz del repositorio base que da funcionalidades generales a los demas repositorios
+ */
 interface BaseRepositoryPort
 {
     /**

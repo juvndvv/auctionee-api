@@ -12,7 +12,7 @@ use App\Review\Infrastructure\Controllers\PlaceReviewController;
 use App\Review\Infrastructure\Controllers\RemoveReviewController;
 use App\Review\Infrastructure\Controllers\UpdateDescriptionController;
 use App\Review\Infrastructure\Controllers\UpdateRatingController;
-use App\Social\Infrastructure\Controllers\CreateChatRoomBaseController;
+use App\Social\Infrastructure\Controllers\CreateChatRoomController;
 use App\Social\Infrastructure\Controllers\DeleteChatMessageBaseController;
 use App\Social\Infrastructure\Controllers\FindChatRoomsByUserUuidController;
 use App\Social\Infrastructure\Controllers\FindFriendListByUserUuidController;
@@ -68,6 +68,6 @@ Route::put('/reviews/{uuid}/description', UpdateDescriptionController::class);
 Route::get("/events", FindAllEventsController::class);
 
 // Chat rooms
-Route::post("/chats", CreateChatRoomBaseController::class);
+Route::post("/chats", CreateChatRoomController::class);
 Route::get("/chats/{uuid}/messages", FindMessagesByChatRoomUuidController::class);
 Route::delete("/chats/{chatUuid}/messages/{messageUuid}", DeleteChatMessageBaseController::class);

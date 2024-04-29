@@ -6,10 +6,12 @@ use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Exceptions\TooManyRowsException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * Implementación del repositorio base que da funcionalidad a los demas repositorios
+ */
 abstract class BaseRepository implements BaseRepositoryPort
 {
     protected Model $model;

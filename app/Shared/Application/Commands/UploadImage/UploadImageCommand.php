@@ -22,4 +22,9 @@ class UploadImageCommand extends Command
      {
          return $this->uploadedFile;
      }
+
+     public static function create(string $folder, UploadedFile $uploadedFile): self
+     {
+         return new self($folder, $uploadedFile);
+     }
 }

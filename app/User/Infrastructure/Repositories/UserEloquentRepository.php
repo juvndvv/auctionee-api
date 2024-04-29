@@ -8,7 +8,6 @@ use App\User\Domain\Models\User;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 use App\User\Infrastructure\Repositories\Models\EloquentUserModel;
 use Illuminate\Support\Collection;
-use Override;
 
 final class UserEloquentRepository extends BaseRepository implements UserRepositoryPort
 {
