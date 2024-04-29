@@ -36,7 +36,7 @@ final class AuthenticateController extends ValidatedCommandController
         } catch (NotFoundException $e) {
             return Response::NOT_FOUND($e->getMessage());
 
-        } catch (Exception $e) {
+        } catch (Exception) {
             return Response::SERVER_ERROR();
         }
     }

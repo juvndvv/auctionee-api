@@ -26,8 +26,7 @@ final class UpdateUserUsernameController extends ValidatedCommandController
         } catch (ValidationException $e) {
             return Response::UNPROCESSABLE_ENTITY("Errores de validación en el nombre de usuario", $e->validator->getMessageBag());
 
-        } catch (Exception $e) {
-            dd($e->getMessage());
+        } catch (Exception) {
             return Response::SERVER_ERROR();
         }
     }

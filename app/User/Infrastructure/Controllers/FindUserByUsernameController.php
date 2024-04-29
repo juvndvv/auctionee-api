@@ -22,7 +22,7 @@ final class FindUserByUsernameController extends QueryController
         } catch (NotFoundException $e) {
             return Response::NOT_FOUND("El usuario $username no existe");
 
-        } catch (Exception $e) {
+        } catch (Exception) {
             return Response::SERVER_ERROR();
         }
     }

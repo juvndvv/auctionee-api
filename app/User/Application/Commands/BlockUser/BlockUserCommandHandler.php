@@ -14,7 +14,7 @@ final class BlockUserCommandHandler extends CommandHandler
     )
     {}
 
-    public function __invoke(BlockUserCommand $command)
+    public function __invoke(BlockUserCommand $command): void
     {
         $uuid = $command->uuid();
 

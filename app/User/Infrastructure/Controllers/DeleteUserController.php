@@ -19,11 +19,10 @@ final class DeleteUserController extends CommandController
 
             return Response::OK($uuid, "Usuario borrado correctamente");
 
-        } catch (NotFoundException $e) {
+        } catch (NotFoundException) {
             return Response::NOT_FOUND("El usuario $uuid no existe");
 
-        } catch (Exception $e) {
-            dd($e);
+        } catch (Exception) {
             return Response::SERVER_ERROR();
         }
     }

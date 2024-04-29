@@ -43,7 +43,7 @@ final class CreateUserController extends ValidatedCommandController
         } catch (ValidationException $e) {
             return Response::UNPROCESSABLE_ENTITY("Errores de validación en el usuario", $e->validator->getMessageBag());
 
-        } catch (Exception $e) {
+        } catch (Exception) {
             return Response::SERVER_ERROR();
         }
     }

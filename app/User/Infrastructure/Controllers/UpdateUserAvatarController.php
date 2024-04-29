@@ -27,7 +27,7 @@ final class UpdateUserAvatarController extends ValidatedCommandController
         } catch (ModelNotFoundException $e) {
             return Response::NOT_FOUND($e->getMessage());
 
-        } catch (Exception $e) {
+        } catch (Exception) {
             return Response::SERVER_ERROR();
         }
     }
