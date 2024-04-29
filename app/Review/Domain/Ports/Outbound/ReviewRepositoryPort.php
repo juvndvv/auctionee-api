@@ -27,17 +27,17 @@ interface ReviewRepositoryPort extends BaseRepositoryPort
 
     /**
      * @param string $reviewerUuid
-     * @return Review
+     * @return Collection<Review>
      * @throws NotFoundException
      */
-    public function findByReviewerUuid(string $reviewerUuid): Review;
+    public function findByReviewerUuid(string $reviewerUuid): Collection;
 
     /**
      * @param string $reviewedUuid
-     * @return Review
+     * @return Collection<Review>
      * @throws NotFoundException
      */
-    public function findByReviewedUuid(string $reviewedUuid): Review;
+    public function findByReviewedUuid(string $reviewedUuid): Collection;
 
     /**
      * @param $uuid

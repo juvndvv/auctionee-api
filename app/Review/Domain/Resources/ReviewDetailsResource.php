@@ -2,7 +2,7 @@
 
 namespace App\Review\Domain\Resources;
 
-class ReviewDetailsResource
+final class ReviewDetailsResource
 {
     public function __construct(
         public string $reviewerUsername,

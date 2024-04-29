@@ -85,7 +85,7 @@ abstract class BaseRepository implements BaseRepositoryPort
     {
         $builders = $this->builder->where($field, '=', $value)->get();
 
-        if ($builders->isEmpty()) {
+        if ($builders->count() === 0) {
             throw new NotFoundException("No se ha encontrado el " . $field . " con el valor " . $value);
         }
 

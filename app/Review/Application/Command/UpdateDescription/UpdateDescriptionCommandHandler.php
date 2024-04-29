@@ -2,13 +2,10 @@
 
 namespace App\Review\Application\Command\UpdateDescription;
 
-use App\Review\Domain\Models\Review;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Shared\Application\Commands\CommandHandler;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastucture\Bus\EventBus;
-use http\Exception\RuntimeException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 final class UpdateDescriptionCommandHandler extends CommandHandler
 {

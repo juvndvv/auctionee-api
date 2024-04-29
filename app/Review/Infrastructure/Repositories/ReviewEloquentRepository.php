@@ -30,16 +30,16 @@ final class ReviewEloquentRepository extends BaseRepository implements ReviewRep
         return Review::fromPrimitives($reviewDb->toArray());
     }
 
-    public function findByReviewerUuid(string $reviewerUuid): Review
+    public function findByReviewerUuid(string $reviewerUuid): Collection
     {
-        $reviewDb = parent::findByFieldValue(Review::SERIALIZED_REVIEWER_UUID, $reviewerUuid)['0'];
-        return Review::fromPrimitives($reviewDb->toArray());
+        $reviewDb = parent::findByFieldValue(Review::SERIALIZED_REVIEWER_UUID, $reviewerUuid);
+        return $reviewDb->map(fn ($review) => Review::fromPrimitives($review->toArray()));
     }
 
-    public function findByReviewedUuid(string $reviewedUuid): Review
+    public function findByReviewedUuid(string $reviewedUuid): Collection
     {
-        $reviewDb = parent::findByFieldValue(Review::SERIALIZED_REVIEWED_UUID, $reviewedUuid)['0'];
-        return Review::fromPrimitives($reviewDb->toArray());
+        $reviewDb = parent::findByFieldValue(Review::SERIALIZED_REVIEWED_UUID, $reviewedUuid);
+        return $reviewDb->map(fn ($review) => Review::fromPrimitives($review->toArray()));
     }
 
     public function updateRating($uuid, int $rating): void
