@@ -2,10 +2,13 @@
 
 namespace App\User\Infrastructure\Repositories;
 
+use App\Shared\Domain\Exceptions\NoContentException;
+use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastucture\Repositories\BaseRepository;
 use App\User\Domain\Models\User;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 use App\User\Infrastructure\Repositories\Models\EloquentUserModel;
+use Illuminate\Support\Collection;
 
 final class UserEloquentRepository extends BaseRepository implements UserRepositoryPort
 {
@@ -15,6 +18,18 @@ final class UserEloquentRepository extends BaseRepository implements UserReposit
     {
         $this->setBuilderFromModel(EloquentUserModel::query()->getModel());
         $this->setEntityName(self::ENTITY_NAME);
+    }
+
+    /**
+     * @param int $offset
+     * @param int $limit
+     * @return Collection<User>
+     * @throws NoContentException
+     */
+    public function findAll(int $offset = 0, int $limit = 20): Collection
+    {
+        $users = parent::findAll($offset, $limit);
+        return $users->map(fn ($user) => User::fromPrimitives($user->toArray()));
     }
 
     public function findByUuid(string $uuid): User
@@ -49,16 +64,25 @@ final class UserEloquentRepository extends BaseRepository implements UserReposit
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_PASSWORD, $password);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function updateAvatar(string $uuid, string $avatar): void
     {
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_AVATAR, $avatar);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function block(string $uuid): void
     {
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_ROLE, User::BLOCKED_ROLE);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function unblock(string $uuid): void
     {
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_ROLE, User::USER_ROLE);

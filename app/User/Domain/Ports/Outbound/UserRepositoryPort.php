@@ -2,14 +2,21 @@
 
 namespace App\User\Domain\Ports\Outbound;
 
+use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
 use App\User\Domain\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Collection;
 
 interface UserRepositoryPort extends BaseRepositoryPort
 {
+    /**
+     * @param int $offset
+     * @param int $limit
+     * @return Collection<User>
+     * @throws NoContentException
+     */
+    public function findAll(int $offset = 0, int $limit = 20): Collection;
 
     /**
      * Busca el usuario por uuid. Lanza ModelNotFound si no lo encuentra.
@@ -24,7 +31,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * Busca el usuario por el nombre de usuario. Lanza ModelNotFound si no lo encuentra
      *
      * @param string $username
-     * @return Model
+     * @return User
      * @throws NotFoundException
      */
     public function findByUsername(string $username): User;

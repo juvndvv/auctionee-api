@@ -214,6 +214,11 @@ final class User extends AggregateRoot
         return $this->password->value();
     }
 
+    public function birth(): string
+    {
+        return $this->birth->value();
+    }
+
     public function avatar(): string
     {
         return $this->avatar->value();
@@ -221,7 +226,7 @@ final class User extends AggregateRoot
 
     public function role(): string
     {
-        return match ($this->role()) {
+        return match ($this->role->value()) {
             1 => "ADMIN",
             2 => "BLOCKED",
             default => "USER",

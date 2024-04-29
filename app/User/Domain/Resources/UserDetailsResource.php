@@ -2,25 +2,31 @@
 
 namespace App\User\Domain\Resources;
 
+use App\User\Domain\Models\User;
+
 final class UserDetailsResource
 {
-    public static function fromArray(array $data): array
+    public function __construct(
+        public string $uuid,
+        public string $name,
+        public string $username,
+        public string $email,
+        public string $avatar,
+        public string $birth,
+        public string $role,
+    )
+    {}
+
+    public static function create(User $user): self
     {
-        return [
-            "uuid" => $data['uuid'],
-            "name" => $data['name'],
-            "username" => $data['username'],
-            "email" => $data['email'],
-            "avatar" => env("CLOUDFLARE_R2_URL") . $data['avatar'],
-            "birth" => $data['birth'],
-            "role" => match ($data["role"]) {
-                1 => "ADMIN",
-                2 => "BLOCKED",
-                3 => "DELETED",
-                default =>  "USER"
-            },
-            "created_at" => $data['created_at'],
-            "updated_at" => $data['updated_at']
-        ];
+        return new self(
+            $user->id(),
+            $user->name(),
+            $user->username(),
+            $user->email(),
+            env("CLOUDFLARE_R2_URL") . $user->avatar(),
+            $user->birth(),
+            $user->role()
+        );
     }
 }
