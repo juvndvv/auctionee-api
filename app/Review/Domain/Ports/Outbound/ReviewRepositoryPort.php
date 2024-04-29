@@ -3,6 +3,7 @@
 namespace App\Review\Domain\Ports\Outbound;
 
 use App\Review\Domain\Models\Review;
+use App\Review\Domain\Projections\ReviewDetailsProjection;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
@@ -34,7 +35,7 @@ interface ReviewRepositoryPort extends BaseRepositoryPort
 
     /**
      * @param string $reviewedUuid
-     * @return Collection<Review>
+     * @return Collection<ReviewDetailsProjection>
      * @throws NotFoundException
      */
     public function findByReviewedUuid(string $reviewedUuid): Collection;

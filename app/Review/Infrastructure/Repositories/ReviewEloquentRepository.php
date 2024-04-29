@@ -4,7 +4,9 @@ namespace App\Review\Infrastructure\Repositories;
 
 use App\Review\Domain\Models\Review;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
+use App\Review\Domain\Projections\ReviewDetailsProjection;
 use App\Review\Infrastructure\Repositories\Models\EloquentReviewModel;
+use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infrastucture\Repositories\BaseRepository;
 use Illuminate\Support\Collection;
 
@@ -38,8 +40,31 @@ final class ReviewEloquentRepository extends BaseRepository implements ReviewRep
 
     public function findByReviewedUuid(string $reviewedUuid): Collection
     {
-        $reviewDb = parent::findByFieldValue(Review::SERIALIZED_REVIEWED_UUID, $reviewedUuid);
-        return $reviewDb->map(fn ($review) => Review::fromPrimitives($review->toArray()));
+        $reviews = EloquentReviewModel::query()
+            ->select(
+                "reviews.uuid",
+                "users.username",
+                "users.avatar",
+                "reviews.rating",
+                "reviews.description",
+                "reviews.created_at")
+            ->join("users", "users.uuid", "=", "reviews.reviewer_uuid")
+            ->where("reviews.reviewed_uuid", $reviewedUuid)
+            ->get();
+
+        if ($reviews->isEmpty()) {
+            throw new NoContentException();
+        }
+
+        return $reviews->map(
+            fn ($review) => ReviewDetailsProjection::create(
+                $review['uuid'],
+                $review['username'],
+                $review['avatar'],
+                $review['rating'],
+                $review['description'],
+                $review['created_at']
+            ));
     }
 
     public function updateRating($uuid, int $rating): void
