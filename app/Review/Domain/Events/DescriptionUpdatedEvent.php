@@ -18,7 +18,7 @@ final class DescriptionUpdatedEvent extends DomainEvent
 
     public function broadcastOn(): array
     {
-        return ['reviews'];
+        return ['users'];
     }
 
     public function broadcastAs(): string

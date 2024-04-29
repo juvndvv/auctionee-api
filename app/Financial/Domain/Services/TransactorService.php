@@ -4,6 +4,7 @@ namespace App\Financial\Domain\Services;
 
 use App\Financial\Domain\Exceptions\NotEnoughFoundsException;
 use App\Financial\Domain\Models\Transaction;
+use App\Financial\Domain\Models\Wallet;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 
 final readonly class TransactorService
@@ -19,7 +20,7 @@ final readonly class TransactorService
     /**
      * @throws NotEnoughFoundsException
      */
-    public function execute(): Transaction
+    public function execute(): Wallet
     {
         // Query data
         $remittentWallet = $this->walletRepository->findByUuid($this->remittentWalletUuid);
@@ -30,7 +31,11 @@ final readonly class TransactorService
         $remittentWallet->withdraw($this->amount);
         $destinationWallet->deposit($this->amount);
 
-        return $remittentWallet->transactions()->get(0);
+        // Update wallets
+        $this->walletRepository->updateAmount($remittentWallet->uuid(), $remittentWallet->amount());
+        $this->walletRepository->updateAmount($destinationWallet->uuid(), $destinationWallet->amount());
+
+        return $remittentWallet;
     }
 
     public static function create(

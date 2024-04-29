@@ -2,6 +2,7 @@
 
 namespace App\Shared\Infrastructure\Repositories;
 
+use App\Financial\Infrastructure\Repositories\Models\EloquentWalletModel;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Exceptions\TooManyRowsException;
@@ -9,6 +10,7 @@ use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use PHPUnit\Framework\Attributes\PreCondition;
 
 abstract class BaseRepository implements BaseRepositoryPort
 {
@@ -36,12 +38,15 @@ abstract class BaseRepository implements BaseRepositoryPort
         return $models;
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function findOneByPrimaryKeyOrFail(string $primaryKey): mixed
     {
-        $model = $this->builder->where('uuid', $primaryKey)->get()->first();
+        $model = EloquentWalletModel::query()->where('uuid', $primaryKey)->get()->first();
 
         if (is_null($model)) {
-            throw new NotFoundException("No se ha encontrado"
+            throw new NotFoundException("No se ha encontrado "
                 . $this->entityName . " con el id " . $primaryKey);
         }
 
@@ -59,12 +64,19 @@ abstract class BaseRepository implements BaseRepositoryPort
         $model->update([$field => $new]);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function deleteByPrimaryKey(string $primaryKey): void
     {
         $model = self::findOneByPrimaryKeyOrFail($primaryKey);
         $model->delete();
     }
 
+    /**
+     * @throws NotFoundException
+     * @throws TooManyRowsException
+     */
     public function deleteByFieldValue(string $field, string $value): void
     {
         $model = self::findByFieldValue($field, $value);

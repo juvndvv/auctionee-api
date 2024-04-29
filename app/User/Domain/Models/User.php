@@ -28,9 +28,9 @@ final class User extends AggregateRoot
     public const string SERIALIZED_BIRTH = 'birth';
     public const string SERIALIZED_ROLE = 'role';
 
-    public const USER_ROLE = 0;
-    public const ADMIN_ROLE = 1;
-    public const BLOCKED_ROLE = 2;
+    public const int USER_ROLE = 0;
+    public const int ADMIN_ROLE = 1;
+    public const int BLOCKED_ROLE = 2;
 
     private UserId $id;
     private UserName $name;

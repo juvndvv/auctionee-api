@@ -18,7 +18,7 @@ final class TransactionPlaced extends DomainEvent
 
     public function broadcastOn(): array
     {
-        return [TransactionPlaced::eventName()];
+        return ['transactions'];
     }
 
     public function broadcastAs(): string
@@ -28,6 +28,6 @@ final class TransactionPlaced extends DomainEvent
 
     public static function eventName(): string
     {
-        return 'transaction-placed';
+        return 'transaction.placed';
     }
 }

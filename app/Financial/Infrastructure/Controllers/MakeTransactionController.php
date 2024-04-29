@@ -27,7 +27,8 @@ final class MakeTransactionController extends CommandController
         } catch (NotFoundException|NotEnoughFoundsException $exception) {
             return Response::BAD_REQUEST($exception->getMessage());
 
-        } catch (Exception) {
+        } catch (Exception $exception) {
+            dd($exception);
             return Response::SERVER_ERROR();
         }
     }

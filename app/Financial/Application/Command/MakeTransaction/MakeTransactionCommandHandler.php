@@ -8,6 +8,7 @@ use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Financial\Domain\Services\TransactorService;
 use App\Shared\Application\Commands\CommandHandler;
 use App\Shared\Infrastructure\Bus\EventBus;
+use JetBrains\PhpStorm\NoReturn;
 
 final class MakeTransactionCommandHandler extends CommandHandler
 {
@@ -27,19 +28,17 @@ final class MakeTransactionCommandHandler extends CommandHandler
         $destinationWalletUuid = $command->destinationWallet();
         $amount = $command->amount();
 
-
         $service = TransactorService::create(
             $remittentWalletUuid,
             $destinationWalletUuid,
             $amount,
             $this->walletRepository
         );
-        $transaction = $service->execute();
+        $remittentWallet = $service->execute();
 
         // Persists
-        $this->transactionRepository->create($remittentWalletUuid, $transaction);
-        $this->walletRepository->withdraw($remittentWalletUuid, $amount);
-        $this->walletRepository->deposit($destinationWalletUuid, $amount);
+        $transaction = $remittentWallet->transactions()->get(0);
+        $this->transactionRepository->create($transaction->toPrimitives());
 
         // Publish events
         $this->eventBus->dispatch(...$remittentWallet->pullDomainEvents());

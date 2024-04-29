@@ -25,17 +25,16 @@ final class TransactionEloquentRepository extends BaseRepository implements Tran
             ->orWhere(Transaction::SERIALIZED_DESTINATION_WALLET_UUID, $walletUuid)
             ->get();
 
-        return $transactionsDb->map(function (EloquentTransactionModel $transaction) {
-            return Transaction::fromPrimitives($transaction->toArray());
-        });
+        return $transactionsDb->map(
+            fn (EloquentTransactionModel $transaction) => Transaction::fromPrimitives($transaction->toArray())
+        );
     }
 
     public function updateCollection(Collection $collection): void
     {
         $transactionsPrimitives = $collection
-            ->map(function (Transaction $transaction) {
-                return $transaction->toPrimitives();
-            })->toArray();
+            ->map(fn (Transaction $transaction) => $transaction->toPrimitives())
+            ->toArray();
 
         foreach ($transactionsPrimitives as $transactionPrimitive) {
             EloquentTransactionModel::query()

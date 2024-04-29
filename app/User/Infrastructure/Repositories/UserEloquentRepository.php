@@ -10,10 +10,11 @@ use App\User\Domain\Models\User;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 use App\User\Infrastructure\Repositories\Models\EloquentUserModel;
 use Illuminate\Support\Collection;
+use Override;
 
 final class UserEloquentRepository extends BaseRepository implements UserRepositoryPort
 {
-    private const ENTITY_NAME = 'user';
+    private const string ENTITY_NAME = 'user';
 
     public function __construct()
     {
@@ -27,6 +28,7 @@ final class UserEloquentRepository extends BaseRepository implements UserReposit
      * @return Collection<User>
      * @throws NoContentException
      */
+    #[Override]
     public function findAll(int $offset = 0, int $limit = 20): Collection
     {
         $users = parent::findAll($offset, $limit);

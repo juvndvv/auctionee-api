@@ -15,7 +15,7 @@ class EloquentTransactionModel extends Model
 
     protected $fillable = [
         'uuid',
-        'remitent_wallet_uuid',
+        'remittent_wallet_uuid',
         'destination_wallet_uuid',
         'amount',
         'created_at',
