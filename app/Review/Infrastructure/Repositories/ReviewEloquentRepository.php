@@ -3,8 +3,10 @@
 namespace App\Review\Infrastructure\Repositories;
 
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
+use App\Review\Domain\Resources\ReviewDetailsResource;
 use App\Review\Infrastructure\Repositories\Models\EloquentReviewModel;
 use App\Shared\Infrastucture\Repositories\BaseRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class ReviewEloquentRepository extends BaseRepository implements ReviewRepositoryPort
 {
@@ -13,9 +15,9 @@ class ReviewEloquentRepository extends BaseRepository implements ReviewRepositor
         return EloquentReviewModel::query()->where("uuid", $uuid)->firstOrFail();
     }
 
-    public function findByReviewerUuid(string $reviewerUuid)
+    public function findByReviewerUuid(string $reviewerUuid): ReviewDetailsResource
     {
-        return EloquentReviewModel::query()
+        $userDb = EloquentReviewModel::query()
             ->select(
                 "reviews.uuid",
                 "users.username",
@@ -26,9 +28,11 @@ class ReviewEloquentRepository extends BaseRepository implements ReviewRepositor
             ->join("users", "users.uuid", "=", "reviews.reviewed_uuid")
             ->where("reviews.reviewer_uuid", $reviewerUuid)
             ->get();
+
+        dd($userDb);
     }
 
-    public function findByReviewedUuid(string $reviewedUuid)
+    public function findByReviewedUuid(string $reviewedUuid): Collection
     {
         return EloquentReviewModel::query()
             ->select(
@@ -43,27 +47,27 @@ class ReviewEloquentRepository extends BaseRepository implements ReviewRepositor
             ->get();
     }
 
-    public function create(array $data)
+    public function create(array $data): void
     {
-        return EloquentReviewModel::query()->create($data);
+        EloquentReviewModel::query()->create($data);
     }
 
-    public function updateRating($uuid, int $rating)
+    public function updateRating($uuid, int $rating): void
     {
-        return EloquentReviewModel::query()->where('uuid', $uuid)->update(['rating' => $rating]);
+        EloquentReviewModel::query()->where('uuid', $uuid)->update(['rating' => $rating]);
     }
 
-    public function updateDescription(string $uuid, string $description)
+    public function updateDescription(string $uuid, string $description): void
     {
-        return EloquentReviewModel::query()->where('uuid', $uuid)->update(['description' => $description]);
+        EloquentReviewModel::query()->where('uuid', $uuid)->update(['description' => $description]);
     }
 
-    public function remove(string $uuid)
+    public function remove(string $uuid): void
     {
-        return EloquentReviewModel::query()->where('uuid', $uuid)->delete();
+        EloquentReviewModel::query()->where('uuid', $uuid)->delete();
     }
 
-    public function findUserAverageRating(string $userUuid)
+    public function findUserAverageRating(string $userUuid): float
     {
         return EloquentReviewModel::query()
             ->where("reviewed_uuid", "=", $userUuid)

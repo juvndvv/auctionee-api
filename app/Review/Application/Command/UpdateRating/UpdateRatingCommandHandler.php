@@ -10,7 +10,7 @@ use App\Shared\Infrastucture\Bus\EventBus;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use RuntimeException;
 
-class UpdateRatingCommandHandler extends CommandHandler
+final class UpdateRatingCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly ReviewRepositoryPort $reviewRepository,

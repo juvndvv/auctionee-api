@@ -4,7 +4,7 @@ namespace App\Review\Application\Command\PlaceReview;
 
 use App\Shared\Application\Queries\Query;
 
-class PlaceReviewCommand extends Query
+final class PlaceReviewCommand extends Query
 {
     private function __construct(
         private readonly string $reviewerUuid,

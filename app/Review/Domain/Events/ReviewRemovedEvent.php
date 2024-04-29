@@ -7,7 +7,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ReviewRemovedEvent extends DomainEvent
+final class ReviewRemovedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

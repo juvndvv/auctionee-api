@@ -4,14 +4,29 @@ namespace App\Review\Domain\Resources;
 
 class ReviewDetailsResource
 {
-    public static function toArray(array $data)
+    public function __construct(
+        public string $reviewerUsername,
+        public string $reviewerAvatar,
+        public int $rating,
+        public string $description,
+        public string $createdAt
+    )
+    {}
+
+    public static function create(
+        string $reviewerUsername,
+        string $reviewerAvatar,
+        int $rating,
+        string $description,
+        string $createdAt
+    ): self
     {
-        return [
-            'reviewer_username' => $data['reviewer_username'],
-            'reviewer_avatar' => $data['reviewer_avatar'],
-            'rating' => $data['rating'],
-            'description' => $data['description'],
-            'created_at' => $data['created_at'],
-        ];
+        return new self(
+            $reviewerUsername,
+            $reviewerAvatar,
+            $rating,
+            $description,
+            $createdAt
+        );
     }
 }

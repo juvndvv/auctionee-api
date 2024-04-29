@@ -4,7 +4,7 @@ namespace App\Review\Application\Command\UpdateDescription;
 
 use App\Shared\Application\Commands\Command;
 
-class UpdateDescriptionCommand extends Command
+final class UpdateDescriptionCommand extends Command
 {
     private function __construct(
         private readonly string $uuid,

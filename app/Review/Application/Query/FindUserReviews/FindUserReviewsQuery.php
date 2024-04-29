@@ -2,15 +2,22 @@
 
 namespace App\Review\Application\Query\FindUserReviews;
 
-use App\Shared\Infraestructure\Bus\Query\Query;
+use App\Shared\Application\Queries\Query;
 
-class FindUserReviewsQuery extends Query
+final class FindUserReviewsQuery extends Query
 {
-    public function __construct(private readonly string $reviewedUuid)
+    private function __construct(
+        private readonly string $reviewedUuid
+    )
     {}
 
     public function reviewedUuid(): string
     {
         return $this->reviewedUuid;
+    }
+
+    public static function create(string $reviewedUuid): self
+    {
+        return new self($reviewedUuid);
     }
 }

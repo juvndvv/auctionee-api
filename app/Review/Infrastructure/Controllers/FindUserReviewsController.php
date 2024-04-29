@@ -14,7 +14,7 @@ final class FindUserReviewsController extends QueryController
     public function __invoke(string $uuid): JsonResponse
     {
         try {
-            $query = new FindUserReviewsQuery($uuid);
+            $query = FindUserReviewsQuery::create($uuid);
             $resource = $this->queryBus->handle($query);
 
             return Response::OK($resource, "Reviews encontradas");
@@ -22,7 +22,7 @@ final class FindUserReviewsController extends QueryController
         } catch (NoContentException) {
             return Response::NO_CONTENT();
 
-        } catch (Exception $e) {
+        } catch (Exception) {
             return Response::SERVER_ERROR();
         }
     }

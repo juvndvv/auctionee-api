@@ -5,7 +5,7 @@ namespace App\Review\Domain\Models\ValueObjects;
 use App\Shared\Domain\Models\ValueObjects\IntValueObject;
 use Illuminate\Testing\Exceptions\InvalidArgumentException;
 
-class ReviewRating extends IntValueObject
+final class ReviewRating extends IntValueObject
 {
     public function __construct(protected int $value)
     {

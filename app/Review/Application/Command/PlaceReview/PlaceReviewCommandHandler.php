@@ -7,7 +7,7 @@ use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Infrastucture\Bus\EventBus;
 
-class PlaceReviewCommandHandler extends QueryHandler
+final class PlaceReviewCommandHandler extends QueryHandler
 {
     public function __construct(
         private readonly ReviewRepositoryPort   $reviewRepository,

@@ -12,7 +12,7 @@ use App\Review\Domain\Models\ValueObjects\ReviewUuid;
 use App\Shared\Domain\Models\AggregateRoot;
 use App\User\Domain\Models\ValueObjects\UserId;
 
-class Review extends AggregateRoot
+final class Review extends AggregateRoot
 {
     public const SERIALIZED_UUID = 'uuid';
     public const SERIALIZED_REVIEWER_UUID = 'reviewer_uuid';

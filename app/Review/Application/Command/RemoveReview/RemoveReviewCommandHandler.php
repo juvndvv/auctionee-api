@@ -9,7 +9,7 @@ use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastucture\Bus\EventBus;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class RemoveReviewCommandHandler extends CommandHandler
+final class RemoveReviewCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly ReviewRepositoryPort $reviewRepository,

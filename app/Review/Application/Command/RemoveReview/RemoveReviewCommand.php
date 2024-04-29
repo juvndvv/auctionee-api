@@ -4,7 +4,7 @@ namespace App\Review\Application\Command\RemoveReview;
 
 use App\Shared\Application\Commands\Command;
 
-class RemoveReviewCommand extends Command
+final class RemoveReviewCommand extends Command
 {
     private function __construct(
         private readonly string $uuid
