@@ -51,7 +51,6 @@ class DatabaseSeeder extends Seeder
             Wallet::SERIALIZED_USER_UUID => 'UD0000000-0000-0000-0000-000000000000',
         ]);
 
-        // Testing purposes
         DB::table('users')->insert([
             USER::SERIALIZED_UUID => '5bfdc240-1780-423a-9688-fd9c50d2d661',
             User::SERIALIZED_NAME => 'Juan Daniel Forner',

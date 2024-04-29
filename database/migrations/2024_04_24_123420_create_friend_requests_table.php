@@ -17,8 +17,15 @@ return new class extends Migration
             $table->string('receiver_uuid');
             $table->timestamps();
 
-            $table->foreign('sender_uuid')->references('uuid')->on('users');
-            $table->foreign('receiver_uuid')->references('uuid')->on('users');
+            $table->foreign('sender_uuid')
+                ->references('uuid')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('receiver_uuid')
+                ->references('uuid')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

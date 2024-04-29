@@ -3,7 +3,7 @@
 namespace App\Social\Domain\Models;
 
 use App\Shared\Domain\Models\AggregateRoot;
-use App\Social\Domain\Events\FriendshipCreatedEvent;
+use App\Social\Domain\Events\FriendRequestCreatedEvent;
 use App\Social\Domain\Events\FriendshipDeletedEvent;
 use App\Social\Domain\Models\ValueObjects\FriendshipUuid;
 use App\User\Domain\Models\ValueObjects\UserId;
@@ -104,7 +104,7 @@ class Friendship extends AggregateRoot
         $friendship = new self($uuid, $leftUuid, $rightUuid);
 
         // Genera evento
-        $friendship->record(FriendshipCreatedEvent::create($friendship->toPrimitives(), now()->toString()));
+        $friendship->record(FriendRequestCreatedEvent::create($friendship->toPrimitives(), now()->toString()));
 
         return $friendship;
     }

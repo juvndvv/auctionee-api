@@ -11,6 +11,10 @@ use Illuminate\Support\Collection;
 
 class ChatRoom extends AggregateRoot
 {
+    public const string SERIALIZED_UUID = 'uuid';
+    public const string SERIALIZED_LEFT_UUID = 'left_uuid';
+    public const string SERIALIZED_RIGHT_UUID = 'right_uuid';
+
     private ChatRoomUuid $uuid;
     private UserId $left;
     private UserId $right;
