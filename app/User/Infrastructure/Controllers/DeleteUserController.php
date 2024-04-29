@@ -7,10 +7,11 @@ use App\Shared\Infrastucture\Controllers\CommandController;
 use App\Shared\Infrastucture\Controllers\Response;
 use App\User\Application\Commands\DeleteUser\DeleteUserCommand;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 final class DeleteUserController extends CommandController
 {
-    public function __invoke(string $uuid)
+    public function __invoke(string $uuid): JsonResponse
     {
         try {
             $command = DeleteUserCommand::create($uuid);

@@ -7,12 +7,13 @@ use App\Shared\Infrastucture\Controllers\Response;
 use App\Shared\Infrastucture\Controllers\ValidatedCommandController;
 use App\User\Application\Commands\UpdateEmail\UpdateEmailCommand;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 final class UpdateUserEmailController extends ValidatedCommandController
 {
-    public function __invoke($uuid, Request $request)
+    public function __invoke($uuid, Request $request): JsonResponse
     {
         try {
             self::validate($request);

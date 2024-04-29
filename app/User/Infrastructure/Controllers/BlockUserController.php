@@ -5,10 +5,11 @@ namespace App\User\Infrastructure\Controllers;
 use App\Shared\Infrastucture\Controllers\CommandController;
 use App\Shared\Infrastucture\Controllers\Response;
 use App\User\Application\Commands\BlockUser\BlockUserCommand;
+use Illuminate\Http\JsonResponse;
 
 final class BlockUserController extends CommandController
 {
-    public function __invoke(string $uuid)
+    public function __invoke(string $uuid): JsonResponse
     {
         $command = BlockUserCommand::create($uuid);
         $this->commandBus->handle($command);

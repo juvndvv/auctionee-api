@@ -7,11 +7,12 @@ use App\Shared\Infrastucture\Controllers\ValidatedCommandController;
 use App\User\Application\Commands\UpdateAvatar\UpdateAvatarCommand;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 final class UpdateUserAvatarController extends ValidatedCommandController
 {
-    public function __invoke(string $uuid, Request $request)
+    public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {
             self::validate($request);

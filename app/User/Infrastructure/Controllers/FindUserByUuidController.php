@@ -7,10 +7,11 @@ use App\Shared\Infrastucture\Controllers\QueryController;
 use App\Shared\Infrastucture\Controllers\Response;
 use App\User\Application\Queries\FindByUuid\FindByUuidQuery;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 final class FindUserByUuidController extends QueryController
 {
-    public function __invoke(string $uuid)
+    public function __invoke(string $uuid): JsonResponse
     {
         try {
             $query = FindByUuidQuery::create($uuid);
