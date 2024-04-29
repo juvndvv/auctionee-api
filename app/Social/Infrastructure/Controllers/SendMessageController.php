@@ -2,8 +2,8 @@
 
 namespace App\Social\Infrastructure\Controllers;
 
-use App\Shared\Infrastucture\Controllers\QueryController;
-use App\Shared\Infrastucture\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\QueryController;
+use App\Shared\Infrastructure\Controllers\Response;
 use App\Social\Application\Commands\SendMessage\SendMessageCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;

@@ -14,11 +14,11 @@ use App\User\Domain\Models\ValueObjects\UserId;
 
 final class Review extends AggregateRoot
 {
-    public const SERIALIZED_UUID = 'uuid';
-    public const SERIALIZED_REVIEWER_UUID = 'reviewer_uuid';
-    public const SERIALIZED_REVIEWED_UUID = 'reviewed_uuid';
-    public const SERIALIZED_DESCRIPTION = 'description';
-    public const SERIALIZED_RATING = 'rating';
+    public const string SERIALIZED_UUID = 'uuid';
+    public const string SERIALIZED_REVIEWER_UUID = 'reviewer_uuid';
+    public const string SERIALIZED_REVIEWED_UUID = 'reviewed_uuid';
+    public const string SERIALIZED_DESCRIPTION = 'description';
+    public const string SERIALIZED_RATING = 'rating';
 
     private ReviewUuid $uuid;
     private ReviewRating $rating;

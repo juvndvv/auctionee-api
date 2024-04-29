@@ -3,19 +3,19 @@
 namespace App\Financial\Domain\Models;
 
 use App\Financial\Domain\Events\TransactionPlaced;
-use App\Financial\Domain\Exeptions\NotEnoughFoundsException;
+use App\Financial\Domain\Exceptions\NotEnoughFoundsException;
 use App\Financial\Domain\Models\ValueObjects\WalletAmount;
 use App\Financial\Domain\Models\ValueObjects\WalletUuid;
 use App\Shared\Domain\Models\AggregateRoot;
 use App\User\Domain\Models\ValueObjects\UserId;
 use Illuminate\Support\Collection;
 
-class Wallet extends AggregateRoot
+final class Wallet extends AggregateRoot
 {
-    public const SERIALIZED_UUID = 'uuid';
-    public const SERIALIZED_AMOUNT = 'amount';
-    public const SERIALIZED_USER_UUID = 'user_uuid';
-    public const SERIALIZED_TRANSACTIONS = 'transactions';
+    public const string SERIALIZED_UUID = 'uuid';
+    public const string SERIALIZED_AMOUNT = 'amount';
+    public const string SERIALIZED_USER_UUID = 'user_uuid';
+    public const string SERIALIZED_TRANSACTIONS = 'transactions';
 
     private readonly WalletUuid $uuid;
     private WalletAmount $amount;

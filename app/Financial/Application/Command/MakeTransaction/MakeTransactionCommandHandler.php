@@ -2,44 +2,46 @@
 
 namespace App\Financial\Application\Command\MakeTransaction;
 
+use App\Financial\Domain\Exceptions\NotEnoughFoundsException;
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
+use App\Financial\Domain\Services\TransactorService;
 use App\Shared\Application\Commands\CommandHandler;
-use App\Shared\Infrastucture\Bus\EventBus;
+use App\Shared\Infrastructure\Bus\EventBus;
 
-class MakeTransactionCommandHandler extends CommandHandler
+final class MakeTransactionCommandHandler extends CommandHandler
 {
     public function __construct(
-        private readonly WalletRepositoryPort $walletRepository,
-        private readonly TransactionRepositoryPort $transactionRepository,
-        private readonly EventBus $eventBus
+        private readonly WalletRepositoryPort       $walletRepository,
+        private readonly TransactionRepositoryPort  $transactionRepository,
+        private readonly EventBus                   $eventBus
     )
     {}
 
+    /**
+     * @throws NotEnoughFoundsException
+     */
     public function __invoke(MakeTransactionCommand $command): void
     {
-        $remitentWalletUuid = $command->remitentWallet();
+        $remittentWalletUuid = $command->remittentWallet();
         $destinationWalletUuid = $command->destinationWallet();
         $amount = $command->amount();
 
-        // Fetch data
-        $remitentWallet = $this->walletRepository->findByUuid($remitentWalletUuid);
-        $destinationWallet = $this->walletRepository->findByUuid($destinationWalletUuid);
 
-        // Make de transaction
-        $remitentWallet->makeTransaction($destinationWalletUuid, $amount);
-        $remitentWallet->withdraw($amount);
-        $destinationWallet->deposit($amount);
-
-        // Get the results
-        $transaction = $remitentWallet->transactions()->get(0);
+        $service = TransactorService::create(
+            $remittentWalletUuid,
+            $destinationWalletUuid,
+            $amount,
+            $this->walletRepository
+        );
+        $transaction = $service->execute();
 
         // Persists
-        $this->transactionRepository->create($remitentWalletUuid, $transaction);
-        $this->walletRepository->withdraw($remitentWalletUuid, $amount);
+        $this->transactionRepository->create($remittentWalletUuid, $transaction);
+        $this->walletRepository->withdraw($remittentWalletUuid, $amount);
         $this->walletRepository->deposit($destinationWalletUuid, $amount);
 
         // Publish events
-        $this->eventBus->dispatch(...$remitentWallet->pullDomainEvents());
+        $this->eventBus->dispatch(...$remittentWallet->pullDomainEvents());
     }
 }

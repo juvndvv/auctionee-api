@@ -7,7 +7,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TransactionPlaced extends DomainEvent
+final class TransactionPlaced extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

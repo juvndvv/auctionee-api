@@ -6,7 +6,7 @@ use App\Retention\Email\Domain\Model\Email;
 use App\Retention\Email\Domain\Ports\Outbound\EmailSenderPort;
 use Resend\Laravel\Facades\Resend;
 
-class ResendEmailSender implements EmailSenderPort
+final class ResendEmailSender implements EmailSenderPort
 {
     public function send(Email $email)
     {

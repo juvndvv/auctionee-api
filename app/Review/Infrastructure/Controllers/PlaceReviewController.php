@@ -3,8 +3,8 @@
 namespace App\Review\Infrastructure\Controllers;
 
 use App\Review\Application\Command\PlaceReview\PlaceReviewCommand;
-use App\Shared\Infrastucture\Controllers\Response;
-use App\Shared\Infrastucture\Controllers\ValidatedCommandController;
+use App\Shared\Infrastructure\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\ValidatedCommandController;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

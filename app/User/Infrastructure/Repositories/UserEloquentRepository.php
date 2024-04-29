@@ -5,7 +5,7 @@ namespace App\User\Infrastructure\Repositories;
 use App\Shared\Domain\Exceptions\BadRequestException;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infrastucture\Repositories\BaseRepository;
+use App\Shared\Infrastructure\Repositories\BaseRepository;
 use App\User\Domain\Models\User;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 use App\User\Infrastructure\Repositories\Models\EloquentUserModel;

@@ -3,7 +3,7 @@
 namespace App\User\Application\Commands\UpdateEmail;
 
 use App\Shared\Application\Commands\CommandHandler;
-use App\Shared\Infrastucture\Bus\EventBus;
+use App\Shared\Infrastructure\Bus\EventBus;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 
 class UpdateEmailCommandHandler extends CommandHandler

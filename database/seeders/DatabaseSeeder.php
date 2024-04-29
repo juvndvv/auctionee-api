@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Financial\Domain\Models\Transaction;
+use App\Review\Domain\Models\Review;
 use Illuminate\Support\Facades\DB;
 use App\Financial\Domain\Models\Wallet;
 use App\User\Domain\Models\User;
@@ -97,6 +98,14 @@ class DatabaseSeeder extends Seeder
             Transaction::SERIALIZED_DESTINATION_WALLET_UUID => 'f17fab00-fb9e-4e03-b393-60e1f1b9932f',
             Transaction::SERIALIZED_REMITTENT_WALLET_UUID => '668430b8-f7c6-42d1-a74d-6c8a2505ad1d',
             Transaction::SERIALIZED_AMOUNT => 200,
+        ]);
+
+        DB::table('reviews')->insert([
+            Review::SERIALIZED_UUID => '1ca1b010-fbbf-42f7-b33d-a060a7d0dc73',
+            Review::SERIALIZED_REVIEWED_UUID => 'c0ba5e6c-461f-42b0-a568-3fe93e144811',
+            Review::SERIALIZED_REVIEWER_UUID => '5bfdc240-1780-423a-9688-fd9c50d2d661',
+            Review::SERIALIZED_DESCRIPTION => 'Descripcion seedeada',
+            Review::SERIALIZED_RATING => 4
         ]);
     }
 }

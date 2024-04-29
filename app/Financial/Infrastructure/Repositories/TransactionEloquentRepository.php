@@ -5,12 +5,12 @@ namespace App\Financial\Infrastructure\Repositories;
 use App\Financial\Domain\Models\Transaction;
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Infrastructure\Repositories\Models\EloquentTransactionModel;
-use App\Shared\Infrastucture\Repositories\BaseRepository;
+use App\Shared\Infrastructure\Repositories\BaseRepository;
 use Illuminate\Support\Collection;
 
-class TransactionEloquentRepository extends BaseRepository implements TransactionRepositoryPort
+final class TransactionEloquentRepository extends BaseRepository implements TransactionRepositoryPort
 {
-    private const ENTITY_NAME = 'transaction';
+    private const string ENTITY_NAME = 'transaction';
 
     public function __construct()
     {

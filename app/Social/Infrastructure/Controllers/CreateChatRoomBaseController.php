@@ -3,8 +3,8 @@
 namespace App\Social\Infrastructure\Controllers;
 
 use App\Shared\Domain\Exceptions\BadRequestException;
-use App\Shared\Infrastucture\Controllers\CommandController;
-use App\Shared\Infrastucture\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\CommandController;
+use App\Shared\Infrastructure\Controllers\Response;
 use App\Social\Application\Commands\CreateChatRoom\CreateChatRoomCommand;
 use Exception;
 use Illuminate\Http\Request;

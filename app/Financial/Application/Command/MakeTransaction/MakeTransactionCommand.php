@@ -4,18 +4,18 @@ namespace App\Financial\Application\Command\MakeTransaction;
 
 use App\Shared\Application\Commands\Command;
 
-class MakeTransactionCommand extends Command
+final class MakeTransactionCommand extends Command
 {
     public function __construct(
-        private readonly string $remitentWallet,
+        private readonly string $remittentWallet,
         private readonly string $destinationWallet,
-        private readonly float $amount
+        private readonly float  $amount
     )
     {}
 
-    public function remitentWallet(): string
+    public function remittentWallet(): string
     {
-        return $this->remitentWallet;
+        return $this->remittentWallet;
     }
 
     public function destinationWallet(): string

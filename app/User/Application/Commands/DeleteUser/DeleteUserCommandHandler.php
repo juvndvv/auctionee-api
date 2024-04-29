@@ -3,7 +3,8 @@
 namespace App\User\Application\Commands\DeleteUser;
 
 use App\Shared\Application\Commands\CommandHandler;
-use App\Shared\Infrastucture\Bus\EventBus;
+use App\Shared\Domain\Exceptions\NotFoundException;
+use App\Shared\Infrastructure\Bus\EventBus;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 
 final class DeleteUserCommandHandler extends CommandHandler
@@ -14,6 +15,9 @@ final class DeleteUserCommandHandler extends CommandHandler
     )
     {}
 
+    /**
+     * @throws NotFoundException
+     */
     public function __invoke(DeleteUserCommand $command): void
     {
         $uuid = $command->uuid();

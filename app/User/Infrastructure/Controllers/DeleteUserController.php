@@ -3,8 +3,8 @@
 namespace App\User\Infrastructure\Controllers;
 
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infrastucture\Controllers\CommandController;
-use App\Shared\Infrastucture\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\CommandController;
+use App\Shared\Infrastructure\Controllers\Response;
 use App\User\Application\Commands\DeleteUser\DeleteUserCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -22,7 +22,7 @@ final class DeleteUserController extends CommandController
         } catch (NotFoundException) {
             return Response::NOT_FOUND("El usuario $uuid no existe");
 
-        } catch (Exception) {
+        } catch (Exception $e) {
             return Response::SERVER_ERROR();
         }
     }

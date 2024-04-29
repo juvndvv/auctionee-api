@@ -7,7 +7,7 @@ use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Domain\Resources\TransactionResource;
 use App\Shared\Application\Commands\QueryHandler;
 
-class FindTransactionsByWalletUuidQueryHandler extends QueryHandler
+final class FindTransactionsByWalletUuidQueryHandler extends QueryHandler
 {
     public function __construct(
         private readonly TransactionRepositoryPort $transactionRepository

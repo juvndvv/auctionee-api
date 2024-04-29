@@ -2,8 +2,8 @@
 
 namespace App\User\Infrastructure\Controllers;
 
-use App\Shared\Infrastucture\Controllers\CommandController;
-use App\Shared\Infrastucture\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\CommandController;
+use App\Shared\Infrastructure\Controllers\Response;
 use App\User\Application\Commands\UnblockUser\UnblockUserCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;

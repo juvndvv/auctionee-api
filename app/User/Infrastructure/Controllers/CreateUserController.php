@@ -3,8 +3,8 @@
 namespace App\User\Infrastructure\Controllers;
 
 use App\Shared\Application\Commands\UploadImage\UploadImageCommand;
-use App\Shared\Infrastucture\Controllers\Response;
-use App\Shared\Infrastucture\Controllers\ValidatedCommandController;
+use App\Shared\Infrastructure\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\ValidatedCommandController;
 use App\User\Application\Commands\Create\CreateUserCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +27,7 @@ final class CreateUserController extends ValidatedCommandController
 
             // Upload the image
             if ($avatar) {
-                $avatarCommand = UploadImageCommand::create("avatars", $avatar);
+                $avatarCommand = UploadImageCommand::create('avatars', $avatar);
                 $avatar = $this->commandBus->handle($avatarCommand);
 
             } else {
@@ -38,10 +38,10 @@ final class CreateUserController extends ValidatedCommandController
             $command = CreateUserCommand::create($name, $username, $email, $password, $avatar, $birth, 0);
             $this->commandBus->handle($command);
 
-            return Response::CREATED("Usuario creado satisfactoriamente", "/users/" . $username);
+            return Response::CREATED('Usuario creado satisfactoriamente', '/users/' . $username);
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación en el usuario", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY('Errores de validación en el usuario', $e->validator->getMessageBag());
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

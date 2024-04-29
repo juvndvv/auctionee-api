@@ -6,7 +6,7 @@ use App\Financial\Domain\Models\Wallet;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Shared\Application\Commands\CommandHandler;
 
-class CreateWalletCommandHandler extends CommandHandler
+final class CreateWalletCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly WalletRepositoryPort $walletRepository

@@ -4,8 +4,8 @@ namespace App\Review\Infrastructure\Controllers;
 
 use App\Review\Application\Command\RemoveReview\RemoveReviewCommand;
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infrastucture\Controllers\CommandController;
-use App\Shared\Infrastucture\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\CommandController;
+use App\Shared\Infrastructure\Controllers\Response;
 use Exception;
 use Illuminate\Http\JsonResponse;
 

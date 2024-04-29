@@ -5,7 +5,7 @@ namespace App\Retention\EventMonitoring\Infrastructure\Repositories;
 use App\Retention\EventMonitoring\Domain\Models\Event;
 use App\Retention\EventMonitoring\Domain\Ports\Outbound\EventRepositoryPort;
 use App\Retention\EventMonitoring\Infrastructure\Repositories\Models\EloquentEventModel;
-use App\Shared\Infrastucture\Repositories\BaseRepository;
+use App\Shared\Infrastructure\Repositories\BaseRepository;
 
 class EloquentEventRepository extends BaseRepository implements EventRepositoryPort
 {

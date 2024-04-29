@@ -5,7 +5,7 @@ namespace App\Retention\Email\Infrastructure\Repositories;
 use App\Retention\Email\Domain\Model\Email;
 use App\Retention\Email\Domain\Ports\Outbound\EmailRepositoryPort;
 
-class InMemoryEmailRepository implements EmailRepositoryPort
+final class InMemoryEmailRepository implements EmailRepositoryPort
 {
     public function getWelcomeEmail(string $to, string $name): Email
     {

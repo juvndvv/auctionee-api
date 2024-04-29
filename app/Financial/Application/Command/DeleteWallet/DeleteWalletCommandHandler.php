@@ -7,7 +7,7 @@ use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Financial\Domain\Services\DeleteWalletService;
 use App\Shared\Application\Commands\CommandHandler;
 
-class DeleteWalletCommandHandler extends CommandHandler
+final class DeleteWalletCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly WalletRepositoryPort       $walletRepository,

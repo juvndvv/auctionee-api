@@ -7,12 +7,12 @@ use App\Financial\Domain\Models\ValueObjects\TransactionUuid;
 use App\Financial\Domain\Models\ValueObjects\WalletUuid;
 use Illuminate\Support\Collection;
 
-class Transaction
+final class Transaction
 {
-    public const SERIALIZED_UUID = 'uuid';
-    public const SERIALIZED_REMITTENT_WALLET_UUID = 'remittent_wallet_uuid';
-    public const SERIALIZED_DESTINATION_WALLET_UUID = 'destination_wallet_uuid';
-    public const SERIALIZED_AMOUNT = 'amount';
+    public const string SERIALIZED_UUID = 'uuid';
+    public const string SERIALIZED_REMITTENT_WALLET_UUID = 'remittent_wallet_uuid';
+    public const string SERIALIZED_DESTINATION_WALLET_UUID = 'destination_wallet_uuid';
+    public const string SERIALIZED_AMOUNT = 'amount';
 
     private TransactionUuid $uuid;
     private WalletUuid $remittentWalletUuid;

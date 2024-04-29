@@ -6,7 +6,7 @@ use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Financial\Domain\Resources\WalletResource;
 use App\Shared\Application\Commands\QueryHandler;
 
-class FindWalletByUserUuidQueryHandler extends QueryHandler
+final class FindWalletByUserUuidQueryHandler extends QueryHandler
 {
     public function __construct(
         private readonly WalletRepositoryPort $walletRepository

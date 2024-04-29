@@ -4,11 +4,11 @@ namespace App\Financial\Application\Command\DepositMoney;
 
 use App\Shared\Application\Commands\Command;
 
-class DepositMoneyCommand extends Command
+final class DepositMoneyCommand extends Command
 {
     public function __construct(
         private readonly string $walletUuid,
-        private readonly float $amount
+        private readonly float  $amount
     )
     {}
 

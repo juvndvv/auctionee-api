@@ -2,8 +2,8 @@
 
 namespace App\User\Infrastructure\Controllers;
 
-use App\Shared\Infrastucture\Controllers\Response;
-use App\Shared\Infrastucture\Controllers\ValidatedCommandController;
+use App\Shared\Infrastructure\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\ValidatedCommandController;
 use App\User\Application\Commands\UpdateAvatar\UpdateAvatarCommand;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

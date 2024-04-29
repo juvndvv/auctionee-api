@@ -4,7 +4,7 @@ namespace App\Financial\Domain\Resources;
 
 use App\Financial\Domain\Models\Transaction;
 
-class TransactionResource
+final class TransactionResource
 {
     public static function fromDomain(Transaction $transaction, string $remitentWallet)
     {

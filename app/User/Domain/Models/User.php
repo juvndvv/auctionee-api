@@ -19,14 +19,14 @@ use App\User\Domain\Models\ValueObjects\UserUsername;
 
 final class User extends AggregateRoot
 {
-    public const SERIALIZED_UUID = 'uuid';
-    public const SERIALIZED_NAME = 'name';
-    public const SERIALIZED_USERNAME = 'username';
-    public const SERIALIZED_EMAIL = 'email';
-    public const SERIALIZED_PASSWORD = 'password';
-    public const SERIALIZED_AVATAR = 'avatar';
-    public const SERIALIZED_BIRTH = 'birth';
-    public const SERIALIZED_ROLE = 'role';
+    public const string SERIALIZED_UUID = 'uuid';
+    public const string SERIALIZED_NAME = 'name';
+    public const string SERIALIZED_USERNAME = 'username';
+    public const string SERIALIZED_EMAIL = 'email';
+    public const string SERIALIZED_PASSWORD = 'password';
+    public const string SERIALIZED_AVATAR = 'avatar';
+    public const string SERIALIZED_BIRTH = 'birth';
+    public const string SERIALIZED_ROLE = 'role';
 
     public const USER_ROLE = 0;
     public const ADMIN_ROLE = 1;

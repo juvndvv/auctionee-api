@@ -5,9 +5,10 @@ namespace App\Review\Infrastructure\Repositories;
 use App\Review\Domain\Models\Review;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Review\Domain\Projections\ReviewDetailsProjection;
+use App\Review\Domain\Projections\UserAverageProjection;
 use App\Review\Infrastructure\Repositories\Models\EloquentReviewModel;
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Infrastucture\Repositories\BaseRepository;
+use App\Shared\Infrastructure\Repositories\BaseRepository;
 use Illuminate\Support\Collection;
 
 final class ReviewEloquentRepository extends BaseRepository implements ReviewRepositoryPort
@@ -82,10 +83,10 @@ final class ReviewEloquentRepository extends BaseRepository implements ReviewRep
         parent::deleteByPrimaryKey($uuid);
     }
 
-    public function findUserAverageRating(string $userUuid): float
+    public function findUserAverageRating(string $userUuid): UserAverageProjection
     {
-        return $this->builder
+        return UserAverageProjection::create(floatval($this->builder
             ->where("reviewed_uuid", "=", $userUuid)
-            ->avg("rating");
+            ->avg("rating")));
     }
 }

@@ -4,7 +4,7 @@ namespace App\Financial\Application\Command\CreateWallet;
 
 use App\Shared\Application\Commands\Command;
 
-class CreateWalletCommand extends Command
+final class CreateWalletCommand extends Command
 {
     public function __construct(
         private readonly string $userUuid,

@@ -5,7 +5,7 @@ namespace App\Review\Application\Command\PlaceReview;
 use App\Review\Domain\Models\Review;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Shared\Application\Commands\QueryHandler;
-use App\Shared\Infrastucture\Bus\EventBus;
+use App\Shared\Infrastructure\Bus\EventBus;
 
 final class PlaceReviewCommandHandler extends QueryHandler
 {

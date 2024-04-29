@@ -3,8 +3,8 @@
 namespace App\Social\Infrastructure\Controllers;
 
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Infrastucture\Controllers\QueryController;
-use App\Shared\Infrastucture\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\QueryController;
+use App\Shared\Infrastructure\Controllers\Response;
 use App\Social\Application\Queries\FindFriendListByUserUuid\FindFriendListByUserUuidQuery;
 use Exception;
 

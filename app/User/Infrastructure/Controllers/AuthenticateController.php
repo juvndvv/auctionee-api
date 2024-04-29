@@ -4,8 +4,8 @@ namespace App\User\Infrastructure\Controllers;
 
 use App\Shared\Domain\Exceptions\BadRequestException;
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infrastucture\Controllers\Response;
-use App\Shared\Infrastucture\Controllers\ValidatedCommandController;
+use App\Shared\Infrastructure\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\ValidatedCommandController;
 use App\User\Application\Commands\Authenticate\AuthenticateCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;

@@ -2,12 +2,10 @@
 
 namespace App\Review\Application\Command\RemoveReview;
 
-use App\Review\Domain\Models\Review;
 use App\Review\Domain\Ports\Outbound\ReviewRepositoryPort;
 use App\Shared\Application\Commands\CommandHandler;
 use App\Shared\Domain\Exceptions\NotFoundException;
-use App\Shared\Infrastucture\Bus\EventBus;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Shared\Infrastructure\Bus\EventBus;
 
 final class RemoveReviewCommandHandler extends CommandHandler
 {

@@ -4,7 +4,7 @@ namespace App\Financial\Domain\Models\ValueObjects;
 
 use App\Shared\Domain\Models\ValueObjects\Uuid;
 
-class TransactionUuid extends Uuid
+final class TransactionUuid extends Uuid
 {
 
 }

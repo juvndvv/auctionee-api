@@ -9,10 +9,10 @@ use App\Retention\EventMonitoring\Domain\Models\ValueObjects\EventUuid;
 
 class Event
 {
-    public const SERIALIZED_UUID = 'uuid';
-    public const SERIALIZED_TYPE = 'type';
-    public const SERIALIZED_PAYLOAD = 'payload';
-    public const SERIALIZED_OCCURRED_ON = 'occurred_on';
+    public const string SERIALIZED_UUID = 'uuid';
+    public const string SERIALIZED_TYPE = 'type';
+    public const string SERIALIZED_PAYLOAD = 'payload';
+    public const string SERIALIZED_OCCURRED_ON = 'occurred_on';
 
     private readonly EventUuid $uuid;
     private readonly EventType $type;

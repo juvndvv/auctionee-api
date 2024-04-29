@@ -4,8 +4,8 @@ namespace App\Review\Infrastructure\Controllers;
 
 use App\Review\Application\Query\FindUserReviews\FindUserReviewsQuery;
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Infrastucture\Controllers\QueryController;
-use App\Shared\Infrastucture\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\QueryController;
+use App\Shared\Infrastructure\Controllers\Response;
 use Exception;
 use Illuminate\Http\JsonResponse;
 

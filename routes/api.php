@@ -1,10 +1,10 @@
 <?php
 
-use App\Financial\Infrastructure\Controllers\DepositMoneyBaseController;
-use App\Financial\Infrastructure\Controllers\FindTransactionsByWalletUuidBaseController;
-use App\Financial\Infrastructure\Controllers\FindWalletByUserUuidBaseController;
-use App\Financial\Infrastructure\Controllers\MakeTransactionBaseController;
-use App\Financial\Infrastructure\Controllers\WithdrawMoneyBaseController;
+use App\Financial\Infrastructure\Controllers\DepositMoneyController;
+use App\Financial\Infrastructure\Controllers\FindTransactionsByWalletUuidController;
+use App\Financial\Infrastructure\Controllers\FindWalletByUserUuidController;
+use App\Financial\Infrastructure\Controllers\MakeTransactionController;
+use App\Financial\Infrastructure\Controllers\WithdrawMoneyController;
 use App\Retention\EventMonitoring\Infrastructure\Controllers\FindAllEventsController;
 use App\Review\Infrastructure\Controllers\FindUserAverageRatingController;
 use App\Review\Infrastructure\Controllers\FindUserReviewsController;
@@ -48,15 +48,15 @@ Route::get('/users/{uuid}/block', BlockUserController::class);
 Route::get('/users/{uuid}/unblock', UnblockUserController::class);
 Route::get('/users/{uuid}/reviews', FindUserReviewsController::class);
 Route::get("/users/{uuid}/rating", FindUserAverageRatingController::class);
-Route::get("/users/{uuid}/wallet", FindWalletByUserUuidBaseController::class);
+Route::get("/users/{uuid}/wallet", FindWalletByUserUuidController::class);
 Route::get("/users/{uuid}/chats", FindChatRoomsByUserUuidController::class);
 Route::get("/users/{uuid}/friends", FindFriendListByUserUuidController::class);
 
 // Wallets
-Route::get("/wallets/{uuid}/transfer", MakeTransactionBaseController::class);
-Route::get("/wallets/{uuid}/transactions", FindTransactionsByWalletUuidBaseController::class);
-Route::post("/wallets/{uuid}/deposit", DepositMoneyBaseController::class);
-Route::post("/wallets/{uuid}/withdraw", WithdrawMoneyBaseController::class);
+Route::get("/wallets/{uuid}/transfer", MakeTransactionController::class);
+Route::get("/wallets/{uuid}/transactions", FindTransactionsByWalletUuidController::class);
+Route::post("/wallets/{uuid}/deposit", DepositMoneyController::class);
+Route::post("/wallets/{uuid}/withdraw", WithdrawMoneyController::class);
 
 // Reviews
 Route::post('/reviews', PlaceReviewController::class);

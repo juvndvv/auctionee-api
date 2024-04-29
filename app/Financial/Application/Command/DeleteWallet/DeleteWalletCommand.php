@@ -4,7 +4,7 @@ namespace App\Financial\Application\Command\DeleteWallet;
 
 use App\Shared\Application\Commands\Command;
 
-class DeleteWalletCommand extends Command
+final   class DeleteWalletCommand extends Command
 {
     public function __construct(
         private readonly string $userUuid,

@@ -5,11 +5,12 @@ namespace App\Financial\Infrastructure\Repositories;
 use App\Financial\Domain\Models\Wallet;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Financial\Infrastructure\Repositories\Models\EloquentWalletModel;
-use App\Shared\Infrastucture\Repositories\BaseRepository;
+use App\Shared\Domain\Exceptions\NotFoundException;
+use App\Shared\Infrastructure\Repositories\BaseRepository;
 
-class WalletEloquentRepository extends BaseRepository implements WalletRepositoryPort
+final class WalletEloquentRepository extends BaseRepository implements WalletRepositoryPort
 {
-private const ENTITY_NAME = 'wallet';
+    private const string ENTITY_NAME = 'wallet';
 
     public function __construct()
     {
@@ -17,12 +18,18 @@ private const ENTITY_NAME = 'wallet';
         $this->setEntityName(self::ENTITY_NAME);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function findByUserUuid(string $userUuid): Wallet
     {
         $walletDb = parent::findByFieldValue(Wallet::SERIALIZED_USER_UUID, $userUuid);
         return Wallet::fromPrimitives($walletDb->toArray()['0']);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function findByUuid(string $uuid): Wallet
     {
         $walletDb = parent::findOneByPrimaryKeyOrFail($uuid);
@@ -34,6 +41,9 @@ private const ENTITY_NAME = 'wallet';
         return parent::existsByFieldValue(Wallet::SERIALIZED_UUID, $uuid);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function updateAmount(string $uuid, float $amount): void
     {
         parent::updateFieldByPrimaryKey($uuid, Wallet::SERIALIZED_AMOUNT, $amount);

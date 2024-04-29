@@ -2,9 +2,9 @@
 
 namespace App\Financial\Application\Query\FindTransactionsByWalletUuid;
 
-use App\Shared\Infraestructure\Bus\Query\Query;
+use App\Shared\Application\Queries\Query;
 
-class FindTransactionsByWalletUuidQuery extends Query
+final class FindTransactionsByWalletUuidQuery extends Query
 {
     public function __construct(
         private readonly string $walletUuid

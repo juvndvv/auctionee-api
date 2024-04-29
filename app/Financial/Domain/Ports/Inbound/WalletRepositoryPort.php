@@ -11,14 +11,14 @@ interface WalletRepositoryPort extends BaseRepositoryPort
 {
     /**
      * @param string $userUuid
-     * @return Model<Wallet>
+     * @return Wallet
      * @throws ModelNotFoundException
      */
     public function findByUserUuid(string $userUuid): Wallet;
 
     /**
      * @param string $uuid
-     * @return Model<Wallet>
+     * @return Wallet
      * @throws ModelNotFoundException
      */
     public function findByUuid(string $uuid): Wallet;

@@ -4,8 +4,8 @@ namespace App\Retention\EventMonitoring\Infrastructure\Controllers;
 
 use App\Retention\EventMonitoring\Application\FindAll\FindAllEventsQuery;
 use App\Shared\Domain\Exceptions\NoContentException;
-use App\Shared\Infrastucture\Controllers\QueryController;
-use App\Shared\Infrastucture\Controllers\Response;
+use App\Shared\Infrastructure\Controllers\QueryController;
+use App\Shared\Infrastructure\Controllers\Response;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

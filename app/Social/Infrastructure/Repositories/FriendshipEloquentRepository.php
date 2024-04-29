@@ -2,7 +2,7 @@
 
 namespace App\Social\Infrastructure\Repositories;
 
-use App\Shared\Infrastucture\Repositories\BaseRepository;
+use App\Shared\Infrastructure\Repositories\BaseRepository;
 use App\Social\Domain\Ports\FriendshipRepositoryPort;
 use App\Social\Infrastructure\Repositories\Models\EloquentFriendshipModel;
 use Illuminate\Support\Collection;

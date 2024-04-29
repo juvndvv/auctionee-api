@@ -19,8 +19,8 @@ return new class extends Migration
             $table->tinyInteger('rating');
             $table->timestamps();
 
-            $table->foreign('reviewed_uuid')->references('uuid')->on('users');
-            $table->foreign('reviewer_uuid')->references('uuid')->on('users');
+            $table->foreign('reviewed_uuid')->references('uuid')->on('users')->onDelete('cascade');
+            $table->foreign('reviewer_uuid')->references('uuid')->on('users')->onDelete('cascade');
         });
     }
 

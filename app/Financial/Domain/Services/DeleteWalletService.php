@@ -7,7 +7,7 @@ use App\Financial\Domain\Models\Wallet;
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 
-class DeleteWalletService
+final class DeleteWalletService
 {
     public const DELETED_WALLET_UUID = 'WD000000-0000-0000-0000-000000000000';
 
