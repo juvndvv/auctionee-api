@@ -4,9 +4,9 @@ namespace App\User\Domain\Resources;
 
 use App\User\Domain\Models\User;
 
-final class UserDetailsResource
+final readonly class UserDetailsResource
 {
-    public function __construct(
+    private function __construct(
         public string $uuid,
         public string $name,
         public string $username,

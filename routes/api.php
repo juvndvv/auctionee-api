@@ -17,6 +17,7 @@ use App\Social\Infrastructure\Controllers\DeleteChatMessageBaseController;
 use App\Social\Infrastructure\Controllers\FindChatRoomsByUserUuidController;
 use App\Social\Infrastructure\Controllers\FindFriendListByUserUuidController;
 use App\Social\Infrastructure\Controllers\FindMessagesByChatRoomUuidController;
+use App\User\Infrastructure\Controllers\AuthenticateController;
 use App\User\Infrastructure\Controllers\BlockUserController;
 use App\User\Infrastructure\Controllers\CreateUserController;
 use App\User\Infrastructure\Controllers\DeleteUserController;
@@ -32,6 +33,7 @@ use App\User\Infrastructure\Controllers\UpdateUserUsernameController;
 use Illuminate\Support\Facades\Route;
 
 // Users
+Route::post("/auth", AuthenticateController::class);
 Route::post('/users', CreateUserController::class);
 Route::get('/users', FindAllUserController::class);
 Route::get('/users/{uuid}', FindUserByUuidController::class);

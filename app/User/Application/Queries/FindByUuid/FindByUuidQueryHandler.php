@@ -17,9 +17,10 @@ final class FindByUuidQueryHandler extends QueryHandler
     /**
      * @throws NotFoundException
      */
-    public function __invoke(FindByUuidQuery $query): array
+    public function __invoke(FindByUuidQuery $query): UserDetailsResource
     {
         $uuid = $query->uuid();
-        return $this->userRepository->findByUuid($uuid)->toPrimitives();
+        $user = $this->userRepository->findByUuid($uuid);
+        return UserDetailsResource::create($user);
     }
 }

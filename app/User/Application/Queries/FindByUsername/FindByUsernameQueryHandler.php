@@ -17,9 +17,10 @@ final class FindByUsernameQueryHandler extends QueryHandler
     /**
      * @throws NotFoundException
      */
-    public function __invoke(FindByUsernameQuery $query): array
+    public function __invoke(FindByUsernameQuery $query): UserSmallResource
     {
         $username = $query->username();
-        return $this->userRepository->findByUsername($username)->toPrimitives();
+        $user = $this->userRepository->findByUsername($username);
+        return UserSmallResource::create($user);
     }
 }

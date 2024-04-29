@@ -2,6 +2,7 @@
 
 namespace App\User\Infrastructure\Repositories;
 
+use App\Shared\Domain\Exceptions\BadRequestException;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastucture\Repositories\BaseRepository;
@@ -86,5 +87,22 @@ final class UserEloquentRepository extends BaseRepository implements UserReposit
     public function unblock(string $uuid): void
     {
         parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_ROLE, User::USER_ROLE);
+    }
+
+    public function authenticate(string $email, string $password): string
+    {
+        $userDb = $this->builder->where('email', $email)->where('password', $password)->first();
+
+        if (!$userDb) {
+            throw new BadRequestException("Email o contraseña incorrecta");
+        }
+
+        return $userDb->createToken('apiToken')->plainTextToken;
+    }
+
+    public function findByEmail(string $email): User
+    {
+        $userDb = parent::findByFieldValue(User::SERIALIZED_EMAIL, $email)['0'];
+        return User::fromPrimitives($userDb->toArray());
     }
 }

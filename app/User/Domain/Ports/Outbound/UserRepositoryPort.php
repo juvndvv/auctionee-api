@@ -2,6 +2,7 @@
 
 namespace App\User\Domain\Ports\Outbound;
 
+use App\Shared\Domain\Exceptions\BadRequestException;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
@@ -35,6 +36,15 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @throws NotFoundException
      */
     public function findByUsername(string $username): User;
+
+    /**
+     * Busca el usuario por el email. Lanza NotFoundException si no lo encuentra
+     *
+     * @param string $email
+     * @return User
+     * @throws NotFoundException
+     */
+    public function findByEmail(string $email): User;
 
     /**
      * Actualiza el nombre del usuario. Lanza excepcion si no existe.
@@ -100,4 +110,14 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @return void
      */
     public function unblock(string $uuid): void;
+
+    /**
+     * Returns token if email and password are correct
+     *
+     * @param string $email
+     * @param string $password
+     * @return string
+     * @throws BadRequestException
+     */
+    public function authenticate(string $email, string $password): string;
 }

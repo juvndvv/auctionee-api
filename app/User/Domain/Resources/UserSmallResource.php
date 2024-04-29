@@ -4,9 +4,9 @@ namespace App\User\Domain\Resources;
 
 use App\User\Domain\Models\User;
 
-final class UserSmallResource
+final readonly class UserSmallResource
 {
-    public function __construct(
+    private function __construct(
         public string $name,
         public string $username,
         public string $avatar,
