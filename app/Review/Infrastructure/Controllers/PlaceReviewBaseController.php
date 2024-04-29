@@ -6,12 +6,13 @@ use App\Review\Application\Command\PlaceReview\PlaceReviewCommand;
 use App\Shared\Infrastucture\Controllers\Response;
 use App\Shared\Infrastucture\Controllers\ValidatedCommandController;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 final class PlaceReviewBaseController extends ValidatedCommandController
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): JsonResponse
     {
         try {
             self::validate($request);

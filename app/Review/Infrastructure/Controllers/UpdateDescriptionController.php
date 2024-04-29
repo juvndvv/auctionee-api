@@ -3,16 +3,17 @@
 namespace App\Review\Infrastructure\Controllers;
 
 use App\Review\Application\Command\UpdateDescription\UpdateDescriptionCommand;
-use App\Review\Infraestructure\Controllers\Exception;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastucture\Controllers\Response;
 use App\Shared\Infrastucture\Controllers\ValidatedCommandController;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 final class UpdateDescriptionController extends ValidatedCommandController
 {
-    public function __invoke(string $uuid, Request $request)
+    public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {
             self::validate($request);

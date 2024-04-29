@@ -7,10 +7,11 @@ use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastucture\Controllers\CommandController;
 use App\Shared\Infrastucture\Controllers\Response;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 final class RemoveReviewController extends CommandController
 {
-    public function __invoke(string $uuid)
+    public function __invoke(string $uuid): JsonResponse
     {
         try {
             $this->commandBus->handle(RemoveReviewCommand::create($uuid));

@@ -7,10 +7,11 @@ use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infrastucture\Controllers\QueryController;
 use App\Shared\Infrastucture\Controllers\Response;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 final class FindUserReviewsController extends QueryController
 {
-    public function __invoke(string $uuid)
+    public function __invoke(string $uuid): JsonResponse
     {
         try {
             $query = new FindUserReviewsQuery($uuid);
