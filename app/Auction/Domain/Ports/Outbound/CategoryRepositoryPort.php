@@ -22,4 +22,12 @@ interface CategoryRepositoryPort extends BaseRepositoryPort
      * @throws NotFoundException
      */
     public function updateName(string $uuid, string $name): void;
+
+    /**
+     * @param string $uuid
+     * @param string $description
+     * @return void
+     * @throws NotFoundException
+     */
+    public function updateDescription(string $uuid, string $description): void;
 }

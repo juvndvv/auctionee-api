@@ -1,6 +1,7 @@
 <?php
 
 use App\Auction\Infrastructure\Controllers\CreateCategoryController;
+use App\Auction\Infrastructure\Controllers\UpdateCategoryDescriptionController;
 use App\Auction\Infrastructure\Controllers\UpdateCategoryNameController;
 use App\Financial\Infrastructure\Controllers\DepositMoneyController;
 use App\Financial\Infrastructure\Controllers\FindTransactionsByWalletUuidController;
@@ -78,3 +79,4 @@ Route::delete('/chats/{chatUuid}/messages/{messageUuid}', DeleteChatMessageContr
 // Categories
 Route::post('/categories', CreateCategoryController::class);
 Route::put('/categories/{uuid}/name', UpdateCategoryNameController::class);
+Route::put('/categories/{uuid}/description', UpdateCategoryDescriptionController::class);

@@ -27,4 +27,9 @@ final class EloquentCategoryRepository extends BaseRepository implements Categor
     {
         parent::updateFieldByPrimaryKey($uuid, Category::SERIALIZED_NAME, $name);
     }
+
+    public function updateDescription(string $uuid, string $description): void
+    {
+        parent::updateFieldByPrimaryKey($uuid, Category::SERIALIZED_DESCRIPTION, $description);
+    }
 }
