@@ -2,12 +2,14 @@
 
 namespace Database\Seeders;
 
-use App\Financial\Domain\Models\Transaction;
-use App\Review\Domain\Models\Review;
-use Illuminate\Support\Facades\DB;
 use App\Financial\Domain\Models\Wallet;
+use App\Review\Infrastructure\Repositories\Models\EloquentReviewModel;
+use App\Social\Infrastructure\Repositories\Models\EloquentChatRoomModel;
+use App\Social\Infrastructure\Repositories\Models\EloquentMessageModel;
 use App\User\Domain\Models\User;
+use App\User\Infrastructure\Repositories\Models\EloquentUserModel;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -51,60 +53,20 @@ class DatabaseSeeder extends Seeder
             Wallet::SERIALIZED_USER_UUID => 'UD0000000-0000-0000-0000-000000000000',
         ]);
 
-        DB::table('users')->insert([
-            USER::SERIALIZED_UUID => '5bfdc240-1780-423a-9688-fd9c50d2d661',
-            User::SERIALIZED_NAME => 'Juan Daniel Forner',
-            User::SERIALIZED_USERNAME => 'juvndv',
-            User::SERIALIZED_EMAIL => 'jdanielforga@gmail.com',
-            User::SERIALIZED_AVATAR => env('DEFAULT_AVATAR'),
-            User::SERIALIZED_PASSWORD => 'jaja',
-            User::SERIALIZED_BIRTH => '1990-01-01',
-            User::SERIALIZED_ROLE => User::USER_ROLE
-        ]);
+        EloquentUserModel::factory()->count(1000)->create();
 
-        DB::table('wallets')->insert([
-            Wallet::SERIALIZED_UUID => 'f17fab00-fb9e-4e03-b393-60e1f1b9932f',
-            Wallet::SERIALIZED_AMOUNT => 0,
-            Wallet::SERIALIZED_USER_UUID => '5bfdc240-1780-423a-9688-fd9c50d2d661',
-        ]);
+        EloquentUserModel::all()->each(function ($user) {
+            DB::table('wallets')->insert([
+                'uuid' => $user->uuid,
+                'amount' => 10000,
+                'user_uuid' => $user->uuid,
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+            ]);
+        });
 
-        DB::table('users')->insert([
-            USER::SERIALIZED_UUID => 'c0ba5e6c-461f-42b0-a568-3fe93e144811',
-            User::SERIALIZED_NAME => 'Jose Domingas',
-            User::SERIALIZED_USERNAME => 'jdfs',
-            User::SERIALIZED_EMAIL => 'jdfsiescamp@gmail.com',
-            User::SERIALIZED_AVATAR => env('DEFAULT_AVATAR'),
-            User::SERIALIZED_PASSWORD => 'jaja',
-            User::SERIALIZED_BIRTH => '1990-01-01',
-            User::SERIALIZED_ROLE => User::USER_ROLE
-        ]);
-
-        DB::table('wallets')->insert([
-            Wallet::SERIALIZED_UUID => '668430b8-f7c6-42d1-a74d-6c8a2505ad1d',
-            Wallet::SERIALIZED_AMOUNT => 0,
-            Wallet::SERIALIZED_USER_UUID => 'c0ba5e6c-461f-42b0-a568-3fe93e144811',
-        ]);
-
-        DB::table('transactions')->insert([
-            Transaction::SERIALIZED_UUID => '4cc6916c-e3d9-41c9-87b0-e438a2e7d04c',
-            Transaction::SERIALIZED_DESTINATION_WALLET_UUID => 'f17fab00-fb9e-4e03-b393-60e1f1b9932f',
-            Transaction::SERIALIZED_REMITTENT_WALLET_UUID => '668430b8-f7c6-42d1-a74d-6c8a2505ad1d',
-            Transaction::SERIALIZED_AMOUNT => 10,
-        ]);
-
-        DB::table('transactions')->insert([
-            Transaction::SERIALIZED_UUID => '066d43f7-db37-4a4c-b7e4-cea6d8dede41',
-            Transaction::SERIALIZED_DESTINATION_WALLET_UUID => 'f17fab00-fb9e-4e03-b393-60e1f1b9932f',
-            Transaction::SERIALIZED_REMITTENT_WALLET_UUID => '668430b8-f7c6-42d1-a74d-6c8a2505ad1d',
-            Transaction::SERIALIZED_AMOUNT => 200,
-        ]);
-
-        DB::table('reviews')->insert([
-            Review::SERIALIZED_UUID => '1ca1b010-fbbf-42f7-b33d-a060a7d0dc73',
-            Review::SERIALIZED_REVIEWED_UUID => 'c0ba5e6c-461f-42b0-a568-3fe93e144811',
-            Review::SERIALIZED_REVIEWER_UUID => '5bfdc240-1780-423a-9688-fd9c50d2d661',
-            Review::SERIALIZED_DESCRIPTION => 'Descripcion seedeada',
-            Review::SERIALIZED_RATING => 4
-        ]);
+        EloquentChatRoomModel::factory()->count(200)->create();
+        EloquentMessageModel::factory()->count(300)->create();
+        EloquentReviewModel::factory()->count(400)->create();
     }
 }
