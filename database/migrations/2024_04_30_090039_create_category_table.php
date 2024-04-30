@@ -1,6 +1,6 @@
 <?php
 
-use App\Auction\Domain\Models\Category;
+use App\Auction\Domain\Models\Category\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
