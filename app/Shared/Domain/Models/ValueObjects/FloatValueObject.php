@@ -2,6 +2,8 @@
 
 namespace App\Shared\Domain\Models\ValueObjects;
 
+use InvalidArgumentException;
+
 abstract class FloatValueObject
 {
     public function __construct(protected float $value) {

@@ -2,7 +2,7 @@
 
 namespace App\Auction\Infrastructure\Repositories;
 
-use App\Auction\Domain\Models\Category;
+use App\Auction\Domain\Models\Category\Category;
 use App\Auction\Domain\Ports\Outbound\CategoryRepositoryPort;
 use App\Auction\Domain\Resources\CategoryResource;
 use App\Auction\Infrastructure\Repositories\Models\EloquentCategoryModel;

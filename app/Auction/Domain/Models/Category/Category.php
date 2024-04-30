@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\Auction\Domain\Models;
+namespace App\Auction\Domain\Models\Category;
 
-use App\Auction\Domain\Models\ValueObjects\CategoryAvatar;
-use App\Auction\Domain\Models\ValueObjects\CategoryDescription;
-use App\Auction\Domain\Models\ValueObjects\CategoryName;
-use App\Auction\Domain\Models\ValueObjects\CategoryUuid;
+use App\Auction\Domain\Models\Category\ValueObjects\CategoryAvatar;
+use App\Auction\Domain\Models\Category\ValueObjects\CategoryDescription;
+use App\Auction\Domain\Models\Category\ValueObjects\CategoryName;
+use App\Auction\Domain\Models\Category\ValueObjects\CategoryUuid;
 use App\Shared\Domain\Models\AggregateRoot;
 
 final class Category extends AggregateRoot

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auction\Domain\Models\ValueObjects;
+namespace App\Auction\Domain\Models\Category\ValueObjects;
 
 use App\Shared\Domain\Models\ValueObjects\TextValueObject;
 

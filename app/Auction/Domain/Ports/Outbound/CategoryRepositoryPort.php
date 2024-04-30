@@ -2,7 +2,7 @@
 
 namespace App\Auction\Domain\Ports\Outbound;
 
-use App\Auction\Domain\Models\Category;
+use App\Auction\Domain\Models\Category\Category;
 use App\Auction\Domain\Resources\CategoryResource;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
