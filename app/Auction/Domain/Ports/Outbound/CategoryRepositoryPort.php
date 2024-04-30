@@ -18,7 +18,7 @@ interface CategoryRepositoryPort extends BaseRepositoryPort
     /**
      * @param string $uuid
      * @param string $name
-     * @return mixed
+     * @return void
      * @throws NotFoundException
      */
     public function updateName(string $uuid, string $name): void;
