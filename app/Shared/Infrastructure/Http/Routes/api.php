@@ -18,7 +18,6 @@ use App\Review\Infrastructure\Http\Controllers\PlaceReviewController;
 use App\Review\Infrastructure\Http\Controllers\RemoveReviewController;
 use App\Review\Infrastructure\Http\Controllers\UpdateDescriptionController;
 use App\Review\Infrastructure\Http\Controllers\UpdateRatingController;
-use App\Shared\Infrastructure\Http\Middleware\EnsureOwnUserMiddleware;
 use App\Social\Infrastructure\Http\Controllers\CreateChatRoomController;
 use App\Social\Infrastructure\Http\Controllers\DeleteChatMessageController;
 use App\Social\Infrastructure\Http\Controllers\FindChatRoomsByUserUuidController;
@@ -39,56 +38,69 @@ use App\User\Infrastructure\Http\Controllers\UpdateUserPasswordController;
 use App\User\Infrastructure\Http\Controllers\UpdateUserUsernameController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v1')->group(function () {
-    // Users
+Route::prefix('/v1')->group(function () {
+
     Route::post('/auth', AuthenticateController::class);
-    Route::post('/users', CreateUserController::class);
-    Route::get('/users', FindAllUserController::class);
-    Route::get('/users/{uuid}', FindUserByUuidController::class);
-    Route::get('/users/username/{username}', FindUserByUsernameController::class);
-    Route::delete('/users/{uuid}', DeleteUserController::class);
-    Route::post('/users/{uuid}/avatar', UpdateUserAvatarController::class);
-    Route::put('/users/{uuid}/email', UpdateUserEmailController::class);
-    Route::put('/users/{uuid}/name', UpdateUserNameController::class);
-    Route::put('/users/{uuid}/username', UpdateUserUsernameController::class);
-    Route::put('/users/{uuid}/password', UpdateUserPasswordController::class);
-    Route::get('/users/{uuid}/block', BlockUserController::class);
-    Route::get('/users/{uuid}/unblock', UnblockUserController::class);
-    Route::get('/users/{uuid}/reviews', FindUserReviewsController::class);
-    Route::get('/users/{uuid}/rating', FindUserAverageRatingController::class);
-    Route::get('/users/{uuid}/wallet', FindWalletByUserUuidController::class);
-    Route::get('/users/{uuid}/chats', FindChatRoomsByUserUuidController::class);
+
+    // Users
+    Route::prefix('/users')->group(function () {
+        Route::post('/', CreateUserController::class);
+        Route::get('/', FindAllUserController::class);
+        Route::get('/{uuid}', FindUserByUuidController::class);
+        Route::get('/username/{username}', FindUserByUsernameController::class);
+        Route::delete('/{uuid}', DeleteUserController::class);
+        Route::post('/{uuid}/avatar', UpdateUserAvatarController::class);
+        Route::put('/{uuid}/email', UpdateUserEmailController::class);
+        Route::put('/{uuid}/name', UpdateUserNameController::class);
+        Route::put('/{uuid}/username', UpdateUserUsernameController::class);
+        Route::put('/{uuid}/password', UpdateUserPasswordController::class);
+        Route::get('/{uuid}/block', BlockUserController::class);
+        Route::get('/{uuid}/unblock', UnblockUserController::class);
+        Route::get('/{uuid}/reviews', FindUserReviewsController::class);
+        Route::get('/{uuid}/rating', FindUserAverageRatingController::class);
+        Route::get('/{uuid}/wallet', FindWalletByUserUuidController::class);
+        Route::get('/{uuid}/chats', FindChatRoomsByUserUuidController::class);
+    });
 
     // Wallets
-    Route::get('/wallets/{uuid}/transfer', MakeTransactionController::class);
-    Route::get('/wallets/{uuid}/transactions', FindTransactionsByWalletUuidController::class);
-    Route::post('/wallets/{uuid}/deposit', DepositMoneyController::class);
-    Route::post('/wallets/{uuid}/withdraw', WithdrawMoneyController::class);
+    Route::prefix('/wallets')->group(function () {
+        Route::get('/{uuid}/transfer', MakeTransactionController::class);
+        Route::get('/{uuid}/transactions', FindTransactionsByWalletUuidController::class);
+        Route::post('/{uuid}/deposit', DepositMoneyController::class);
+        Route::post('/{uuid}/withdraw', WithdrawMoneyController::class);
+    });
 
     // Reviews
-    Route::post('/reviews', PlaceReviewController::class);
-    Route::delete('/reviews/{uuid}', RemoveReviewController::class);
-    Route::put('/reviews/{uuid}/rating', UpdateRatingController::class);
-    Route::put('/reviews/{uuid}/description', UpdateDescriptionController::class);
+    Route::prefix('/reviews')->group(function () {
+        Route::post('/', PlaceReviewController::class);
+        Route::delete('/{uuid}', RemoveReviewController::class);
+        Route::put('/{uuid}/rating', UpdateRatingController::class);
+        Route::put('/{uuid}/description', UpdateDescriptionController::class);
+    });
 
     // Events
     Route::get('/events', FindAllEventsController::class);
 
     // Chat rooms
-    Route::post('/chats', CreateChatRoomController::class);
-    Route::post('chats/{uuid}', SendMessageController::class)->middleware('auth:sanctum');
-    Route::get('/chats/{uuid}/messages', FindMessagesByChatRoomUuidController::class);
-    Route::get('/users/{uuid}/chats', FindChatRoomsByUserUuidController::class);
-    Route::delete('/chats/{chatUuid}/messages/{messageUuid}', DeleteChatMessageController::class);
+    Route::prefix('/chats')->group(function () {
+        Route::post('/', CreateChatRoomController::class);
+        Route::post('/{uuid}', SendMessageController::class)->middleware('auth:sanctum');
+        Route::get('/{uuid}/messages', FindMessagesByChatRoomUuidController::class);
+        Route::delete('/{chatUuid}/messages/{messageUuid}', DeleteChatMessageController::class);
+    });
 
     // Categories
-    Route::get('/categories', FindAllCategoriesController::class);
-    Route::post('/categories', CreateCategoryController::class);
-    Route::put('/categories/{uuid}/name', UpdateCategoryNameController::class);
-    Route::put('/categories/{uuid}/description', UpdateCategoryDescriptionController::class);
-    Route::post('/categories/{uuid}/avatar', UpdateCategoryAvatarController::class);
+    Route::prefix('/categories')->group(function () {
+        Route::get('/', FindAllCategoriesController::class);
+        Route::post('/', CreateCategoryController::class);
+        Route::put('/{uuid}/name', UpdateCategoryNameController::class);
+        Route::put('/{uuid}/description', UpdateCategoryDescriptionController::class);
+        Route::post('/{uuid}/avatar', UpdateCategoryAvatarController::class);
+    });
 
     // Auctions
-    Route::post('/auctions', CreateAuctionController::class);
+    Route::prefix('/auctions')->group(function () {
+        Route::post('/', CreateAuctionController::class);
+    });
 });
 
