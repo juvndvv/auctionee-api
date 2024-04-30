@@ -5,7 +5,7 @@ namespace App\Social\Infrastructure\Repositories\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class EloquentChatRoomModel extends Model
+final class EloquentChatRoomModel extends Model
 {
     use HasUuids;
 

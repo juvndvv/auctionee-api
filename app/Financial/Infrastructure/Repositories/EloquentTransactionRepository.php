@@ -8,7 +8,7 @@ use App\Financial\Infrastructure\Repositories\Models\EloquentTransactionModel;
 use App\Shared\Infrastructure\Repositories\BaseRepository;
 use Illuminate\Support\Collection;
 
-final class TransactionEloquentRepository extends BaseRepository implements TransactionRepositoryPort
+final class EloquentTransactionRepository extends BaseRepository implements TransactionRepositoryPort
 {
     private const string ENTITY_NAME = 'transaction';
 

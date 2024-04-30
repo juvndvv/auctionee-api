@@ -9,7 +9,7 @@ use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 use App\User\Infrastructure\Repositories\Models\EloquentUserModel;
 use Illuminate\Support\Collection;
 
-final class UserEloquentRepository extends BaseRepository implements UserRepositoryPort
+final class EloquentUserRepository extends BaseRepository implements UserRepositoryPort
 {
     private const string ENTITY_NAME = 'user';
 

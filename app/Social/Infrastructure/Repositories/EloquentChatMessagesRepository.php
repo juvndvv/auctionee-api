@@ -9,7 +9,7 @@ use App\Social\Domain\Resources\MessageResource;
 use App\Social\Infrastructure\Repositories\Models\EloquentMessageModel;
 use Illuminate\Support\Collection;
 
-class ChatMessagesEloquentRepository extends BaseRepository implements ChatMessagesRepositoryPort
+final class EloquentChatMessagesRepository extends BaseRepository implements ChatMessagesRepositoryPort
 {
     public const string ENTITY_NAME = "chat_message";
 

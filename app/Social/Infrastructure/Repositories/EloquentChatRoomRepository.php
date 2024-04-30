@@ -9,7 +9,7 @@ use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 use App\Social\Infrastructure\Repositories\Models\EloquentChatRoomModel;
 use Illuminate\Support\Collection;
 
-final class ChatRoomEloquentRepository extends BaseRepository implements ChatRoomRepositoryPort
+final class EloquentChatRoomRepository extends BaseRepository implements ChatRoomRepositoryPort
 {
     public const string ENTITY_NAME = 'chat_room';
 

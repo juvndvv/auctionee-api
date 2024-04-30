@@ -11,7 +11,7 @@ use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infrastructure\Repositories\BaseRepository;
 use Illuminate\Support\Collection;
 
-final class ReviewEloquentRepository extends BaseRepository implements ReviewRepositoryPort
+final class EloquentReviewRepository extends BaseRepository implements ReviewRepositoryPort
 {
     private const string ENTITY_NAME = 'review';
 

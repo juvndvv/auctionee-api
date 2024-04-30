@@ -8,7 +8,7 @@ use App\Financial\Infrastructure\Repositories\Models\EloquentWalletModel;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastructure\Repositories\BaseRepository;
 
-final class WalletEloquentRepository extends BaseRepository implements WalletRepositoryPort
+final class EloquentWalletRepository extends BaseRepository implements WalletRepositoryPort
 {
     private const string ENTITY_NAME = 'wallet';
 
