@@ -3,7 +3,7 @@
 namespace App\Auction\Application\Commands\CreateAuction;
 
 use App\Auction\Domain\Models\Auction\Auction;
-use App\Auction\Domain\Ports\Outbound\AuctionCategoryPort;
+use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
 use App\Shared\Application\Commands\CommandHandler;
 use App\Shared\Infrastructure\Bus\EventBus;
 
@@ -11,7 +11,7 @@ final class CreateAuctionCommandHandler extends CommandHandler
 {
     public function __construct(
         private readonly EventBus $eventBus,
-        private readonly AuctionCategoryPort $auctionRepository
+        private readonly AuctionRepositoryPort $auctionRepository
     )
     {}
 

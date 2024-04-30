@@ -2,7 +2,9 @@
 
 namespace App\Shared\Infrastructure\Providers;
 
+use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
 use App\Auction\Domain\Ports\Outbound\CategoryRepositoryPort;
+use App\Auction\Infrastructure\Repositories\EloquentAuctionRepository;
 use App\Auction\Infrastructure\Repositories\EloquentCategoryRepository;
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
@@ -25,10 +27,8 @@ use App\Shared\Infrastructure\Listeners\UserUpdatedListener;
 use App\Shared\Infrastructure\Repositories\CloudflareR2ImageRepository;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
-use App\Social\Domain\Ports\FriendshipRepositoryPort;
 use App\Social\Infrastructure\Repositories\EloquentChatMessagesRepository;
 use App\Social\Infrastructure\Repositories\EloquentChatRoomRepository;
-use App\Social\Infrastructure\Repositories\FriendshipEloquentRepository;
 use App\User\Domain\Events\UserBlockedEvent;
 use App\User\Domain\Events\UserCreatedEvent;
 use App\User\Domain\Events\UserDeletedEvent;
@@ -73,8 +73,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TransactionRepositoryPort::class, EloquentTransactionRepository::class);
         $this->app->bind(ChatRoomRepositoryPort::class, EloquentChatRoomRepository::class);
         $this->app->bind(ChatMessagesRepositoryPort::class, EloquentChatMessagesRepository::class);
-        $this->app->bind(FriendshipRepositoryPort::class, FriendshipEloquentRepository::class);
         $this->app->bind(CategoryRepositoryPort::class, EloquentCategoryRepository::class);
+        $this->app->bind(AuctionRepositoryPort::class, EloquentAuctionRepository::class);
     }
 
     /**

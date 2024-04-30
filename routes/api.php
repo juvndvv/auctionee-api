@@ -1,5 +1,6 @@
 <?php
 
+use App\Auction\Infrastructure\Controllers\CreateAuctionController;
 use App\Auction\Infrastructure\Controllers\CreateCategoryController;
 use App\Auction\Infrastructure\Controllers\FindAllCategoriesController;
 use App\Auction\Infrastructure\Controllers\UpdateCategoryAvatarController;
@@ -84,3 +85,6 @@ Route::post('/categories', CreateCategoryController::class);
 Route::put('/categories/{uuid}/name', UpdateCategoryNameController::class);
 Route::put('/categories/{uuid}/description', UpdateCategoryDescriptionController::class);
 Route::post('/categories/{uuid}/avatar', UpdateCategoryAvatarController::class);
+
+// Auctions
+Route::post('/auctions', CreateAuctionController::class);
