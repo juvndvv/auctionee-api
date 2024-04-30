@@ -18,7 +18,7 @@ final readonly class AuctionStatus
 
     private static function ensureIsValid(string $value): void
     {
-        if ($value != Status::READY->name || $value != Status::ONGOING->name || $value != Status::COMPLETED->name) {
+        if ($value != Status::READY->name && $value != Status::ONGOING->name && $value != Status::COMPLETED->name) {
             throw new InvalidArgumentException("Estado inválido: $value");
         }
     }

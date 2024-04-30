@@ -29,7 +29,7 @@ final readonly class AuctionStartingDate
     {
         $date = DateTime::createFromFormat(self::FORMAT, $value);
 
-        if ($date && $date->format(self::FORMAT) === $value) {
+        if (!$date && !$date->format(self::FORMAT) === $value) {
             throw new InvalidArgumentException("El formato de la fecha no es correcto: Y-m-d H:i:s");
         }
     }
