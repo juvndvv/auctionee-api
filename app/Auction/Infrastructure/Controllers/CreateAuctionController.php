@@ -21,7 +21,7 @@ final class CreateAuctionController extends ValidatedCommandController
             $userUuid = $request->input('user_uuid');
             $name = $request->input('name');
             $description = $request->input('description');
-            $status = $request->input('status');
+            $status = 'READY';
             $startingPrice = $request->float('starting_price');
             $startingDate = $request->input('starting_date');
             $duration = $request->integer('duration');
@@ -41,6 +41,16 @@ final class CreateAuctionController extends ValidatedCommandController
 
     static function validate(Request $request): void
     {
-        // TODO: Implement validate() method.
+        $validStatus = '';
+
+        $request->validate([
+            'category_uuid' => 'required|exists:categories,uuid',
+            'user_uuid' => 'required|exists:users,uuid',
+            'name' => 'required',
+            'description' => 'required',
+            'starting_price' => 'required|float',
+            'starting_date' => 'required|date|date_format:Y-m-d H:i:s',
+            'duration' => 'required|integer|min:1',
+        ]);
     }
 }
