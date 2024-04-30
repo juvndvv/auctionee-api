@@ -17,16 +17,26 @@ final class CreateAuctionController extends ValidatedCommandController
         try {
             self::validate($request);
 
+            $status = 'READY';
+
             $categoryUuid = $request->input('category_uuid');
-            $userUuid = $request->input('user_uuid');
+            $userUuid = $request->input('user_uuid');               // TODO: from token
             $name = $request->input('name');
             $description = $request->input('description');
-            $status = 'READY';
             $startingPrice = $request->float('starting_price');
             $startingDate = $request->input('starting_date');
             $duration = $request->integer('duration');
 
-            $command = CreateAuctionCommand::create($categoryUuid, $userUuid, $name, $description, $status, $startingPrice, $startingDate, $duration);
+            $command = CreateAuctionCommand::create(
+                $categoryUuid,
+                $userUuid,
+                $name,
+                $description,
+                $status,
+                $startingPrice,
+                $startingDate,
+                $duration
+            );
             $uuid = $this->commandBus->handle($command);
 
             return Response::CREATED("Subasta creada con exito", "/auctions/" .  $uuid);
@@ -48,7 +58,7 @@ final class CreateAuctionController extends ValidatedCommandController
             'user_uuid' => 'required|exists:users,uuid',
             'name' => 'required',
             'description' => 'required',
-            'starting_price' => 'required|float',
+            'starting_price' => 'required|numeric|decimal:2',
             'starting_date' => 'required|date|date_format:Y-m-d H:i:s',
             'duration' => 'required|integer|min:1',
         ]);
