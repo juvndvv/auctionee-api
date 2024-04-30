@@ -76,8 +76,9 @@
 ## Miscelaneo
 
 - [ ] Paginar respuestas grandes
-- [ ] Pedir dominios
+- [x] Pedir dominios
 - [ ] VPS para desplegar la API
+- [ ] Testing de la API
 - [ ] Workflow de GitHub para desplegar back y front
 - [ ] Buscar donde desplegar el Frontend
 - [ ] Asegurar la API
@@ -86,11 +87,3 @@
 - [x] Configurar Pusher
 - [x] Configurar Cloudflare
 - [x] Configurar Resend
-
-## Dudas
-
-Necesito crear una lista de transacciones y una galeria de imagenes, como es mejor hacerlo en el dominio: Collection, crear una entidad que internamente sea una collection...
-
-Devolver acciones en las respuestas es habitual? Si es asi, como guardo los endpoints para no tener que hardcodearlos en todos los sitios?
-
-Que son los servicios de dominio y como implementarlos
