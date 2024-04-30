@@ -20,7 +20,6 @@ final class CreateCategoryCommandHandler extends CommandHandler
         $avatar = $command->avatar();
 
         $category = Category::create($name, $description, $avatar);
-
         $this->categoryRepository->create($category->toPrimitives());
     }
 }

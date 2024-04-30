@@ -68,7 +68,8 @@ final class Category extends AggregateRoot
         return [
             self::SERIALIZED_UUID => $this->uuid(),
             self::SERIALIZED_NAME => $this->name(),
-            self::SERIALIZED_DESCRIPTION => $this->description()
+            self::SERIALIZED_DESCRIPTION => $this->description(),
+            self::SERIALIZED_AVATAR => $this->avatar(),
         ];
     }
 
