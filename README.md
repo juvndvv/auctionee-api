@@ -47,16 +47,11 @@
 - [x] Modelado de la base de datos
 - [x] Modelado del dominio
 - [ ] Modelado del repositorio
-- [ ] Endpoint Caso de uso de enviar peticion de amistad
-- [ ] Endpoint Caso de uso de aceptar peticion de amistad
-- [ ] Endpoint Caso de uso de rechazar peticion de amistad
-- [ ] Endpoint Caso de uso de eliminar amigo
-- [ ] Endpoint Caso de uso de obtener lista de amigos
 - [x] Endpoint Caso de uso de crear un chat
 - [x] Endpoint Caso de uso de guardar mensaje
 - [x] Endpoint Caso de uso de recuperar los chats de un usuario
 - [x] Endpoint Caso de uso de eliminar un mensaje
-- [ ] Endpoint Caso de uso de recuperar mensajes de una conversacion
+- [x] Endpoint Caso de uso de recuperar mensajes de una conversacion
 
 ## Financial
 
@@ -72,11 +67,7 @@
 
 ## Auction
 
-- [ ] Mirar como programar tareas
-- [ ] Modelado de la base de datos
-- [ ] Modelado del repositorio
-- [ ] Modelado del dominio
-- [ ] Endpoint Caso de uso de crear subasta
+- [x] Endpoint Caso de uso de crear subasta
 - [ ] Endpoint Caso de uso de editar subasta
 - [ ] Endpoint Caso de uso de eliminar subasta
 - [ ] Endpoint Caso de uso de pujar en subasta
