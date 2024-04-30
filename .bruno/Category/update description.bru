@@ -1,0 +1,17 @@
+meta {
+  name: update description
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{url}}/categories/e360e089-2c9c-4b8f-920a-55cb4d7c8158/description
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "description": "Descripción nueva"
+  }
+}

@@ -5,7 +5,13 @@ meta {
 }
 
 put {
-  url: {{url}}/categories/uuid
-  body: none
+  url: {{url}}/categories/e360e089-2c9c-4b8f-920a-55cb4d7c8158/name
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "name": "Mamapinga"
+  }
 }
