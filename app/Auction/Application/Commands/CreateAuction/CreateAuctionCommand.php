@@ -4,7 +4,7 @@ namespace App\Auction\Application\Commands\CreateAuction;
 
 use App\Shared\Application\Commands\Command;
 
-final  class CreateAuctionCommand extends Command
+final class CreateAuctionCommand extends Command
 {
     private function __construct(
         private readonly string $categoryUuid,

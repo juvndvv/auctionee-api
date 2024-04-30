@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Retention\EventMonitoring\Infrastructure\Controllers;
+namespace App\User\Infrastructure\Http\Controllers;
 
-use App\Retention\EventMonitoring\Application\FindAll\FindAllEventsQuery;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infrastructure\Http\Controllers\QueryController;
 use App\Shared\Infrastructure\Http\Controllers\Response;
+use App\User\Application\Queries\FindAll\FindAllUserQuery;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-final class FindAllEventsController extends QueryController
+final class FindAllUserController extends QueryController
 {
     private const DEFAULT_OFFSET = 0;
-    private const DEFAULT_LIMIT = 10;
+    private const DEFAULT_LIMIT = 20;
 
     public function __invoke(Request $request): JsonResponse
     {
@@ -21,16 +21,15 @@ final class FindAllEventsController extends QueryController
             $offset = $request->query->getInt('offset', self::DEFAULT_OFFSET);
             $limit = $request->query->getInt('limit', self::DEFAULT_LIMIT);
 
-            $query = FindAllEventsQuery::create($offset, $limit);
-            $resources = $this->queryBus->handle($query);
+            $query = FindAllUserQuery::create($offset, $limit);
 
-            return Response::OK($resources, "Eventos encontrados");
+            $users = $this->queryBus->handle($query);
+            return Response::OK($users, "Usuarios encontrados");
 
-        } catch (NoContentException $e) {
+        } catch (NoContentException) {
             return Response::NO_CONTENT();
 
-        } catch (Exception $e) {
-            dd($e);
+        } catch (Exception) {
             return Response::SERVER_ERROR();
         }
     }
