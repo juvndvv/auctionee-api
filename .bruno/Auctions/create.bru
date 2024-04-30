@@ -4,8 +4,18 @@ meta {
   seq: 1
 }
 
-get {
+post {
   url: {{url}}/auctions
-  body: none
+  body: multipartForm
   auth: none
+}
+
+body:multipart-form {
+  category_uuid: 36a9dcfb-92a4-47ff-9c07-1e2c11803877
+  user_uuid: 3eff1fdd-eb0c-413c-856d-81302396f93f
+  name: Vaso de leche
+  description: Rico vaso de leche con cola cao al mas puro estilo argelino
+  starting_price: 20.00
+  starting_date: 2025-01-12 00:00:00
+  duration: 30
 }
