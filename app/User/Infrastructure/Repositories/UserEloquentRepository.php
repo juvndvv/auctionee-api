@@ -74,7 +74,10 @@ final class UserEloquentRepository extends BaseRepository implements UserReposit
 
     public function authenticate(string $email, string $password): string
     {
-        $userDb = $this->model->where('email', $email)->where('password', $password)->first();
+        $userDb = EloquentUserModel::query()
+            ->where('email', $email)
+            ->where('password', $password)
+            ->first();
 
         if (!$userDb) {
             throw new BadRequestException("Email o contraseña incorrecta");

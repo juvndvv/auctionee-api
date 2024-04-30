@@ -2,11 +2,13 @@
 
 namespace App\Shared\Infrastructure\Repositories;
 
+use App\Shared\Domain\Exceptions\BadRequestException;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Exceptions\TooManyRowsException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 
 /**

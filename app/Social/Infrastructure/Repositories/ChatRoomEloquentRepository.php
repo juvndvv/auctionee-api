@@ -3,13 +3,21 @@
 namespace App\Social\Infrastructure\Repositories;
 
 use App\Shared\Domain\Exceptions\NoContentException;
+use App\Shared\Infrastructure\Repositories\BaseRepository;
 use App\Social\Domain\Models\ChatRoom;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 use App\Social\Infrastructure\Repositories\Models\EloquentChatRoomModel;
 use Illuminate\Support\Collection;
 
-class ChatRoomEloquentRepository implements ChatRoomRepositoryPort
+final class ChatRoomEloquentRepository extends BaseRepository implements ChatRoomRepositoryPort
 {
+    public const string ENTITY_NAME = 'chat_room';
+
+    public function __construct()
+    {
+        parent::setEntityName(self::ENTITY_NAME);
+        parent::setModel(EloquentChatRoomModel::query()->getModel());
+    }
 
     public function findByUuid(string $uuid): ChatRoom
     {
@@ -17,17 +25,19 @@ class ChatRoomEloquentRepository implements ChatRoomRepositoryPort
         return ChatRoom::fromPrimitives($chatRoomDb->toArray());
     }
 
-    public function create(ChatRoom $chatRoom): void
-    {
-        EloquentChatRoomModel::query()->create($chatRoom->toPrimitives());
-    }
-
     public function existsByLeftAndRight(string $leftUuid, string $rightUuid): bool
     {
-        return EloquentChatRoomModel::query()
+        $option1 = EloquentChatRoomModel::query()
             ->where("left_uuid", $leftUuid)
             ->where("right_uuid", $rightUuid)
             ->exists();
+
+        $option2 = EloquentChatRoomModel::query()
+            ->where("left_uuid", $rightUuid)
+            ->where("right_uuid", $leftUuid)
+            ->exists();
+
+        return $option1 || $option2;
     }
 
     public function findByUserUuid(string $uuid): Collection
@@ -47,5 +57,12 @@ class ChatRoomEloquentRepository implements ChatRoomRepositoryPort
                 return ChatRoom::fromPrimitives($chatRoom->toArray());
             }
         );
+    }
+
+    public function exists(string $uuid): bool
+    {
+        return EloquentChatRoomModel::query()
+            ->where("uuid", $uuid)
+            ->exists();
     }
 }

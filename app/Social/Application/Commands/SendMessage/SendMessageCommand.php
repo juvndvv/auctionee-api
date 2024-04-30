@@ -6,7 +6,7 @@ use App\Shared\Application\Commands\Command;
 
 final class SendMessageCommand extends Command
 {
-    public function __construct(
+    private function __construct(
         private readonly string $chatRoomUuid,
         private readonly string $senderUuid,
         private readonly string $content
@@ -26,5 +26,10 @@ final class SendMessageCommand extends Command
     public function content(): string
     {
         return $this->content;
+    }
+
+    public static function create(string $chatRoomUuid, string $senderUuid, string $content): SendMessageCommand
+    {
+        return new self($chatRoomUuid, $senderUuid, $content);
     }
 }

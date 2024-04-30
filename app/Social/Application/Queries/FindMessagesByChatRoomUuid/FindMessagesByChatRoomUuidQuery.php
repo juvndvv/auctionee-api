@@ -5,13 +5,20 @@ namespace App\Social\Application\Queries\FindMessagesByChatRoomUuid;
 
 use App\Shared\Application\Queries\Query;
 
-class FindMessagesByChatRoomUuidQuery extends Query
+final class FindMessagesByChatRoomUuidQuery extends Query
 {
-    public function __construct(private readonly string $uuid)
+    private function __construct(
+        private readonly string $uuid
+    )
     {}
 
-    public function uuid()
+    public function uuid(): string
     {
         return $this->uuid;
+    }
+
+    public static function create(string $uuid): self
+    {
+        return new self($uuid);
     }
 }

@@ -13,10 +13,11 @@ use App\Review\Infrastructure\Controllers\RemoveReviewController;
 use App\Review\Infrastructure\Controllers\UpdateDescriptionController;
 use App\Review\Infrastructure\Controllers\UpdateRatingController;
 use App\Social\Infrastructure\Controllers\CreateChatRoomController;
-use App\Social\Infrastructure\Controllers\DeleteChatMessageBaseController;
+use App\Social\Infrastructure\Controllers\DeleteChatMessageController;
 use App\Social\Infrastructure\Controllers\FindChatRoomsByUserUuidController;
 use App\Social\Infrastructure\Controllers\FindFriendListByUserUuidController;
 use App\Social\Infrastructure\Controllers\FindMessagesByChatRoomUuidController;
+use App\Social\Infrastructure\Controllers\SendMessageController;
 use App\User\Infrastructure\Controllers\AuthenticateController;
 use App\User\Infrastructure\Controllers\BlockUserController;
 use App\User\Infrastructure\Controllers\CreateUserController;
@@ -50,7 +51,6 @@ Route::get('/users/{uuid}/reviews', FindUserReviewsController::class);
 Route::get("/users/{uuid}/rating", FindUserAverageRatingController::class);
 Route::get("/users/{uuid}/wallet", FindWalletByUserUuidController::class);
 Route::get("/users/{uuid}/chats", FindChatRoomsByUserUuidController::class);
-Route::get("/users/{uuid}/friends", FindFriendListByUserUuidController::class);
 
 // Wallets
 Route::get("/wallets/{uuid}/transfer", MakeTransactionController::class);
@@ -69,5 +69,7 @@ Route::get("/events", FindAllEventsController::class);
 
 // Chat rooms
 Route::post("/chats", CreateChatRoomController::class);
+Route::post('chats/{uuid}', SendMessageController::class)->middleware('auth:sanctum');
 Route::get("/chats/{uuid}/messages", FindMessagesByChatRoomUuidController::class);
-Route::delete("/chats/{chatUuid}/messages/{messageUuid}", DeleteChatMessageBaseController::class);
+Route::get('/users/{uuid}/chats', FindChatRoomsByUserUuidController::class);
+Route::delete("/chats/{chatUuid}/messages/{messageUuid}", DeleteChatMessageController::class);

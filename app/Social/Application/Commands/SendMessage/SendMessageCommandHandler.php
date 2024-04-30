@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Social\Application\Commands\SendMessage;
 
@@ -30,7 +30,7 @@ final class SendMessageCommandHandler extends CommandHandler
 
         // Persistence
         $message = $chatRoom->lastMessagePrimitives();
-        $this->chatMessageRepository->save($message);
+        $this->chatMessageRepository->create($message);
 
         // Publish events
         $this->eventBus->dispatch(...$chatRoom->pullDomainEvents());

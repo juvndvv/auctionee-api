@@ -20,26 +20,20 @@ final class DeleteMessageCommandHandler extends CommandHandler
 
     public function __invoke(DeleteMessageCommand $command): void
     {
-        try {
-            $chatRoomUuid = $command->chatRoomUuid();
-            $messageUuid = $command->messageUuid();
+        $chatRoomUuid = $command->chatRoomUuid();
+        $messageUuid = $command->messageUuid();
 
-            // Query data
-            $chatRoom = $this->chatRoomRepository->findByUuid($chatRoomUuid);
-            $message = $this->chatMessagesRepository->findByUuid($messageUuid);
+        // Query data
+        $chatRoom = $this->chatRoomRepository->findByUuid($chatRoomUuid);
+        $message = $this->chatMessagesRepository->findByUuid($messageUuid);
 
-            // Use case
-            $chatRoom->deleteMessage($message);
+        // Use case
+        $chatRoom->deleteMessage($message);
 
-            // Persistence
-            $this->chatMessagesRepository->delete($messageUuid);
+        // Persistence
+        $this->chatMessagesRepository->deleteByPrimaryKey($messageUuid);
 
-            // Publish
-            $this->eventBus->dispatch(...$chatRoom->pullDomainEvents());
-
-        } catch (ModelNotFoundException $e) {
-            throw new NotFoundException("No se encontro el mensaje");
-        }
-
+        // Publish
+        $this->eventBus->dispatch(...$chatRoom->pullDomainEvents());
     }
 }

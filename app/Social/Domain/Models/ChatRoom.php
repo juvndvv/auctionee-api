@@ -128,7 +128,7 @@ final class ChatRoom extends AggregateRoot
     public function deleteMessage(Message $message): void
     {
         $destination = $this->getDestinationUuid($message);
-        $this->record(new MessageDeletedEvent($destination, [], now()->toString()));
+        $this->record(new MessageDeletedEvent($destination, $this->toPrimitives(), now()->toString()));
     }
 
     private function getDestinationUuid(Message $message): string

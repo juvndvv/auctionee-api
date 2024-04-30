@@ -6,7 +6,7 @@ use App\Shared\Application\Queries\Query;
 
 final class FindChatRoomsByUserUuidQuery extends Query
 {
-    public function __construct(
+    private function __construct(
         private readonly string $uuid
     )
     {}
@@ -14,5 +14,10 @@ final class FindChatRoomsByUserUuidQuery extends Query
     public function uuid(): string
     {
         return $this->uuid;
+    }
+
+    public static function create(string $uuid): self
+    {
+        return new self($uuid);
     }
 }

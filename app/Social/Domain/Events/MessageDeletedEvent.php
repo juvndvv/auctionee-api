@@ -21,7 +21,7 @@ class MessageDeletedEvent extends DomainEvent
 
     public function broadcastOn(): array
     {
-        return ['messages.' . $this->destinationUuid];
+        return ['user.' . $this->destinationUuid];
     }
 
     public function broadcastAs(): string

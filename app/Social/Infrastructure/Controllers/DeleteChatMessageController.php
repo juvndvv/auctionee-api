@@ -8,16 +8,13 @@ use App\Shared\Infrastructure\Controllers\Response;
 use App\Social\Application\Commands\DeleteMessage\DeleteMessageCommand;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
-final class DeleteChatMessageBaseController extends CommandController
+final class DeleteChatMessageController extends CommandController
 {
     public function __invoke(string $chatUuid, string $messageUuid): JsonResponse
     {
         try {
-            self::validate(new Request());
-
-            $command = new DeleteMessageCommand($chatUuid, $messageUuid);
+            $command = DeleteMessageCommand::create($chatUuid, $messageUuid);
             $this->commandBus->handle($command);
 
             return Response::OK("", "Mensaje eliminado correctamente");
@@ -28,10 +25,5 @@ final class DeleteChatMessageBaseController extends CommandController
         } catch (Exception $e) {
             return Response::SERVER_ERROR();
         }
-    }
-
-    static function validate(Request $request): void
-    {
-        // TODO: Implement validate() method.
     }
 }

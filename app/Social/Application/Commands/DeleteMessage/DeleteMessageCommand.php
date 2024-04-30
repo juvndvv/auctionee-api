@@ -6,7 +6,7 @@ use App\Shared\Application\Commands\Command;
 
 final class DeleteMessageCommand extends Command
 {
-    public function __construct(
+    private function __construct(
         private readonly string $chatRoomUuid,
         private readonly string $messageUuid,
     )
@@ -20,5 +20,10 @@ final class DeleteMessageCommand extends Command
     public function messageUuid(): string
     {
         return $this->messageUuid;
+    }
+
+    public static function create(string $chatRoomUuid, string $messageUuid): DeleteMessageCommand
+    {
+        return new self($chatRoomUuid, $messageUuid);
     }
 }

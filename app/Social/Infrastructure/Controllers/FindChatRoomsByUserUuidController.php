@@ -7,16 +7,15 @@ use App\Shared\Infrastructure\Controllers\QueryController;
 use App\Shared\Infrastructure\Controllers\Response;
 use App\Social\Application\Queries\FindChatRoomsByUserUuid\FindChatRoomsByUserUuidQuery;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 final class FindChatRoomsByUserUuidController extends QueryController
 {
-    public function __invoke(string $userUuid)
+    public function __invoke(string $uuid): JsonResponse
     {
         try {
-            self::validate(new Request());
-
-            $query = new FindChatRoomsByUserUuidQuery($userUuid);
+            $query = FindChatRoomsByUserUuidQuery::create($uuid);
             $resources = $this->queryBus->handle($query);
 
             return Response::OK($resources, "Chats encontrados");

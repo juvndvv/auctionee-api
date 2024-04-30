@@ -18,7 +18,7 @@ final class CreateChatRoomController extends CommandController
         try {
             self::validate($request);
 
-            $leftUuid = $request->input("left_uuid");
+            $leftUuid = $request->user()->uuid;
             $rightUuid = $request->input("right_uuid");
 
             $command = CreateChatRoomCommand::create($leftUuid, $rightUuid);
@@ -33,7 +33,6 @@ final class CreateChatRoomController extends CommandController
             return Response::BAD_REQUEST($e->getMessage());
 
         } catch (Exception $e) {
-            dd($e->getMessage());
             return Response::SERVER_ERROR();
         }
     }
@@ -41,8 +40,7 @@ final class CreateChatRoomController extends CommandController
     static function validate(Request $request): void
     {
         $request->validate([
-            "left_uuid" => "required",
-            "right_uuid" => "required"
+            "user_uuid" => "required"
         ]);
     }
 }

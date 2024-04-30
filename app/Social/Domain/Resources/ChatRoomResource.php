@@ -2,12 +2,17 @@
 
 namespace App\Social\Domain\Resources;
 
-use App\Social\Domain\Models\ChatRoom;
-
-class ChatRoomResource
+final class ChatRoomResource
 {
-    public static function fromDomain(ChatRoom $chatRoom): array
-    {
+    public function __construct(
+        public string $uuid,
+        public string $username,
+        public string $avatar
+    )
+    {}
 
+    public static function create(string $uuid, string $username, string $avatar): self
+    {
+        return new self($uuid, $username, $avatar);
     }
 }
