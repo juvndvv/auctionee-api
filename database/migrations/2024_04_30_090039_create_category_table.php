@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->string(Category::SERIALIZED_UUID)->primary();
             $table->string(Category::SERIALIZED_NAME)->unique();
             $table->string(Category::SERIALIZED_DESCRIPTION);
