@@ -2,7 +2,7 @@
 
 namespace App\Auction\Infrastructure\Controllers;
 
-use App\Auction\Application\Command\UpdateName\UpdateNameCommand;
+use App\Auction\Application\Command\UpdateCategoryName\UpdateCategoryNameCommand;
 use App\Shared\Infrastructure\Controllers\Response;
 use App\Shared\Infrastructure\Controllers\ValidatedCommandController;
 use Exception;
@@ -17,7 +17,7 @@ final class UpdateCategoryNameController extends ValidatedCommandController
 
             $name = $request->input("name");
 
-            $command = UpdateNameCommand::create($uuid, $name);
+            $command = UpdateCategoryNameCommand::create($uuid, $name);
             $this->commandBus->handle($command);
 
             return Response::OK($name, "Nombre de la categoria actualizado");

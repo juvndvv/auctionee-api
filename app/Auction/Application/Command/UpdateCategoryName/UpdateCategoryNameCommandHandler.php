@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Auction\Application\Command\UpdateName;
+namespace App\Auction\Application\Command\UpdateCategoryName;
 
-use App\Auction\Domain\Models\Category;
 use App\Auction\Domain\Ports\Outbound\CategoryRepositoryPort;
 use App\Shared\Application\Commands\CommandHandler;
 use App\Shared\Domain\Exceptions\NotFoundException;
 
-final class UpdateNameCommandHandler extends CommandHandler
+final class UpdateCategoryNameCommandHandler extends CommandHandler
 {
     public function __construct(
         private CategoryRepositoryPort $categoryRepository
@@ -17,7 +16,7 @@ final class UpdateNameCommandHandler extends CommandHandler
     /**
      * @throws NotFoundException
      */
-    public function __invoke(UpdateNameCommand $command): void
+    public function __invoke(UpdateCategoryNameCommand $command): void
     {
         $uuid = $command->uuid();
         $name = $command->name();

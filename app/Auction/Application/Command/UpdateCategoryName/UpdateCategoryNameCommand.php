@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Auction\Application\Command\UpdateName;
+namespace App\Auction\Application\Command\UpdateCategoryName;
 
 use App\Shared\Application\Commands\Command;
 
-final class UpdateNameCommand extends Command
+final class UpdateCategoryNameCommand extends Command
 {
     private function __construct(
         private readonly string $uuid,
