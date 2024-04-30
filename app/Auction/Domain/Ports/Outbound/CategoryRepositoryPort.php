@@ -30,4 +30,12 @@ interface CategoryRepositoryPort extends BaseRepositoryPort
      * @throws NotFoundException
      */
     public function updateDescription(string $uuid, string $description): void;
+
+    /**
+     * @param string $uuid
+     * @param string $avatar
+     * @return void
+     * @throws NotFoundException
+     */
+    public function updateAvatar(string $uuid, string $avatar): void;
 }
