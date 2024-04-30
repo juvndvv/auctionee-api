@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('category', function (Blueprint $table) {
             $table->string(Category::SERIALIZED_UUID)->primary();
-            $table->string(Category::SERIALIZED_NAME);
+            $table->string(Category::SERIALIZED_NAME)->unique();
             $table->string(Category::SERIALIZED_DESCRIPTION);
             $table->string(Category::SERIALIZED_AVATAR);
         });
