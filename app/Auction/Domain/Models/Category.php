@@ -78,4 +78,14 @@ final class Category extends AggregateRoot
         $uuid = CategoryUuid::random()->value();
         return new self($uuid, $name, $description, $avatar);
     }
+
+    public static function fromPrimitives(array $data): self
+    {
+        return new self(
+            $data[self::SERIALIZED_UUID],
+            $data[self::SERIALIZED_NAME],
+            $data[self::SERIALIZED_DESCRIPTION],
+            $data[self::SERIALIZED_AVATAR]
+        );
+    }
 }
