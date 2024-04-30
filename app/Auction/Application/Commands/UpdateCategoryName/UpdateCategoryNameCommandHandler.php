@@ -9,7 +9,7 @@ use App\Shared\Domain\Exceptions\NotFoundException;
 final class UpdateCategoryNameCommandHandler extends CommandHandler
 {
     public function __construct(
-        private CategoryRepositoryPort $categoryRepository
+        private readonly CategoryRepositoryPort $categoryRepository
     )
     {}
 
