@@ -23,9 +23,9 @@ final class UpdatePasswordCommandHandler extends CommandHandler
         $uuid = $command->uuid();
         $name = $command->password();
 
-        $user = $this->userRepository->findByUuid($uuid);               // Query
-        $user->updatePassword($name);                                   // Use case
+        $user = $this->userRepository->findByUuid($uuid);                   // Query
+        $user->updatePassword($name);                                       // Use case
         $this->userRepository->updatePassword($uuid, $user->password());    // Persistence
-        $this->eventBus->dispatch(...$user->pullDomainEvents());        // Publish event
+        $this->eventBus->dispatch(...$user->pullDomainEvents());            // Publish event
     }
 }
