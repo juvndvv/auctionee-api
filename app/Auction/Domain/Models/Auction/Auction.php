@@ -1,7 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Auction\Domain\Models\Auction;
 
+use App\Auction\Domain\Events\AuctionPlacedEvent;
 use App\Auction\Domain\Models\Auction\ValueObjects\AuctionDescription;
 use App\Auction\Domain\Models\Auction\ValueObjects\AuctionDuration;
 use App\Auction\Domain\Models\Auction\ValueObjects\AuctionName;
@@ -42,9 +43,9 @@ final class Auction extends AggregateRoot
         string $name,
         string $description,
         string $status,
-        string $startingPrice,
+        float $startingPrice,
         string $startingDate,
-        string $duration,
+        int $duration,
     )
     {
         $this->uuid = new AuctionUuid($uuid);
@@ -88,7 +89,7 @@ final class Auction extends AggregateRoot
         return $this->status->value();
     }
 
-    public function startingPrice(): string
+    public function startingPrice(): float
     {
         return $this->startingPrice->value();
     }
@@ -98,10 +99,26 @@ final class Auction extends AggregateRoot
         return $this->startingDate->value();
     }
 
-    public function duration(): string
+    public function duration(): int
     {
         return $this->duration->value();
     }
+
+    public function toPrimitives(): array
+    {
+        return [
+            self::SERIALIZED_UUID => $this->uuid->value(),
+            self::SERIALIZED_CATEGORY_UUID => $this->categoryUuid->value(),
+            self::SERIALIZED_USER_UUID => $this->userUuid->value(),
+            self::SERIALIZED_NAME => $this->name->value(),
+            self::SERIALIZED_DESCRIPTION => $this->description->value(),
+            self::SERIALIZED_STATUS => $this->status->value(),
+            self::SERIALIZED_STARTING_PRICE => $this->startingPrice->value(),
+            self::SERIALIZED_STARTING_DATE => $this->startingDate->value(),
+            self::SERIALIZED_DURATION => $this->duration->value(),
+        ];
+    }
+
 
     public static function create(
         string $categoryUuid,
@@ -109,14 +126,14 @@ final class Auction extends AggregateRoot
         string $name,
         string $description,
         string $status,
-        string $startingPrice,
+        float $startingPrice,
         string $startingDate,
-        string $duration,
+        int $duration,
     ): self
     {
         $uuid = AuctionUuid::random()->value();
 
-        return new self(
+        $auction = new self(
             $uuid,
             $categoryUuid,
             $userUuid,
@@ -127,5 +144,9 @@ final class Auction extends AggregateRoot
             $startingDate,
             $duration
         );
+
+        $auction->record(new AuctionPlacedEvent(now()->toString(), $auction->toPrimitives()));
+
+        return $auction;
     }
 }
