@@ -9,6 +9,7 @@ use App\Shared\Infrastructure\Http\Controllers\ValidatedCommandController;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 final class CreateCategoryController extends ValidatedCommandController
 {
@@ -31,8 +32,11 @@ final class CreateCategoryController extends ValidatedCommandController
 
             return Response::CREATED("Categoria creada correctamente", "/categories/" . $uuid);
 
+        } catch (ValidationException $exception) {
+            return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
+
         } catch (Exception $exception) {
-            dd($exception);
+            return Response::SERVER_ERROR();
         }
     }
 
@@ -41,7 +45,7 @@ final class CreateCategoryController extends ValidatedCommandController
         $request->validate([
             'name' => 'string|required',
             'description' => 'string|required',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
     }
 }
