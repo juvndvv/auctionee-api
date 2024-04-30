@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auction\Application\Command\UpdateCategoryAvatar;
+namespace App\Auction\Application\Commands\UpdateCategoryAvatar;
 
 use App\Shared\Application\Commands\Command;
 use Illuminate\Http\UploadedFile;

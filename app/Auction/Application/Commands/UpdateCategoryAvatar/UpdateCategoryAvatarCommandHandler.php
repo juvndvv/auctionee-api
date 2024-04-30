@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Auction\Application\Command\UpdateCategoryAvatar;
+namespace App\Auction\Application\Commands\UpdateCategoryAvatar;
 
 use App\Auction\Domain\Ports\Outbound\CategoryRepositoryPort;
 use App\Shared\Application\Commands\CommandHandler;

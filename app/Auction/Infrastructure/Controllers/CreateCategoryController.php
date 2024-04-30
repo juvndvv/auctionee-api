@@ -2,7 +2,7 @@
 
 namespace App\Auction\Infrastructure\Controllers;
 
-use App\Auction\Application\Command\CreateCategory\CreateCategoryCommand;
+use App\Auction\Application\Commands\CreateCategory\CreateCategoryCommand;
 use App\Shared\Application\Commands\UploadImage\UploadImageCommand;
 use App\Shared\Infrastructure\Controllers\Response;
 use App\Shared\Infrastructure\Controllers\ValidatedCommandController;

@@ -2,7 +2,7 @@
 
 namespace App\Auction\Infrastructure\Controllers;
 
-use App\Auction\Application\Command\UpdateCategoryName\UpdateCategoryNameCommand;
+use App\Auction\Application\Commands\UpdateCategoryName\UpdateCategoryNameCommand;
 use App\Shared\Infrastructure\Controllers\Response;
 use App\Shared\Infrastructure\Controllers\ValidatedCommandController;
 use Exception;

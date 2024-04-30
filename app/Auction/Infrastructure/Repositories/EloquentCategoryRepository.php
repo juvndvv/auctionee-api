@@ -4,8 +4,10 @@ namespace App\Auction\Infrastructure\Repositories;
 
 use App\Auction\Domain\Models\Category;
 use App\Auction\Domain\Ports\Outbound\CategoryRepositoryPort;
+use App\Auction\Domain\Resources\CategoryResource;
 use App\Auction\Infrastructure\Repositories\Models\EloquentCategoryModel;
 use App\Shared\Infrastructure\Repositories\BaseRepository;
+use Illuminate\Support\Collection;
 
 final class EloquentCategoryRepository extends BaseRepository implements CategoryRepositoryPort
 {
@@ -15,6 +17,20 @@ final class EloquentCategoryRepository extends BaseRepository implements Categor
     {
         parent::setEntityName(self::ENTITY_NAME);
         parent::setModel(EloquentCategoryModel::query()->getModel());
+    }
+
+    public function findAll(int $offset = 0, int $limit = 20): Collection
+    {
+        $categoriesDb = parent::findAll($offset, $limit);
+
+        return $categoriesDb->map(
+            fn (EloquentCategoryModel $category) => CategoryResource::create(
+                $category->uuid,
+                $category->name,
+                $category->description,
+                $category->avatar
+            )
+        );
     }
 
     public function findByUuid(string $uuid): Category

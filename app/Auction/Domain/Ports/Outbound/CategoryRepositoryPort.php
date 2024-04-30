@@ -3,11 +3,22 @@
 namespace App\Auction\Domain\Ports\Outbound;
 
 use App\Auction\Domain\Models\Category;
+use App\Auction\Domain\Resources\CategoryResource;
+use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
+use Illuminate\Support\Collection;
 
 interface CategoryRepositoryPort extends BaseRepositoryPort
 {
+    /**
+     * @param int $offset
+     * @param int $limit
+     * @return Collection<CategoryResource>
+     * @throws NoContentException
+     */
+    public function findAll(int $offset = 0, int $limit = 20): Collection;
+
     /**
      * @param string $uuid
      * @return Category

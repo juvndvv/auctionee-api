@@ -1,6 +1,7 @@
 <?php
 
 use App\Auction\Infrastructure\Controllers\CreateCategoryController;
+use App\Auction\Infrastructure\Controllers\FindAllCategoriesController;
 use App\Auction\Infrastructure\Controllers\UpdateCategoryAvatarController;
 use App\Auction\Infrastructure\Controllers\UpdateCategoryDescriptionController;
 use App\Auction\Infrastructure\Controllers\UpdateCategoryNameController;
@@ -78,6 +79,7 @@ Route::get('/users/{uuid}/chats', FindChatRoomsByUserUuidController::class);
 Route::delete('/chats/{chatUuid}/messages/{messageUuid}', DeleteChatMessageController::class);
 
 // Categories
+Route::get('/categories', FindAllCategoriesController::class);
 Route::post('/categories', CreateCategoryController::class);
 Route::put('/categories/{uuid}/name', UpdateCategoryNameController::class);
 Route::put('/categories/{uuid}/description', UpdateCategoryDescriptionController::class);

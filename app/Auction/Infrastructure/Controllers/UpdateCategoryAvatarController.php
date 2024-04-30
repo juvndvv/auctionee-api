@@ -2,7 +2,7 @@
 
 namespace App\Auction\Infrastructure\Controllers;
 
-use App\Auction\Application\Command\UpdateCategoryAvatar\UpdateCategoryAvatarCommand;
+use App\Auction\Application\Commands\UpdateCategoryAvatar\UpdateCategoryAvatarCommand;
 use App\Shared\Infrastructure\Controllers\Response;
 use App\Shared\Infrastructure\Controllers\ValidatedCommandController;
 use Exception;

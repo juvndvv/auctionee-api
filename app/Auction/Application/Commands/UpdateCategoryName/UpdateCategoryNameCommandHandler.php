@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Auction\Application\Command\UpdateCategoryName;
+namespace App\Auction\Application\Commands\UpdateCategoryName;
 
 use App\Auction\Domain\Ports\Outbound\CategoryRepositoryPort;
 use App\Shared\Application\Commands\CommandHandler;

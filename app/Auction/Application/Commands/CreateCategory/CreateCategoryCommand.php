@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Auction\Application\Command\CreateCategory;
+namespace App\Auction\Application\Commands\CreateCategory;
 
 use App\Shared\Application\Commands\Command;
 
