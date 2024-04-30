@@ -19,4 +19,6 @@ class EloquentCategoryModel extends Model
         'description',
         'avatar',
     ];
+
+    public $timestamps = null;
 }
