@@ -13,13 +13,16 @@ final class CreateCategoryCommandHandler extends CommandHandler
     )
     {}
 
-    public function __invoke(CreateCategoryCommand $command): void
+    public function __invoke(CreateCategoryCommand $command): string
     {
         $name = $command->name();
         $description = $command->description();
         $avatar = $command->avatar();
 
         $category = Category::create($name, $description, $avatar);
+
         $this->categoryRepository->create($category->toPrimitives());
+
+        return $category->uuid();
     }
 }

@@ -27,9 +27,9 @@ final class CreateCategoryController extends ValidatedCommandController
 
             // Register category
             $command = CreateCategoryCommand::create($name, $description, $avatar);
-            $this->commandBus->handle($command);
+            $uuid = $this->commandBus->handle($command);
 
-            return Response::OK(null, "Categoria creada correctamente");
+            return Response::CREATED("Categoria creada correctamente", "/categories/" . $uuid);
 
         } catch (Exception $exception) {
             dd($exception);
