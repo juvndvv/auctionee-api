@@ -48,8 +48,33 @@ final class Category extends AggregateRoot
         return $this->avatar->value();
     }
 
-    public static function create(string $uuid, string $name, string $description, string $avatar): self
+    public function updateName(string $name)
     {
+        $this->name = new CategoryName($name);
+    }
+
+    public function updateDescription(string $description)
+    {
+        $this->description = new CategoryDescription($description);
+    }
+
+    public function updateAvatar(string $avatar): void
+    {
+        $this->avatar = new CategoryAvatar($avatar);
+    }
+
+    public function toPrimitives(): array
+    {
+        return [
+            self::SERIALIZED_UUID => $this->uuid(),
+            self::SERIALIZED_NAME => $this->name(),
+            self::SERIALIZED_DESCRIPTION => $this->description()
+        ];
+    }
+
+    public static function create(string $name, string $description, string $avatar): self
+    {
+        $uuid = CategoryUuid::random()->value();
         return new self($uuid, $name, $description, $avatar);
     }
 }
