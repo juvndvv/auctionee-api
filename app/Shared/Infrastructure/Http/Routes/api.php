@@ -6,6 +6,7 @@ use App\Auction\Infrastructure\Http\Controllers\FindAllCategoriesController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionAvatarController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionDescriptionController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionNameController;
+use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionStartingPriceController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateCategoryAvatarController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateCategoryDescriptionController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateCategoryNameController;
@@ -107,6 +108,7 @@ Route::prefix('/v1')->group(function () {
         Route::post('/{uuid}/avatar', UpdateAuctionAvatarController::class);
         Route::put('/{uuid}/name', UpdateAuctionNameController::class);
         Route::put('/{uuid}/description', UpdateAuctionDescriptionController::class);
+        Route::put('/{uuid}/price', UpdateAuctionStartingPriceController::class);
     });
 });
 
