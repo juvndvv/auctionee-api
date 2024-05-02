@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureOwnUserMiddleware
+final class EnsureOwnUserMiddleware
 {
     /**
      * Handle an incoming request.
