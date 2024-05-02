@@ -52,7 +52,6 @@ final class CreateAuctionController extends ValidatedCommandController
             return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
 
         } catch (Exception $exception) {
-            dd($exception);
             return Response::SERVER_ERROR();
         }
     }

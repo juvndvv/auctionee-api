@@ -36,7 +36,7 @@ interface AuctionRepositoryPort extends BaseRepositoryPort
     /**
      * @throws NotFoundException
      */
-    public function updateStartingDate(string $uuid, float $startingDate): void;
+    public function updateStartingDate(string $uuid, string $startingDate): void;
 
     /**
      * @throws NotFoundException

@@ -1,0 +1,17 @@
+meta {
+  name: update date
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{url}}/auctions/e1f6b049-4085-4e5f-946c-86b211ed879e/date
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "starting_date": "2025-01-13 00:00:00"
+  }
+}
