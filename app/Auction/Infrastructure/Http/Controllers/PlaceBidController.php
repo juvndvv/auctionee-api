@@ -13,8 +13,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use function Laravel\Prompts\select;
-use function PHPUnit\Framework\isNull;
 
 final class PlaceBidController extends ValidatedCommandController
 {
