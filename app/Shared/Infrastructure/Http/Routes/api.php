@@ -49,28 +49,34 @@ use App\User\Infrastructure\Http\Controllers\UpdateUserUsernameController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->group(function () {
-
-    Route::post('/auth', AuthenticateController::class);
+    Route::post('/auth', AuthenticateController::class)->withoutMiddleware('auth:sanctum');
 
     // Users
     Route::prefix('/users')->group(function () {
-        Route::post('/', CreateUserController::class);
-        Route::get('/', FindAllUserController::class);
+        // Public
+        Route::post('/', CreateUserController::class)->withoutMiddleware('auth:sanctum');
+
+        // Auth
         Route::get('/{uuid}', FindUserByUuidController::class);
         Route::get('/username/{username}', FindUserByUsernameController::class);
-        Route::delete('/{uuid}', DeleteUserController::class);
-        Route::post('/{uuid}/avatar', UpdateUserAvatarController::class);
-        Route::put('/{uuid}/email', UpdateUserEmailController::class);
-        Route::put('/{uuid}/name', UpdateUserNameController::class);
-        Route::put('/{uuid}/username', UpdateUserUsernameController::class);
-        Route::put('/{uuid}/password', UpdateUserPasswordController::class);
-        Route::get('/{uuid}/block', BlockUserController::class);
-        Route::get('/{uuid}/unblock', UnblockUserController::class);
         Route::get('/{uuid}/reviews', FindUserReviewsController::class);
         Route::get('/{uuid}/rating', FindUserAverageRatingController::class);
         Route::get('/{uuid}/wallet', FindWalletByUserUuidController::class);
         Route::get('/{uuid}/chats', FindChatRoomsByUserUuidController::class);
         Route::get('/{uuid}/auctions', FindAllAuctionsByUserUuidController::class);
+
+        // Admin
+        Route::get('/', FindAllUserController::class);
+        Route::delete('/{uuid}', DeleteUserController::class);
+        Route::get('/{uuid}/block', BlockUserController::class);
+        Route::get('/{uuid}/unblock', UnblockUserController::class);
+
+        // Owner
+        Route::post('/{uuid}/avatar', UpdateUserAvatarController::class);
+        Route::put('/{uuid}/email', UpdateUserEmailController::class);
+        Route::put('/{uuid}/name', UpdateUserNameController::class);
+        Route::put('/{uuid}/username', UpdateUserUsernameController::class);
+        Route::put('/{uuid}/password', UpdateUserPasswordController::class);
     });
 
     // Wallets
@@ -84,10 +90,10 @@ Route::prefix('/v1')->group(function () {
 
     // Reviews
     Route::prefix('/reviews')->group(function () {
-        // Autenticado
+        // Auth
         Route::post('/', PlaceReviewController::class);
 
-        // Autenticado y dueño
+        // Owner
         Route::delete('/{uuid}', RemoveReviewController::class);
         Route::put('/{uuid}/rating', UpdateRatingController::class);
         Route::put('/{uuid}/description', UpdateDescriptionController::class);
@@ -98,20 +104,20 @@ Route::prefix('/v1')->group(function () {
 
     // Chat rooms
     Route::prefix('/chats')->group(function () {
-        // Autenticado
+        // Auth
         Route::post('/', CreateChatRoomController::class);
 
-        // Autenticado y participante
-        Route::post('/{uuid}', SendMessageController::class)->middleware('auth:sanctum');
+        // Auth and participant
+        Route::post('/{uuid}', SendMessageController::class);
         Route::get('/{uuid}/messages', FindMessagesByChatRoomUuidController::class);
 
-        // Autenticado y dueño
+        // Owner
         Route::delete('/{chatUuid}/messages/{messageUuid}', DeleteChatMessageController::class);
     });
 
     // Categories
     Route::prefix('/categories')->group(function () {
-        // Publicas
+        // Auth
         Route::get('/', FindAllCategoriesController::class);
 
         // ADMIN
@@ -123,14 +129,12 @@ Route::prefix('/v1')->group(function () {
 
     // Auctions
     Route::prefix('/auctions')->group(function () {
-        // Publicas
+        // Auth
         Route::get('/', FindAllAuctionsController::class);
-
-        // Autenticado
-        Route::post('/', CreateAuctionController::class)->middleware('auth:sanctum');
+        Route::post('/', CreateAuctionController::class);
         Route::get('/{uuid}', FindAuctionByUuidController::class);
 
-        // Autenticado y dueño
+        // Owner
         Route::post('/{uuid}/avatar', UpdateAuctionAvatarController::class);
         Route::put('/{uuid}/name', UpdateAuctionNameController::class);
         Route::put('/{uuid}/description', UpdateAuctionDescriptionController::class);
@@ -139,6 +143,7 @@ Route::prefix('/v1')->group(function () {
         Route::put('/{uuid}/duration', UpdateAuctionDurationController::class);
     });
 
-    Route::post('/bids', PlaceBidController::class)->middleware('auth:sanctum');
-});
+    // Auth
+    Route::post('/bids', PlaceBidController::class);
+})->middleware('auth:sanctum');
 
