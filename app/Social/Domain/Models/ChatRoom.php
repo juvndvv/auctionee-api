@@ -6,7 +6,7 @@ use App\Shared\Domain\Models\AggregateRoot;
 use App\Social\Domain\Events\MessageDeletedEvent;
 use App\Social\Domain\Events\MessageSentEvent;
 use App\Social\Domain\Models\ValueObjects\ChatRoomUuid;
-use App\User\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserUuid;
 use Illuminate\Support\Collection;
 
 final class ChatRoom extends AggregateRoot
@@ -16,8 +16,8 @@ final class ChatRoom extends AggregateRoot
     public const string SERIALIZED_RIGHT_UUID = 'right_uuid';
 
     private ChatRoomUuid $uuid;
-    private UserId $left;
-    private UserId $right;
+    private UserUuid $left;
+    private UserUuid $right;
 
     /**
      * @var Collection<Message>
@@ -33,8 +33,8 @@ final class ChatRoom extends AggregateRoot
     public function __construct(string $uuid, string $leftUuid, string $rightUuid, array $messages = [])
     {
         $this->uuid = new ChatRoomUuid($uuid);
-        $this->left = new UserId($leftUuid);
-        $this->right = new UserId($rightUuid);
+        $this->left = new UserUuid($leftUuid);
+        $this->right = new UserUuid($rightUuid);
         $this->messages = new Collection($messages);
     }
 

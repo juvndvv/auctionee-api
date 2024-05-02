@@ -10,7 +10,7 @@ use App\User\Domain\Events\UserUnblockedEvent;
 use App\User\Domain\Events\UserUpdatedEvent;
 use App\User\Domain\Models\ValueObjects\UserBirth;
 use App\User\Domain\Models\ValueObjects\UserEmail;
-use App\User\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserUuid;
 use App\User\Domain\Models\ValueObjects\UserAvatar;
 use App\User\Domain\Models\ValueObjects\UserName;
 use App\User\Domain\Models\ValueObjects\UserPassword;
@@ -32,7 +32,7 @@ final class User extends AggregateRoot
     public const int ADMIN_ROLE = 1;
     public const int BLOCKED_ROLE = 2;
 
-    private UserId $id;
+    private UserUuid $id;
     private UserName $name;
     private UserUsername $username;
     private UserEmail $email;
@@ -52,7 +52,7 @@ final class User extends AggregateRoot
         string $birth,
         int $role
     ) {
-        $this->id = new UserId($uuid);
+        $this->id = new UserUuid($uuid);
         $this->name = new UserName($name);
         $this->username = new UserUsername($username);
         $this->email = new UserEmail($email);
@@ -64,7 +64,7 @@ final class User extends AggregateRoot
 
     public static function create($name, $username, $email, $password, $avatar, $birth, $role): User
     {
-        $generatedId = UserId::random();
+        $generatedId = UserUuid::random();
 
         $user = new self(
             $generatedId,

@@ -4,18 +4,18 @@ namespace App\Social\Domain\Models;
 
 use App\Social\Domain\Models\ValueObjects\MessageContent;
 use App\Social\Domain\Models\ValueObjects\MessageUuid;
-use App\User\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserUuid;
 
 class Message
 {
     private MessageUuid $messageUuid;
-    private UserId $senderUuid;
+    private UserUuid $senderUuid;
     private MessageContent $content;
 
     public function __construct(string $uuid, string $senderUuid, string $content)
     {
         $this->messageUuid = new MessageUuid($uuid);
-        $this->senderUuid = new UserId($senderUuid);
+        $this->senderUuid = new UserUuid($senderUuid);
         $this->content = new MessageContent($content);
     }
 

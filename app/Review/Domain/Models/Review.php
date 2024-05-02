@@ -10,7 +10,7 @@ use App\Review\Domain\Models\ValueObjects\ReviewDescription;
 use App\Review\Domain\Models\ValueObjects\ReviewRating;
 use App\Review\Domain\Models\ValueObjects\ReviewUuid;
 use App\Shared\Domain\Models\AggregateRoot;
-use App\User\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserUuid;
 
 final class Review extends AggregateRoot
 {
@@ -23,8 +23,8 @@ final class Review extends AggregateRoot
     private ReviewUuid $uuid;
     private ReviewRating $rating;
     private ReviewDescription $description;
-    private UserId $reviewerId;
-    private UserId $reviewedId;
+    private UserUuid $reviewerId;
+    private UserUuid $reviewedId;
 
     public function __construct(
         string  $uuid,
@@ -37,8 +37,8 @@ final class Review extends AggregateRoot
         $this->uuid = new ReviewUuid($uuid);
         $this->rating = new ReviewRating($rating);
         $this->description = new ReviewDescription($description);
-        $this->reviewerId = new UserId($reviewerId);
-        $this->reviewedId = new UserId($reviewedId);
+        $this->reviewerId = new UserUuid($reviewerId);
+        $this->reviewedId = new UserUuid($reviewedId);
     }
 
     public function uuid(): string

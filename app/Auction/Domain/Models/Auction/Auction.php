@@ -14,7 +14,7 @@ use App\Auction\Domain\Models\Auction\ValueObjects\AuctionStatus;
 use App\Auction\Domain\Models\Auction\ValueObjects\AuctionUuid;
 use App\Auction\Domain\Models\Category\ValueObjects\CategoryUuid;
 use App\Shared\Domain\Models\AggregateRoot;
-use App\User\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserUuid;
 
 final class Auction extends AggregateRoot
 {
@@ -31,7 +31,7 @@ final class Auction extends AggregateRoot
 
     private AuctionUuid $uuid;
     private CategoryUuid $categoryUuid;
-    private UserId $userUuid;
+    private UserUuid $userUuid;
     private AuctionName $name;
     private AuctionDescription $description;
     private AuctionStatus $status;
@@ -55,7 +55,7 @@ final class Auction extends AggregateRoot
     {
         $this->uuid = new AuctionUuid($uuid);
         $this->categoryUuid = new CategoryUuid($categoryUuid);
-        $this->userUuid = new UserId($userUuid);
+        $this->userUuid = new UserUuid($userUuid);
         $this->name = new AuctionName($name);
         $this->description = new AuctionDescription($description);
         $this->status = new AuctionStatus($status);

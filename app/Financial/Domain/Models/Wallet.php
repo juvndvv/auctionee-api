@@ -7,7 +7,7 @@ use App\Financial\Domain\Exceptions\NotEnoughFoundsException;
 use App\Financial\Domain\Models\ValueObjects\WalletAmount;
 use App\Financial\Domain\Models\ValueObjects\WalletUuid;
 use App\Shared\Domain\Models\AggregateRoot;
-use App\User\Domain\Models\ValueObjects\UserId;
+use App\User\Domain\Models\ValueObjects\UserUuid;
 use Illuminate\Support\Collection;
 
 final class Wallet extends AggregateRoot
@@ -19,7 +19,7 @@ final class Wallet extends AggregateRoot
 
     private readonly WalletUuid $uuid;
     private WalletAmount $amount;
-    private readonly UserId $userId;
+    private readonly UserUuid $userId;
     private Collection $transactions;
 
     /**
@@ -37,7 +37,7 @@ final class Wallet extends AggregateRoot
     {
         $this->uuid = new WalletUuid($uuid);
         $this->amount = new WalletAmount($amount);
-        $this->userId = new UserId($userId);
+        $this->userId = new UserUuid($userId);
         $this->transactions = $transactions;
     }
 
