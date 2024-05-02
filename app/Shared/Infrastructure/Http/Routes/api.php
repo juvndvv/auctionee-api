@@ -2,6 +2,7 @@
 
 use App\Auction\Infrastructure\Http\Controllers\CreateAuctionController;
 use App\Auction\Infrastructure\Http\Controllers\CreateCategoryController;
+use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsByUserUuidController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllCategoriesController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionAvatarController;
@@ -67,6 +68,7 @@ Route::prefix('/v1')->group(function () {
         Route::get('/{uuid}/rating', FindUserAverageRatingController::class);
         Route::get('/{uuid}/wallet', FindWalletByUserUuidController::class);
         Route::get('/{uuid}/chats', FindChatRoomsByUserUuidController::class);
+        Route::get('/{uuid}/auctions', FindAllAuctionsByUserUuidController::class);
     });
 
     // Wallets

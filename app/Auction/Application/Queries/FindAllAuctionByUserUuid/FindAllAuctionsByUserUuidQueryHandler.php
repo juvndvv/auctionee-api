@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Auction\Application\Queries\FindAllAuctions;
+namespace App\Auction\Application\Queries\FindAllAuctionByUserUuid;
 
 use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
-use App\Auction\Domain\Projections\AuctionAndUserProjection;
 use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Domain\Exceptions\NoContentException;
 use Illuminate\Support\Collection;
 
-final class FindAllAuctionsQueryHandler extends QueryHandler
+final class FindAllAuctionsByUserUuidQueryHandler extends QueryHandler
 {
     public function __construct(
         private readonly AuctionRepositoryPort $auctionRepository
@@ -16,15 +15,14 @@ final class FindAllAuctionsQueryHandler extends QueryHandler
     {}
 
     /**
-     * @param FindAllAuctionsQuery $query
-     * @return Collection<AuctionAndUserProjection>
      * @throws NoContentException
      */
-    public function __invoke(FindAllAuctionsQuery $query): Collection
+    public function __invoke(FindAllAuctionsByUserUuidQuery $query): Collection
     {
+        $userUuid = $query->userUuid();
         $offset = $query->offset();
         $limit = $query->limit();
 
-        return $this->auctionRepository->findAll($offset, $limit);
+        return $this->auctionRepository->findByUserUuid($userUuid, $offset, $limit);
     }
 }

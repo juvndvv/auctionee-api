@@ -3,7 +3,8 @@
 namespace App\Auction\Domain\Ports\Outbound;
 
 use App\Auction\Domain\Models\Auction\Auction;
-use App\Auction\Domain\Resources\AuctionResource;
+use App\Auction\Domain\Projections\AuctionAndUserProjection;
+use App\Auction\Domain\Projections\AuctionOverviewProjection;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
@@ -14,10 +15,19 @@ interface AuctionRepositoryPort extends BaseRepositoryPort
     /**
      * @param int $offset
      * @param int $limit
-     * @return Collection<AuctionResource>
+     * @return Collection<AuctionAndUserProjection>
      * @throws NoContentException
      */
     public function findAll(int $offset = 0, int $limit = 0): Collection;
+
+    /**
+     * @param string $uuid
+     * @param int $offset
+     * @param int $limit
+     * @return Collection<AuctionOverviewProjection>
+     * @throws NoContentException
+     */
+    public function findByUserUuid(string $uuid, int $offset, int $limit): Collection;
 
     /**
      * @throws NotFoundException

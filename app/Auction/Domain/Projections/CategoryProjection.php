@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Auction\Domain\Resources;
+namespace App\Auction\Domain\Projections;
 
-final class CategoryResource
+final class CategoryProjection
 {
     private function __construct(
         public string $uuid,

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Auction\Domain\Resources;
+namespace App\Auction\Domain\Projections;
 
-final class AuctionResource
+final class AuctionAndUserProjection
 {
     public string $avatar;
     public string $user_avatar;
