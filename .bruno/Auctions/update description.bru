@@ -1,0 +1,17 @@
+meta {
+  name: update description
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{url}}/auctions/e1f6b049-4085-4e5f-946c-86b211ed879e/description
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "description": "Descripcion actualizada"
+  }
+}
