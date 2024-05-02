@@ -2,6 +2,7 @@
 
 use App\Auction\Infrastructure\Http\Controllers\CreateAuctionController;
 use App\Auction\Infrastructure\Http\Controllers\CreateCategoryController;
+use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllCategoriesController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionAvatarController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionDescriptionController;
@@ -78,26 +79,37 @@ Route::prefix('/v1')->group(function () {
 
     // Reviews
     Route::prefix('/reviews')->group(function () {
+        // Autenticado
         Route::post('/', PlaceReviewController::class);
+
+        // Autenticado y dueño
         Route::delete('/{uuid}', RemoveReviewController::class);
         Route::put('/{uuid}/rating', UpdateRatingController::class);
         Route::put('/{uuid}/description', UpdateDescriptionController::class);
     });
 
-    // Events
+    // Events (ADMIN)
     Route::get('/events', FindAllEventsController::class);
 
     // Chat rooms
     Route::prefix('/chats')->group(function () {
+        // Autenticado
         Route::post('/', CreateChatRoomController::class);
+
+        // Autenticado y participante
         Route::post('/{uuid}', SendMessageController::class)->middleware('auth:sanctum');
         Route::get('/{uuid}/messages', FindMessagesByChatRoomUuidController::class);
+
+        // Autenticado y dueño
         Route::delete('/{chatUuid}/messages/{messageUuid}', DeleteChatMessageController::class);
     });
 
     // Categories
     Route::prefix('/categories')->group(function () {
+        // Publicas
         Route::get('/', FindAllCategoriesController::class);
+
+        // ADMIN
         Route::post('/', CreateCategoryController::class);
         Route::put('/{uuid}/name', UpdateCategoryNameController::class);
         Route::put('/{uuid}/description', UpdateCategoryDescriptionController::class);
@@ -106,7 +118,13 @@ Route::prefix('/v1')->group(function () {
 
     // Auctions
     Route::prefix('/auctions')->group(function () {
+        // Publicas
+        Route::get('/', FindAllAuctionsController::class);
+
+        // Autenticado
         Route::post('/', CreateAuctionController::class)->middleware('auth:sanctum');
+
+        // Autenticado y dueño
         Route::post('/{uuid}/avatar', UpdateAuctionAvatarController::class);
         Route::put('/{uuid}/name', UpdateAuctionNameController::class);
         Route::put('/{uuid}/description', UpdateAuctionDescriptionController::class);

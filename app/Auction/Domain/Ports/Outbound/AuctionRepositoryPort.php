@@ -3,11 +3,22 @@
 namespace App\Auction\Domain\Ports\Outbound;
 
 use App\Auction\Domain\Models\Auction\Auction;
+use App\Auction\Domain\Resources\AuctionResource;
+use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
+use Illuminate\Support\Collection;
 
 interface AuctionRepositoryPort extends BaseRepositoryPort
 {
+    /**
+     * @param int $offset
+     * @param int $limit
+     * @return Collection<AuctionResource>
+     * @throws NoContentException
+     */
+    public function findAll(int $offset = 0, int $limit = 0): Collection;
+
     /**
      * @throws NotFoundException
      */

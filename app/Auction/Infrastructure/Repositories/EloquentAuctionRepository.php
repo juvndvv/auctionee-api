@@ -4,8 +4,11 @@ namespace App\Auction\Infrastructure\Repositories;
 
 use App\Auction\Domain\Models\Auction\Auction;
 use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
+use App\Auction\Domain\Resources\AuctionResource;
 use App\Auction\Infrastructure\Repositories\Models\EloquentAuctionModel;
 use App\Shared\Infrastructure\Repositories\BaseRepository;
+use Illuminate\Support\Collection;
+use JetBrains\PhpStorm\NoReturn;
 
 final class EloquentAuctionRepository extends BaseRepository implements AuctionRepositoryPort
 {
@@ -15,6 +18,30 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
     {
         parent::setEntityName(self::ENTITY_NAME);
         parent::setModel(EloquentAuctionModel::query()->getModel());
+    }
+
+    public function findAll(int $offset = 0, int $limit = 0): Collection
+    {
+        $auctionsDb = EloquentAuctionModel::query()
+            ->select([
+                'auctions.uuid as uuid',
+                'auctions.name as name',
+                'auctions.description as description',
+                'auctions.starting_price as price',
+                'auctions.starting_date as date',
+                'auctions.duration as duration',
+                'auctions.avatar as avatar',
+                'users.uuid as user_uuid',
+                'users.username as user_username',
+                'users.avatar as user_avatar',
+            ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
+        ->offset($offset)
+        ->limit($limit)
+        ->get();
+
+        return $auctionsDb->map(
+            fn (EloquentAuctionModel $auctionModel) => AuctionResource::fromPrimitives($auctionModel->toArray())
+        );
     }
 
     public function findByUuid(string $uuid): Auction
