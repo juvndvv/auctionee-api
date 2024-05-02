@@ -2,7 +2,7 @@
 
 namespace App\Auction\Infrastructure\Http\Controllers;
 
-use App\Auction\Application\Commands\UpdateAuctionStartingDate\UpdateAuctionStartingDateCommand;
+use App\Auction\Application\Commands\UpdateAuctionDuration\UpdateAuctionDurationCommand;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastructure\Http\Controllers\Response;
 use App\Shared\Infrastructure\Http\Controllers\ValidatedCommandController;
@@ -11,19 +11,19 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-final class UpdateAuctionStartingDateController extends ValidatedCommandController
+final class UpdateAuctionDurationController extends ValidatedCommandController
 {
     public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {
             self::validate($request);
 
-            $startingDate = $request->input('starting_date');
+            $duration = $request->input('duration');
 
-            $command = UpdateAuctionStartingDateCommand::create($uuid, $startingDate);
+            $command = UpdateAuctionDurationCommand::create($uuid, $duration);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "Fecha actualizada");
+            return Response::OK(null, "Duracion actualizada");
 
         } catch (ValidationException $exception) {
             return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
@@ -38,6 +38,6 @@ final class UpdateAuctionStartingDateController extends ValidatedCommandControll
 
     static function validate(Request $request): void
     {
-        $request->validate(['starting_date' => 'required|date|date_format:Y-m-d H:i:s']);
+        $request->validate(['duration' => 'required|integer|min:1',]);
     }
 }

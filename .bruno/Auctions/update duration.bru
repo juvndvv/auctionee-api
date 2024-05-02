@@ -1,0 +1,17 @@
+meta {
+  name: update duration
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{url}}/auctions/e1f6b049-4085-4e5f-946c-86b211ed879e/duration
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "duration": 35
+  }
+}

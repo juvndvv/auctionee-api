@@ -5,6 +5,7 @@ use App\Auction\Infrastructure\Http\Controllers\CreateCategoryController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllCategoriesController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionAvatarController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionDescriptionController;
+use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionDurationController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionNameController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionStartingDateController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionStartingPriceController;
@@ -111,6 +112,7 @@ Route::prefix('/v1')->group(function () {
         Route::put('/{uuid}/description', UpdateAuctionDescriptionController::class);
         Route::put('/{uuid}/price', UpdateAuctionStartingPriceController::class);
         Route::put('/{uuid}/date', UpdateAuctionStartingDateController::class);
+        Route::put('/{uuid}/duration', UpdateAuctionDurationController::class);
     });
 });
 
