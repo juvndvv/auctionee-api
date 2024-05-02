@@ -43,6 +43,9 @@ final class PlaceBidController extends ValidatedCommandController
      */
     static function validate(Request $request): void
     {
+        // TODO comprobar que no puja el dueño
+        // TODO comprobar que no puje dos veces el mismo usuario
+
         // Simple validations
         $customValidator = Validator::make($request->all(), [
             'amount' => 'required|numeric|min:0.01',
@@ -53,6 +56,7 @@ final class PlaceBidController extends ValidatedCommandController
         $auctionUuid = $request->input("auction_uuid");
         $auction = EloquentAuctionModel::query()
             ->select([
+                'user_uuid',
                 'starting_date',
                 'duration'
             ])->where('uuid', $auctionUuid)
