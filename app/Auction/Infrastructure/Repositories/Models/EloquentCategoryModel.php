@@ -5,7 +5,7 @@ namespace App\Auction\Infrastructure\Repositories\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class EloquentCategoryModel extends Model
+final class EloquentCategoryModel extends Model
 {
     use HasUuids;
 

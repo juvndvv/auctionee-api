@@ -5,7 +5,7 @@ namespace App\Auction\Infrastructure\Repositories\Models;
 use App\Auction\Domain\Models\Bid\Bid;
 use Illuminate\Database\Eloquent\Model;
 
-class EloquentBidModel extends Model
+final class EloquentBidModel extends Model
 {
     protected $table = 'bids';
 

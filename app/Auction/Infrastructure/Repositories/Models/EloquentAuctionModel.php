@@ -6,7 +6,7 @@ use App\Auction\Domain\Models\Auction\Auction;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class EloquentAuctionModel extends Model
+final class EloquentAuctionModel extends Model
 {
     use HasUuids;
 
