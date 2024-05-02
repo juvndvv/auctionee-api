@@ -31,15 +31,4 @@ final class EloquentUserModel extends Authenticatable
         'birth',
         'role'
     ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-        ];
-    }
 }

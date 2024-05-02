@@ -5,6 +5,7 @@ use App\Auction\Infrastructure\Http\Controllers\CreateCategoryController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsByUserUuidController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllCategoriesController;
+use App\Auction\Infrastructure\Http\Controllers\PlaceBidController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionAvatarController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionDescriptionController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionDurationController;
@@ -73,6 +74,7 @@ Route::prefix('/v1')->group(function () {
 
     // Wallets
     Route::prefix('/wallets')->group(function () {
+        // Owner
         Route::get('/{uuid}/transfer', MakeTransactionController::class);
         Route::get('/{uuid}/transactions', FindTransactionsByWalletUuidController::class);
         Route::post('/{uuid}/deposit', DepositMoneyController::class);
@@ -134,5 +136,7 @@ Route::prefix('/v1')->group(function () {
         Route::put('/{uuid}/date', UpdateAuctionStartingDateController::class);
         Route::put('/{uuid}/duration', UpdateAuctionDurationController::class);
     });
+
+    Route::post('/bids', PlaceBidController::class)->middleware('auth:sanctum');
 });
 

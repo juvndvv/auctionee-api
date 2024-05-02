@@ -1,0 +1,22 @@
+meta {
+  name: place bid
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{url}}/bids
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "amount": 13.1,
+    "auction_uuid": "581a7b97-7f31-41ca-bd67-eeda84401567"
+  }
+}

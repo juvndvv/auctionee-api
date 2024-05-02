@@ -3,8 +3,10 @@
 namespace App\Shared\Infrastructure\Providers;
 
 use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
+use App\Auction\Domain\Ports\Outbound\BidRepositoryPort;
 use App\Auction\Domain\Ports\Outbound\CategoryRepositoryPort;
 use App\Auction\Infrastructure\Repositories\EloquentAuctionRepository;
+use App\Auction\Infrastructure\Repositories\EloquentBidRepository;
 use App\Auction\Infrastructure\Repositories\EloquentCategoryRepository;
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
@@ -75,6 +77,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ChatMessagesRepositoryPort::class, EloquentChatMessagesRepository::class);
         $this->app->bind(CategoryRepositoryPort::class, EloquentCategoryRepository::class);
         $this->app->bind(AuctionRepositoryPort::class, EloquentAuctionRepository::class);
+        $this->app->bind(BidRepositoryPort::class, EloquentBidRepository::class);
     }
 
     /**

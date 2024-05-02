@@ -12,8 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bids', function (Blueprint $table) {
-            $table->id();
+            $table->string('uuid')->primary();
+            $table->float('amount');
+            $table->string('user_uuid');
+            $table->string('auction_uuid');
             $table->timestamps();
+
+            $table
+                ->foreign('user_uuid')
+                ->references('uuid')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table
+                ->foreign('auction_uuid')
+                ->references('uuid')
+                ->on('auctions')
+                ->onDelete('cascade');
         });
     }
 
