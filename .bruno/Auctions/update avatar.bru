@@ -4,8 +4,13 @@ meta {
   seq: 2
 }
 
-put {
-  url: {{url}}/auctions/uuid/avatar
-  body: none
+post {
+  url: {{url}}/auctions/e1f6b049-4085-4e5f-946c-86b211ed879e/avatar
+  body: multipartForm
   auth: none
+}
+
+body:multipart-form {
+  avatar: @file(/home/jotade/Imágenes/Fondos de escritorio/forest-3622519_1920.jpg)
+  name: Juanda
 }
