@@ -23,6 +23,6 @@ final class AuctionPlacedEvent extends DomainEvent
 
     public static function eventName(): string
     {
-        return 'auction.placed';
+        return 'auction.created';
     }
 }
