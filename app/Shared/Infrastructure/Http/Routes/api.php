@@ -3,6 +3,7 @@
 use App\Auction\Infrastructure\Http\Controllers\CreateAuctionController;
 use App\Auction\Infrastructure\Http\Controllers\CreateCategoryController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllCategoriesController;
+use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionAvatarController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateCategoryAvatarController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateCategoryDescriptionController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateCategoryNameController;
@@ -100,7 +101,8 @@ Route::prefix('/v1')->group(function () {
 
     // Auctions
     Route::prefix('/auctions')->group(function () {
-        Route::post('/', CreateAuctionController::class);
+        Route::post('/', CreateAuctionController::class)->middleware('auth:sanctum');
+        Route::post('/{uuid}/avatar', UpdateAuctionAvatarController::class);
     });
 });
 

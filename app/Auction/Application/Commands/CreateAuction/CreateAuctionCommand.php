@@ -14,7 +14,8 @@ final class CreateAuctionCommand extends Command
         private readonly string $status,
         private readonly float  $startingPrice,
         private readonly string $startingDate,
-        private readonly int    $duration
+        private readonly int    $duration,
+        private readonly string $avatar
     )
     {}
 
@@ -58,6 +59,11 @@ final class CreateAuctionCommand extends Command
         return $this->duration;
     }
 
+    public function avatar(): string
+    {
+        return $this->avatar;
+    }
+
     public static function create(
         string $categoryUuid,
         string $userUuid,
@@ -66,7 +72,8 @@ final class CreateAuctionCommand extends Command
         string $status,
         float $startingPrice,
         string $startingDate,
-        int $duration
+        int $duration,
+        string $avatar
     ): self
     {
         return new self(
@@ -77,7 +84,8 @@ final class CreateAuctionCommand extends Command
             $status,
             $startingPrice,
             $startingDate,
-            $duration
+            $duration,
+            $avatar
         );
     }
 }

@@ -25,6 +25,7 @@ final class CreateAuctionCommandHandler extends CommandHandler
         $startingPrice = $command->startingPrice();
         $startingDate = $command->startingDate();
         $duration = $command->duration();
+        $avatar  = $command->avatar();
 
         $auction = Auction::create(
             $categoryUuid,
@@ -34,7 +35,8 @@ final class CreateAuctionCommandHandler extends CommandHandler
             $status,
             $startingPrice,
             $startingDate,
-            $duration
+            $duration,
+            $avatar
         );
 
         $this->auctionRepository->create($auction->toPrimitives());

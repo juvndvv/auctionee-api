@@ -24,20 +24,21 @@ return new class extends Migration
 
         Schema::create('auctions',
             function (Blueprint $table) use ($validStatus) {
-            $table->string(Auction::SERIALIZED_UUID)->primary();
-            $table->string(Auction::SERIALIZED_CATEGORY_UUID);
-            $table->string(Auction::SERIALIZED_USER_UUID);
-            $table->string(Auction::SERIALIZED_NAME);
-            $table->string(Auction::SERIALIZED_DESCRIPTION);
-            $table->enum(Auction::SERIALIZED_STATUS, $validStatus);
-            $table->float(Auction::SERIALIZED_STARTING_PRICE);
-            $table->timestamp(Auction::SERIALIZED_STARTING_DATE);
-            $table->integer(Auction::SERIALIZED_DURATION);
+            $table->string(Auction::UUID)->primary();
+            $table->string(Auction::CATEGORY_UUID);
+            $table->string(Auction::USER_UUID);
+            $table->string(Auction::NAME);
+            $table->string(Auction::DESCRIPTION);
+            $table->enum(Auction::STATUS, $validStatus);
+            $table->float(Auction::STARTING_PRICE);
+            $table->timestamp(Auction::STARTING_DATE);
+            $table->integer(Auction::DURATION);
+            $table->string(Auction::AVATAR);
             $table->timestamps();
 
-            $table->foreign(Auction::SERIALIZED_CATEGORY_UUID)->references(Category::SERIALIZED_UUID)->on('categories');
+            $table->foreign(Auction::CATEGORY_UUID)->references(Category::SERIALIZED_UUID)->on('categories');
 
-            $table->foreign(Auction::SERIALIZED_USER_UUID)->references(User::SERIALIZED_UUID)->on('users');
+            $table->foreign(Auction::USER_UUID)->references(User::SERIALIZED_UUID)->on('users');
         });
     }
 

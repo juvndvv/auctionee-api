@@ -3,6 +3,7 @@
 namespace App\Auction\Infrastructure\Http\Controllers;
 
 use App\Auction\Application\Commands\CreateAuction\CreateAuctionCommand;
+use App\Shared\Application\Commands\UploadImage\UploadImageCommand;
 use App\Shared\Infrastructure\Http\Controllers\Response;
 use App\Shared\Infrastructure\Http\Controllers\ValidatedCommandController;
 use Exception;
@@ -18,15 +19,20 @@ final class CreateAuctionController extends ValidatedCommandController
             self::validate($request);
 
             $status = 'READY';
-
             $categoryUuid = $request->input('category_uuid');
-            $userUuid = $request->input('user_uuid');               // TODO: from token
+            $userUuid = $request->user()->uuid;               // TODO: from token
             $name = $request->input('name');
             $description = $request->input('description');
             $startingPrice = $request->float('starting_price');
             $startingDate = $request->input('starting_date');
             $duration = $request->integer('duration');
+            $avatar  = $request->file('avatar');
 
+            // Upload avatar
+            $command = UploadImageCommand::create('auctions', $avatar);
+            $avatar = $this->commandBus->handle($command);
+
+            // Create auction
             $command = CreateAuctionCommand::create(
                 $categoryUuid,
                 $userUuid,
@@ -35,7 +41,8 @@ final class CreateAuctionController extends ValidatedCommandController
                 $status,
                 $startingPrice,
                 $startingDate,
-                $duration
+                $duration,
+                $avatar
             );
             $uuid = $this->commandBus->handle($command);
 
@@ -45,6 +52,7 @@ final class CreateAuctionController extends ValidatedCommandController
             return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
 
         } catch (Exception $exception) {
+            dd($exception);
             return Response::SERVER_ERROR();
         }
     }
@@ -55,12 +63,12 @@ final class CreateAuctionController extends ValidatedCommandController
 
         $request->validate([
             'category_uuid' => 'required|exists:categories,uuid',
-            'user_uuid' => 'required|exists:users,uuid',
             'name' => 'required',
             'description' => 'required',
             'starting_price' => 'required|numeric|decimal:2',
             'starting_date' => 'required|date|date_format:Y-m-d H:i:s',
             'duration' => 'required|integer|min:1',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
 }

@@ -15,14 +15,15 @@ class EloquentAuctionModel extends Model
     protected $primaryKey = 'uuid';
 
     protected $fillable = [
-        Auction::SERIALIZED_UUID,
-        Auction::SERIALIZED_CATEGORY_UUID,
-        Auction::SERIALIZED_USER_UUID,
-        Auction::SERIALIZED_NAME,
-        Auction::SERIALIZED_DESCRIPTION,
-        Auction::SERIALIZED_STATUS,
-        Auction::SERIALIZED_STARTING_PRICE,
-        Auction::SERIALIZED_STARTING_DATE,
-        Auction::SERIALIZED_DURATION
+        Auction::UUID,
+        Auction::CATEGORY_UUID,
+        Auction::USER_UUID,
+        Auction::NAME,
+        Auction::DESCRIPTION,
+        Auction::STATUS,
+        Auction::STARTING_PRICE,
+        Auction::STARTING_DATE,
+        Auction::DURATION,
+        Auction::AVATAR
     ];
 }
