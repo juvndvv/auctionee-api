@@ -27,4 +27,29 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
     {
         parent::updateFieldByPrimaryKey($uuid, Auction::AVATAR, $avatar);
     }
+
+    public function updateName(string $uuid, string $name): void
+    {
+        parent::updateFieldByPrimaryKey($uuid, Auction::NAME, $name);
+    }
+
+    public function updateDescription(string $uuid, string $description): void
+    {
+        parent::updateFieldByPrimaryKey($uuid, Auction::DESCRIPTION, $description);
+    }
+
+    public function updateStartingPrice(string $uuid, float $startingPrice): void
+    {
+        parent::updateFieldByPrimaryKey($uuid, Auction::STARTING_PRICE, $startingPrice);
+    }
+
+    public function updateStartingDate(string $uuid, float $startingDate): void
+    {
+        parent::updateFieldByPrimaryKey($uuid, Auction::STARTING_DATE, $startingDate);
+    }
+
+    public function updateDuration(string $uuid, int $duration): void
+    {
+        parent::updateFieldByPrimaryKey($uuid, Auction::DURATION, $duration);
+    }
 }
