@@ -4,6 +4,7 @@ namespace App\Auction\Domain\Ports\Outbound;
 
 use App\Auction\Domain\Models\Auction\Auction;
 use App\Auction\Domain\Projections\AuctionAndUserProjection;
+use App\Auction\Domain\Projections\AuctionDetailedProjection;
 use App\Auction\Domain\Projections\AuctionOverviewProjection;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
@@ -32,7 +33,7 @@ interface AuctionRepositoryPort extends BaseRepositoryPort
     /**
      * @throws NotFoundException
      */
-    public function findByUuid(string $uuid): Auction;
+    public function findByUuid(string $uuid): AuctionDetailedProjection;
 
     /**
      * @throws NotFoundException

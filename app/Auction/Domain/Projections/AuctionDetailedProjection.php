@@ -18,14 +18,14 @@ final class AuctionDetailedProjection
         public string $user_uuid,
         public string $user_username,
         string $user_avatar,
-        public array $bids
+        public array $bids = []
     )
     {
         $this->avatar = env("CLOUDFLARE_R2_URL") . $avatar;
         $this->user_avatar = env("CLOUDFLARE_R2_URL") . $user_avatar;
     }
 
-    public static function fromPrimitives(array $data): self
+    public static function fromPrimitives(array $data, array $bids = []): self
     {
         return new self(
             $data['uuid'],
@@ -38,7 +38,7 @@ final class AuctionDetailedProjection
             $data['user_uuid'],
             $data['user_username'],
             $data['user_avatar'],
-            $data['bids'],
+            $bids
         );
     }
 }

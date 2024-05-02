@@ -5,6 +5,7 @@ use App\Auction\Infrastructure\Http\Controllers\CreateCategoryController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsByUserUuidController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllCategoriesController;
+use App\Auction\Infrastructure\Http\Controllers\FindAuctionByUuidController;
 use App\Auction\Infrastructure\Http\Controllers\PlaceBidController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionAvatarController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionDescriptionController;
@@ -127,6 +128,7 @@ Route::prefix('/v1')->group(function () {
 
         // Autenticado
         Route::post('/', CreateAuctionController::class)->middleware('auth:sanctum');
+        Route::get('/{uuid}', FindAuctionByUuidController::class);
 
         // Autenticado y dueño
         Route::post('/{uuid}/avatar', UpdateAuctionAvatarController::class);

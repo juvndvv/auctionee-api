@@ -5,8 +5,11 @@ namespace App\Auction\Infrastructure\Repositories;
 use App\Auction\Domain\Models\Auction\Auction;
 use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
 use App\Auction\Domain\Projections\AuctionAndUserProjection;
+use App\Auction\Domain\Projections\AuctionDetailedProjection;
 use App\Auction\Domain\Projections\AuctionOverviewProjection;
+use App\Auction\Domain\Projections\BidDetailedProjection;
 use App\Auction\Infrastructure\Repositories\Models\EloquentAuctionModel;
+use App\Auction\Infrastructure\Repositories\Models\EloquentBidModel;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infrastructure\Repositories\BaseRepository;
 use Illuminate\Support\Collection;
@@ -76,10 +79,41 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
         );
     }
 
-    public function findByUuid(string $uuid): Auction
+    public function findByUuid(string $uuid): AuctionDetailedProjection
     {
-        $auctionDb = parent::findOneByPrimaryKeyOrFail($uuid);
-        return Auction::fromPrimitives($auctionDb->toArray());
+        $auctionDb = EloquentAuctionModel::query()
+            ->select([
+                'auctions.uuid',
+                'users.uuid as user_uuid',
+                'users.username as user_username',
+                'users.avatar as user_avatar',
+                'auctions.name as name',
+                'auctions.description as description',
+                'auctions.starting_price as price',
+                'auctions.starting_date as date',
+                'auctions.duration as duration',
+                'auctions.avatar as avatar',
+            ])
+            ->where('auctions.uuid', $uuid)
+            ->join('users', 'users.uuid', '=', 'auctions.user_uuid')
+            ->first();
+
+        $bids = EloquentBidModel::query()
+            ->select([
+                'bids.amount as amount',
+                'bids.created_at as date',
+                'users.avatar as user_avatar',
+                'users.username as username',
+            ])
+            ->join('users', 'users.uuid', '=', 'bids.user_uuid')
+            ->where('auction_uuid', $uuid)
+            ->get();
+
+        $bids = $bids->map(
+            fn (EloquentBidModel $bidModel) => BidDetailedProjection::fromPrivimites($bidModel->toArray())
+        );
+
+        return AuctionDetailedProjection::fromPrimitives($auctionDb->toArray(), $bids->toArray());
     }
 
     public function updateAvatar(string $uuid, string $avatar): void

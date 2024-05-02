@@ -2,7 +2,7 @@
 
 namespace App\Auction\Domain\Projections;
 
-class BidDetailedProjection
+final class BidDetailedProjection
 {
     public function __construct(
         public string $amount,
@@ -12,8 +12,13 @@ class BidDetailedProjection
     )
     {}
 
-    public static function create(string $amount, string $username, string $user_avatar, string $date): self
+    public static function fromPrivimites(array $data): self
     {
-        return new self($amount, $username, $user_avatar, $date);
+        return new self(
+            $data['amount'],
+            $data['username'],
+            $data['user_avatar'],
+            $data['date']
+        );
     }
 }
