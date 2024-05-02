@@ -43,16 +43,13 @@ final class PlaceBidController extends ValidatedCommandController
      */
     static function validate(Request $request): void
     {
-        // TODO comprobar que no puja el dueño
-        // TODO comprobar que no puje dos veces el mismo usuario
-
         // Simple validations
         $customValidator = Validator::make($request->all(), [
             'amount' => 'required|numeric|min:0.01',
             'auction_uuid' => 'required|string|exists:auctions,uuid'
         ]);
 
-        // Auction live validation
+        // Auction validations
         $auctionUuid = $request->input("auction_uuid");
         $auction = EloquentAuctionModel::query()
             ->select([
@@ -62,7 +59,18 @@ final class PlaceBidController extends ValidatedCommandController
             ])->where('uuid', $auctionUuid)
             ->first();
 
+        // Bidder is not owner
+        $customValidator->after(function ($customValidator) use ($request, $auction) {
+            if ($request->user()->uuid === $auction->user_uuid) {
+                $customValidator->errors()->add('owner', 'El propietario no puede pujar');
+            }
+        });
 
+        if ($customValidator->fails()) {
+            throw new ValidationException($customValidator);
+        }
+
+        // Is live validation
         $customValidator->after(function ($customValidator) use ($auctionUuid, $auction) {
             if (strtotime($auction->starting_date) > strtotime(now())) {
                 $customValidator->errors()->add('time','La subasta no ha empezado');
@@ -90,26 +98,32 @@ final class PlaceBidController extends ValidatedCommandController
             }
         });
 
-        // Bid amount validation
+        // Previous bid validation
         $topBid = EloquentBidModel::query()
-            ->select('amount')
+            ->select([
+                'amount',
+                'user_uuid'
+                ])
             ->where('auction_uuid', $auctionUuid)
             ->orderBy('amount', 'desc')
             ->limit(1)
             ->first();
 
-        if (!is_null($topBid)) {
-            $topBidAmount = $topBid->amount;
-
-        } else {
-            $topBidAmount = 0;
-        }
-
-        $customValidator->after(function ($customValidator) use ($topBidAmount, $amount) {
-            if ($amount <= $topBidAmount) {
-                $customValidator->errors()->add('amount', 'La cantidad debe ser superior a la de la anterior puja');
+        // Previous bid user validation
+        $customValidator->after(function ($customValidator) use ($request, $topBid) {
+            if ($request->user()->uuid === $topBid->user_uuid) {
+                $customValidator->errors()->add('user_uuid', 'No se puede pujar dos veces seguidas');
             }
         });
+
+        // Previous bid amount validation
+        if (!is_null($topBid)) {
+            $customValidator->after(function ($customValidator) use ($topBid, $amount) {
+                if ($amount <= $topBid->amount) {
+                    $customValidator->errors()->add('amount', 'La cantidad debe ser superior a la de la anterior puja');
+                }
+            });
+        }
 
         if ($customValidator->fails()) {
             throw new ValidationException($customValidator);
