@@ -43,17 +43,17 @@ final class EloquentReviewRepository extends BaseRepository implements ReviewRep
     {
         $reviews = EloquentReviewModel::query()
             ->select(
-                "reviews.uuid",
-                "users.username",
-                "users.avatar",
-                "reviews.rating",
-                "reviews.description",
-                "reviews.created_at")
+                "reviews.uuid as uuid",
+                "users.username as username",
+                "users.avatar as avatar",
+                "reviews.rating as rating",
+                "reviews.description as description",
+                "reviews.created_at as created_at")
             ->join("users", "users.uuid", "=", "reviews.reviewer_uuid")
             ->where("reviews.reviewed_uuid", $reviewedUuid)
             ->get();
 
-        if ($reviews->isEmpty()) {
+        if ($reviews->count() === 0) {
             throw new NoContentException();
         }
 
