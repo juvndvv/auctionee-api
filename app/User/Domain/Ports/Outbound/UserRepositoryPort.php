@@ -12,6 +12,8 @@ use Illuminate\Support\Collection;
 interface UserRepositoryPort extends BaseRepositoryPort
 {
     /**
+     * Busca todos los usuarios. Respuesta paginada
+     *
      * @param int $offset
      * @param int $limit
      * @return Collection<User>
