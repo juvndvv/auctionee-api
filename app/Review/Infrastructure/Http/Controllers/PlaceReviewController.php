@@ -17,7 +17,7 @@ final class PlaceReviewController extends ValidatedCommandController
         try {
             self::validate($request);
 
-            $reviewerUuid = $request['reviewerUuid'];
+            $reviewerUuid = $request->user()->uuid;
             $reviewedUuid = $request['reviewedUuid'];
             $description = $request['description'];
             $rating = $request['rating'];
@@ -38,7 +38,6 @@ final class PlaceReviewController extends ValidatedCommandController
     public static function validate(Request $request): void
     {
         $request->validate([
-            'reviewerUuid' => 'required|string|exists:users,uuid',
             'reviewedUuid' => 'required|string|exists:users,uuid',
             'description' => 'required|string',
             'rating' => 'required|integer|between:1,5'
