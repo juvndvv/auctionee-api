@@ -39,7 +39,7 @@ interface ReviewRepositoryPort extends BaseRepositoryPort
      * @return Collection<ReviewDetailsProjection>
      * @throws NotFoundException
      */
-    public function findByReviewedUuid(string $reviewedUuid): Collection;
+    public function findByReviewedUuid(string $reviewedUuid, int $offset, int $limit): Collection;
 
     /**
      * @param $uuid

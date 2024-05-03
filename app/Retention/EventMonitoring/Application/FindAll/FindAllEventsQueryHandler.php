@@ -19,7 +19,10 @@ class FindAllEventsQueryHandler extends QueryHandler
      */
     public function __invoke(FindAllEventsQuery $query): array
     {
-        $events = $this->eventRepository->findAll();
+        $offset = $query->offset();
+        $limit = $query->limit();
+
+        $events = $this->eventRepository->findAll($offset, $limit);
 
         // Map to resource
         $eventResourceArr = [];

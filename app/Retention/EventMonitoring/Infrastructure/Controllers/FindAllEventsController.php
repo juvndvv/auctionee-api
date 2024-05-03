@@ -12,14 +12,11 @@ use Illuminate\Http\Request;
 
 final class FindAllEventsController extends QueryController
 {
-    private const DEFAULT_OFFSET = 0;
-    private const DEFAULT_LIMIT = 10;
-
     public function __invoke(Request $request): JsonResponse
     {
         try {
-            $offset = $request->query->getInt('offset', self::DEFAULT_OFFSET);
-            $limit = $request->query->getInt('limit', self::DEFAULT_LIMIT);
+            $offset = $request->input('page', 0) * env('PAGINATION_LIMIT');
+            $limit = env('PAGINATION_LIMIT');
 
             $query = FindAllEventsQuery::create($offset, $limit);
             $resources = $this->queryBus->handle($query);
