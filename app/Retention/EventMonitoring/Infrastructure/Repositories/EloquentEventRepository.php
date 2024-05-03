@@ -9,7 +9,7 @@ use App\Shared\Infrastructure\Repositories\BaseRepository;
 
 class EloquentEventRepository extends BaseRepository implements EventRepositoryPort
 {
-    private const ENTITY_NAME = Event::class;
+    private const string ENTITY_NAME = Event::class;
 
     public function __construct()
     {
