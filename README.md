@@ -25,7 +25,7 @@
 - [x] Endpoint Caso de uso de actualizar nombre
 - [x] Endpoint Caso de uso de actualizar contraseña
 - [x] Endpoint Caso de uso de actualizar el nombre de usuario
-- [ ] Endpoint Caso de uso de autenticarse
+- [x] Endpoint Caso de uso de autenticarse
 
 ## Email
 
@@ -46,7 +46,7 @@
 
 - [x] Modelado de la base de datos
 - [x] Modelado del dominio
-- [ ] Modelado del repositorio
+- [x] Modelado del repositorio
 - [x] Endpoint Caso de uso de crear un chat
 - [x] Endpoint Caso de uso de guardar mensaje
 - [x] Endpoint Caso de uso de recuperar los chats de un usuario
@@ -68,10 +68,9 @@
 ## Auction
 
 - [x] Endpoint Caso de uso de crear subasta
-- [ ] Endpoint Caso de uso de editar subasta
-- [ ] Endpoint Caso de uso de eliminar subasta
-- [ ] Endpoint Caso de uso de pujar en subasta
-- [ ] Endpoint Caso de uso de finalizar subasta
+- [x] Endpoint Caso de uso de editar subasta
+- [x] Endpoint Caso de uso de eliminar subasta
+- [x] Endpoint Caso de uso de pujar en subasta
 
 ## Miscelaneo
 
