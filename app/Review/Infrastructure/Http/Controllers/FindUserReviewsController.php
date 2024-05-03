@@ -8,13 +8,17 @@ use App\Shared\Infrastructure\Http\Controllers\QueryController;
 use App\Shared\Infrastructure\Http\Controllers\Response;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 final class FindUserReviewsController extends QueryController
 {
-    public function __invoke(string $uuid): JsonResponse
+    public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {
-            $query = FindUserReviewsQuery::create($uuid);
+            $offset = $request->input('page', 0) * env('PAGINATION_LIMIT');
+            $limit = env('PAGINATION_LIMIT');
+
+            $query = FindUserReviewsQuery::create($uuid, $offset, $limit);
             $resource = $this->queryBus->handle($query);
 
             return Response::OK($resource, "Reviews encontradas");

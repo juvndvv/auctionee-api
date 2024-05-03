@@ -39,7 +39,7 @@ final class EloquentReviewRepository extends BaseRepository implements ReviewRep
         return $reviewDb->map(fn ($review) => Review::fromPrimitives($review->toArray()));
     }
 
-    public function findByReviewedUuid(string $reviewedUuid): Collection
+    public function findByReviewedUuid(string $reviewedUuid, int $offset, int $limit): Collection
     {
         $reviews = EloquentReviewModel::query()
             ->select(
@@ -51,6 +51,8 @@ final class EloquentReviewRepository extends BaseRepository implements ReviewRep
                 "reviews.created_at as created_at")
             ->join("users", "users.uuid", "=", "reviews.reviewer_uuid")
             ->where("reviews.reviewed_uuid", $reviewedUuid)
+            ->offset($offset)
+            ->limit($limit)
             ->get();
 
         if ($reviews->count() === 0) {
@@ -64,7 +66,7 @@ final class EloquentReviewRepository extends BaseRepository implements ReviewRep
                 $review['avatar'],
                 $review['rating'],
                 $review['description'],
-                $review['created_at']
+                now()->toString()
             ));
     }
 

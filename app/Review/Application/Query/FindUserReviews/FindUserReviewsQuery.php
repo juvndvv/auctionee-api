@@ -7,7 +7,9 @@ use App\Shared\Application\Queries\Query;
 final class FindUserReviewsQuery extends Query
 {
     private function __construct(
-        private readonly string $reviewedUuid
+        private readonly string $reviewedUuid,
+        private readonly int $offset,
+        private readonly int $limit
     )
     {}
 
@@ -16,8 +18,18 @@ final class FindUserReviewsQuery extends Query
         return $this->reviewedUuid;
     }
 
-    public static function create(string $reviewedUuid): self
+    public function offset(): int
     {
-        return new self($reviewedUuid);
+        return $this->offset;
+    }
+
+    public function limit(): int
+    {
+        return $this->limit;
+    }
+
+    public static function create(string $reviewedUuid, string $offset, string $limit): self
+    {
+        return new self($reviewedUuid, $offset, $limit);
     }
 }

@@ -22,6 +22,9 @@ final class FindUserReviewsQueryHandler extends QueryHandler
     public function __invoke(FindUserReviewsQuery $query): Collection
     {
         $reviewedUuid = $query->reviewedUuid();
-        return $this->reviewRepository->findByReviewedUuid($reviewedUuid);
+        $offset = $query->offset();
+        $limit = $query->limit();
+
+        return $this->reviewRepository->findByReviewedUuid($reviewedUuid, $offset, $limit);
     }
 }
