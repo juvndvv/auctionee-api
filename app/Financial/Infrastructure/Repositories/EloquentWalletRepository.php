@@ -2,6 +2,7 @@
 
 namespace App\Financial\Infrastructure\Repositories;
 
+use App\Financial\Domain\Exceptions\NotEnoughFoundsException;
 use App\Financial\Domain\Models\Wallet;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 use App\Financial\Infrastructure\Repositories\Models\EloquentWalletModel;
@@ -23,7 +24,7 @@ final class EloquentWalletRepository extends BaseRepository implements WalletRep
      */
     public function findByUserUuid(string $userUuid): Wallet
     {
-        $walletDb = parent::findByFieldValue(Wallet::SERIALIZED_USER_UUID, $userUuid);
+        $walletDb = parent::findByFieldValue(Wallet::USER_UUID, $userUuid);
         return Wallet::fromPrimitives($walletDb->toArray()['0']);
     }
 
@@ -38,7 +39,7 @@ final class EloquentWalletRepository extends BaseRepository implements WalletRep
 
     public function existsByUuid(string $uuid): bool
     {
-        return parent::existsByFieldValue(Wallet::SERIALIZED_UUID, $uuid);
+        return parent::existsByFieldValue(Wallet::UUID, $uuid);
     }
 
     /**
@@ -46,15 +47,50 @@ final class EloquentWalletRepository extends BaseRepository implements WalletRep
      */
     public function updateAmount(string $uuid, float $amount): void
     {
-        parent::updateFieldByPrimaryKey($uuid, Wallet::SERIALIZED_AMOUNT, $amount);
+        parent::updateFieldByPrimaryKey($uuid, Wallet::BALANCE, $amount);
     }
 
     public function findAmountByUuid(string $uuid): float
     {
         return EloquentWalletModel::query()
-            ->select('amount')
-            ->where('uuid', $uuid)
+            ->select(Wallet::BALANCE)
+            ->where(Wallet::UUID, $uuid)
             ->first()
-            ->getAttribute('amount');
+            ->getAttribute(Wallet::BALANCE);
+    }
+
+    public function blockAmount(string $uuid, float $amount): void
+    {
+        $walletDb = EloquentWalletModel::query()
+            ->select([Wallet::BALANCE, Wallet::BLOCKED_BALANCE])
+            ->where(Wallet::UUID, $uuid)->firstOrFail();
+
+        $balance = $walletDb->getAttribute(Wallet::BLOCKED_BALANCE);
+
+        if ($balance < $amount) {
+            throw new NotEnoughFoundsException("No hay fondos suficientes");
+        }
+
+        $blockedBalance = $walletDb->getAttribute(Wallet::BLOCKED_BALANCE);
+
+        $walletDb->update([
+            Wallet::BALANCE => $balance - $amount,
+            Wallet::BLOCKED_BALANCE => $blockedBalance + $amount
+        ]);
+    }
+
+    public function unblockAmount(string $uuid, float $amount): void
+    {
+        $walletDb = EloquentWalletModel::query()
+            ->select([Wallet::BALANCE, Wallet::BLOCKED_BALANCE])
+            ->where(Wallet::UUID, $uuid)->firstOrFail();
+
+        $balance = $walletDb->getAttribute(Wallet::BLOCKED_BALANCE);
+        $blockedBalance = $walletDb->getAttribute(Wallet::BLOCKED_BALANCE);
+
+        $walletDb->update([
+            Wallet::BALANCE => $balance + $amount,
+            Wallet::BLOCKED_BALANCE => $blockedBalance - $amount
+        ]);
     }
 }

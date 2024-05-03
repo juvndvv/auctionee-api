@@ -10,7 +10,7 @@ final class WalletResource
     {
         return [
             'uuid' => $wallet->uuid(),
-            'amount' => $wallet->amount(),
+            'amount' => $wallet->balance(),
         ];
     }
 }

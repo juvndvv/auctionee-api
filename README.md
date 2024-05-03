@@ -30,17 +30,7 @@
 ## Email
 
 - [x] Modelado del dominio
-- [ ] Reestructurar las carpetas (mover lo de Shared o Retention)
 - [ ] Definir que casos faltan para enviar emails
-
-## Notificaciones
-
-- [ ] Definir que eventos generan notificaciones y a quien
-- [ ] Modelado de la base de datos
-- [ ] Modelado del dominio
-- [ ] Listener Caso de uso de enviar notificacion
-- [ ] Listener Caso de uso de guardar notificacion
-- [ ] Endpoint Caso de uso de marcar como leida
 
 ## Social
 
@@ -71,9 +61,11 @@
 - [x] Endpoint Caso de uso de editar subasta
 - [x] Endpoint Caso de uso de eliminar subasta
 - [x] Endpoint Caso de uso de pujar en subasta
+- [ ] Endpoint buscar subastas por categoria
 
 ## Miscelaneo
 
+- [ ] Subscripciones a categorias
 - [ ] Paginar respuestas grandes
 - [x] Pedir dominios
 - [ ] VPS para desplegar la API

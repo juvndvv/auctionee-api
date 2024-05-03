@@ -25,6 +25,6 @@ final class WithdrawMoneyCommandHandler extends CommandHandler
         $wallet = $this->walletRepository->findByUuid($uuid);
         $wallet->withdraw($amount);
 
-        $this->walletRepository->updateAmount($uuid, $wallet->amount());
+        $this->walletRepository->updateAmount($uuid, $wallet->balance());
     }
 }

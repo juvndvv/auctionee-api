@@ -3,7 +3,6 @@
 namespace App\Financial\Domain\Services;
 
 use App\Financial\Domain\Exceptions\NotEnoughFoundsException;
-use App\Financial\Domain\Models\Transaction;
 use App\Financial\Domain\Models\Wallet;
 use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 
@@ -32,8 +31,8 @@ final readonly class TransactorService
         $destinationWallet->deposit($this->amount);
 
         // Update wallets
-        $this->walletRepository->updateAmount($remittentWallet->uuid(), $remittentWallet->amount());
-        $this->walletRepository->updateAmount($destinationWallet->uuid(), $destinationWallet->amount());
+        $this->walletRepository->updateAmount($remittentWallet->uuid(), $remittentWallet->balance());
+        $this->walletRepository->updateAmount($destinationWallet->uuid(), $destinationWallet->balance());
 
         return $remittentWallet;
     }

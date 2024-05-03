@@ -2,6 +2,7 @@
 
 namespace App\Financial\Domain\Ports\Inbound;
 
+use App\Financial\Domain\Exceptions\NotEnoughFoundsException;
 use App\Financial\Domain\Models\Wallet;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -35,6 +36,22 @@ interface WalletRepositoryPort extends BaseRepositoryPort
      * @throws ModelNotFoundException
      */
     public function updateAmount(string $uuid, float $amount): void;
+
+    /**
+     * @param string $uuid
+     * @param float $amount
+     * @return void
+     * @throws NotEnoughFoundsException
+     */
+    public function blockAmount(string $uuid, float $amount): void;
+
+    /**
+     * @param string $uuid
+     * @param float $amount
+     * @return void
+     * @throws NotEnoughFoundsException
+     */
+    public function unblockAmount(string $uuid, float $amount): void;
 
     /**
      * Busca la columna <i>amount</i> por la clave primaria

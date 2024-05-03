@@ -31,9 +31,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('wallets')->insert([
-            Wallet::SERIALIZED_UUID => 'W0000000-0000-0000-0000-000000000000',
-            Wallet::SERIALIZED_AMOUNT => 0,
-            Wallet::SERIALIZED_USER_UUID => 'U0000000-0000-0000-0000-000000000000',
+            Wallet::UUID => 'W0000000-0000-0000-0000-000000000000',
+            Wallet::BALANCE => 0,
+            Wallet::USER_UUID => 'U0000000-0000-0000-0000-000000000000',
         ]);
 
         DB::table('users')->insert([
@@ -48,9 +48,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('wallets')->insert([
-            Wallet::SERIALIZED_UUID => 'WD000000-0000-0000-0000-000000000000',
-            Wallet::SERIALIZED_AMOUNT => 0,
-            Wallet::SERIALIZED_USER_UUID => 'UD0000000-0000-0000-0000-000000000000',
+            Wallet::UUID => 'WD000000-0000-0000-0000-000000000000',
+            Wallet::BALANCE => 0,
+            Wallet::USER_UUID => 'UD0000000-0000-0000-0000-000000000000',
         ]);
 
         EloquentUserModel::factory()->count(1000)->create();
