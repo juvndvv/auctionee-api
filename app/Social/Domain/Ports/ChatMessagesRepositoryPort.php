@@ -17,7 +17,6 @@ interface ChatMessagesRepositoryPort extends BaseRepositoryPort
      * @throws NoContentException
      */
     public function findAllByChatRoomUuid(string $chatRoomUuid, string $fromDate): Collection;
-
     public function findByUuid(string $uuid): Message;
     public function exists(string $uuid): bool;
     public function delete(string $uuid): void;

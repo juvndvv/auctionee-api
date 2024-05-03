@@ -3,11 +3,9 @@
 namespace App\Social\Application\Commands\DeleteMessage;
 
 use App\Shared\Application\Commands\CommandHandler;
-use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastructure\Bus\EventBus;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 final class DeleteMessageCommandHandler extends CommandHandler
 {
