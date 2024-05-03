@@ -3,6 +3,7 @@
 namespace App\User\Application\Commands\UpdateAvatar;
 
 use App\Shared\Application\Commands\CommandHandler;
+use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Inbound\ImageRepositoryPort;
 use App\Shared\Infrastructure\Bus\EventBus;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
@@ -16,6 +17,9 @@ final class UpdateAvatarCommandHandler extends CommandHandler
     )
     {}
 
+    /**
+     * @throws NotFoundException
+     */
     public function __invoke(UpdateAvatarCommand $command): string
     {
         $uuid = $command->uuid();
