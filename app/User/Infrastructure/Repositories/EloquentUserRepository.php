@@ -19,9 +19,9 @@ final class EloquentUserRepository extends BaseRepository implements UserReposit
         $this->setEntityName(self::ENTITY_NAME);
     }
 
-    public function findAll(int $offset = 0, int $limit = 20): Collection
+    public function findAll(int $offset, int $limit): Collection
     {
-        $users = parent::findAll($offset, $limit);
+        $users = EloquentUserModel::query()->offset($offset)->limit($limit)->get();
         return $users->map(fn ($user) => User::fromPrimitives($user->toArray()));
     }
 

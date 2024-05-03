@@ -2,6 +2,7 @@
 
 namespace App\User\Infrastructure\Http\Controllers;
 
+use _PHPStan_7961f7ae1\OndraM\CiDetector\Env;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infrastructure\Http\Controllers\QueryController;
 use App\Shared\Infrastructure\Http\Controllers\Response;
@@ -12,14 +13,11 @@ use Illuminate\Http\Request;
 
 final class FindAllUserController extends QueryController
 {
-    private const DEFAULT_OFFSET = 0;
-    private const DEFAULT_LIMIT = 20;
-
     public function __invoke(Request $request): JsonResponse
     {
         try {
-            $offset = $request->query->getInt('offset', self::DEFAULT_OFFSET);
-            $limit = $request->query->getInt('limit', self::DEFAULT_LIMIT);
+            $offset = $request->input('page', 0) * env('PAGINATION_LIMIT');
+            $limit = env('PAGINATION_LIMIT');
 
             $query = FindAllUserQuery::create($offset, $limit);
 

@@ -20,7 +20,10 @@ final class FindAllUserQueryHandler extends QueryHandler
      */
     public function __invoke(FindAllUserQuery $query): Collection
     {
-        $users = $this->userRepository->findAll();
+        $offset = $query->offset();
+        $limit = $query->limit();
+
+        $users = $this->userRepository->findAll($offset, $limit);
         return $users->map(fn ($user) => UserSmallResource::create($user));
     }
 }

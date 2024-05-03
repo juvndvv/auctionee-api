@@ -17,7 +17,7 @@ interface UserRepositoryPort extends BaseRepositoryPort
      * @return Collection<User>
      * @throws NoContentException
      */
-    public function findAll(int $offset = 0, int $limit = 20): Collection;
+    public function findAll(int $offset, int $limit): Collection;
 
     /**
      * Busca el usuario por uuid. Lanza ModelNotFound si no lo encuentra.

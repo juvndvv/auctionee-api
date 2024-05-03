@@ -19,7 +19,7 @@ interface BaseRepositoryPort
      * @return Collection
      * @throws NoContentException
      */
-    public function findAll(int $offset = 0, int $limit = 20): Collection;
+    public function findAll(int $offset, int $limit): Collection;
 
     /**
      * Busca un modelo por su clave primaria y devuelve su modelo de dominio. Lanza excepcion si no encuentra

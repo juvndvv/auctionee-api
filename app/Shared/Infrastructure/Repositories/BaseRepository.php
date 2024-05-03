@@ -29,9 +29,9 @@ abstract class BaseRepository implements BaseRepositoryPort
         $this->entityName = $entityName;
     }
 
-    public function findAll(int $offset = 0, int $limit = 20): Collection
+    public function findAll(int $offset, int $limit): Collection
     {
-        $models = $this->model::query()->get()->forPage($offset, $limit);
+        $models = $this->model::query()->all()->forPage($offset, $limit);
 
         if ($models->isEmpty()) {
             throw new NoContentException("No existen entidades $this->entityName");
