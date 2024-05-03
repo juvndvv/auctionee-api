@@ -62,4 +62,11 @@ final class EloquentChatMessagesRepository extends BaseRepository implements Cha
             ->where('uuid', $uuid)
             ->exists();
     }
+
+    public function delete(string $uuid): void
+    {
+        EloquentMessageModel::query()
+            ->where('uuid', $uuid)
+            ->update(['content' => '!*! Mensaje eliminado']);
+    }
 }

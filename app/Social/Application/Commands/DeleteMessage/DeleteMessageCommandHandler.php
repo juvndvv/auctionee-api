@@ -31,7 +31,7 @@ final class DeleteMessageCommandHandler extends CommandHandler
         $chatRoom->deleteMessage($message);
 
         // Persistence
-        $this->chatMessagesRepository->deleteByPrimaryKey($messageUuid);
+        $this->chatMessagesRepository->delete($messageUuid);
 
         // Publish
         $this->eventBus->dispatch(...$chatRoom->pullDomainEvents());
