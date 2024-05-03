@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('wallets')->insert([
             Wallet::UUID => 'W0000000-0000-0000-0000-000000000000',
-            Wallet::BALANCE => 0,
+            Wallet::BALANCE => 9999999,
             Wallet::USER_UUID => 'U0000000-0000-0000-0000-000000000000',
         ]);
 
