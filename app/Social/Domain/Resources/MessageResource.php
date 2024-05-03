@@ -7,12 +7,13 @@ class MessageResource
     public function __construct(
         public string $uuid,
         public string $message,
-        public string $date
+        public string $date,
+        public string $senderUuid,
     )
     {}
 
-    public static function create(string $uuid, string $message, string $date): self
+    public static function create(string $uuid, string $message, string $date, string $senderUuid): self
     {
-        return new self($uuid, $message, $date);
+        return new self($uuid, $message, $date, $senderUuid);
     }
 }

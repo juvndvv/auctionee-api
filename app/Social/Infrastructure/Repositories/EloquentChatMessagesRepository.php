@@ -27,7 +27,7 @@ final class EloquentChatMessagesRepository extends BaseRepository implements Cha
         }
 
         $messagesDb = EloquentMessageModel::query()
-            ->select(['uuid', 'content', 'created_at'])
+            ->select(['uuid', 'content', 'created_at', 'sender_uuid'])
             ->where('chat_room_uuid', $chatRoomUuid)
             ->orderBy('created_at', 'desc')
             ->where('created_at', '<', $fromDate)
@@ -41,7 +41,8 @@ final class EloquentChatMessagesRepository extends BaseRepository implements Cha
         return $messagesDb->map(fn ($message) => MessageResource::create(
             $message->uuid,
             $message->content,
-            $message->created_at
+            $message->created_at,
+            $message->sender_uuid
         ));
     }
 
