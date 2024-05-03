@@ -8,7 +8,8 @@ final class CreateWalletCommand extends Command
 {
     public function __construct(
         private readonly string $userUuid,
-        private readonly float $amount = 0
+        private readonly float  $balance = 0,
+        private readonly float $blockedBalance = 0
     )
     {}
 
@@ -17,8 +18,13 @@ final class CreateWalletCommand extends Command
         return $this->userUuid;
     }
 
-    public function amount(): float
+    public function balance(): float
     {
-        return $this->amount;
+        return $this->balance;
+    }
+
+    public function blockedAmount(): float
+    {
+        return $this->blockedBalance;
     }
 }

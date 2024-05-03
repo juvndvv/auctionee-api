@@ -15,10 +15,11 @@ final class CreateWalletCommandHandler extends CommandHandler
 
     public function __invoke(CreateWalletCommand $command): void
     {
-        $amount = $command->amount();
+        $balance = $command->balance();
+        $blockedBalance  = $command->blockedAmount();
         $userUuid = $command->userUuid();
 
-        $wallet = Wallet::create($amount, $userUuid);
+        $wallet = Wallet::create($balance, $blockedBalance, $userUuid);
         $this->walletRepository->create($wallet->toPrimitives());
     }
 }

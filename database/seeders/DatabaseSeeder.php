@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('wallets')->insert([
             Wallet::UUID => 'W0000000-0000-0000-0000-000000000000',
-            Wallet::BALANCE => 0,
+            Wallet::BALANCE => 9999999,
             Wallet::USER_UUID => 'U0000000-0000-0000-0000-000000000000',
         ]);
 
@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
             Wallet::USER_UUID => 'UD0000000-0000-0000-0000-000000000000',
         ]);
 
+        /**
         EloquentUserModel::factory()->count(1000)->create();
 
         EloquentUserModel::all()->each(function ($user) {
@@ -68,5 +69,6 @@ class DatabaseSeeder extends Seeder
         EloquentChatRoomModel::factory()->count(200)->create();
         EloquentMessageModel::factory()->count(300)->create();
         EloquentReviewModel::factory()->count(400)->create();
+         **/
     }
 }

@@ -9,7 +9,7 @@ use App\Financial\Domain\Ports\Inbound\WalletRepositoryPort;
 
 final class DeleteWalletService
 {
-    public const DELETED_WALLET_UUID = 'WD000000-0000-0000-0000-000000000000';
+    public const string DELETED_WALLET_UUID = 'WD000000-0000-0000-0000-000000000000';
 
     /**
      * Recorre transacciones y cambia el valor del uuid de la wallet que se va a eliminar a
