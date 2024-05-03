@@ -18,7 +18,7 @@ final class UserDeletedEvent extends DomainEvent
 
     public function broadcastOn(): array
     {
-        return ['users'];
+        return ['admin', 'users'];
     }
 
     public function broadcastAs(): string
