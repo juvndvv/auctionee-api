@@ -86,7 +86,7 @@ final class Review extends AggregateRoot
     {
         $old = $this->rating();
         $this->rating = new ReviewRating($rating);
-        $this->record(new RatingUpdatedEvent([
+        $this->record(new RatingUpdatedEvent($this->reviewedId(), [
             'old' => $old,
             'new' => $rating
         ], now()->toString()));
@@ -96,7 +96,7 @@ final class Review extends AggregateRoot
     {
         $old = $this->description();
         $this->description = new ReviewDescription($description);
-        $this->record(new DescriptionUpdatedEvent([
+        $this->record(new DescriptionUpdatedEvent($this->reviewedId(), [
             'old' => $old,
             'new' => $description
         ], now()->toString()));
@@ -118,7 +118,7 @@ final class Review extends AggregateRoot
             $reviewedId
         );
 
-        $review->record(new ReviewPlacedEvent($review->toPrimitives(), now()->toString()));
+        $review->record(new ReviewPlacedEvent($reviewedId, $review->toPrimitives(), now()->toString()));
 
         return $review;
     }
