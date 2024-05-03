@@ -56,7 +56,7 @@ final class User extends AggregateRoot
         $this->name = new UserName($name);
         $this->username = new UserUsername($username);
         $this->email = new UserEmail($email);
-        $this->password = $password === "" ? new UserPassword($password) : new UserPassword("123");
+        $this->password = new UserPassword($password);
         $this->avatar = new UserAvatar($avatar);
         $this->birth = new UserBirth($birth);
         $this->role = new UserRole($role);
