@@ -15,11 +15,11 @@ final class FindUserByUsernameController extends QueryController
     {
         try {
             $query = FindByUsernameQuery::create($username);
-            $result = $this->queryBus->handle($query);
+            $resource = $this->queryBus->handle($query);
 
-            return Response::OK($result, "Usuario encontrado satisfactoriamente");
+            return Response::OK($resource, "Usuario encontrado satisfactoriamente");
 
-        } catch (NotFoundException $e) {
+        } catch (NotFoundException) {
             return Response::NOT_FOUND("El usuario $username no existe");
 
         } catch (Exception) {

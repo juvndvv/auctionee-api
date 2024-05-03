@@ -6,7 +6,7 @@ use App\Shared\Application\Commands\CommandHandler;
 use App\Shared\Domain\Exceptions\BadRequestException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
-use App\User\Domain\Resources\AuthenticatedUser;
+use App\User\Domain\Projections\AuthenticatedUserProjection;
 
 final class AuthenticateCommandHandler extends CommandHandler
 {
@@ -19,7 +19,7 @@ final class AuthenticateCommandHandler extends CommandHandler
      * @throws BadRequestException
      * @throws NotFoundException
      */
-    public function __invoke(AuthenticateCommand $command): AuthenticatedUser
+    public function __invoke(AuthenticateCommand $command): AuthenticatedUserProjection
     {
         $email = $command->email();
         $password = $command->password();
@@ -27,6 +27,6 @@ final class AuthenticateCommandHandler extends CommandHandler
         $token = $this->userRepository->authenticate($email, $password);
         $user = $this->userRepository->findByEmail($email);
 
-        return AuthenticatedUser::create($user, $token);
+        return AuthenticatedUserProjection::create($user, $token);
     }
 }

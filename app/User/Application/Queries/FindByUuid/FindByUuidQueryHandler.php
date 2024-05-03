@@ -5,7 +5,7 @@ namespace App\User\Application\Queries\FindByUuid;
 use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
-use App\User\Domain\Resources\UserSmallResource;
+use App\User\Domain\Projections\UserSmallProjection;
 
 final class FindByUuidQueryHandler extends QueryHandler
 {
@@ -17,10 +17,10 @@ final class FindByUuidQueryHandler extends QueryHandler
     /**
      * @throws NotFoundException
      */
-    public function __invoke(FindByUuidQuery $query): UserSmallResource
+    public function __invoke(FindByUuidQuery $query): UserSmallProjection
     {
         $uuid = $query->uuid();
         $user = $this->userRepository->findByUuid($uuid);
-        return UserSmallResource::create($user);
+        return UserSmallProjection::create($user);
     }
 }

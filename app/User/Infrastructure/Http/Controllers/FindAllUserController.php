@@ -2,7 +2,6 @@
 
 namespace App\User\Infrastructure\Http\Controllers;
 
-use _PHPStan_7961f7ae1\OndraM\CiDetector\Env;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infrastructure\Http\Controllers\QueryController;
 use App\Shared\Infrastructure\Http\Controllers\Response;
