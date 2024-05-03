@@ -2,6 +2,7 @@
 
 namespace App\Social\Infrastructure\Repositories;
 
+use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infrastructure\Repositories\BaseRepository;
 use App\Social\Domain\Models\Message;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
@@ -19,13 +20,23 @@ final class EloquentChatMessagesRepository extends BaseRepository implements Cha
         parent::setModel(EloquentMessageModel::query()->getModel());
     }
 
-    public function findAllByChatRoomUuid(string $chatRoomUuid): Collection
+    public function findAllByChatRoomUuid(string $chatRoomUuid, string $fromDate): Collection
     {
+        if (empty($fromDate)) {
+            $fromDate = now()->format('Y-m-d H:i:s');
+        }
+
         $messagesDb = EloquentMessageModel::query()
             ->select(['uuid', 'content', 'created_at'])
             ->where('chat_room_uuid', $chatRoomUuid)
             ->orderBy('created_at', 'desc')
+            ->where('created_at', '<', $fromDate)
+            ->limit(env('PAGINATION_LIMIT'))
             ->get();
+
+        if ($messagesDb->count() ===  0) {
+            throw new NoContentException();
+        }
 
         return $messagesDb->map(fn ($message) => MessageResource::create(
             $message->uuid,

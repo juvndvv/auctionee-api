@@ -8,7 +8,8 @@ use App\Shared\Application\Queries\Query;
 final class FindMessagesByChatRoomUuidQuery extends Query
 {
     private function __construct(
-        private readonly string $uuid
+        private readonly string $uuid,
+        private readonly string $token,
     )
     {}
 
@@ -17,8 +18,13 @@ final class FindMessagesByChatRoomUuidQuery extends Query
         return $this->uuid;
     }
 
-    public static function create(string $uuid): self
+    public function token(): string
     {
-        return new self($uuid);
+        return $this->token;
+    }
+
+    public static function create(string $uuid, string $token): self
+    {
+        return new self($uuid, $token);
     }
 }

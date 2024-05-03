@@ -19,7 +19,7 @@ final class CreateChatRoomController extends CommandController
             self::validate($request);
 
             $leftUuid = $request->user()->uuid;
-            $rightUuid = $request->input("right_uuid");
+            $rightUuid = $request->input("user_uuid");
 
             $command = CreateChatRoomCommand::create($leftUuid, $rightUuid);
             $this->commandBus->handle($command);

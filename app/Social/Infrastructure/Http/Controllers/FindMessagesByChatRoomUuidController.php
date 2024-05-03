@@ -2,28 +2,44 @@
 
 namespace App\Social\Infrastructure\Http\Controllers;
 
+use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastructure\Http\Controllers\QueryController;
 use App\Shared\Infrastructure\Http\Controllers\Response;
 use App\Social\Application\Queries\FindMessagesByChatRoomUuid\FindMessagesByChatRoomUuidQuery;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 final class FindMessagesByChatRoomUuidController extends QueryController
 {
-    public function __invoke(string $uuid): JsonResponse
+    public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {
-            $query = FindMessagesByChatRoomUuidQuery::create($uuid);
-            $messages = $this->queryBus->handle($query);
+            $token = $this->getTokenDateFromRequest($request);
 
-            return Response::OK($messages, "Mensajes encontrados satisfactoriamente");
+            $query = FindMessagesByChatRoomUuidQuery::create($uuid, $token);
+            $resource = $this->queryBus->handle($query);
+
+            return Response::OK($resource, "Mensajes encontrados satisfactoriamente");
 
         } catch (NotFoundException $exception) {
             return Response::NOT_FOUND($exception->getMessage());
 
-        } catch (Exception) {
+        } catch (NoContentException) {
+            return Response::NO_CONTENT();
+
+        } catch (Exception $exception) {
             return Response::SERVER_ERROR();
         }
+    }
+
+    public function getTokenDateFromRequest(Request $request): string
+    {
+        if ($request->hasHeader('Token')) {
+            return base64_decode($request->header('Token'));
+        }
+
+        return "";
     }
 }
