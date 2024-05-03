@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: {{url}}/users
+  url: {{url}}/users?page=1
   body: none
-  auth: none
+  auth: inherit
+}
+
+query {
+  page: 1
 }
