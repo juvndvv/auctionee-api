@@ -40,6 +40,7 @@ use App\User\Infrastructure\Http\Controllers\DeleteUserController;
 use App\User\Infrastructure\Http\Controllers\FindAllUserController;
 use App\User\Infrastructure\Http\Controllers\FindUserByUsernameController;
 use App\User\Infrastructure\Http\Controllers\FindUserByUuidController;
+use App\User\Infrastructure\Http\Controllers\LogoutController;
 use App\User\Infrastructure\Http\Controllers\UnblockUserController;
 use App\User\Infrastructure\Http\Controllers\UpdateUserAvatarController;
 use App\User\Infrastructure\Http\Controllers\UpdateUserEmailController;
@@ -51,6 +52,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::prefix('/v1')->group(function () {
         Route::post('/auth', AuthenticateController::class)->withoutMiddleware('auth:sanctum');
+        Route::get('/logout', LogoutController::class);
 
         // Users
         Route::prefix('/users')->group(function () {
