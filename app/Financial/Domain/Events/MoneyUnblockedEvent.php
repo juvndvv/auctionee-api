@@ -28,6 +28,6 @@ final class MoneyUnblockedEvent extends DomainEvent
 
     public static function eventName(): string
     {
-        return 'money.blocked';
+        return 'money.unblocked';
     }
 }

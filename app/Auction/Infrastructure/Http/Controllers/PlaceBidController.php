@@ -5,6 +5,7 @@ namespace App\Auction\Infrastructure\Http\Controllers;
 use App\Auction\Application\Commands\PlaceBid\PlaceBidCommand;
 use App\Auction\Infrastructure\Repositories\Models\EloquentAuctionModel;
 use App\Auction\Infrastructure\Repositories\Models\EloquentBidModel;
+use App\Financial\Domain\Models\Wallet;
 use App\Financial\Infrastructure\Repositories\Models\EloquentWalletModel;
 use App\Shared\Infrastructure\Http\Controllers\Response;
 use App\Shared\Infrastructure\Http\Controllers\ValidatedCommandController;
@@ -34,6 +35,7 @@ final class PlaceBidController extends ValidatedCommandController
             return Response::UNPROCESSABLE_ENTITY("Errores de validación", $exception->validator->getMessageBag());
 
         } catch (Exception $exception) {
+            dd($exception);
             return Response::SERVER_ERROR();
         }
     }
@@ -88,12 +90,12 @@ final class PlaceBidController extends ValidatedCommandController
         $userUuid = $request->user()->uuid;
         $amount = $request->input("amount");
         $wallet = EloquentWalletModel::query()
-            ->select('amount')
-            ->where('user_uuid', $userUuid)
+            ->select(Wallet::BALANCE)
+            ->where(Wallet::USER_UUID, $userUuid)
             ->first();
 
         $customValidator->after(function ($validator) use ($customValidator, $wallet, $amount) {
-            if ($wallet->amount < $amount) {
+            if ($wallet->balance < $amount) {
                 $customValidator->errors()->add('money', 'No tienes sufiente dinero');
             }
         });
@@ -111,7 +113,7 @@ final class PlaceBidController extends ValidatedCommandController
 
         // Previous bid user validation
         $customValidator->after(function ($customValidator) use ($request, $topBid) {
-            if ($request->user()->uuid === $topBid->user_uuid) {
+            if (!is_null($topBid) && $request->user()->uuid === $topBid->user_uuid) {
                 $customValidator->errors()->add('user_uuid', 'No se puede pujar dos veces seguidas');
             }
         });

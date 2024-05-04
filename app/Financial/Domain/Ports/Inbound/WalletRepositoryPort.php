@@ -43,7 +43,7 @@ interface WalletRepositoryPort extends BaseRepositoryPort
      * @return void
      * @throws NotEnoughFoundsException
      */
-    public function blockAmount(string $uuid, float $amount): void;
+    public function updateBlockedAmount(string $uuid, float $amount): void;
 
     /**
      * @param string $uuid

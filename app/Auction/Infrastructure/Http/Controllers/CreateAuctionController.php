@@ -68,7 +68,7 @@ final class CreateAuctionController extends ValidatedCommandController
             'starting_price' => 'required|numeric|decimal:2',
             'starting_date' => 'required|date|date_format:Y-m-d H:i:s',
             'duration' => 'required|integer|min:1',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
     }
 }

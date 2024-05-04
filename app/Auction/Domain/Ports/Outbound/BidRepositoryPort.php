@@ -2,9 +2,14 @@
 
 namespace App\Auction\Domain\Ports\Outbound;
 
+use App\Auction\Domain\Models\Bid\Bid;
+use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
 
 interface BidRepositoryPort extends BaseRepositoryPort
 {
-    public function getTopBid(string $auctionUuid);
+    /**
+     * @throws NoContentException
+     */
+    public function getTopBidOrFail(string $auctionUuid): Bid;
 }

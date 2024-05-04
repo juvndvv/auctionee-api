@@ -65,7 +65,7 @@ final class EloquentWalletRepository extends BaseRepository implements WalletRep
             ->select([Wallet::BALANCE, Wallet::BLOCKED_BALANCE])
             ->where(Wallet::UUID, $uuid)->firstOrFail();
 
-        $balance = $walletDb->getAttribute(Wallet::BLOCKED_BALANCE);
+        $balance = $walletDb->getAttribute(Wallet::BALANCE);
 
         if ($balance < $amount) {
             throw new NotEnoughFoundsException("No hay fondos suficientes");
@@ -75,7 +75,20 @@ final class EloquentWalletRepository extends BaseRepository implements WalletRep
 
         $walletDb->update([
             Wallet::BALANCE => $balance - $amount,
+        ]);
+
+        $walletDb->update([
             Wallet::BLOCKED_BALANCE => $blockedBalance + $amount
+        ]);
+    }
+
+    public function updateBlockedAmount(string $uuid, float $amount): void
+    {
+        EloquentWalletModel::query()
+            ->where(Wallet::UUID, $uuid)
+            ->firstOrFail()
+        ->update([
+            Wallet::BLOCKED_BALANCE => $amount,
         ]);
     }
 

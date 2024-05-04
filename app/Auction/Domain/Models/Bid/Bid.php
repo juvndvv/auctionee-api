@@ -66,4 +66,14 @@ final class Bid extends AggregateRoot
         $bid->record(new BidPlacedEvent($auctionUuid, now()->toString(), $bid->toPrimitives()));
         return $bid;
     }
+
+    public static function fromPrimitives(array $data): self
+    {
+        return new self(
+            $data[self::UUID],
+            $data[self::AMOUNT],
+            $data[self::USER_UUID],
+            $data[self::AUCTION_UUID]
+        );
+    }
 }

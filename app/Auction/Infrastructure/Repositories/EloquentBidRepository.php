@@ -2,8 +2,10 @@
 
 namespace App\Auction\Infrastructure\Repositories;
 
+use App\Auction\Domain\Models\Bid\Bid;
 use App\Auction\Domain\Ports\Outbound\BidRepositoryPort;
 use App\Auction\Infrastructure\Repositories\Models\EloquentBidModel;
+use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Infrastructure\Repositories\BaseRepository;
 
 final class EloquentBidRepository extends BaseRepository implements BidRepositoryPort
@@ -16,14 +18,18 @@ final class EloquentBidRepository extends BaseRepository implements BidRepositor
         parent::setEntityName(self::ENTITY_NAME);
     }
 
-    public function getTopBid(string $auctionUuid)
+    public function getTopBidOrFail(string $auctionUuid): Bid
     {
-        return EloquentBidModel::query()
-            ->select('amount')
+        $topBid = EloquentBidModel::query()
             ->where('auction_uuid', $auctionUuid)
             ->orderBy('amount', 'desc')
             ->limit(1)
-            ->get()
-        ;
+            ->first();
+
+        if (is_null($topBid)) {
+            throw new NoContentException();
+        }
+
+        return Bid::fromPrimitives($topBid->toArray());
     }
 }
