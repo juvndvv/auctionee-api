@@ -20,10 +20,15 @@ final class WithdrawMoneyController extends CommandController
             $command = new WithdrawMoneyCommand($uuid, $amount);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "Dinero retirado correctamente");
+            return Response::OK(
+                data: $uuid,
+                message: "Dinero retirado"
+            );
 
         } catch (NotEnoughFoundsException $exception) {
-            return Response::BAD_REQUEST($exception->getMessage());
+            return Response::BAD_REQUEST(
+                message: $exception->getMessage()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

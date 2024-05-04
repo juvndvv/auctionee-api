@@ -21,7 +21,10 @@ final class FindUserReviewsController extends QueryController
             $query = FindUserReviewsQuery::create($uuid, $offset, $limit);
             $resource = $this->queryBus->handle($query);
 
-            return Response::OK($resource, "Reviews encontradas");
+            return Response::OK(
+                data: $resource,
+                message:  "Reviews encontradas"
+            );
 
         } catch (NoContentException) {
             return Response::NO_CONTENT();

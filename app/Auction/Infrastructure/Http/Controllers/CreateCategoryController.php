@@ -30,10 +30,16 @@ final class CreateCategoryController extends ValidatedCommandController
             $command = CreateCategoryCommand::create($name, $description, $avatar);
             $uuid = $this->commandBus->handle($command);
 
-            return Response::CREATED("Categoria creada correctamente", "/categories/" . $uuid);
+            return Response::CREATED(
+                message: "Categoria creada",
+                url: "/categories/" . $uuid
+            );
 
         } catch (ValidationException $exception) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validacion",
+                error: $exception->validator->getMessageBag()
+            );
 
         } catch (Exception $exception) {
             return Response::SERVER_ERROR();

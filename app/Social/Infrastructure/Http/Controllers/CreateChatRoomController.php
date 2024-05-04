@@ -22,15 +22,23 @@ final class CreateChatRoomController extends CommandController
             $rightUuid = $request->input("user_uuid");
 
             $command = CreateChatRoomCommand::create($leftUuid, $rightUuid);
-            $this->commandBus->handle($command);
+            $uuid = $this->commandBus->handle($command);
 
-            return Response::OK(null, "Sala creada correctamente");
+            return Response::CREATED(
+                message: "Sala creada correctamente",
+                url: "/chatrooms/" . $uuid
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Hubieron errores de validación", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Hubieron errores de validación",
+                error: $e->validator->getMessageBag()
+            );
 
         } catch (BadRequestException $e) {
-            return Response::BAD_REQUEST($e->getMessage());
+            return Response::BAD_REQUEST(
+                message: $e->getMessage()
+            );
 
         } catch (Exception $e) {
             return Response::SERVER_ERROR();

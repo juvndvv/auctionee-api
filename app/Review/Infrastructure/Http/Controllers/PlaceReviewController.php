@@ -25,10 +25,16 @@ final class PlaceReviewController extends ValidatedCommandController
             $command = PlaceReviewCommand::create($reviewerUuid, $reviewedUuid, $description, $rating);
             $this->commandBus->handle($command);
 
-            return Response::CREATED("Review creada satisfactoriamente", "/user/" . $reviewedUuid . "/reviews");
+            return Response::CREATED(
+                message: "Review creada",
+                url: "/user/" . $reviewedUuid . "/reviews"
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación en el usuario", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validación en el usuario",
+                error: $e->validator->getMessageBag()
+            );
 
         } catch (Exception $e) {
             return Response::SERVER_ERROR();

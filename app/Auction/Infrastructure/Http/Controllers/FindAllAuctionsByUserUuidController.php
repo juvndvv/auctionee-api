@@ -21,7 +21,10 @@ final class FindAllAuctionsByUserUuidController extends QueryController
             $query = FindAllAuctionsByUserUuidQuery::create($uuid, $offset, $limit);
             $resources = $this->queryBus->handle($query);
 
-            return Response::OK($resources, "Subastas encontradas");
+            return Response::OK(
+                data: $resources,
+                message: "Subastas encontradas"
+            );
 
         } catch (NoContentException) {
             return Response::NO_CONTENT();

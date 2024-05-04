@@ -22,10 +22,16 @@ final class UpdateCategoryDescriptionController extends ValidatedCommandControll
             $command = UpdateCategoryDescriptionCommand::create($uuid, $description);
             $this->commandBus->handle($command);
 
-            return Response::OK($description, "Nombre de la categoria actualizado");
+            return Response::OK(
+                data: $description,
+                message: "Nombre de la categoria actualizado"
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validacion",
+                error: $e->validator->getMessageBag()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

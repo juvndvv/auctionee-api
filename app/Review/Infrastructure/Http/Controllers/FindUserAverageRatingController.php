@@ -15,10 +15,15 @@ final class FindUserAverageRatingController extends QueryController
     {
         try {
             $avg = $this->queryBus->handle(new FindUserAverageQuery($uuid));
-            return Response::OK($avg);
+            return Response::OK(
+                data: $avg,
+                message: "Media encontrada"
+            );
 
         } catch (NotFoundException $exception) {
-            return Response::NOT_FOUND($exception->getMessage());
+            return Response::NOT_FOUND(
+                message: $exception->getMessage()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

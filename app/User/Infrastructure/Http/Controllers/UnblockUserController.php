@@ -16,7 +16,10 @@ final class UnblockUserController extends CommandController
             $command = UnblockUserCommand::create($uuid);
             $this->commandBus->handle($command);
 
-            return Response::OK($uuid, "Usuario desbloqueado correctamente.");
+            return Response::OK(
+                data: $uuid,
+                message: "Usuario desbloqueado"
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

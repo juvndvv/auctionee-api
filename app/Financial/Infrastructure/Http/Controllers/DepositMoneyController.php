@@ -20,7 +20,10 @@ final class DepositMoneyController extends CommandController
             $command = new DepositMoneyCommand($uuid, $amount);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "El dinero se ha ingresado correctamente");
+            return Response::OK(
+                data: $amount,
+                message: "El dinero se ha ingresado"
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

@@ -24,13 +24,21 @@ final class UpdateAuctionDescriptionController extends ValidatedCommandControlle
             $command = UpdateAuctionDescriptionCommand::create($uuid, $description);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "Descripcion actualizada");
+            return Response::OK(
+                data: $description,
+                message: "Descripcion actualizada"
+            );
 
         } catch (ValidationException $exception) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validacion",
+                error: $exception->validator->getMessageBag()
+            );
 
         } catch (NotFoundException $exception) {
-            return Response::NOT_FOUND($exception->getMessage());
+            return Response::NOT_FOUND(
+                message: $exception->getMessage()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

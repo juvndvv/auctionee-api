@@ -29,13 +29,18 @@ final class PlaceBidController extends ValidatedCommandController
             $command = PlaceBidCommand::create($userUuid, $amount, $auctionUuid);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "Se ha pujado correctamente");
+            return Response::OK(
+                data: $amount,
+                message: "Se ha pujado correctamente"
+            );
 
         } catch (ValidationException $exception) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación", $exception->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validación",
+                error: $exception->validator->getMessageBag()
+            );
 
         } catch (Exception $exception) {
-            dd($exception);
             return Response::SERVER_ERROR();
         }
     }

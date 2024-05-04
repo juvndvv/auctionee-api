@@ -21,11 +21,18 @@ final class SendMessageController extends ValidatedCommandController
             $content = $request->input('content');
 
             $command = SendMessageCommand::create($uuid, $senderUuid, $content);
-            $this->commandBus->handle($command);
-            return Response::OK(null, "Mensaje enviado");
+            $messageUuid = $this->commandBus->handle($command);
+
+            return Response::OK(
+                data: $messageUuid,
+                message: "Mensaje enviado"
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validación",
+                error: $e->validator->getMessageBag()
+            );
 
         } catch (Exception $e) {
             return Response::SERVER_ERROR();

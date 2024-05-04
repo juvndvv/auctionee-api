@@ -23,10 +23,16 @@ final class UpdateAuctionNameController extends ValidatedCommandController
             $command = UpdateAuctionNameCommand::create($uuid, $name);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "Nombre actualizado");
+            return Response::OK(
+                data: $name,
+                message: "Nombre actualizado"
+            );
 
         } catch (ValidationException $exception) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validacion",
+                error: $exception->validator->getMessageBag()
+            );
 
         } catch (NotFoundException $exception) {
             return Response::NOT_FOUND($exception->getMessage());

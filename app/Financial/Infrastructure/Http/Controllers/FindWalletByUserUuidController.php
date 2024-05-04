@@ -16,10 +16,16 @@ final class FindWalletByUserUuidController extends QueryController
         try {
             $query = new FindWalletByUserUuidQuery($uuid);
             $resource = $this->queryBus->handle($query);
-            return Response::OK($resource, "Wallet encontrada");
+
+            return Response::OK(
+                data: $resource,
+                message: "Wallet encontrada"
+            );
 
         } catch (NotFoundException) {
-            return Response::NOT_FOUND("No se ha encontrado la wallet");
+            return Response::NOT_FOUND(
+                message: "No se ha encontrado la wallet"
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

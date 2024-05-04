@@ -23,10 +23,16 @@ final class UpdateDescriptionController extends ValidatedCommandController
             $command = UpdateDescriptionCommand::create($uuid, $description);
             $this->commandBus->handle($command);
 
-            return Response::OK($description, "Descripcion actualizada correctamente");
+            return Response::OK(
+                data: $description,
+                message: "Descripcion actualizada"
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación en la descripcion", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validación en la descripcion",
+                error: $e->validator->getMessageBag()
+            );
 
         }  catch (NotFoundException $e) {
             return Response::NOT_FOUND($e->getMessage());

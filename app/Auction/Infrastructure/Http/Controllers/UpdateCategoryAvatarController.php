@@ -22,10 +22,16 @@ final class UpdateCategoryAvatarController extends ValidatedCommandController
             $command = UpdateCategoryAvatarCommand::create($uuid, $avatar);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "Avatar actualizado");
+            return Response::OK(
+                data: "",
+                message: "Avatar actualizado"
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validacion",
+                error: $e->validator->getMessageBag()
+            );
 
         } catch (Exception $e) {
             return Response::SERVER_ERROR();

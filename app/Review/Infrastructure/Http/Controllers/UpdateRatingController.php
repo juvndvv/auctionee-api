@@ -23,10 +23,16 @@ final class UpdateRatingController extends ValidatedCommandController
             $command = UpdateRatingCommand::create($uuid, $rating);
             $this->commandBus->handle($command);
 
-            return Response::OK($rating, "Rating actualizado correctamente");
+            return Response::OK(
+                data: $rating,
+                message: "Rating actualizado"
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación en el rating", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validación en el rating",
+                error: $e->validator->getMessageBag()
+            );
 
         }  catch (NotFoundException $e) {
             return Response::NOT_FOUND($e->getMessage());

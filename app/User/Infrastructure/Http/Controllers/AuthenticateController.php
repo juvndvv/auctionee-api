@@ -25,16 +25,26 @@ final class AuthenticateController extends ValidatedCommandController
             $command = AuthenticateCommand::create($email, $password);
             $resource = $this->commandBus->handle($command);
 
-            return Response::OK($resource, "Autenticacion exitosa");
+            return Response::OK(
+                data: $resource,
+                message: "Autenticacion exitosa"
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación en el usuario", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validación en el usuario",
+                error: $e->validator->getMessageBag()
+            );
 
         } catch (BadRequestException $e) {
-            return Response::BAD_REQUEST($e->getMessage());
+            return Response::BAD_REQUEST(
+                message: $e->getMessage()
+            );
 
         } catch (NotFoundException $e) {
-            return Response::NOT_FOUND($e->getMessage());
+            return Response::NOT_FOUND(
+                message: $e->getMessage()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

@@ -21,10 +21,15 @@ final class FindMessagesByChatRoomUuidController extends QueryController
             $query = FindMessagesByChatRoomUuidQuery::create($uuid, $token);
             $resource = $this->queryBus->handle($query);
 
-            return Response::OK($resource, "Mensajes encontrados satisfactoriamente");
+            return Response::OK(
+                data: $resource,
+                message: "Mensajes encontrados satisfactoriamente"
+            );
 
         } catch (NotFoundException $exception) {
-            return Response::NOT_FOUND($exception->getMessage());
+            return Response::NOT_FOUND(
+                message: $exception->getMessage()
+            );
 
         } catch (NoContentException) {
             return Response::NO_CONTENT();

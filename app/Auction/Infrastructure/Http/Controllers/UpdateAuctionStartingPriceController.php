@@ -23,10 +23,16 @@ final class UpdateAuctionStartingPriceController extends ValidatedCommandControl
             $command = UpdateAuctionStartingPriceCommand::create($uuid, $startingPrice);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "Precio actualizado");
+            return Response::OK(
+                data: $startingPrice,
+                message: "Precio actualizado"
+            );
 
         } catch (ValidationException $exception) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validacion",
+                error: $exception->validator->getMessageBag()
+            );
 
         } catch (NotFoundException $exception) {
             return Response::NOT_FOUND($exception->getMessage());

@@ -17,10 +17,15 @@ final class DeleteUserController extends CommandController
             $command = DeleteUserCommand::create($uuid);
             $this->commandBus->handle($command);
 
-            return Response::OK($uuid, "Usuario borrado correctamente");
+            return Response::OK(
+                data: $uuid,
+                message: "Usuario borrado correctamente"
+            );
 
         } catch (NotFoundException) {
-            return Response::NOT_FOUND("El usuario $uuid no existe");
+            return Response::NOT_FOUND(
+                message: "El usuario $uuid no existe"
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

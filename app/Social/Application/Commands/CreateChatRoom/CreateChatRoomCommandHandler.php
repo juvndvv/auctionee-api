@@ -17,7 +17,7 @@ final class CreateChatRoomCommandHandler extends CommandHandler
     /**
      * @throws BadRequestException
      */
-    public function __invoke(CreateChatRoomCommand $command): void
+    public function __invoke(CreateChatRoomCommand $command): string
     {
         $leftUuid = $command->leftUuid();
         $rightUuid = $command->rightUuid();
@@ -29,5 +29,7 @@ final class CreateChatRoomCommandHandler extends CommandHandler
         $chatRoom = ChatRoom::create($leftUuid, $rightUuid);
 
         $this->chatRoomRepository->create($chatRoom->toPrimitives());
+
+        return $chatRoom->uuid();
     }
 }

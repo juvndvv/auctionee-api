@@ -3,6 +3,7 @@
 namespace App\Financial\Domain\Ports\Inbound;
 
 use App\Financial\Domain\Models\Transaction;
+use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Domain\Ports\Outbound\BaseRepositoryPort;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
@@ -14,7 +15,7 @@ interface TransactionRepositoryPort extends BaseRepositoryPort
      *
      * @param string $walletUuid
      * @return Collection<Transaction>
-     * @throws ModelNotFoundException
+     * @throws NotFoundException
      */
     public function findByWalletUuid(string $walletUuid): Collection;
 

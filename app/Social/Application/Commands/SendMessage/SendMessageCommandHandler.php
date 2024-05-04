@@ -16,7 +16,7 @@ final class SendMessageCommandHandler extends CommandHandler
     )
     {}
 
-    public function __invoke(SendMessageCommand  $command): void
+    public function __invoke(SendMessageCommand  $command): string
     {
         $chatRoomUuid = $command->chatRoomUuid();
         $senderUuid = $command->senderuuid();
@@ -34,5 +34,7 @@ final class SendMessageCommandHandler extends CommandHandler
 
         // Publish events
         $this->eventBus->dispatch(...$chatRoom->pullDomainEvents());
+
+        return $chatRoom->messages()->last()->messageUuid();
     }
 }

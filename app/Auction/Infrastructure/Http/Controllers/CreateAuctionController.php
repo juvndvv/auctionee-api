@@ -47,10 +47,16 @@ final class CreateAuctionController extends ValidatedCommandController
             );
             $uuid = $this->commandBus->handle($command);
 
-            return Response::CREATED("Subasta creada con exito", "/auctions/" .  $uuid);
+            return Response::CREATED(
+                message: "Subasta creada",
+                url: "/auctions/" .  $uuid
+            );
 
         } catch (ValidationException $exception) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validacion",
+                error: $exception->validator->getMessageBag()
+            );
 
         } catch (Exception $exception) {
             return Response::SERVER_ERROR();

@@ -22,13 +22,17 @@ final class MakeTransactionController extends CommandController
             $command = new MakeTransactionCommand($uuid, $destinationWallet, $amount);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "Transacción realizada");
+            return Response::OK(
+                data: $uuid,
+                message: "Transacción realizada"
+            );
 
         } catch (NotFoundException|NotEnoughFoundsException $exception) {
-            return Response::BAD_REQUEST($exception->getMessage());
+            return Response::BAD_REQUEST(
+                message: $exception->getMessage()
+            );
 
         } catch (Exception $exception) {
-            dd($exception);
             return Response::SERVER_ERROR();
         }
     }

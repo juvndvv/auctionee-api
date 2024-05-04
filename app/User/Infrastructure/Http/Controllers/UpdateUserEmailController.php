@@ -23,13 +23,21 @@ final class UpdateUserEmailController extends ValidatedCommandController
             $command = UpdateEmailCommand::create($uuid, $email);
             $this->commandBus->handle($command);
 
-            return Response::OK($email, "Email actualizado correctamente");
+            return Response::OK(
+                data: $email,
+                message: "Email actualizado"
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación en el nombre", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validación en el nombre",
+                error: $e->validator->getMessageBag()
+            );
 
         }  catch (NotFoundException $e) {
-            return Response::NOT_FOUND($e->getMessage());
+            return Response::NOT_FOUND(
+                message: $e->getMessage()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

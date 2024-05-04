@@ -16,7 +16,10 @@ final class FindAllCategoriesController extends QueryController
             $query = new FindAllCategoriesQuery();
             $resources = $this->queryBus->handle($query);
 
-            return Response::OK($resources, "Categorias encontradas");
+            return Response::OK(
+                data: $resources,
+                message: "Categorias encontradas"
+            );
 
         } catch (NoContentException $e) {
             return Response::NO_CONTENT();

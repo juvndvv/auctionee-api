@@ -16,10 +16,15 @@ final class BlockUserController extends CommandController
         try {
             $command = BlockUserCommand::create($uuid);
             $this->commandBus->handle($command);
-            return Response::OK($uuid, "Usuario bloqueado correctamente.");
+            return Response::OK(
+                data: $uuid,
+                message: "Usuario bloqueado correctamente."
+            );
 
         } catch (NotFoundException $exception) {
-            return Response::NOT_FOUND($exception->getMessage());
+            return Response::NOT_FOUND(
+                message: $exception->getMessage()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

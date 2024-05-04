@@ -17,7 +17,10 @@ final class FindChatRoomsByUserUuidController extends QueryController
             $query = FindChatRoomsByUserUuidQuery::create($uuid);
             $resources = $this->queryBus->handle($query);
 
-            return Response::OK($resources, "Chats encontrados");
+            return Response::OK(
+                data: $resources,
+                message: "Chats encontrados"
+            );
 
         } catch (NoContentException $e) {
             return Response::NO_CONTENT();

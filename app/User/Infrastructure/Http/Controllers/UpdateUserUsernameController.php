@@ -21,10 +21,16 @@ final class UpdateUserUsernameController extends ValidatedCommandController
             $command = UpdateUsernameCommand::create($uuid, $name);
             $this->commandBus->handle($command);
 
-            return Response::OK($name, "Nombre actualizado correctamente");
+            return Response::OK(
+                data: $name,
+                message: "Nombre actualizado correctamente"
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación en el nombre de usuario", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validación en el nombre de usuario",
+                error: $e->validator->getMessageBag()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

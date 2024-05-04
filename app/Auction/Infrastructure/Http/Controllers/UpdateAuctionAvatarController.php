@@ -22,10 +22,16 @@ final class UpdateAuctionAvatarController extends ValidatedCommandController
             $command = UpdateAuctionAvatarCommand::create($uuid, $avatar);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "Imagen actualizada");
+            return Response::OK(
+                data: "",
+                message: "Imagen actualizada"
+            );
 
         } catch (ValidationException $exception) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validacion",
+                error: $exception->validator->getMessageBag()
+            );
 
         } catch (Exception $exception) {
             return Response::SERVER_ERROR();

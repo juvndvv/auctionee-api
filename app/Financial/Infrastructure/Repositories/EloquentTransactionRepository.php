@@ -5,6 +5,7 @@ namespace App\Financial\Infrastructure\Repositories;
 use App\Financial\Domain\Models\Transaction;
 use App\Financial\Domain\Ports\Inbound\TransactionRepositoryPort;
 use App\Financial\Infrastructure\Repositories\Models\EloquentTransactionModel;
+use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastructure\Repositories\BaseRepository;
 use Illuminate\Support\Collection;
 
@@ -24,6 +25,10 @@ final class EloquentTransactionRepository extends BaseRepository implements Tran
             ->where(Transaction::SERIALIZED_REMITTENT_WALLET_UUID, $walletUuid)
             ->orWhere(Transaction::SERIALIZED_DESTINATION_WALLET_UUID, $walletUuid)
             ->get();
+
+        if ($transactionsDb->count() == 0) {
+            throw new NotFoundException("No existe la wallet con uuid $walletUuid");
+        }
 
         return $transactionsDb->map(
             fn (EloquentTransactionModel $transaction) => Transaction::fromPrimitives($transaction->toArray())

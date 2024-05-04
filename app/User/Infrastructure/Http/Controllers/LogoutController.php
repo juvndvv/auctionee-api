@@ -15,7 +15,10 @@ final class LogoutController
         try {
             PersonalAccessToken::findToken($request->bearerToken())->delete();
 
-            return Response::OK('', 'Sesion cerrada');
+            return Response::OK(
+                data: '',
+                message: 'Sesion cerrada'
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

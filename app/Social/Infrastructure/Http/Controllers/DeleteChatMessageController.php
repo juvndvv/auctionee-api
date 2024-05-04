@@ -17,10 +17,15 @@ final class DeleteChatMessageController extends CommandController
             $command = DeleteMessageCommand::create($chatUuid, $messageUuid);
             $this->commandBus->handle($command);
 
-            return Response::OK("", "Mensaje eliminado correctamente");
+            return Response::OK(
+                data: $messageUuid,
+                message: "Mensaje eliminado correctamente"
+            );
 
         } catch (NotFoundException $e) {
-            return Response::NOT_FOUND($e->getMessage());
+            return Response::NOT_FOUND(
+                message: $e->getMessage()
+            );
 
         } catch (Exception $e) {
             return Response::SERVER_ERROR();

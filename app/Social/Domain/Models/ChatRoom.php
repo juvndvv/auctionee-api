@@ -93,11 +93,11 @@ final class ChatRoom extends AggregateRoot
     }
 
     /**
-     * @return array
+     * @return Collection<Message>
      */
-    public function messages(): array
+    public function messages(): Collection
     {
-        return $this->messages->toArray();
+        return $this->messages;
     }
 
     /**

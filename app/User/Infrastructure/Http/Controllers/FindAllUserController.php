@@ -21,7 +21,10 @@ final class FindAllUserController extends QueryController
             $query = FindAllUserQuery::create($offset, $limit);
 
             $users = $this->queryBus->handle($query);
-            return Response::OK($users, "Usuarios encontrados");
+            return Response::OK(
+                data: $users,
+                message: "Usuarios encontrados"
+            );
 
         } catch (NoContentException) {
             return Response::NO_CONTENT();

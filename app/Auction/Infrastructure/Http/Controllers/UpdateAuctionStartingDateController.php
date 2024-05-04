@@ -23,10 +23,16 @@ final class UpdateAuctionStartingDateController extends ValidatedCommandControll
             $command = UpdateAuctionStartingDateCommand::create($uuid, $startingDate);
             $this->commandBus->handle($command);
 
-            return Response::OK(null, "Fecha actualizada");
+            return Response::OK(
+                data: $startingDate,
+                message: "Fecha actualizada"
+            );
 
         } catch (ValidationException $exception) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validacion", $exception->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validacion",
+                error: $exception->validator->getMessageBag()
+            );
 
         } catch (NotFoundException $exception) {
             return Response::NOT_FOUND($exception->getMessage());

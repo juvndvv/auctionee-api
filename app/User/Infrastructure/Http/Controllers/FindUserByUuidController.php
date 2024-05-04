@@ -17,10 +17,15 @@ final class FindUserByUuidController extends QueryController
             $query = FindByUuidQuery::create($uuid);
             $resource = $this->queryBus->handle($query);
 
-            return Response::OK($resource, "Usuario encontrado satisfactoriamente");
+            return Response::OK(
+                data: $resource,
+                message: "Usuario encontrado"
+            );
 
         } catch (NotFoundException $e) {
-            return Response::NOT_FOUND($e->getMessage());
+            return Response::NOT_FOUND(
+                message: $e->getMessage()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

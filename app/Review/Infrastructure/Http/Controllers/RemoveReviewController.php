@@ -15,10 +15,15 @@ final class RemoveReviewController extends CommandController
     {
         try {
             $this->commandBus->handle(RemoveReviewCommand::create($uuid));
-            return Response::OK($uuid, "Review eliminada satisfactoriamente");
+            return Response::OK(
+                data: $uuid,
+                message: "Review eliminada"
+            );
 
         } catch (NotFoundException $e) {
-            return Response::NOT_FOUND($e->getMessage());
+            return Response::NOT_FOUND(
+                message: $e->getMessage()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

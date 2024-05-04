@@ -23,13 +23,21 @@ final class UpdateUserPasswordController extends ValidatedCommandController
             $command = UpdatePasswordCommand::create($uuid, $password);
             $this->commandBus->handle($command);
 
-            return Response::OK($password, "Contraseña actualizada correctamente");
+            return Response::OK(
+                data: $password,
+                message: "Contraseña actualizada"
+            );
 
         } catch (NotFoundException $e) {
-            return Response::NOT_FOUND($e->getMessage());
+            return Response::NOT_FOUND(
+                message: $e->getMessage()
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY("Errores de validación en la contraseña", $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: "Errores de validación en la contraseña",
+                error: $e->validator->getMessageBag()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();

@@ -38,10 +38,16 @@ final class CreateUserController extends ValidatedCommandController
             $command = CreateUserCommand::create($name, $username, $email, $password, $avatar, $birth, 0);
             $this->commandBus->handle($command);
 
-            return Response::CREATED('Usuario creado satisfactoriamente', '/users/' . $username);
+            return Response::CREATED(
+                message: 'Usuario creado satisfactoriamente',
+                url: '/users/' . $username
+            );
 
         } catch (ValidationException $e) {
-            return Response::UNPROCESSABLE_ENTITY('Errores de validación en el usuario', $e->validator->getMessageBag());
+            return Response::UNPROCESSABLE_ENTITY(
+                message: 'Errores de validación en el usuario',
+                error: $e->validator->getMessageBag()
+            );
 
         } catch (Exception) {
             return Response::SERVER_ERROR();
