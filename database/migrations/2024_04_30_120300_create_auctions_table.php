@@ -15,12 +15,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Get valids status
-        $validStatus = [];
-
-        foreach (Status::cases() as $case) {
-            $validStatus[] = $case->name;
-        }
+        $validStatus = $this->getValidStatus();
 
         Schema::create('auctions',
             function (Blueprint $table) use ($validStatus) {
@@ -36,9 +31,9 @@ return new class extends Migration
             $table->string(Auction::AVATAR);
             $table->timestamps();
 
-            $table->foreign(Auction::CATEGORY_UUID)->references(Category::SERIALIZED_UUID)->on('categories');
+            $table->foreign(Auction::CATEGORY_UUID)->references(Category::UUID)->on('categories');
 
-            $table->foreign(Auction::USER_UUID)->references(User::SERIALIZED_UUID)->on('users');
+            $table->foreign(Auction::USER_UUID)->references(User::UUID)->on('users');
         });
     }
 
@@ -48,5 +43,16 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('auctions');
+    }
+
+    public function getValidStatus(): array
+    {
+        $validStatus = [];
+
+        foreach (Status::cases() as $case) {
+            $validStatus[] = $case->name;
+        }
+
+        return $validStatus;
     }
 };

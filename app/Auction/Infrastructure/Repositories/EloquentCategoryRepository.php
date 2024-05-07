@@ -41,16 +41,16 @@ final class EloquentCategoryRepository extends BaseRepository implements Categor
 
     public function updateName(string $uuid, string $name): void
     {
-        parent::updateFieldByPrimaryKey($uuid, Category::SERIALIZED_NAME, $name);
+        parent::updateFieldByPrimaryKey($uuid, Category::NAME, $name);
     }
 
     public function updateDescription(string $uuid, string $description): void
     {
-        parent::updateFieldByPrimaryKey($uuid, Category::SERIALIZED_DESCRIPTION, $description);
+        parent::updateFieldByPrimaryKey($uuid, Category::DESCRIPTION, $description);
     }
 
     public function updateAvatar(string $uuid, string $avatar): void
     {
-        parent::updateFieldByPrimaryKey($uuid, Category::SERIALIZED_AVATAR, $avatar);
+        parent::updateFieldByPrimaryKey($uuid, Category::AVATAR, $avatar);
     }
 }

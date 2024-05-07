@@ -37,7 +37,7 @@ final class UserDeletedListener extends BaseListener
      */
     public function deleteWallet(UserDeletedEvent $event): void
     {
-        $userUuid = $event->payload[User::SERIALIZED_UUID];
+        $userUuid = $event->payload[User::UUID];
         $command = DeleteWalletCommand::create($userUuid);
         $this->commandBus->handle($command);
     }

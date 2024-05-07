@@ -10,10 +10,10 @@ use App\Shared\Domain\Models\AggregateRoot;
 
 final class Category extends AggregateRoot
 {
-    public const string SERIALIZED_UUID = 'uuid';
-    public const string SERIALIZED_NAME = 'name';
-    public const string SERIALIZED_DESCRIPTION = 'description';
-    public const string SERIALIZED_AVATAR = 'avatar';
+    public const string UUID = 'uuid';
+    public const string NAME = 'name';
+    public const string DESCRIPTION = 'description';
+    public const string AVATAR = 'avatar';
 
     private CategoryUuid $uuid;
     private CategoryName $name;
@@ -66,10 +66,10 @@ final class Category extends AggregateRoot
     public function toPrimitives(): array
     {
         return [
-            self::SERIALIZED_UUID => $this->uuid(),
-            self::SERIALIZED_NAME => $this->name(),
-            self::SERIALIZED_DESCRIPTION => $this->description(),
-            self::SERIALIZED_AVATAR => $this->avatar(),
+            self::UUID => $this->uuid(),
+            self::NAME => $this->name(),
+            self::DESCRIPTION => $this->description(),
+            self::AVATAR => $this->avatar(),
         ];
     }
 
@@ -82,10 +82,10 @@ final class Category extends AggregateRoot
     public static function fromPrimitives(array $data): self
     {
         return new self(
-            $data[self::SERIALIZED_UUID],
-            $data[self::SERIALIZED_NAME],
-            $data[self::SERIALIZED_DESCRIPTION],
-            $data[self::SERIALIZED_AVATAR]
+            $data[self::UUID],
+            $data[self::NAME],
+            $data[self::DESCRIPTION],
+            $data[self::AVATAR]
         );
     }
 }
