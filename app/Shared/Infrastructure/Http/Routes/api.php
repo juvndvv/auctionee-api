@@ -37,6 +37,8 @@ use App\User\Infrastructure\Http\Controllers\AuthenticateController;
 use App\User\Infrastructure\Http\Controllers\BlockUserController;
 use App\User\Infrastructure\Http\Controllers\CreateUserController;
 use App\User\Infrastructure\Http\Controllers\DeleteUserController;
+use App\User\Infrastructure\Http\Controllers\ExistsEmailController;
+use App\User\Infrastructure\Http\Controllers\ExistsUsernameController;
 use App\User\Infrastructure\Http\Controllers\FindAllUserController;
 use App\User\Infrastructure\Http\Controllers\FindUserByUsernameController;
 use App\User\Infrastructure\Http\Controllers\FindUserByUuidController;
@@ -58,6 +60,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::prefix('/users')->group(function () {
             // Public
             Route::post('/', CreateUserController::class)->withoutMiddleware('auth:sanctum');
+            Route::post('/existsUsername', ExistsUsernameController::class)->withoutMiddleware('auth:sanctum');
+            Route::post('/existsEmail', ExistsEmailController::class)->withoutMiddleware('auth:santum');
 
             // Auth
             Route::get('/{uuid}', FindUserByUuidController::class);
