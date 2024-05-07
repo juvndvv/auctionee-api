@@ -13,10 +13,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->string(Category::SERIALIZED_UUID)->primary();
-            $table->string(Category::SERIALIZED_NAME)->unique();
-            $table->string(Category::SERIALIZED_DESCRIPTION);
-            $table->string(Category::SERIALIZED_AVATAR);
+            $table->string(Category::UUID)->primary();
+            $table->string(Category::NAME)->unique();
+            $table->string(Category::DESCRIPTION);
+            $table->string(Category::AVATAR);
         });
     }
 

@@ -20,14 +20,14 @@ class DatabaseSeeder extends Seeder
     {
         // Default users
         DB::table('users')->insert([
-            User::SERIALIZED_UUID => 'U0000000-0000-0000-0000-000000000000',
-            User::SERIALIZED_NAME => 'Auctionee Main Account',
-            User::SERIALIZED_USERNAME => 'admin',
-            User::SERIALIZED_EMAIL => 'admin@jotade.dev',
-            User::SERIALIZED_AVATAR => env('DEFAULT_AVATAR'),
-            User::SERIALIZED_PASSWORD => 'admin',
-            User::SERIALIZED_BIRTH => '1990-01-01',
-            User::SERIALIZED_ROLE => User::ADMIN_ROLE,
+            User::UUID => 'U0000000-0000-0000-0000-000000000000',
+            User::NAME => 'Auctionee Main Account',
+            User::USERNAME => 'admin',
+            User::EMAIL => 'admin@jotade.dev',
+            User::AVATAR => env('DEFAULT_AVATAR'),
+            User::PASSWORD => 'admin',
+            User::BIRTH => '1990-01-01',
+            User::ROLE => User::ADMIN_ROLE,
         ]);
 
         DB::table('wallets')->insert([
@@ -37,14 +37,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            User::SERIALIZED_UUID => 'UD000000-0000-0000-0000-000000000000',
-            User::SERIALIZED_NAME => 'Deleted Account',
-            User::SERIALIZED_USERNAME => 'deleted',
-            User::SERIALIZED_EMAIL => 'deleted@jotade.dev',
-            User::SERIALIZED_AVATAR => env('DEFAULT_AVATAR'),
-            User::SERIALIZED_PASSWORD => 'deleted',
-            User::SERIALIZED_BIRTH => '1990-01-01',
-            User::SERIALIZED_ROLE => User::USER_ROLE,
+            User::UUID => 'UD000000-0000-0000-0000-000000000000',
+            User::NAME => 'Deleted Account',
+            User::USERNAME => 'deleted',
+            User::EMAIL => 'deleted@jotade.dev',
+            User::AVATAR => env('DEFAULT_AVATAR'),
+            User::PASSWORD => 'deleted',
+            User::BIRTH => '1990-01-01',
+            User::ROLE => User::USER_ROLE,
         ]);
 
         DB::table('wallets')->insert([

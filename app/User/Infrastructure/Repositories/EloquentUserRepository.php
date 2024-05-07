@@ -33,43 +33,43 @@ final class EloquentUserRepository extends BaseRepository implements UserReposit
 
     public function findByUsername(string $username): User
     {
-        $userDb = parent::findByFieldValue(User::SERIALIZED_USERNAME, $username)['0'];
+        $userDb = parent::findByFieldValue(User::USERNAME, $username)['0'];
         return User::fromPrimitives($userDb->toArray());
     }
 
     public function updateName(string $uuid, string $name): void
     {
-        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_NAME, $name);
+        parent::updateFieldByPrimaryKey($uuid, User::NAME, $name);
     }
 
     public function updateUsername(string $uuid, string $username): void
     {
-        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_USERNAME, $username);
+        parent::updateFieldByPrimaryKey($uuid, User::USERNAME, $username);
     }
 
     public function updateEmail(string $uuid, string $email): void
     {
-        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_EMAIL, $email);
+        parent::updateFieldByPrimaryKey($uuid, User::EMAIL, $email);
     }
 
     public function updatePassword(string $uuid, string $password): void
     {
-        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_PASSWORD, $password);
+        parent::updateFieldByPrimaryKey($uuid, User::PASSWORD, $password);
     }
 
     public function updateAvatar(string $uuid, string $avatar): void
     {
-        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_AVATAR, $avatar);
+        parent::updateFieldByPrimaryKey($uuid, User::AVATAR, $avatar);
     }
 
     public function block(string $uuid): void
     {
-        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_ROLE, User::BLOCKED_ROLE);
+        parent::updateFieldByPrimaryKey($uuid, User::ROLE, User::BLOCKED_ROLE);
     }
 
     public function unblock(string $uuid): void
     {
-        parent::updateFieldByPrimaryKey($uuid, User::SERIALIZED_ROLE, User::USER_ROLE);
+        parent::updateFieldByPrimaryKey($uuid, User::ROLE, User::USER_ROLE);
     }
 
     public function authenticate(string $email, string $password): string
@@ -88,7 +88,7 @@ final class EloquentUserRepository extends BaseRepository implements UserReposit
 
     public function findByEmail(string $email): User
     {
-        $userDb = parent::findByFieldValue(User::SERIALIZED_EMAIL, $email)['0'];
+        $userDb = parent::findByFieldValue(User::EMAIL, $email)['0'];
         return User::fromPrimitives($userDb->toArray());
     }
 }
