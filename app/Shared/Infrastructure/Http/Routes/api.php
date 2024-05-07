@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             // Public
             Route::post('/', CreateUserController::class)->withoutMiddleware('auth:sanctum');
             Route::post('/existsUsername', ExistsUsernameController::class)->withoutMiddleware('auth:sanctum');
-            Route::post('/existsEmail', ExistsEmailController::class)->withoutMiddleware('auth:santum');
+            Route::post('/existsEmail', ExistsEmailController::class)->withoutMiddleware('auth:sanctum');
 
             // Auth
             Route::get('/{uuid}', FindUserByUuidController::class);
