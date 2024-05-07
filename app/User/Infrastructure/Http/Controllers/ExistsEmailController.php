@@ -16,6 +16,8 @@ final class ExistsEmailController extends ValidatedCommandController
     public function __invoke(Request $request): JsonResponse
     {
         try {
+            self::validate($request);
+
             $email = $request->input("email");
 
             $exists = EloquentUserModel::query()

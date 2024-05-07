@@ -16,6 +16,8 @@ final class ExistsUsernameController extends ValidatedCommandController
     public function __invoke(Request $request): JsonResponse
     {
         try {
+            self::validate($request);
+
             $username = $request->input("username");
 
             $exists = EloquentUserModel::query()
