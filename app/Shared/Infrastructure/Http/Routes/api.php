@@ -28,6 +28,7 @@ use App\Review\Infrastructure\Http\Controllers\PlaceReviewController;
 use App\Review\Infrastructure\Http\Controllers\RemoveReviewController;
 use App\Review\Infrastructure\Http\Controllers\UpdateDescriptionController;
 use App\Review\Infrastructure\Http\Controllers\UpdateRatingController;
+use App\Shared\Infrastructure\Http\Middleware\cors;
 use App\Social\Infrastructure\Http\Controllers\CreateChatRoomController;
 use App\Social\Infrastructure\Http\Controllers\DeleteChatMessageController;
 use App\Social\Infrastructure\Http\Controllers\FindChatRoomsByUserUuidController;
@@ -51,7 +52,7 @@ use App\User\Infrastructure\Http\Controllers\UpdateUserPasswordController;
 use App\User\Infrastructure\Http\Controllers\UpdateUserUsernameController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'auth:sanctum', 'cors'], function () {
+Route::group(['middleware' => 'auth:sanctum', cors::class], function () {
     Route::prefix('/v1')->group(function () {
         Route::post('/auth', AuthenticateController::class)->withoutMiddleware('auth:sanctum');
         Route::get('/logout', LogoutController::class);
