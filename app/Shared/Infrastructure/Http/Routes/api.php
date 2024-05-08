@@ -41,6 +41,7 @@ use App\User\Infrastructure\Http\Controllers\DeleteUserController;
 use App\User\Infrastructure\Http\Controllers\ExistsEmailController;
 use App\User\Infrastructure\Http\Controllers\ExistsUsernameController;
 use App\User\Infrastructure\Http\Controllers\FindAllUserController;
+use App\User\Infrastructure\Http\Controllers\FindUserByToken;
 use App\User\Infrastructure\Http\Controllers\FindUserByUsernameController;
 use App\User\Infrastructure\Http\Controllers\FindUserByUuidController;
 use App\User\Infrastructure\Http\Controllers\LogoutController;
@@ -56,6 +57,7 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
     Route::prefix('/v1')->group(function () {
         Route::post('/auth', AuthenticateController::class)->withoutMiddleware('auth:sanctum');
         Route::get('/logout', LogoutController::class);
+        Route::post('/token', FindUserByToken::class);
 
         // Users
         Route::prefix('/users')->group(function () {
