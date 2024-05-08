@@ -52,7 +52,7 @@ use App\User\Infrastructure\Http\Controllers\UpdateUserPasswordController;
 use App\User\Infrastructure\Http\Controllers\UpdateUserUsernameController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'auth:sanctum', cors::class], function () {
+Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
     Route::prefix('/v1')->group(function () {
         Route::post('/auth', AuthenticateController::class)->withoutMiddleware('auth:sanctum');
         Route::get('/logout', LogoutController::class);
