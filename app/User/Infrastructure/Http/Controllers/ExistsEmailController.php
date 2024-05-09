@@ -29,8 +29,8 @@ final class ExistsEmailController extends ValidatedCommandController
         } catch (ValidationException $exception) {
             return Response::UNPROCESSABLE_ENTITY('Errores de validacion', $exception->validator->getMessageBag());
 
-        } catch (Exception) {
-            return Response::SERVER_ERROR();
+        } catch (Exception $e) {
+            return Response::SERVER_ERROR($e->getMessage());
         }
     }
 
