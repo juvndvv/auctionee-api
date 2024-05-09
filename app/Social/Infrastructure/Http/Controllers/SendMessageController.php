@@ -35,8 +35,7 @@ final class SendMessageController extends ValidatedCommandController
             );
 
         } catch (Exception $e) {
-            echo $e->getMessage();
-            return Response::SERVER_ERROR();
+            return Response::SERVER_ERROR($e->getMessage());
         }
     }
 
