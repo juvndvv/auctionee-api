@@ -15,7 +15,7 @@ class ChatRoomService
     public function __invoke(string $leftUuid, string $rightUuid): ChatRoom
     {
         $room = ChatRoom::create($leftUuid, $rightUuid);
-        $this->chatRoomRepository->create($room);
+        $this->chatRoomRepository->create($room->toPrimitives());
         return $room;
     }
 }

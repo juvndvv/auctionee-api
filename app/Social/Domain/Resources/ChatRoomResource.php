@@ -6,13 +6,13 @@ final class ChatRoomResource
 {
     public function __construct(
         public string $uuid,
-        public string $username,
+        public string $name,
         public string $avatar
     )
     {}
 
-    public static function create(string $uuid, string $username, string $avatar): self
+    public static function create(string $uuid, string $name, string $avatar): self
     {
-        return new self($uuid, $username, $avatar);
+        return new self($uuid, $name, env('CLOUDFLARE_R2_URL') . $avatar);
     }
 }

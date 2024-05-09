@@ -32,10 +32,10 @@ final class FindChatRoomsByUserUuidQueryHandler extends QueryHandler
             $otherUser = $this->userRepository->findByUuid($otherUserUuid);
 
             $chatRoomUuid = $chatRoom->uuid();
-            $username = $otherUser->username();
+            $name = $otherUser->name();
             $avatar = $otherUser->avatar();
 
-            return ChatRoomResource::create($chatRoomUuid, $username, $avatar);
+            return ChatRoomResource::create($chatRoomUuid, $name, $avatar);
         });
     }
 }
