@@ -7,7 +7,6 @@ use App\Shared\Domain\Exceptions\NoContentException;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
-use App\Social\Domain\Resources\MessageResource;
 use Illuminate\Support\Collection;
 
 final class FindMessagesByChatRoomUuidQueryHandler extends QueryHandler
