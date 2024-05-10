@@ -40,7 +40,11 @@ final class FindChatRoomsByUserUuidQueryHandler extends QueryHandler
             $lastMessage = $this->chatMessagesRepository->findLastMessageByChatRoomUuid($chatRoomUuid);
 
             if (!is_null($lastMessage)) {
-                $lastMessage = MessageResource::create($lastMessage->uuid, $lastMessage->content, $lastMessage->created_at, $lastMessage->sender_uuid);
+                $content = $lastMessage->content;
+                if ($lastMessage->sender_uuid === $uuid)
+                    $content = "Tu: {$content}";
+
+                $lastMessage = MessageResource::create($lastMessage->uuid, $content, $lastMessage->created_at, $lastMessage->sender_uuid);
             }
 
             return ChatRoomResource::create($chatRoomUuid, $name, $avatar, $lastMessage);
