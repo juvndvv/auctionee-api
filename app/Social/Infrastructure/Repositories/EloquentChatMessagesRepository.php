@@ -8,6 +8,7 @@ use App\Social\Domain\Models\Message;
 use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Resources\MessageResource;
 use App\Social\Infrastructure\Repositories\Models\EloquentMessageModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 final class EloquentChatMessagesRepository extends BaseRepository implements ChatMessagesRepositoryPort
@@ -68,5 +69,14 @@ final class EloquentChatMessagesRepository extends BaseRepository implements Cha
         EloquentMessageModel::query()
             ->where('uuid', $uuid)
             ->update(['content' => '!*! Mensaje eliminado']);
+    }
+
+    public function findLastMessageByChatRoomUuid(string $chatRoomUuid): Model | null
+    {
+        return EloquentMessageModel::query()
+            ->where('chat_room_uuid', $chatRoomUuid)
+            ->orderBy('created_at', 'desc')
+            ->limit(1)
+            ->first();
     }
 }

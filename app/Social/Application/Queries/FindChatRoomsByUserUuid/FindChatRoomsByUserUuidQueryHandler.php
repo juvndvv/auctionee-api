@@ -5,8 +5,10 @@ namespace App\Social\Application\Queries\FindChatRoomsByUserUuid;
 use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\Social\Domain\Models\ChatRoom;
+use App\Social\Domain\Ports\ChatMessagesRepositoryPort;
 use App\Social\Domain\Ports\ChatRoomRepositoryPort;
 use App\Social\Domain\Resources\ChatRoomResource;
+use App\Social\Domain\Resources\MessageResource;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 use Illuminate\Support\Collection;
 
@@ -14,6 +16,7 @@ final class FindChatRoomsByUserUuidQueryHandler extends QueryHandler
 {
     public function __construct(
         private readonly ChatRoomRepositoryPort $chatRoomRepository,
+        private readonly ChatMessagesRepositoryPort $chatMessagesRepository,
         private readonly UserRepositoryPort $userRepository
     )
     {}
@@ -34,8 +37,13 @@ final class FindChatRoomsByUserUuidQueryHandler extends QueryHandler
             $chatRoomUuid = $chatRoom->uuid();
             $name = $otherUser->name();
             $avatar = $otherUser->avatar();
+            $lastMessage = $this->chatMessagesRepository->findLastMessageByChatRoomUuid($chatRoomUuid);
 
-            return ChatRoomResource::create($chatRoomUuid, $name, $avatar);
+            if (!is_null($lastMessage)) {
+                $lastMessage = MessageResource::create($lastMessage->uuid, $lastMessage->content, $lastMessage->created_at1, $lastMessage->sender_uuid);
+            }
+
+            return ChatRoomResource::create($chatRoomUuid, $name, $avatar, $lastMessage);
         });
     }
 }
