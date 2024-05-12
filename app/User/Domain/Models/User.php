@@ -227,8 +227,8 @@ final class User extends AggregateRoot
     public function role(): string
     {
         return match ($this->role->value()) {
-            1 => "ADMIN",
-            2 => "BLOCKED",
+            "1" => "ADMIN",
+            "2" => "BLOCKED",
             default => "USER",
         };
     }
