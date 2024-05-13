@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: {{url}}/users
+  url: http://localhost/api/v1/users?all=false
   body: none
   auth: inherit
+}
+
+query {
+  all: false
 }

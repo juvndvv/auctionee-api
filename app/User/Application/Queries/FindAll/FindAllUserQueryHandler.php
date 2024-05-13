@@ -4,8 +4,10 @@ namespace App\User\Application\Queries\FindAll;
 
 use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Domain\Exceptions\NoContentException;
+use App\User\Domain\Models\User;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
 use App\User\Domain\Projections\UserDetailsProjection;
+use App\User\Infrastructure\Repositories\Models\EloquentUserModel;
 use Illuminate\Support\Collection;
 
 final class FindAllUserQueryHandler extends QueryHandler
