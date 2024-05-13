@@ -5,7 +5,7 @@ namespace App\User\Application\Queries\FindAll;
 use App\Shared\Application\Commands\QueryHandler;
 use App\Shared\Domain\Exceptions\NoContentException;
 use App\User\Domain\Ports\Outbound\UserRepositoryPort;
-use App\User\Domain\Projections\UserSmallProjection;
+use App\User\Domain\Projections\UserDetailsProjection;
 use Illuminate\Support\Collection;
 
 final class FindAllUserQueryHandler extends QueryHandler
@@ -24,6 +24,6 @@ final class FindAllUserQueryHandler extends QueryHandler
         $limit = $query->limit();
 
         $users = $this->userRepository->findAll($offset, $limit);
-        return $users->map(fn ($user) => UserSmallProjection::create($user));
+        return $users->map(fn ($user) => UserDetailsProjection::create($user));
     }
 }
