@@ -10,12 +10,13 @@ final class ChatRoomResource
         public string $uuid,
         public string $name,
         public string $avatar,
+	public string $userUuid,
         public MessageResource | null $lastMessage,
     )
     {}
 
-    public static function create(string $uuid, string $name, string $avatar, MessageResource | null $lastMessage): self
+    public static function create(string $uuid, string $name, string $avatar, string $userUuid, MessageResource | null $lastMessage): self
     {
-        return new self($uuid, $name, env('CLOUDFLARE_R2_URL') . $avatar, $lastMessage);
+        return new self($uuid, $name, env('CLOUDFLARE_R2_URL') . $avatar, $userUuid, $lastMessage);
     }
 }
