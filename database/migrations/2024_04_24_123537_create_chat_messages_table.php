@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('content');
             $table->timestamps();
 
-            $table->foreign('chat_room_uuid')->references('uuid')->on('chat_rooms');
+            $table->foreign('chat_room_uuid')->references('uuid')->on('chat_rooms')->onDelete('cascade');
         });
     }
 

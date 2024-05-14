@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('right_uuid');
             $table->timestamps();
 
-            $table->foreign('left_uuid')->references('uuid')->on('users');
-            $table->foreign('right_uuid')->references('uuid')->on('users');
+            $table->foreign('left_uuid')->references('uuid')->on('users')->onDelete('cascade');
+            $table->foreign('right_uuid')->references('uuid')->on('users')->onDelete('cascade');
         });
     }
 
