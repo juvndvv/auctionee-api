@@ -53,6 +53,7 @@ use App\User\Infrastructure\Http\Controllers\UpdateUserEmailController;
 use App\User\Infrastructure\Http\Controllers\UpdateUserNameController;
 use App\User\Infrastructure\Http\Controllers\UpdateUserPasswordController;
 use App\User\Infrastructure\Http\Controllers\UpdateUserUsernameController;
+use App\User\Infrastructure\Http\Controllers\UserCountController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
@@ -63,6 +64,7 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
 
         // Users
         Route::prefix('/users')->group(function () {
+            Route::get('/count', UserCountController::class);
             // Public
             Route::post('/', CreateUserController::class)->withoutMiddleware('auth:sanctum');
             Route::post('/existsUsername', ExistsUsernameController::class)->withoutMiddleware('auth:sanctum');
