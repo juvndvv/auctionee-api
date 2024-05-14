@@ -44,6 +44,7 @@ use App\User\Infrastructure\Http\Controllers\FindAllUserController;
 use App\User\Infrastructure\Http\Controllers\FindUserByToken;
 use App\User\Infrastructure\Http\Controllers\FindUserByUsernameController;
 use App\User\Infrastructure\Http\Controllers\FindUserByUuidController;
+use App\User\Infrastructure\Http\Controllers\FindUserLikeController;
 use App\User\Infrastructure\Http\Controllers\LogoutController;
 use App\User\Infrastructure\Http\Controllers\PromoteAdminController;
 use App\User\Infrastructure\Http\Controllers\PromoteUserController;
@@ -65,6 +66,7 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
         // Users
         Route::prefix('/users')->group(function () {
             Route::get('/count', UserCountController::class);
+            Route::get('like/{str}', FindUserLikeController::class);
             // Public
             Route::post('/', CreateUserController::class)->withoutMiddleware('auth:sanctum');
             Route::post('/existsUsername', ExistsUsernameController::class)->withoutMiddleware('auth:sanctum');
