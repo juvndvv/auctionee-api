@@ -45,6 +45,8 @@ use App\User\Infrastructure\Http\Controllers\FindUserByToken;
 use App\User\Infrastructure\Http\Controllers\FindUserByUsernameController;
 use App\User\Infrastructure\Http\Controllers\FindUserByUuidController;
 use App\User\Infrastructure\Http\Controllers\LogoutController;
+use App\User\Infrastructure\Http\Controllers\PromoteAdminController;
+use App\User\Infrastructure\Http\Controllers\PromoteUserController;
 use App\User\Infrastructure\Http\Controllers\UnblockUserController;
 use App\User\Infrastructure\Http\Controllers\UpdateUserAvatarController;
 use App\User\Infrastructure\Http\Controllers\UpdateUserEmailController;
@@ -80,6 +82,8 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
             Route::delete('/{uuid}', DeleteUserController::class);
             Route::get('/{uuid}/block', BlockUserController::class);
             Route::get('/{uuid}/unblock', UnblockUserController::class);
+            Route::get('/{uuid}/admin', PromoteAdminController::class);
+            Route::get('/{uuid}/user', PromoteUserController::class);
 
             // Owner
             Route::post('/{uuid}/avatar', UpdateUserAvatarController::class);
