@@ -6,6 +6,7 @@ use App\Auction\Infrastructure\Http\Controllers\DeleteCategoryController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsByUserUuidController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllCategoriesController;
+use App\Auction\Infrastructure\Http\Controllers\FindAuctionByCategoryUuid;
 use App\Auction\Infrastructure\Http\Controllers\FindAuctionByUuidController;
 use App\Auction\Infrastructure\Http\Controllers\PlaceBidController;
 use App\Auction\Infrastructure\Http\Controllers\UpdateAuctionAvatarController;
@@ -139,7 +140,7 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
             // Auth
             Route::get('/', FindAllCategoriesController::class);
             Route::delete('/{uuid}', DeleteCategoryController::class);
-
+            Route::get('/{uuid}/auctions', FindAuctionByCategoryUuid::class);
             // ADMIN
             Route::post('/', CreateCategoryController::class);
             Route::put('/{uuid}/name', UpdateCategoryNameController::class);
