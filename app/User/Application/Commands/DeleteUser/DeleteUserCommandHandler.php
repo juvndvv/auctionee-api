@@ -32,8 +32,10 @@ final class DeleteUserCommandHandler extends CommandHandler
         $user->delete();
 
         $this->userRepository->deleteByPrimaryKey($uuid);
-        $this->imageRepository->delete($avatar);
 
+        if ($avatar !== env('DEFAULT_AVATAR')) {
+            $this->imageRepository->delete($avatar);
+        }
         $this->eventBus->dispatch(...$user->pullDomainEvents());
     }
 }
