@@ -24,6 +24,18 @@ class FindAuctionByCategoryUuid
         }
 
         $auctionModels = EloquentAuctionModel::query()
+            ->select([
+                'auctions.uuid as uuid',
+                'auctions.name as name',
+                'auctions.description as description',
+                'auctions.starting_price as price',
+                'auctions.starting_date as date',
+                'auctions.duration as duration',
+                'auctions.avatar as avatar',
+                'users.uuid as user_uuid',
+                'users.username as user_username',
+                'users.avatar as user_avatar',
+            ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
             ->where('category_uuid', $categoryUuid)
             ->get();
 
