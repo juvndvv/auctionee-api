@@ -15,7 +15,7 @@ class FindAuctionByCategoryUuid
         $categoryUuid = EloquentCategoryModel::query()
             ->select('uuid')
             ->where('name', $uuid)
-            ->get()->name;
+            ->first()->name;
 
         $auctionModels = EloquentAuctionModel::query()
             ->where('category_uuid', $uuid)
