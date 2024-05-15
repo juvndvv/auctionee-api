@@ -12,14 +12,19 @@ class FindAuctionByCategoryUuid
 {
     public function __invoke(string $uuid)
     {
-        $categoryUuid = EloquentCategoryModel::query()
+        $categoryModel = EloquentCategoryModel::query()
             ->select('uuid')
             ->where('name', $uuid)
-            ->first()->name;
+            ->first();
+
+        if (!is_null($categoryModel)) {
+            $categoryUuid = $categoryModel->uuid;
+        } else {
+            $categoryUuid = $uuid;
+        }
 
         $auctionModels = EloquentAuctionModel::query()
-            ->where('category_uuid', $uuid)
-            ->orWhere('category_uuid', $categoryUuid)
+            ->where('category_uuid', $categoryUuid)
             ->get();
 
         $resources = $auctionModels->map(
