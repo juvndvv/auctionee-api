@@ -14,6 +14,6 @@ final class CategoryProjection
 
     public static function create(string $uuid, string $name, string $description, string $avatar): self
     {
-        return new self($uuid, $name, $description, $avatar);
+        return new self($uuid, $name, $description, env('CLOUDFLARE_R2_URL') . $avatar);
     }
 }
