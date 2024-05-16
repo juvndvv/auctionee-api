@@ -152,7 +152,7 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
 
         // Auctions
         Route::prefix('/auctions')->group(function () {
-            Route::delete('', DeleteAuctionController::class);
+            Route::delete('/{uuid}', DeleteAuctionController::class);
             Route::get('/count', FindTotalAuctions::class);
             // Auth
             Route::get('/', FindAllAuctionsController::class);
