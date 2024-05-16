@@ -30,6 +30,8 @@ interface AuctionRepositoryPort extends BaseRepositoryPort
      */
     public function findByUserUuid(string $uuid, int $offset, int $limit): Collection;
 
+    public function findModelByUuid(string $uuid): Auction;
+
     /**
      * @throws NotFoundException
      */

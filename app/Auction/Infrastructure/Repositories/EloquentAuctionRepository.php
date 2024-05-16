@@ -83,6 +83,15 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
         );
     }
 
+    public function findModelByUuid(string $uuid): Auction
+    {
+        $auctionModel = EloquentAuctionModel::query()
+            ->where('uuid', $uuid)
+            ->first();
+
+        return Auction::fromPrimitives($auctionModel->toArray());
+    }
+
     public function findByUuid(string $uuid): AuctionDetailedProjection
     {
         $auctionDb = EloquentAuctionModel::query()

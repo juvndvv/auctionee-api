@@ -23,7 +23,7 @@ final class UpdateAuctionStartingPriceCommandHandler extends CommandHandler
         $uuid = $command->uuid();
         $startingPrice = $command->startingPrice();
 
-        $auction = $this->auctionRepository->findByUuid($uuid);
+        $auction = $this->auctionRepository->findModelByUuid($uuid);
         $auction->updateStartingPrice($startingPrice);
         $this->auctionRepository->updateStartingPrice($uuid, $startingPrice);
         $this->eventBus->dispatch(...$auction->pullDomainEvents());

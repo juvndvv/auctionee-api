@@ -24,7 +24,7 @@ final class UpdateAuctionDurationCommandHandler extends CommandHandler
         $uuid = $command->uuid();
         $duration = $command->duration();
 
-        $auction = $this->auctionRepository->findByUuid($uuid);
+        $auction = $this->auctionRepository->findModelByUuid($uuid);
         $auction->updateDuration($duration);
         $this->auctionRepository->updateDuration($uuid, $duration);
         $this->eventBus->dispatch(...$auction->pullDomainEvents());

@@ -23,7 +23,7 @@ final class UpdateAuctionStartingDateCommandHandler extends CommandHandler
         $uuid = $command->uuid();
         $startingDate = $command->startingDate();
 
-        $auction = $this->auctionRepository->findByUuid($uuid);
+        $auction = $this->auctionRepository->findModelByUuid($uuid);
         $auction->updateStartingDate($startingDate);
         $this->auctionRepository->updateStartingDate($uuid, $startingDate);
         $this->eventBus->dispatch(...$auction->pullDomainEvents());

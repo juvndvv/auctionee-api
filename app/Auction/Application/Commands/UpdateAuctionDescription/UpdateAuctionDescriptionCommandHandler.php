@@ -3,6 +3,7 @@
 namespace App\Auction\Application\Commands\UpdateAuctionDescription;
 
 use App\Auction\Application\Commands\UpdateAuctionName\UpdateAuctionNameCommand;
+use App\Auction\Domain\Models\Auction\Auction;
 use App\Auction\Domain\Ports\Outbound\AuctionRepositoryPort;
 use App\Shared\Domain\Exceptions\NotFoundException;
 use App\Shared\Infrastructure\Bus\EventBus;
@@ -23,7 +24,8 @@ final class UpdateAuctionDescriptionCommandHandler
         $uuid = $command->uuid();
         $description = $command->description();
 
-        $auction = $this->auctionRepository->findByUuid($uuid);
+        $auction = $this->auctionRepository->findModelByUuid($uuid);
+
         $auction->updateDescription($description);
         $this->auctionRepository->updateDescription($uuid, $description);
         $this->eventBus->dispatch(...$auction->pullDomainEvents());

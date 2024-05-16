@@ -25,7 +25,7 @@ final class UpdateAuctionAvatarCommandHandler extends CommandHandler
         $uuid = $command->uuid();
         $avatar = $command->avatar();
 
-        $auction = $this->auctionRepository->findByUuid($uuid);             // Query auction
+        $auction = $this->auctionRepository->findModelByUuid($uuid);        // Query auction
         $old = $auction->avatar();                                          // Delete previous
         $this->imageRepository->delete($old);
         $new = $this->imageRepository->store('auctions', $avatar);   // Save new

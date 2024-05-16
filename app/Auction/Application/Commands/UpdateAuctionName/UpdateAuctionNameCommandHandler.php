@@ -23,7 +23,7 @@ final class UpdateAuctionNameCommandHandler extends CommandHandler
         $uuid = $command->uuid();
         $name = $command->name();
 
-        $auction = $this->auctionRepository->findByUuid($uuid);
+        $auction = $this->auctionRepository->findModelByUuid($uuid);
         $auction->updateName($name);
         $this->auctionRepository->updateName($uuid, $name);
         $this->eventBus->dispatch(...$auction->pullDomainEvents());

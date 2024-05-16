@@ -9,7 +9,6 @@ use App\Shared\Infrastructure\Http\Controllers\ValidatedCommandController;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schedule;
 use Illuminate\Validation\ValidationException;
 
 final class CreateAuctionController extends ValidatedCommandController
