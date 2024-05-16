@@ -38,7 +38,11 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
                 'users.uuid as user_uuid',
                 'users.username as user_username',
                 'users.avatar as user_avatar',
+                'categories.uuid as category_uuid',
+                'categories.name as category_name',
+                'categories.avatar as category_avatar',
             ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
+            ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
         ->offset($offset)
         ->limit($limit)
         ->get();

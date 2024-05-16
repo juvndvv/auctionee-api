@@ -17,7 +17,10 @@ final class AuctionAndUserProjection
         string $avatar,
         public string $user_uuid,
         public string $user_username,
-        string $user_avatar
+        string $user_avatar,
+        public string $category_uuid,
+        public string $category_name,
+        public string $category_avatar,
     )
     {
         $this->avatar = env("CLOUDFLARE_R2_URL") . $avatar;
@@ -36,7 +39,10 @@ final class AuctionAndUserProjection
             $data['avatar'],
             $data['user_uuid'],
             $data['user_username'],
-            $data['user_avatar']
+            $data['user_avatar'],
+            $data['category_uuid'],
+            $data['category_name'],
+            $data['category_avatar']
         );
     }
 }
