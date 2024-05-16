@@ -2,6 +2,7 @@
 
 use App\Auction\Infrastructure\Http\Controllers\CreateAuctionController;
 use App\Auction\Infrastructure\Http\Controllers\CreateCategoryController;
+use App\Auction\Infrastructure\Http\Controllers\DeleteAuctionController;
 use App\Auction\Infrastructure\Http\Controllers\DeleteCategoryController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsByUserUuidController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsController;
@@ -151,6 +152,7 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
 
         // Auctions
         Route::prefix('/auctions')->group(function () {
+            Route::delete('', DeleteAuctionController::class);
             Route::get('/count', FindTotalAuctions::class);
             // Auth
             Route::get('/', FindAllAuctionsController::class);
