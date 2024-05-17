@@ -44,6 +44,7 @@ final class EloquentReviewRepository extends BaseRepository implements ReviewRep
         $reviews = EloquentReviewModel::query()
             ->select(
                 "reviews.uuid as uuid",
+                "users.uuid as user_uuid",
                 "users.username as username",
                 "users.avatar as avatar",
                 "reviews.rating as rating",
@@ -62,6 +63,7 @@ final class EloquentReviewRepository extends BaseRepository implements ReviewRep
         return $reviews->map(
             fn ($review) => ReviewDetailsProjection::create(
                 $review['uuid'],
+                $review['user_uuid'],
                 $review['username'],
                 $review['avatar'],
                 $review['rating'],

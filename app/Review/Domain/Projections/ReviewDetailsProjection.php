@@ -6,6 +6,7 @@ final class ReviewDetailsProjection
 {
     public function __construct(
         public string   $uuid,
+        public string $reviewerUuid,
         public string   $reviewerUsername,
         public string   $reviewerAvatar,
         public int      $rating,
@@ -16,6 +17,7 @@ final class ReviewDetailsProjection
 
     public static function create(
         string  $uuid,
+        string $reviewerUuid,
         string  $reviewerUsername,
         string  $reviewerAvatar,
         int     $rating,
@@ -25,6 +27,7 @@ final class ReviewDetailsProjection
     {
         return new self(
             $uuid,
+            $reviewerUuid,
             $reviewerUsername,
             $reviewerAvatar,
             $rating,
