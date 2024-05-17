@@ -15,10 +15,7 @@ final class FindAllAuctionsByUserUuidController extends QueryController
     public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {
-            $offset = $request->query->getInt('offset', 0);
-            $limit = $request->query->getInt('limit', 10);
-
-            $query = FindAllAuctionsByUserUuidQuery::create($uuid, $offset, $limit);
+            $query = FindAllAuctionsByUserUuidQuery::create($uuid);
             $resources = $this->queryBus->handle($query);
 
             return Response::OK(

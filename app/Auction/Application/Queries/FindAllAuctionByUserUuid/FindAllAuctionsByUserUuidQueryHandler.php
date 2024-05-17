@@ -20,9 +20,7 @@ final class FindAllAuctionsByUserUuidQueryHandler extends QueryHandler
     public function __invoke(FindAllAuctionsByUserUuidQuery $query): Collection
     {
         $userUuid = $query->userUuid();
-        $offset = $query->offset();
-        $limit = $query->limit();
 
-        return $this->auctionRepository->findByUserUuid($userUuid, $offset, $limit);
+        return $this->auctionRepository->findByUserUuid($userUuid);
     }
 }

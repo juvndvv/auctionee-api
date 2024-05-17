@@ -8,8 +8,6 @@ final class FindAllAuctionsByUserUuidQuery extends Query
 {
     public function __construct(
         private readonly string $userUuid,
-        private readonly int $offset,
-        private readonly int $limit
     )
     {}
 
@@ -18,18 +16,8 @@ final class FindAllAuctionsByUserUuidQuery extends Query
         return $this->userUuid;
     }
 
-    public function offset(): int
+    public static function create(string $userUuid): self
     {
-        return $this->offset;
-    }
-
-    public function limit(): int
-    {
-        return $this->limit;
-    }
-
-    public static function create(string $userUuid, int $offset, int $limit): self
-    {
-        return new self($userUuid, $offset, $limit);
+        return new self($userUuid);
     }
 }

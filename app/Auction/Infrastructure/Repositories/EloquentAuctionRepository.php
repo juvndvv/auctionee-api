@@ -58,7 +58,7 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
         );
     }
 
-    public function findByUserUuid(string $uuid, int $offset, int $limit): Collection
+    public function findByUserUuid(string $uuid): Collection
     {
         $auctionModels = EloquentAuctionModel::query()
             ->select([
@@ -78,8 +78,6 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
             ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
             ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
             ->where('user_uuid', $uuid)
-            ->offset($offset)
-            ->limit($limit)
             ->get();
 
         if ($auctionModels->count() == 0) {
