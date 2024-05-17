@@ -8,14 +8,21 @@ use App\Shared\Infrastructure\Http\Controllers\Response;
 use App\User\Application\Queries\FindByUuid\FindByUuidQuery;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 final class FindUserByUuidController extends QueryController
 {
-    public function __invoke(string $uuid): JsonResponse
+    public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {
             $query = FindByUuidQuery::create($uuid);
             $resource = $this->queryBus->handle($query);
+
+            $fullUser = $request->query('full');
+
+            if ($fullUser) {
+
+            }
 
             return Response::OK(
                 data: $resource,

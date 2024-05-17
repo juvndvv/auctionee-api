@@ -62,12 +62,22 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
     {
         $auctionModels = EloquentAuctionModel::query()
             ->select([
-                'uuid',
-                'name',
-                'starting_price',
-                'starting_date',
-                'avatar'
-            ])->where('user_uuid', $uuid)
+                'auctions.uuid as uuid',
+                'auctions.name as name',
+                'auctions.description as description',
+                'auctions.starting_price as price',
+                'auctions.starting_date as date',
+                'auctions.duration as duration',
+                'auctions.avatar as avatar',
+                'users.uuid as user_uuid',
+                'users.username as user_username',
+                'users.avatar as user_avatar',
+                'categories.uuid as category_uuid',
+                'categories.name as category_name',
+                'categories.avatar as category_avatar',
+            ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
+            ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
+            ->where('user_uuid', $uuid)
             ->offset($offset)
             ->limit($limit)
             ->get();
@@ -79,7 +89,7 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
         return $auctionModels->map(
             fn (EloquentAuctionModel $auctionModel)
             =>
-            AuctionOverviewProjection::fromPrimitives($auctionModel->toArray())
+            AuctionAndUserProjection::fromPrimitives($auctionModel->toArray())
         );
     }
 
