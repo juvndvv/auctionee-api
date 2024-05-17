@@ -29,7 +29,7 @@ final class ReviewDetailsProjection
             $uuid,
             $reviewerUuid,
             $reviewerUsername,
-            env('CLOUDFLARE_R2_URL') . '/' .$reviewerAvatar,
+            env('CLOUDFLARE_R2_URL') . $reviewerAvatar,
             $rating,
             $description,
             $createdAt
