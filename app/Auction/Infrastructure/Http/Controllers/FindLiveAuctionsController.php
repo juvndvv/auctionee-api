@@ -29,7 +29,7 @@ final class FindLiveAuctionsController
                 JOIN users ON users.uuid = auctions.user_uuid
                 JOIN categories ON categories.uuid = auctions.category_uuid
             WHERE
-                NOW() BETWEEN auctions.starting_date AND DATE_ADD(auctions.starting_date, INTERVAL auctions.duration SECOND)
+                NOW() BETWEEN auctions.starting_date AND DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)
         '), 'Subastas en directo encontradas');
     }
 }
