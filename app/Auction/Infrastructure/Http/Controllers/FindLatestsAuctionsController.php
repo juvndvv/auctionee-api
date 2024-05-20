@@ -27,7 +27,7 @@ class FindLatestsAuctionsController
                 'categories.avatar as category_avatar',
             ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
             ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
-            ->orderBy('auctions.created_at')
+            ->orderBy('auctions.created_at', 'desc')
             ->limit(5)
             ->get();
 
