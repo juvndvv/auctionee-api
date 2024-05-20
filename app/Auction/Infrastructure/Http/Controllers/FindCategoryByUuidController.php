@@ -13,6 +13,6 @@ class FindCategoryByUuidController
         $category = EloquentCategoryModel::query()
             ->where('uuid', $uuid)
             ->first();
-        return Response::OK(Category::fromPrimitives($category->toArray()), 'Categoria encontrada');
+        return Response::OK($category, 'Categoria encontrada');
     }
 }
