@@ -33,11 +33,6 @@ final class FindLiveAuctionsController
                 NOW() BETWEEN auctions.starting_date AND DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)
         ');
 
-        foreach ($auctions as $auction) {
-            $auction['avatar'] = env('CLOUDFLARE_R2_URL') . $auction['avatar'];
-            $auction['user_avatar'] = env('CLOUDFLARE_R2_URL') . $auction['user_avatar'];
-            $auction['category_avatar'] = env('CLOUDFLARE_R2_URL') . $auction['category_avatar'];
-        }
         return Response::OK($auctions, 'Subastas en directo encontradas');
     }
 }
