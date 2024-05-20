@@ -6,14 +6,11 @@ use App\Auction\Domain\Projections\CategoryProjection;
 use App\Auction\Infrastructure\Repositories\Models\EloquentCategoryModel;
 use App\Shared\Infrastructure\Http\Controllers\Response;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 final class FindCategoriesLikeController
 {
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(string $query): JsonResponse
     {
-        $query = $request['query'];
-
         $categoriesDb = EloquentCategoryModel::query()
             ->where('name', 'like', "%$query%")
             ->get();

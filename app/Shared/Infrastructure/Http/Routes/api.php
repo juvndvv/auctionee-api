@@ -144,7 +144,7 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
         // Categories
         Route::prefix('/categories')->group(function () {
             Route::get('count', FindTotalCategories::class);
-            Route::get('like', FindCategoriesLikeController::class);
+            Route::get('like/{query}', FindCategoriesLikeController::class);
             // Auth
             Route::get('/', FindAllCategoriesController::class);
             Route::delete('/{uuid}', DeleteCategoryController::class);
