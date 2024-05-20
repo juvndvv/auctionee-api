@@ -31,6 +31,6 @@ final class FindLiveAuctionsController
             WHERE
                 NOW() BETWEEN auctions.starting_date AND DATE_ADD(auctions.starting_date,
                 INTERVAL auctions.duration SECOND)
-        ', [1]), 'Subastas en directo encontradas');
+        ', [0]), 'Subastas en directo encontradas');
     }
 }
