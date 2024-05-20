@@ -27,7 +27,7 @@ class FindAuctionsLikeController
                 'categories.avatar as category_avatar',
             ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
             ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
-            ->where('name', 'like', "%$query%")
+            ->where('auctions.name', 'like', "%$query%")
             ->get();
 
         $resources = $auctionsDb->map(
