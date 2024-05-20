@@ -9,6 +9,7 @@ use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllCategoriesController;
 use App\Auction\Infrastructure\Http\Controllers\FindAuctionByCategoryUuid;
 use App\Auction\Infrastructure\Http\Controllers\FindAuctionByUuidController;
+use App\Auction\Infrastructure\Http\Controllers\FindCategoriesLikeController;
 use App\Auction\Infrastructure\Http\Controllers\FindLatestsAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindLiveAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindTotalAuctions;
@@ -143,6 +144,7 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
         // Categories
         Route::prefix('/categories')->group(function () {
             Route::get('count', FindTotalCategories::class);
+            Route::get('like', FindCategoriesLikeController::class);
             // Auth
             Route::get('/', FindAllCategoriesController::class);
             Route::delete('/{uuid}', DeleteCategoryController::class);

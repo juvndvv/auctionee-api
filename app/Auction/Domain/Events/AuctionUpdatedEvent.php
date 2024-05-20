@@ -18,7 +18,7 @@ final class AuctionUpdatedEvent extends DomainEvent
 
     public function broadcastOn(): array
     {
-        return ['user.' . $this->userUuid];
+        return ['auctions', 'user.' . $this->userUuid];
     }
 
     public function broadcastAs(): string
