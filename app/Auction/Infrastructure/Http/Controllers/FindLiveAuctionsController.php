@@ -2,10 +2,7 @@
 
 namespace App\Auction\Infrastructure\Http\Controllers;
 
-use App\Auction\Domain\Projections\AuctionAndUserProjection;
-use App\Auction\Infrastructure\Repositories\Models\EloquentAuctionModel;
 use App\Shared\Infrastructure\Http\Controllers\Response;
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -34,6 +31,6 @@ final class FindLiveAuctionsController
             WHERE
                 NOW() BETWEEN auctions.starting_date AND DATE_ADD(auctions.starting_date,
                 INTERVAL auctions.duration SECOND)
-        '), 'Subastas en directo encontradas');
+        ', [1]), 'Subastas en directo encontradas');
     }
 }
