@@ -10,7 +10,8 @@ final class FindLiveAuctionsController
 {
     public function __invoke(): JsonResponse
     {
-        return Response::OK(DB::select('
+
+        $auctions = DB::select('
             SELECT
                 auctions.uuid as uuid,
                 auctions.name as name,
@@ -30,6 +31,13 @@ final class FindLiveAuctionsController
                 JOIN categories ON categories.uuid = auctions.category_uuid
             WHERE
                 NOW() BETWEEN auctions.starting_date AND DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)
-        '), 'Subastas en directo encontradas');
+        ');
+
+        foreach ($auctions as $auction) {
+            $auction['avatar'] = env('CLOUDFLARE_R2_URL') . $auction['avatar'];
+            $auction['user_avatar'] = env('CLOUDFLARE_R2_URL') . $auction['user_avatar'];
+            $auction['category_avatar'] = env('CLOUDFLARE_R2_URL') . $auction['category_avatar'];
+        }
+        return Response::OK($auctions, 'Subastas en directo encontradas');
     }
 }
