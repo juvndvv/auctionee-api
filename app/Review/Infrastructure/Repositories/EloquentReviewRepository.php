@@ -69,7 +69,7 @@ final class EloquentReviewRepository extends BaseRepository implements ReviewRep
                 $review['avatar'],
                 $review['rating'],
                 $review['description'],
-                now()->toString()
+                $review['created_at']
             ));
     }
 
