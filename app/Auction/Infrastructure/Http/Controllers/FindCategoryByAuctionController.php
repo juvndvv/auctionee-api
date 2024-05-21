@@ -15,8 +15,9 @@ final class FindCategoryByAuctionController
                 'categories.description as description',
                 'categories.avatar as avatar',
             ])->join('auctions', 'auctions.category_uuid', '=', 'categories.uuid')
-            ->where('auctions.uuid', $uuid);
+            ->where('auctions.uuid', $uuid)
+            ->first();
 
-        return $category;
+        return $category->toArray();
     }
 }
