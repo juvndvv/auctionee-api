@@ -52,6 +52,7 @@ final class EloquentReviewRepository extends BaseRepository implements ReviewRep
                 "reviews.created_at as created_at")
             ->join("users", "users.uuid", "=", "reviews.reviewer_uuid")
             ->where("reviews.reviewed_uuid", $reviewedUuid)
+            ->orderBy("reviews.created_at", "DESC")
             ->offset($offset)
             ->limit($limit)
             ->get();
