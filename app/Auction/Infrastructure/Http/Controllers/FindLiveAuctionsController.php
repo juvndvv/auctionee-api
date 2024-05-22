@@ -30,7 +30,7 @@ final class FindLiveAuctionsController
                 JOIN users ON users.uuid = auctions.user_uuid
                 JOIN categories ON categories.uuid = auctions.category_uuid
             WHERE
-                NOW() BETWEEN auctions.starting_date AND DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)
+                DATE_ADD(NOW(), INTERVAL 2 HOUR) BETWEEN auctions.starting_date AND DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)
         ');
 
         return Response::OK($auctions, 'Subastas en directo encontradas');
