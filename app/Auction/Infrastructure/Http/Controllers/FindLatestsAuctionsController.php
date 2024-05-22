@@ -5,6 +5,7 @@ namespace App\Auction\Infrastructure\Http\Controllers;
 use App\Auction\Domain\Projections\AuctionAndUserProjection;
 use App\Auction\Infrastructure\Repositories\Models\EloquentAuctionModel;
 use App\Shared\Infrastructure\Http\Controllers\Response;
+use Illuminate\Support\Facades\DB;
 
 class FindLatestsAuctionsController
 {
@@ -27,6 +28,7 @@ class FindLatestsAuctionsController
                 'categories.avatar as category_avatar',
             ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
             ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
+            ->whereRaw('DATE_ADD(NOW(), INTERVAL 2 HOUR) < DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)')
             ->orderBy('auctions.created_at', 'desc')
             ->limit(5)
             ->get();
