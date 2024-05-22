@@ -30,7 +30,6 @@ class FindLatestsAuctionsController
             ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
             ->whereRaw('DATE_ADD(NOW(), INTERVAL 2 HOUR) < DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)')
             ->orderBy('auctions.created_at', 'desc')
-            ->limit(5)
             ->get();
 
         $resources = $auctionModels->map(
