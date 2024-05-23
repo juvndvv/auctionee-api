@@ -15,7 +15,7 @@ final class FindUserReviewsController extends QueryController
     public function __invoke(string $uuid, Request $request): JsonResponse
     {
         try {
-            $offset = $request->input('page', 0) * env('PAGINATION_LIMIT');
+            $offset = $request->query('page', 0) * env('PAGINATION_LIMIT');
             $limit = env('PAGINATION_LIMIT');
 
             $query = FindUserReviewsQuery::create($uuid, $offset, $limit);
