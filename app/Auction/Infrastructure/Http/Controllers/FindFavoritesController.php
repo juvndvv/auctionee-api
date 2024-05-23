@@ -31,7 +31,8 @@ class FindFavoritesController
                 'categories.avatar as category_avatar',
             ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
             ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
-            ->join('user_auctions_favorites', 'user_auctions_favorites.user_uuid', '=', $userUuid)
+            ->join('user_auctions_favorites', 'user_auctions_favorites.user_uuid', '=', 'user.uuid')
+            ->where('user_auctions_favorites.user_uuid', $userUuid)
         ->get();
 
         $resources = $auctionModels->map(
