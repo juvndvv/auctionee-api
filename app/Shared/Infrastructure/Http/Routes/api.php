@@ -1,9 +1,11 @@
 <?php
 
+use App\Auction\Infrastructure\Http\Controllers\AddFavoriteController;
 use App\Auction\Infrastructure\Http\Controllers\CreateAuctionController;
 use App\Auction\Infrastructure\Http\Controllers\CreateCategoryController;
 use App\Auction\Infrastructure\Http\Controllers\DeleteAuctionController;
 use App\Auction\Infrastructure\Http\Controllers\DeleteCategoryController;
+use App\Auction\Infrastructure\Http\Controllers\DeleteFavoriteController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsByUserUuidController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindAllCategoriesController;
@@ -13,6 +15,7 @@ use App\Auction\Infrastructure\Http\Controllers\FindAuctionsLikeController;
 use App\Auction\Infrastructure\Http\Controllers\FindCategoriesLikeController;
 use App\Auction\Infrastructure\Http\Controllers\FindCategoryByAuctionController;
 use App\Auction\Infrastructure\Http\Controllers\FindCategoryByUuidController;
+use App\Auction\Infrastructure\Http\Controllers\FindFavoritesController;
 use App\Auction\Infrastructure\Http\Controllers\FindLatestsAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindLiveAuctionsController;
 use App\Auction\Infrastructure\Http\Controllers\FindTotalAuctions;
@@ -106,6 +109,12 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
             Route::put('/{uuid}/name', UpdateUserNameController::class);
             Route::put('/{uuid}/username', UpdateUserUsernameController::class);
             Route::put('/{uuid}/password', UpdateUserPasswordController::class);
+        });
+
+        Route::prefix('/favs')->group(function () {
+            Route::get('', FindFavoritesController::class);
+            Route::post('/add/{auctionUuid}', AddFavoriteController::class);
+            Route::delete('/remove/{auctionUuid}', DeleteFavoriteController::class);
         });
 
         // Wallets
