@@ -33,7 +33,7 @@ return new class extends Migration
 
             $table->foreign(Auction::CATEGORY_UUID)->references(Category::UUID)->on('categories');
 
-            $table->foreign(Auction::USER_UUID)->references(User::UUID)->on('users');
+            $table->foreign(Auction::USER_UUID)->references(User::UUID)->on('users')->onDelete('cascade');
         });
     }
 
