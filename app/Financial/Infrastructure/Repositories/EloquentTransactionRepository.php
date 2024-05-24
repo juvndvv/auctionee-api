@@ -26,10 +26,6 @@ final class EloquentTransactionRepository extends BaseRepository implements Tran
             ->orWhere(Transaction::SERIALIZED_DESTINATION_WALLET_UUID, $walletUuid)
             ->get();
 
-        if ($transactionsDb->count() == 0) {
-            throw new NotFoundException("No existe la wallet con uuid $walletUuid");
-        }
-
         return $transactionsDb->map(
             fn (EloquentTransactionModel $transaction) => Transaction::fromPrimitives($transaction->toArray())
         );
