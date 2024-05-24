@@ -6,11 +6,11 @@ use App\Financial\Domain\Models\Transaction;
 
 final class TransactionResource
 {
-    public static function fromDomain(Transaction $transaction, string $remitentWallet)
+    public static function fromDomain(Transaction $transaction, string $remittentWallet): array
     {
         return [
-            'remitent_wallet' => $remitentWallet,
-            'destination_wallet' => $transaction->destinationWalletUuid(),
+            'remittentWallet' => $remittentWallet,
+            'destinationWallet' => $transaction->destinationWalletUuid(),
             'amount' => $transaction->amount()
         ];
     }

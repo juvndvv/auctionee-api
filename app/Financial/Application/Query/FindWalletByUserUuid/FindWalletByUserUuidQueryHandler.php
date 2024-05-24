@@ -17,6 +17,6 @@ final class FindWalletByUserUuidQueryHandler extends QueryHandler
     {
         $userUuid = $query->userUuid();
         $wallet = $this->walletRepository->findByUserUuid($userUuid);
-        return WalletResource::fromDomain($wallet);
+        return $wallet;
     }
 }
