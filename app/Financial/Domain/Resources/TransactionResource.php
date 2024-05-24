@@ -9,7 +9,7 @@ final class TransactionResource
     public static function fromDomain(Transaction $transaction, string $remittentWallet): array
     {
         return [
-            'remittentWallet' => $remittentWallet,
+            'remittentWallet' => $transaction->remittentWalletUuid(),
             'destinationWallet' => $transaction->destinationWalletUuid(),
             'amount' => $transaction->amount()
         ];

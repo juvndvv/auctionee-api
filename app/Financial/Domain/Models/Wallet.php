@@ -128,7 +128,7 @@ final class Wallet extends AggregateRoot
      */
     public static function create(float $balance, float $blockedBalance, string $userUuid, Collection $transactions = new Collection()): self
     {
-        $uuid = WalletUuid::random();
+        $uuid = $userUuid;
 
         return new self(
             $uuid,
