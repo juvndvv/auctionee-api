@@ -120,7 +120,7 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
         // Wallets
         Route::prefix('/wallets')->group(function () {
             // Owner
-            Route::get('/{uuid}/transfer', MakeTransactionController::class);
+            Route::post('/{uuid}/transfer', MakeTransactionController::class);
             Route::get('/{uuid}/transactions', FindTransactionsByWalletUuidController::class);
             Route::post('/{uuid}/deposit', DepositMoneyController::class);
             Route::post('/{uuid}/withdraw', WithdrawMoneyController::class);
