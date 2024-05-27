@@ -18,6 +18,7 @@ final class Transaction
     private WalletUuid $remittentWalletUuid;
     private WalletUuid $destinationWalletUuid;
     private TransactionAmount $amount;
+    private string $createdAt;
 
     /**
      * @param string $uuid
@@ -29,12 +30,14 @@ final class Transaction
         string $uuid,
         string $remittentWalletUuid,
         string $destinationWalletUuid,
-        float $amount)
+        float $amount,
+        string $createdAt)
     {
         $this->uuid = new TransactionUuid($uuid);
         $this->remittentWalletUuid = new WalletUuid($remittentWalletUuid);
         $this->destinationWalletUuid = new WalletUuid($destinationWalletUuid);
         $this->amount = new TransactionAmount($amount);
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -47,7 +50,8 @@ final class Transaction
             $data[self::SERIALIZED_UUID],
             $data[self::SERIALIZED_REMITTENT_WALLET_UUID],
             $data[self::SERIALIZED_DESTINATION_WALLET_UUID],
-            $data[self::SERIALIZED_AMOUNT]
+            $data[self::SERIALIZED_AMOUNT],
+            $data['created_at']
         );
     }
 
@@ -61,6 +65,7 @@ final class Transaction
             self::SERIALIZED_REMITTENT_WALLET_UUID => $this->remittentWalletUuid(),
             self::SERIALIZED_DESTINATION_WALLET_UUID => $this->destinationWalletUuid(),
             self::SERIALIZED_AMOUNT => $this->amount(),
+            'createdAt' => $this->createdAt
         ];
     }
 
@@ -96,6 +101,11 @@ final class Transaction
         return $this->amount->value();
     }
 
+    public function createdAt(): string
+    {
+        return $this->createdAt;
+    }
+
     /**
      * @param string $remittentUuid
      * @return void
@@ -120,7 +130,7 @@ final class Transaction
      * @param float $amount
      * @return self
      */
-    public static function create(string $remittentWalletUuid, string $destinationWalletUuid, float $amount): self
+    public static function create(string $remittentWalletUuid, string $destinationWalletUuid, float $amount, string $createdAt): self
     {
         $uuid = TransactionUuid::random();
 
@@ -128,7 +138,8 @@ final class Transaction
             $uuid->value(),
             $remittentWalletUuid,
             $destinationWalletUuid,
-            $amount
+            $amount,
+            $createdAt
         );
     }
 

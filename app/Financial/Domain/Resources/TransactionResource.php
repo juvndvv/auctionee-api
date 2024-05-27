@@ -11,7 +11,8 @@ final class TransactionResource
         return [
             'remittentWallet' => $transaction->remittentWalletUuid(),
             'destinationWallet' => $transaction->destinationWalletUuid(),
-            'amount' => $transaction->amount()
+            'amount' => $transaction->amount(),
+            'createdAt' => $transaction->createdAt(),
         ];
     }
 }
