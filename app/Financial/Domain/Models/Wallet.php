@@ -153,7 +153,7 @@ final class Wallet extends AggregateRoot
             throw new NotEnoughFoundsException("No existe suficiente dinero");
         }
 
-        $transaction = Transaction::create($this->uuid(), $destinationWalletUuid, $amount);
+        $transaction = Transaction::create($this->uuid(), $destinationWalletUuid, $amount, now());
         $this->transactions->add($transaction);
 
         $this->record(new TransactionPlacedEvent($transaction->toPrimitives(), now()->toString()));
