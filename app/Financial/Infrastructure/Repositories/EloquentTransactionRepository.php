@@ -24,6 +24,7 @@ final class EloquentTransactionRepository extends BaseRepository implements Tran
         $transactionsDb = EloquentTransactionModel::query()
             ->where(Transaction::SERIALIZED_REMITTENT_WALLET_UUID, $walletUuid)
             ->orWhere(Transaction::SERIALIZED_DESTINATION_WALLET_UUID, $walletUuid)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return $transactionsDb->map(
