@@ -128,6 +128,7 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
             ])
             ->join('users', 'users.uuid', '=', 'bids.user_uuid')
             ->where('auction_uuid', $uuid)
+            ->orderBy('amount', 'desc')
             ->get();
 
         $bids = $bids->map(
