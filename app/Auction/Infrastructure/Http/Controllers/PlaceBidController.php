@@ -52,7 +52,7 @@ final class PlaceBidController extends ValidatedCommandController
     {
         // Simple validations
         $customValidator = Validator::make($request->all(), [
-            'amount' => 'required|numeric|min:0.01',
+            'amount' => 'required|numeric',
             'auction_uuid' => 'required|string|exists:auctions,uuid'
         ]);
 
