@@ -17,7 +17,7 @@ final class BidDetailedProjection
         return new self(
             $data['amount'],
             $data['username'],
-            $data['user_avatar'],
+            env('CLOUDFLARE_R2_URL') . $data['user_avatar'],
             $data['date']
         );
     }
