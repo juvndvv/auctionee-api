@@ -39,7 +39,7 @@ final class PlaceBidService
         try {
             $previousTopBid = $this->bidRepository->getTopBidOrFail($this->auctionUuid);
             $this->previousTopBidderWallet = $this->walletRepository->findByUserUuid($previousTopBid->userUuid());
-            $this->previousTopBidderWallet->unblockBalance($previousTopBid->amount());
+            $this->previousTopBidderWallet->unblockBalance($previousTopBid->amount(), $this->auctionUuid);
         } catch (NoContentException) {}
 
         // Crea la puja

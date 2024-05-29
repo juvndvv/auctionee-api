@@ -216,10 +216,10 @@ final class Wallet extends AggregateRoot
      * @param float $amount
      * @return void
      */
-    public function unblockBalance(float $amount): void
+    public function unblockBalance(float $amount, string $auctionName = ''): void
     {
         $this->blockedBalance = new WalletBlockedBalance($this->blockedBalance->value() - $amount);
         $this->balance = new WalletBalance($this->balance->value() + $amount);
-        $this->record(new MoneyUnblockedEvent($this->userId(), ['amount' => $amount], now()->toString()));
+        $this->record(new MoneyUnblockedEvent($this->userId(), ['amount' => $amount, 'auctionUuid' => $auctionName], now()->toString()));
     }
 }
