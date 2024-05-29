@@ -28,6 +28,8 @@ final class PlaceBidCommandHandler extends CommandHandler
         $amount  = $command->amount();
         $auctionUuid = $command->auctionUuid();
 
+        dd($amount);
+
         // Crea y ejecuta el servicio de dominio
         $placeBidService = PlaceBidService::create(
             $this->walletRepository,
