@@ -41,6 +41,7 @@ final class PlaceBidController extends ValidatedCommandController
             );
 
         } catch (Exception $exception) {
+            dd($exception);
             return Response::SERVER_ERROR();
         }
     }
