@@ -5,6 +5,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\DB;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -19,14 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->call(function() {
-            $auctions = EloquentAuctionModel::query()
-                ->where('finished', '=', '0')
-                ->get();
-
-            foreach ($auctions as $auction) {
-                $auction->finished = 1;
-                $auction->save();
-            }
+            DB::update('UPDATE auctions SET FINISHED = 1 WHERE FINISHED = 0');
 
         })->everySecond();
     })
