@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->call(function() {
             EloquentAuctionModel::query()
                 ->select()
-                ->whereNot('finished')
+                ->where('finished', '=', '0')
                 ->each(function($auction) {
                     $auction->update(['finished' => true]);
                 });
