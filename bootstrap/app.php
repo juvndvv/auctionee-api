@@ -19,10 +19,6 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withSchedule(function (Schedule $schedule) {
-        $schedule->call(function() {
-            DB::update('UPDATE auctions SET FINISHED = 1 WHERE FINISHED = 0');
-
-        })->everySecond();
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
