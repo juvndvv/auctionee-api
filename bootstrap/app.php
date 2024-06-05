@@ -23,7 +23,6 @@ return Application::configure(basePath: dirname(__DIR__))
             EloquentAuctionModel::query()
                 ->select()
                 ->whereNot('finished')
-                ->where('DATE_ADD(NOW(), INTERVAL 2 HOUR) > DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)')
                 ->each(function($auction) {
                     $auction->update(['finished' => true]);
                 });
