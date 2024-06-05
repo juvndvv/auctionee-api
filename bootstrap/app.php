@@ -21,7 +21,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withSchedule(function (Schedule $schedule) {
         $schedule->call(function() {
             EloquentAuctionModel::query()
-                ->select()
                 ->where('finished', '=', '0')
                 ->each(function($auction) {
                     $auction->update(['finished' => true]);
