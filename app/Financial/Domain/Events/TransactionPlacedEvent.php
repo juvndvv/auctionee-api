@@ -11,7 +11,7 @@ final class TransactionPlacedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(string $userUuid, array $payload, string $occurredOn, string $eventId = null)
+    public function __construct(private readonly string $userUuid, array $payload, string $occurredOn, string $eventId = null)
     {
         parent::__construct($occurredOn, $payload, self::eventName(), $eventId);
     }
