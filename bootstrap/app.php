@@ -20,21 +20,13 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->call(function() {
-            $auctions = DB::select('
-            SELECT *
-            FROM auctions
-            WHERE
-                NOT finished
-                AND DATE_ADD(NOW(), INTERVAL 2 HOUR) > DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)
-                '
-            );
-
-            foreach ($auctions as $auction) {
-                DB::update(
-                    'UPDATE auctions
-                    SET finished = 1'
-                );
-            }
+            EloquentAuctionModel::query()
+                ->select()
+                ->whereNot('finished')
+                ->where('DATE_ADD(NOW(), INTERVAL 2 HOUR) > DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)')
+                ->each(function($auction) {
+                    $auction->update(['finished' => true]);
+                });
         })->everyFiveMinutes();
     })
     ->withExceptions(function (Exceptions $exceptions) {
