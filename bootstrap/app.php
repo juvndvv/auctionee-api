@@ -5,6 +5,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\DB;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -19,11 +20,22 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->call(function() {
-            $auctions = EloquentAuctionModel::query()
-                ->select([
-                    ''
-                ]);
-        })->everySecond();
+            $auctions = DB::select('
+            SELECT *
+            FROM auctions
+            WHERE
+                NOT finished
+                AND DATE_ADD(NOW(), INTERVAL 2 HOUR) > DATE_ADD(auctions.starting_date, INTERVAL auctions.duration MINUTE)
+                '
+            );
+
+            foreach ($auctions as $auction) {
+                DB::update(
+                    'UPDATE auctions
+                    SET finished = 1'
+                );
+            }
+        })->everyFiveMinutes();
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
