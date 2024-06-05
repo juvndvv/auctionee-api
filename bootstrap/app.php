@@ -18,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->call(function() {
-            \Illuminate\Support\Facades\Log::info('Hola');
+            \Illuminate\Support\Facades\Log::error('Hola');
         })->everySecond();
     })
     ->withExceptions(function (Exceptions $exceptions) {
