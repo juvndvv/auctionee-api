@@ -33,6 +33,7 @@ final class MakeTransactionController extends CommandController
             );
 
         } catch (Exception $exception) {
+            return $exception->getMessage();
             return Response::SERVER_ERROR();
         }
     }
