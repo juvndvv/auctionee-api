@@ -156,7 +156,7 @@ final class Wallet extends AggregateRoot
         $transaction = Transaction::create($this->uuid(), $destinationWalletUuid, $amount, now());
         $this->transactions->add($transaction);
 
-        $this->record(new TransactionPlacedEvent($transaction->toPrimitives(), now()->toString()));
+        $this->record(new TransactionPlacedEvent($destinationWalletUuid, $transaction->toPrimitives(), now()->toString()));
     }
 
     /**

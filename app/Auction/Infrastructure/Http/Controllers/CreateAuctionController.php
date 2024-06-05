@@ -20,7 +20,7 @@ final class CreateAuctionController extends ValidatedCommandController
 
             $status = 'READY';
             $categoryUuid = $request->input('category_uuid');
-            $userUuid = $request->user()->uuid;               // TODO: from token
+            $userUuid = $request->user()->uuid;
             $name = $request->input('name');
             $description = $request->input('description');
             $startingPrice = $request->float('starting_price');

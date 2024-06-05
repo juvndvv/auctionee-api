@@ -11,14 +11,14 @@ final class TransactionPlacedEvent extends DomainEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(array $payload, string $occurredOn, string $eventId = null)
+    public function __construct(string $userUuid, array $payload, string $occurredOn, string $eventId = null)
     {
         parent::__construct($occurredOn, $payload, self::eventName(), $eventId);
     }
 
     public function broadcastOn(): array
     {
-        return ['transactions'];
+        return ['transactions', 'user.' . $this->userUuid];
     }
 
     public function broadcastAs(): string
