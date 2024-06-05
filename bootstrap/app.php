@@ -26,7 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->each(function($auction) {
                     $auction->update(['finished' => true]);
                 });
-        })->everyFiveMinutes();
+        })->everySecond();
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
