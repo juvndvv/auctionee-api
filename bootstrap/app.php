@@ -23,7 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->where('finished', '=', '0')
                 ->get();
 
-            $auctions->each(fn(EloquentAuctionModel $auction) => $auction->update(['finished' => 1]));
+            foreach ($auctions as $auction) {
+                $auction->finished = 1;
+                $auction->save();
+            }
+
         })->everySecond();
     })
     ->withExceptions(function (Exceptions $exceptions) {
