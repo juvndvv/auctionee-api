@@ -20,7 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withSchedule(function (Schedule $schedule) {
         $schedule->call(function() {
             $auctions = EloquentAuctionModel::query()
-                ->where('finished', '=', '0');
+                ->where('finished', '=', '0')
+                ->get();
 
             $auctions->each(fn(EloquentAuctionModel $auction) => $auction->update(['finished' => 1]));
         })->everySecond();
