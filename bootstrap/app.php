@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
             EloquentAuctionModel::query()
                 ->where('finished', '=', '0')
                 ->each(function($auction) {
-                    $auction->update(['finished' => true]);
+                    $auction->update(['finished' => '1']);
                 });
         })->everyFourHours();
     })
