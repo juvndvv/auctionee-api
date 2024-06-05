@@ -24,6 +24,7 @@ final class EloquentAuctionModel extends Model
         Auction::STARTING_PRICE,
         Auction::STARTING_DATE,
         Auction::DURATION,
-        Auction::AVATAR
+        Auction::AVATAR,
+        Auction::FINISHED
     ];
 }

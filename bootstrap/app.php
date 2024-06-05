@@ -1,5 +1,6 @@
 <?php
 
+use App\Auction\Infrastructure\Repositories\Models\EloquentAuctionModel;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,7 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->call(function() {
-            \Illuminate\Support\Facades\Log::error('Hola');
+            $auctions = EloquentAuctionModel::query()
+                ->select([
+                    ''
+                ]);
         })->everySecond();
     })
     ->withExceptions(function (Exceptions $exceptions) {

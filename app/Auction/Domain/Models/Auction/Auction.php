@@ -28,6 +28,7 @@ final class Auction extends AggregateRoot
     public const string STARTING_DATE = 'starting_date';
     public const string DURATION = 'duration';
     public const string AVATAR = 'avatar';
+    public const string FINISHED = 'finished';
 
     private AuctionUuid $uuid;
     private CategoryUuid $categoryUuid;
