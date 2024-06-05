@@ -19,11 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->call(function() {
-            EloquentAuctionModel::query()
-                ->where('finished', '=', '0')
-                ->each(function($auction) {
-                    $auction->update(['finished' => '1']);
-                });
+            $auctions = EloquentAuctionModel::query()
+                ->where('finished', '=', '0');
+
+            $auctions->each(fn(EloquentAuctionModel $auction) => $auction->update(['finished' => 1]));
         })->everyFourHours();
     })
     ->withExceptions(function (Exceptions $exceptions) {
