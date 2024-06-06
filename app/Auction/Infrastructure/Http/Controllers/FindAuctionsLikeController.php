@@ -25,8 +25,8 @@ class FindAuctionsLikeController
                 'categories.uuid as category_uuid',
                 'categories.name as category_name',
                 'categories.avatar as category_avatar',
-            ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
-            ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
+            ])->leftJoin('users', 'users.uuid', '=', 'auctions.user_uuid')
+            ->leftJoin('categories', 'categories.uuid', '=', 'auctions.category_uuid')
             ->where('auctions.name', 'like', "%$query%")
             ->get();
 
