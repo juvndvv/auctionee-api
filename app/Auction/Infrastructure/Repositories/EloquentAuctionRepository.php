@@ -51,11 +51,29 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
             throw new NoContentException("No hay subastas");
         }
 
-        return $auctionsModels->map(
-            fn (EloquentAuctionModel $auctionModel)
-            =>
-            AuctionAndUserProjection::fromPrimitives($auctionModel->toArray())
-        );
+        $auctions = [];
+
+        for ($i = 0; $i < $auctionsModels->count(); $i++) {
+            $bids = EloquentBidModel::query()
+                ->select([
+                    'bids.amount as amount',
+                    'bids.created_at as date',
+                    'users.avatar as user_avatar',
+                    'users.username as username',
+                ])
+                ->join('users', 'users.uuid', '=', 'bids.user_uuid')
+                ->where('auction_uuid', $auctionsModels[$i]->uuid)
+                ->orderBy('amount', 'desc')
+                ->get();
+
+            $bids = $bids->map(
+                fn (EloquentBidModel $bidModel) => BidDetailedProjection::fromPrivimites($bidModel->toArray())
+            );
+            $auction = AuctionDetailedProjection::fromPrimitives($auctionsModels[$i]->toArray(), $bids->toArray());
+            $auctions[] = $auction;
+        }
+
+        return collect($auctions);
     }
 
     public function findByUserUuid(string $uuid): Collection
