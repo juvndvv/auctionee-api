@@ -18,6 +18,9 @@ final class AuctionDetailedProjection
         public string $user_uuid,
         public string $user_username,
         string $user_avatar,
+        public string $category_uuid,
+        public string $category_name,
+        public string $category_avatar,
         public array $bids = []
     )
     {
@@ -38,6 +41,9 @@ final class AuctionDetailedProjection
             $data['user_uuid'],
             $data['user_username'],
             $data['user_avatar'],
+            $data['category_uuid'],
+            $data['category_name'],
+            $data['category_avatar'],
             $bids
         );
     }
