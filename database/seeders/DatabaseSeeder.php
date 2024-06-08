@@ -21,17 +21,17 @@ class DatabaseSeeder extends Seeder
         // Default users
         DB::table('users')->insert([
             User::UUID => 'U0000000-0000-0000-0000-000000000000',
-            User::NAME => 'Auctionee Main Account',
-            User::USERNAME => 'admin',
-            User::EMAIL => 'admin@jotade.dev',
+            User::NAME => 'Entidad bancaria',
+            User::USERNAME => 'banca',
+            User::EMAIL => 'banca@jotade.dev',
             User::AVATAR => env('DEFAULT_AVATAR'),
-            User::PASSWORD => 'admin',
+            User::PASSWORD => 'banca',
             User::BIRTH => '1990-01-01',
             User::ROLE => User::ADMIN_ROLE,
         ]);
 
         DB::table('wallets')->insert([
-            Wallet::UUID => 'W0000000-0000-0000-0000-000000000000',
+            Wallet::UUID => 'U0000000-0000-0000-0000-000000000000',
             Wallet::BALANCE => 9999999,
             Wallet::USER_UUID => 'U0000000-0000-0000-0000-000000000000',
         ]);
@@ -48,11 +48,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('wallets')->insert([
-            Wallet::UUID => 'WD000000-0000-0000-0000-000000000000',
+            Wallet::UUID => 'UD000000-0000-0000-0000-000000000000',
             Wallet::BALANCE => 0,
             Wallet::USER_UUID => 'UD0000000-0000-0000-0000-000000000000',
         ]);
-
-       EloquentUserModel::factory()->count(200)->create();
     }
 }
