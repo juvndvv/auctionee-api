@@ -40,6 +40,6 @@ final class UpdateCategoryAvatarController extends ValidatedCommandController
 
     static function validate(Request $request): void
     {
-        $request->validate(["avatar" => "required|image|mimes:jpeg,jpg,png,gif"]);
+        $request->validate(["avatar" => "required|image"]);
     }
 }
