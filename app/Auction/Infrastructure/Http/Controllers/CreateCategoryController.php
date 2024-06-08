@@ -51,7 +51,7 @@ final class CreateCategoryController extends ValidatedCommandController
         $request->validate([
             'name' => 'string|required',
             'description' => 'string|required',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'avatar' => 'required|image',
         ]);
     }
 }
