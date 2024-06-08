@@ -47,7 +47,7 @@ final class UpdateUserAvatarController extends ValidatedCommandController
     public static function validate(Request $request): void
     {
         $request->validate([
-            "avatar" => "required|image|mimes:jpeg,png,jpg,webp|max:2048"
+            "avatar" => "required|image"
         ]);
     }
 }

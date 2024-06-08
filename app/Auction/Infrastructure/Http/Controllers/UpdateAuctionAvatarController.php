@@ -41,7 +41,7 @@ final class UpdateAuctionAvatarController extends ValidatedCommandController
     static function validate(Request $request): void
     {
         $request->validate([
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'avatar' => 'required|image',
         ]);
     }
 }
