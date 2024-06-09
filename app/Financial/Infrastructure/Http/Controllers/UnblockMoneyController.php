@@ -17,7 +17,7 @@ class UnblockMoneyController
     {
         $amount = $request['amount'];
 
-        dd($amount);
+        echo $amount;
 
         $this->walletRepository->unblockAmount($uuid, $amount);
 
