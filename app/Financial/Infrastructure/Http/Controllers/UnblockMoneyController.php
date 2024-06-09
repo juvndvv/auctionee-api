@@ -15,7 +15,7 @@ class UnblockMoneyController
 
     public function __invoke(string $uuid, Request $request): JsonResponse
     {
-        $this->walletRepository->unblockAmount($uuid, $request->get('amount'));
+        $this->walletRepository->unblockAmount($uuid, $request['amount']);
 
         return Response::OK('', 'Desbloqueado');
     }
