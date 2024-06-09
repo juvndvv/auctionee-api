@@ -104,6 +104,8 @@ final class EloquentWalletRepository extends BaseRepository implements WalletRep
         $walletDb->update([
             Wallet::BALANCE => $balance + $amount,
             Wallet::BLOCKED_BALANCE => $blockedBalance - $amount
-        ])->save();
+        ]);
+
+        $walletDb->save();
     }
 }
