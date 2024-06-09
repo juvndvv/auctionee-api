@@ -120,22 +120,25 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
 
     public function findByUuid(string $uuid): AuctionDetailedProjection
     {
-        $auctionDb = EloquentAuctionModel::query()
+        $auctionModels = EloquentAuctionModel::query()
             ->select([
-                'auctions.uuid',
-                'users.uuid as user_uuid',
-                'users.username as user_username',
-                'users.avatar as user_avatar',
+                'auctions.uuid as uuid',
                 'auctions.name as name',
                 'auctions.description as description',
                 'auctions.starting_price as price',
                 'auctions.starting_date as date',
                 'auctions.duration as duration',
                 'auctions.avatar as avatar',
-            ])
-            ->where('auctions.uuid', $uuid)
-            ->join('users', 'users.uuid', '=', 'auctions.user_uuid')
-            ->first();
+                'users.uuid as user_uuid',
+                'users.username as user_username',
+                'users.avatar as user_avatar',
+                'categories.uuid as category_uuid',
+                'categories.name as category_name',
+                'categories.avatar as category_avatar',
+            ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
+            ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
+            ->where('user_uuid', $uuid)
+            ->get();
 
         $bids = EloquentBidModel::query()
             ->select([
