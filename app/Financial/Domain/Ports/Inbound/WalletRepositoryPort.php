@@ -45,6 +45,8 @@ interface WalletRepositoryPort extends BaseRepositoryPort
      */
     public function updateBlockedAmount(string $uuid, float $amount): void;
 
+    public function updateUnblockedAmount(string $uuid, float $amount): void;
+
     /**
      * @param string $uuid
      * @param float $amount
