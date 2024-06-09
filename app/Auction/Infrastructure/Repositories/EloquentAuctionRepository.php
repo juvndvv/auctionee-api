@@ -120,7 +120,7 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
 
     public function findByUuid(string $uuid): AuctionDetailedProjection
     {
-        $auctionModels = EloquentAuctionModel::query()
+        $auctionDb = EloquentAuctionModel::query()
             ->select([
                 'auctions.uuid as uuid',
                 'auctions.name as name',
