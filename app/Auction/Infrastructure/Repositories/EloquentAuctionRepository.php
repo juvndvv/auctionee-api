@@ -137,7 +137,7 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
                 'categories.avatar as category_avatar',
             ])->join('users', 'users.uuid', '=', 'auctions.user_uuid')
             ->join('categories', 'categories.uuid', '=', 'auctions.category_uuid')
-            ->where('auction.uuid', $uuid)
+            ->where('auctions.uuid', $uuid)
             ->get();
 
         $bids = EloquentBidModel::query()
