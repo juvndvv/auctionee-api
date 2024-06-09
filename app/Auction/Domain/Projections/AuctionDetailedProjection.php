@@ -30,7 +30,6 @@ final class AuctionDetailedProjection
 
     public static function fromPrimitives(array $data, array $bids = []): self
     {
-        dd($data);
         return new self(
             $data['uuid'],
             $data['name'],
