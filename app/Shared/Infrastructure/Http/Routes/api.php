@@ -35,6 +35,7 @@ use App\Financial\Infrastructure\Http\Controllers\DepositMoneyController;
 use App\Financial\Infrastructure\Http\Controllers\FindTransactionsByWalletUuidController;
 use App\Financial\Infrastructure\Http\Controllers\FindWalletByUserUuidController;
 use App\Financial\Infrastructure\Http\Controllers\MakeTransactionController;
+use App\Financial\Infrastructure\Http\Controllers\UnblockMoneyController;
 use App\Financial\Infrastructure\Http\Controllers\WithdrawMoneyController;
 use App\Retention\EventMonitoring\Infrastructure\Controllers\FindAllEventsController;
 use App\Review\Infrastructure\Http\Controllers\FindUserAverageRatingController;
@@ -125,6 +126,7 @@ Route::group(['middleware' => ['auth:sanctum', cors::class]], function () {
             Route::get('/{uuid}/transactions', FindTransactionsByWalletUuidController::class);
             Route::post('/{uuid}/deposit', DepositMoneyController::class);
             Route::post('/{uuid}/withdraw', WithdrawMoneyController::class);
+            Route::post('/{uuid}/unblock', UnblockMoneyController::class);
         });
 
         // Reviews
