@@ -3,7 +3,6 @@
 namespace App\Financial\Infrastructure\Http\Controllers;
 
 use App\Financial\Infrastructure\Repositories\EloquentWalletRepository;
-use App\Financial\Infrastructure\Repositories\Models\EloquentWalletModel;
 use App\Shared\Infrastructure\Http\Controllers\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,6 +15,7 @@ class UnblockMoneyController
 
     public function __invoke(string $uuid, Request $request): JsonResponse
     {
+        dd($request);
         $this->walletRepository->unblockAmount($uuid, $request->get('amount'));
 
         return Response::OK('', 'Desbloqueado');
