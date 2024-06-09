@@ -24,8 +24,8 @@ final class FindAuctionByUuidController extends QueryController
         } catch (NoContentException) {
             return Response::NO_CONTENT();
 
-        } catch (Exception) {
-            return Response::SERVER_ERROR();
+        } catch (Exception $e) {
+            return Response::SERVER_ERROR($e->getMessage());
         }
     }
 }
