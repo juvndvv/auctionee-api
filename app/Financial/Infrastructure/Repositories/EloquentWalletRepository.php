@@ -98,10 +98,8 @@ final class EloquentWalletRepository extends BaseRepository implements WalletRep
             ->select([Wallet::BALANCE, Wallet::BLOCKED_BALANCE])
             ->where(Wallet::UUID, $uuid)->firstOrFail();
 
-        $balance = $walletDb->getAttribute(Wallet::BLOCKED_BALANCE);
+        $balance = $walletDb->getAttribute(Wallet::BALANCE);
         $blockedBalance = $walletDb->getAttribute(Wallet::BLOCKED_BALANCE);
-
-        dd($balance, $blockedBalance, $walletDb);
 
         $walletDb->update([
             Wallet::BALANCE => $balance + $amount,
