@@ -17,8 +17,6 @@ class UnblockMoneyController
     {
         $amount = $request['amount'];
 
-        return json_encode(['amount' => $amount]);
-
         $this->walletRepository->unblockAmount($uuid, $amount);
 
         return Response::OK('', 'Desbloqueado');
