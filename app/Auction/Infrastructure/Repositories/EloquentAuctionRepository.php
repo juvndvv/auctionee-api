@@ -140,8 +140,6 @@ final class EloquentAuctionRepository extends BaseRepository implements AuctionR
             ->where('auctions.uuid', $uuid)
             ->get();
 
-        dd($auctionDb);
-
         $bids = EloquentBidModel::query()
             ->select([
                 'bids.amount as amount',
