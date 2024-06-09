@@ -15,7 +15,7 @@ final class AuctionDetailedProjection
         public string $date,
         public int $duration,
         string $avatar,
-        string $finished,
+        public string $finished,
         public string $user_uuid,
         public string $user_username,
         string $user_avatar,
