@@ -102,10 +102,10 @@ final class EloquentWalletRepository extends BaseRepository implements WalletRep
         $blockedBalance = $walletDb->getAttribute(Wallet::BLOCKED_BALANCE);
 
         $balance = $balance + $amount;
-        $unblocked = $blockedBalance - $amount;
+        $blockedBalance = $blockedBalance - $amount;
 
-        self::updateBlockedAmount($uuid, $balance);
-        self::updateUnblockedAmount($uuid, $unblocked);
+        self::updateBlockedAmount($uuid, $blockedBalance);
+        self::updateUnblockedAmount($uuid, $balance);
     }
 
     public function updateUnblockedAmount(string $uuid, float $amount): void
