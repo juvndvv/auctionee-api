@@ -13,11 +13,11 @@ class UnblockMoneyController
     {
     }
 
-    public function __invoke(string $uuid, Request $request): JsonResponse
+    public function __invoke(string $uuid, Request $request)
     {
         $amount = $request['amount'];
 
-        echo $amount;
+        return json_encode(['amount' => $amount]);
 
         $this->walletRepository->unblockAmount($uuid, $amount);
 
